@@ -198,7 +198,7 @@ class PuzzleBuilder {
       id: req.id,
       lang: lexicon.lang.code,
       kind: req.kind,
-      level: cfg.level,
+      level: req.level,
       daily: req.daily,
       pack: req.pack,
       title: req.title,

@@ -33,13 +33,27 @@ Future<void> main(List<String> args) async {
 /// Builds a puzzle, retrying with salted seeds when the first seed cannot be
 /// completed (rare: a template whose words have no usable clues). Returns null
 /// after [retries] failures so batch commands can continue.
-BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(String seed) request, String seed, {int retries = 3, void Function(String)? log}) {
+BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(String seed, {LevelConfig? fallback}) request, String seed,
+    {int retries = 3, LevelConfig? fallback, void Function(String)? log}) {
   for (var attempt = 0; attempt <= retries; attempt++) {
     final s = attempt == 0 ? seed : '$seed|retry$attempt';
     try {
       return builder.build(request(s));
     } on BuildFailure catch (e) {
       log?.call('  attempt ${attempt + 1} failed: ${e.message}');
+    }
+  }
+  if (fallback != null) {
+    // Last resort: generate with the next-easier level's geometry/word bands
+    // but keep the requested level and ids, so no day or pack slot stays empty.
+    for (var attempt = 0; attempt < 2; attempt++) {
+      try {
+        final out = builder.build(request('$seed|fallback$attempt', fallback: fallback));
+        log?.call('  built with fallback config (level ${fallback.level} parameters)');
+        return out;
+      } on BuildFailure catch (e) {
+        log?.call('  fallback attempt ${attempt + 1} failed: ${e.message}');
+      }
     }
   }
   return null;
@@ -127,7 +141,8 @@ class PackCommand extends _Base {
     final s = store;
     final lexicon = s.loadLexicon();
     final builder = PuzzleBuilder(lexicon);
-    final templates = s.loadTemplates(level: level);
+    final allTemplates = s.loadTemplates();
+    final templates = allTemplates.where((t) => t.level == level).toList();
     if (templates.isEmpty) throw UsageException('no templates for level $level; run `templates` first', usage);
     final cfg = LevelConfig.forLanguage(lang, level);
     final usedWords = <String>{};
@@ -152,18 +167,19 @@ class PackCommand extends _Base {
       final shifted = _shiftDifficulty(cfg, ramp);
       final outcome = buildWithRetries(
         builder,
-        (seed) => BuildRequest(
+        (seed, {LevelConfig? fallback}) => BuildRequest(
           id: id,
           kind: PuzzleKind.pack,
           level: level,
           seed: seed,
-          templates: templates,
-          config: shifted,
+          templates: fallback == null ? templates : allTemplates,
+          config: fallback ?? shifted,
           pack: PackRef(id: s.packId(level, pack), index: index),
           excludeCanonical: usedWords,
           usedClueIds: usedClues,
         ),
         Seeds.pack(lang: lang, level: level, pack: pack, index: index, salt: salt),
+        fallback: level > 1 ? LevelConfig.forLanguage(lang, level - 1) : null,
         log: log,
       );
       if (outcome == null) {
@@ -264,18 +280,19 @@ class DailiesCommand extends _Base {
         final recent = s.recentDailyWords(date, variant, 30, lexicon.lang);
         final outcome = buildWithRetries(
           builder,
-          (seed) => BuildRequest(
+          (seed, {LevelConfig? fallback}) => BuildRequest(
             id: s.dailyId(date, variant),
             kind: PuzzleKind.daily,
             level: cfg.level,
             seed: seed,
             templates: templates,
-            config: cfg,
+            config: fallback ?? cfg,
             daily: DailyInfo(date: date, variant: DailyVariant.fromCode(variant)),
             title: lang == 'he' ? (variant == 'easy' ? 'התשחץ היומי' : 'האתגר היומי') : (variant == 'easy' ? 'Daily Arrowword' : 'Daily Challenge'),
             excludeCanonical: recent,
           ),
           Seeds.daily(secret: secret, lang: lang, date: date, variant: variant),
+          fallback: variant == 'hard' ? LevelConfig.forLanguage(lang, 4) : LevelConfig.forLanguage(lang, 1),
           log: log,
         );
         if (outcome == null) {
