@@ -60,7 +60,7 @@ class LevelConfig {
 
   double get meanDifficultyTarget => (meanDifficultyMin + meanDifficultyMax) / 2;
 
-  LevelConfig copyWith({int? rows, int? cols, int? targetWords, int? maxWordLen, double? max2LetterShare, double? lengthMid}) => LevelConfig(
+  LevelConfig copyWith({int? rows, int? cols, int? targetWords, int? maxWordLen, double? max2LetterShare, double? lengthMid, double? minCheckedRatio, double? letterDensityTarget}) => LevelConfig(
         level: level,
         rows: rows ?? this.rows,
         cols: cols ?? this.cols,
@@ -70,7 +70,7 @@ class LevelConfig {
         maxWordDifficulty: maxWordDifficulty,
         meanDifficultyMin: meanDifficultyMin,
         meanDifficultyMax: meanDifficultyMax,
-        minCheckedRatio: minCheckedRatio,
+        minCheckedRatio: minCheckedRatio ?? this.minCheckedRatio,
         maxBentArrows: maxBentArrows,
         allowedArrows: allowedArrows,
         clueDifficultyMin: clueDifficultyMin,
@@ -78,7 +78,7 @@ class LevelConfig {
         allowMultiword: allowMultiword,
         allowProper: allowProper,
         parSeconds: parSeconds,
-        letterDensityTarget: letterDensityTarget,
+        letterDensityTarget: letterDensityTarget ?? this.letterDensityTarget,
         scoreMin: scoreMin,
         scoreMax: scoreMax,
         borderLetters: borderLetters,
@@ -106,6 +106,10 @@ class LevelConfig {
       // English answers are longer and two-letter words are scarce.
       // English has only ~55 usable two-letter words, so English grids avoid two-letter runs entirely.
       final en = base.copyWith(max2LetterShare: 0.0, lengthMid: base.effectiveLengthMid + 1.4);
+      if (level >= 4) {
+        // English letter statistics make dense expert grids hard to fill: looser checking, more clue cells.
+        return en.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 4, minCheckedRatio: base.minCheckedRatio - 0.1, letterDensityTarget: base.letterDensityTarget - 0.06);
+      }
       if (level >= 3) {
         return en.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 2, maxWordLen: base.maxWordLen + 1);
       }

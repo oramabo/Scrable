@@ -169,6 +169,7 @@ class PackCommand extends _Base {
       if (outcome == null) {
         stderr.writeln('FAILED $id after retries');
         failed++;
+        ids.remove(id);
         continue;
       }
       for (final w in outcome.words) {
@@ -186,7 +187,7 @@ class PackCommand extends _Base {
       'level': level,
       'index': pack,
       'title': {'he': 'רמה $level · חבילה $pack', 'en': 'Level $level · Pack $pack'},
-      'puzzleCount': count,
+      'puzzleCount': ids.length,
       'puzzles': ids,
       'free': pack == 1,
     };
