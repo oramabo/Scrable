@@ -108,7 +108,7 @@ class LevelConfig {
       final en = base.copyWith(max2LetterShare: 0.0, lengthMid: base.effectiveLengthMid + 1.4);
       if (level >= 4) {
         // English letter statistics make dense expert grids hard to fill: looser checking, more clue cells.
-        return en.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 4, minCheckedRatio: base.minCheckedRatio - 0.1, letterDensityTarget: base.letterDensityTarget - 0.06);
+        return en.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 4, maxWordLen: base.maxWordLen + 1, minCheckedRatio: base.minCheckedRatio - 0.1, letterDensityTarget: base.letterDensityTarget - 0.06);
       }
       if (level >= 3) {
         return en.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 2, maxWordLen: base.maxWordLen + 1);
