@@ -30,11 +30,18 @@ DAILY_SEED_SECRET=... dart run tools/generate/bin/chetz_gen.dart --content conte
 dart run tools/generate/bin/chetz_gen.dart --content content manifest --lang he
 dart run tools/generate/bin/chetz_gen.dart --content content validate --lang he
 ```
-Upload `content/he/puzzles/**` to the CDN bucket under `puzzles/he/...` using the versioned file names listed
-in `content/he/puzzles/manifests/*.json` (immutable, long cache) and the manifests under `manifests/he/`
-(5-minute cache). `manifests/publish-index.json` carries the `solutionHash` and `letterCells` the
-`publishPuzzle` function needs for leaderboard validation. Point the app at the CDN with
-`AppConfig.cdnBaseUrl`.
+Publish to Firebase (Storage + Firestore) with the script that reuses the `publishPuzzle` /
+`rebuildManifests` handlers, so the CDN files and documents are exactly what the functions produce:
+```
+cd functions && npm run build
+GOOGLE_APPLICATION_CREDENTIALS=/path/sa.json GCLOUD_PROJECT=chetz-prod STORAGE_BUCKET=chetz-prod.appspot.com \
+  node scripts/publish-content.cjs --content ../content --lang he          # add --lang en for English
+```
+Puzzle files land at `puzzles/{lang}/...v{n}.json` (immutable cache), manifests at `manifests/{lang}/daily.json`
+and `packs.json` (5-minute cache); `dailies/*` documents carry the `solutionHash` and `letterCells` used
+by the leaderboard validation. The daily manifest only exposes dates up to three days ahead. Point the
+app at the bucket or a CDN in front of it with `AppConfig.cdnBaseUrl`. The same script was verified
+against the Firebase emulators (`firebase emulators:exec --only firestore,storage`).
 
 Content credit: clue/answer pairs were seeded from the public Mordo clue dictionary
 (pitaronfree.blogspot.com). Every imported clue has `status: imported`; the admin review flow upgrades
