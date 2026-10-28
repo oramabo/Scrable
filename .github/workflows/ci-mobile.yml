@@ -1,0 +1,45 @@
+name: ci-mobile
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/mobile/**'
+      - 'packages/**'
+      - '.github/workflows/ci-mobile.yml'
+  pull_request:
+    paths:
+      - 'apps/mobile/**'
+      - 'packages/**'
+      - '.github/workflows/ci-mobile.yml'
+
+jobs:
+  mobile:
+    name: flutter analyze + test (apps/mobile)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect apps/mobile
+        id: detect
+        run: echo "present=$([ -f apps/mobile/pubspec.yaml ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - uses: subosito/flutter-action@v2
+        if: hashFiles('apps/mobile/pubspec.yaml') != ''
+        with:
+          channel: stable
+          cache: true
+      - name: flutter pub get
+        if: hashFiles('apps/mobile/pubspec.yaml') != ''
+        working-directory: apps/mobile
+        run: flutter pub get
+      - name: flutter analyze
+        if: hashFiles('apps/mobile/pubspec.yaml') != ''
+        working-directory: apps/mobile
+        run: flutter analyze --fatal-infos
+      - name: flutter test
+        if: hashFiles('apps/mobile/pubspec.yaml') != ''
+        working-directory: apps/mobile
+        run: flutter test
+      - name: Skipped
+        if: steps.detect.outputs.present == 'false'
+        run: echo "apps/mobile not present yet; nothing to do"

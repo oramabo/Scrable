@@ -1,0 +1,810 @@
+{
+  "schemaVersion": 1,
+  "lang": "he",
+  "id": "he-d-2026-11-01-easy",
+  "kind": "daily",
+  "level": 2,
+  "daily": {
+    "date": "2026-11-01",
+    "variant": "easy"
+  },
+  "grid": {
+    "rows": 10,
+    "cols": 8,
+    "colOrigin": "readingStart"
+  },
+  "layout": [
+    "CCCCCCCC",
+    "CCLCLLLL",
+    "LLLLCLLC",
+    "CLLCLLLL",
+    "CCLCCCLL",
+    "CLLLLCCL",
+    "CLLLLLLL",
+    "CLLLLLLC",
+    "CLCLLLLL",
+    "CLLLLLLL"
+  ],
+  "clueCells": [
+    {
+      "r": 0,
+      "c": 2,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d03",
+          "arrow": "D",
+          "text": "סוג של בד",
+          "lines": [
+            "סוג של בד"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 0,
+      "c": 5,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d06",
+          "arrow": "D",
+          "text": "קריאה מתוך פליאה",
+          "lines": [
+            "קריאה",
+            "מתוך",
+            "פליאה"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 0,
+      "c": 6,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d08",
+          "arrow": "D",
+          "text": "שבר את צמאונו",
+          "lines": [
+            "שבר את",
+            "צמאונו"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 1,
+      "c": 0,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a02",
+          "arrow": "DA",
+          "text": "נסיוב הדם",
+          "lines": [
+            "נסיוב הדם"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 1,
+      "c": 1,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d01",
+          "arrow": "D",
+          "text": "רחמנא ליצלן",
+          "lines": [
+            "רחמנא",
+            "ליצלן"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 1,
+      "c": 3,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a01",
+          "arrow": "A",
+          "text": "נהר בתורכיה",
+          "lines": [
+            "נהר",
+            "בתורכיה"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 2,
+      "c": 4,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a03",
+          "arrow": "A",
+          "text": "מילת ברירה",
+          "lines": [
+            "מילת",
+            "ברירה"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 2,
+      "c": 7,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d10",
+          "arrow": "D",
+          "text": "חלק באיבר",
+          "lines": [
+            "חלק",
+            "באיבר"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 3,
+      "c": 0,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a04",
+          "arrow": "A",
+          "text": "לשון רבים",
+          "lines": [
+            "לשון רבים"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 3,
+      "c": 3,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a05",
+          "arrow": "A",
+          "text": "תנועה בדקדוק העברי",
+          "lines": [
+            "תנועה",
+            "בדקדוק",
+            "העברי"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 4,
+      "c": 1,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d02",
+          "arrow": "D",
+          "text": "פרסום",
+          "lines": [
+            "פרסום"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 4,
+      "c": 3,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d04",
+          "arrow": "D",
+          "text": "קומדיה של מולייר",
+          "lines": [
+            "קומדיה של",
+            "מולייר"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 4,
+      "c": 4,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d05",
+          "arrow": "D",
+          "text": "כוונן",
+          "lines": [
+            "כוונן"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 4,
+      "c": 5,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a06",
+          "arrow": "A",
+          "text": "מילת קריאה",
+          "lines": [
+            "מילת",
+            "קריאה"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 5,
+      "c": 0,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a07",
+          "arrow": "A",
+          "text": "יצר תרשים",
+          "lines": [
+            "יצר תרשים"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 5,
+      "c": 5,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d07",
+          "arrow": "D",
+          "text": "נגלה לעין",
+          "lines": [
+            "נגלה",
+            "לעין"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 5,
+      "c": 6,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d09",
+          "arrow": "D",
+          "text": "כפוף, גחון",
+          "lines": [
+            "כפוף,",
+            "גחון"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 6,
+      "c": 0,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a08",
+          "arrow": "A",
+          "text": "סוג של עץ נשיר",
+          "lines": [
+            "סוג של עץ",
+            "נשיר"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 7,
+      "c": 0,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a09",
+          "arrow": "A",
+          "text": "רכס בבולגריה",
+          "lines": [
+            "רכס",
+            "בבולגריה"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 7,
+      "c": 7,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "d11",
+          "arrow": "D",
+          "text": "משנה",
+          "lines": [
+            "משנה"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 8,
+      "c": 2,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a10",
+          "arrow": "A",
+          "text": "תקופה בחיים",
+          "lines": [
+            "תקופה",
+            "בחיים"
+          ]
+        }
+      ]
+    },
+    {
+      "r": 9,
+      "c": 0,
+      "slots": [
+        {
+          "pos": "full",
+          "wordId": "a11",
+          "arrow": "A",
+          "text": "תוכנית מציאות ישראלית",
+          "lines": [
+            "תוכנית",
+            "מציאות",
+            "ישראלית"
+          ]
+        }
+      ]
+    }
+  ],
+  "words": [
+    {
+      "id": "a01",
+      "dir": "A",
+      "start": {
+        "r": 1,
+        "c": 4
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 1,
+        "c": 3
+      },
+      "arrow": "A",
+      "clueId": "hc_dacbd14c666b",
+      "lemmaId": "hw_dda0389b56",
+      "wordCount": 1,
+      "difficulty": 0.273
+    },
+    {
+      "id": "a02",
+      "dir": "A",
+      "start": {
+        "r": 2,
+        "c": 0
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 1,
+        "c": 0
+      },
+      "arrow": "DA",
+      "clueId": "hc_43f6a8777c4f",
+      "lemmaId": "hw_dc1c2961ed",
+      "wordCount": 1,
+      "difficulty": 0.311
+    },
+    {
+      "id": "a03",
+      "dir": "A",
+      "start": {
+        "r": 2,
+        "c": 5
+      },
+      "len": 2,
+      "clueCell": {
+        "r": 2,
+        "c": 4
+      },
+      "arrow": "A",
+      "clueId": "hc_8d074253d2cd",
+      "lemmaId": "hw_fbff31ee53",
+      "wordCount": 1,
+      "difficulty": 0.23
+    },
+    {
+      "id": "a04",
+      "dir": "A",
+      "start": {
+        "r": 3,
+        "c": 1
+      },
+      "len": 2,
+      "clueCell": {
+        "r": 3,
+        "c": 0
+      },
+      "arrow": "A",
+      "clueId": "hc_ef51b7b6a47d",
+      "lemmaId": "hw_280339c189",
+      "wordCount": 1,
+      "difficulty": 0.283
+    },
+    {
+      "id": "a05",
+      "dir": "A",
+      "start": {
+        "r": 3,
+        "c": 4
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 3,
+        "c": 3
+      },
+      "arrow": "A",
+      "clueId": "hc_85075dc45134",
+      "lemmaId": "hw_b1ecaca68b",
+      "wordCount": 1,
+      "difficulty": 0.258
+    },
+    {
+      "id": "a06",
+      "dir": "A",
+      "start": {
+        "r": 4,
+        "c": 6
+      },
+      "len": 2,
+      "clueCell": {
+        "r": 4,
+        "c": 5
+      },
+      "arrow": "A",
+      "clueId": "hc_888155db3ca9",
+      "lemmaId": "hw_ada455cde7",
+      "wordCount": 1,
+      "difficulty": 0.283
+    },
+    {
+      "id": "a07",
+      "dir": "A",
+      "start": {
+        "r": 5,
+        "c": 1
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 5,
+        "c": 0
+      },
+      "arrow": "A",
+      "clueId": "hc_2b7d95ea97ec",
+      "lemmaId": "hw_28689f707c",
+      "wordCount": 1,
+      "difficulty": 0.542
+    },
+    {
+      "id": "a08",
+      "dir": "A",
+      "start": {
+        "r": 6,
+        "c": 1
+      },
+      "len": 7,
+      "clueCell": {
+        "r": 6,
+        "c": 0
+      },
+      "arrow": "A",
+      "clueId": "hc_18b21363fbbe",
+      "lemmaId": "hw_8f56143fe2",
+      "wordCount": 1,
+      "difficulty": 0.265
+    },
+    {
+      "id": "a09",
+      "dir": "A",
+      "start": {
+        "r": 7,
+        "c": 1
+      },
+      "len": 6,
+      "clueCell": {
+        "r": 7,
+        "c": 0
+      },
+      "arrow": "A",
+      "clueId": "hc_d3a35e435351",
+      "lemmaId": "hw_723401adbb",
+      "wordCount": 1,
+      "difficulty": 0.367
+    },
+    {
+      "id": "a10",
+      "dir": "A",
+      "start": {
+        "r": 8,
+        "c": 3
+      },
+      "len": 5,
+      "clueCell": {
+        "r": 8,
+        "c": 2
+      },
+      "arrow": "A",
+      "clueId": "hc_4fc9e3ce543b",
+      "lemmaId": "hw_0f89ec23b3",
+      "wordCount": 1,
+      "difficulty": 0.435
+    },
+    {
+      "id": "a11",
+      "dir": "A",
+      "start": {
+        "r": 9,
+        "c": 1
+      },
+      "len": 7,
+      "clueCell": {
+        "r": 9,
+        "c": 0
+      },
+      "arrow": "A",
+      "clueId": "hc_92985e85887e",
+      "lemmaId": "hw_2a3ab9c625",
+      "wordCount": 1,
+      "difficulty": 0.491
+    },
+    {
+      "id": "d01",
+      "dir": "D",
+      "start": {
+        "r": 2,
+        "c": 1
+      },
+      "len": 2,
+      "clueCell": {
+        "r": 1,
+        "c": 1
+      },
+      "arrow": "D",
+      "clueId": "hc_01f63267a3f1",
+      "lemmaId": "hw_56109f63a3",
+      "wordCount": 1,
+      "difficulty": 0.283
+    },
+    {
+      "id": "d02",
+      "dir": "D",
+      "start": {
+        "r": 5,
+        "c": 1
+      },
+      "len": 5,
+      "clueCell": {
+        "r": 4,
+        "c": 1
+      },
+      "arrow": "D",
+      "clueId": "hc_0c1e864e76d7",
+      "lemmaId": "hw_59a410538f",
+      "wordCount": 1,
+      "difficulty": 0.251
+    },
+    {
+      "id": "d03",
+      "dir": "D",
+      "start": {
+        "r": 1,
+        "c": 2
+      },
+      "len": 7,
+      "clueCell": {
+        "r": 0,
+        "c": 2
+      },
+      "arrow": "D",
+      "clueId": "hc_75e7a0335b5a",
+      "lemmaId": "hw_849712aa1e",
+      "wordCount": 1,
+      "difficulty": 0.394
+    },
+    {
+      "id": "d04",
+      "dir": "D",
+      "start": {
+        "r": 5,
+        "c": 3
+      },
+      "len": 5,
+      "clueCell": {
+        "r": 4,
+        "c": 3
+      },
+      "arrow": "D",
+      "clueId": "hc_9ab2f33353dd",
+      "lemmaId": "hw_5687f8d0be",
+      "wordCount": 1,
+      "difficulty": 0.435
+    },
+    {
+      "id": "d05",
+      "dir": "D",
+      "start": {
+        "r": 5,
+        "c": 4
+      },
+      "len": 5,
+      "clueCell": {
+        "r": 4,
+        "c": 4
+      },
+      "arrow": "D",
+      "clueId": "hc_288583341932",
+      "lemmaId": "hw_6edaef3e55",
+      "wordCount": 1,
+      "difficulty": 0.57
+    },
+    {
+      "id": "d06",
+      "dir": "D",
+      "start": {
+        "r": 1,
+        "c": 5
+      },
+      "len": 3,
+      "clueCell": {
+        "r": 0,
+        "c": 5
+      },
+      "arrow": "D",
+      "clueId": "hc_7fde76eb6607",
+      "lemmaId": "hw_bfebc7b2b7",
+      "wordCount": 1,
+      "difficulty": 0.514
+    },
+    {
+      "id": "d07",
+      "dir": "D",
+      "start": {
+        "r": 6,
+        "c": 5
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 5,
+        "c": 5
+      },
+      "arrow": "D",
+      "clueId": "hc_7e55d5e29349",
+      "lemmaId": "hw_66577aa499",
+      "wordCount": 1,
+      "difficulty": 0.542
+    },
+    {
+      "id": "d08",
+      "dir": "D",
+      "start": {
+        "r": 1,
+        "c": 6
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 0,
+        "c": 6
+      },
+      "arrow": "D",
+      "clueId": "hc_003244a3b5bd",
+      "lemmaId": "hw_73110a21b5",
+      "wordCount": 1,
+      "difficulty": 0.258
+    },
+    {
+      "id": "d09",
+      "dir": "D",
+      "start": {
+        "r": 6,
+        "c": 6
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 5,
+        "c": 6
+      },
+      "arrow": "D",
+      "clueId": "hc_84f1babd4fb0",
+      "lemmaId": "hw_8a5d2452e3",
+      "wordCount": 1,
+      "difficulty": 0.311
+    },
+    {
+      "id": "d10",
+      "dir": "D",
+      "start": {
+        "r": 3,
+        "c": 7
+      },
+      "len": 4,
+      "clueCell": {
+        "r": 2,
+        "c": 7
+      },
+      "arrow": "D",
+      "clueId": "hc_33eed04508c9",
+      "lemmaId": "hw_1e3c2455fd",
+      "wordCount": 1,
+      "difficulty": 0.311
+    },
+    {
+      "id": "d11",
+      "dir": "D",
+      "start": {
+        "r": 8,
+        "c": 7
+      },
+      "len": 2,
+      "clueCell": {
+        "r": 7,
+        "c": 7
+      },
+      "arrow": "D",
+      "clueId": "hc_9a028881e658",
+      "lemmaId": "hw_1fda0aa5d9",
+      "wordCount": 1,
+      "difficulty": 0.38
+    }
+  ],
+  "solution": {
+    "enc": "xor1",
+    "data": "+bEvYEOxXq0WLPE6BesZg7qwwbceDFTBVIuZztLhdKsToe7E9oDk+sb+yprBEGG9RzYM"
+  },
+  "difficulty": {
+    "score": 39.2,
+    "band": "easy",
+    "features": {
+      "meanWordDiff": 0.363,
+      "p90WordDiff": 0.542,
+      "meanClueDiff": 0.518,
+      "wordCount": 22.0,
+      "avgLen": 4.182,
+      "checkedRatio": 0.804,
+      "properShare": 0.0,
+      "multiwordShare": 0.0,
+      "bentArrows": 1.0,
+      "twoLetterShare": 0.227,
+      "uncheckedLetters": 10.0
+    }
+  },
+  "meta": {
+    "generator": {
+      "version": "0.1.0",
+      "seed": "2e89195dc8dbca025a8a4ffabaf8211f",
+      "templateId": "he-t2-fx2",
+      "dictSnapshot": "he-fixture-2026-10-28"
+    },
+    "author": "generator",
+    "createdAt": "2026-10-28T22:33:32.790310Z",
+    "publishedAt": "2026-10-28T12:00:00Z",
+    "version": 1,
+    "checksum": "sha256:750700ce4913daeeb138113d40b6bf5ce7da1bba1f52c23f8bf1b1f7855ff0d4"
+  }
+}

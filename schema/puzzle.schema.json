@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/puzzle.schema.json",
+  "title": "Chetz arrowword puzzle (schema v1)",
+  "description": "Published puzzle JSON exactly as produced by `PuzzleCodec.toJson` in packages/core (lib/src/model/puzzle_codec.dart). Column 0 is the first column in the language's reading direction (rightmost for Hebrew, leftmost for English). The solution ships obfuscated (xor1) or plain (authoring/tests only).",
+  "type": "object",
+  "required": ["schemaVersion", "lang", "id", "kind", "level", "grid", "layout", "clueCells", "words", "solution", "difficulty", "meta"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "integer", "enum": [1] },
+    "lang": { "$ref": "#/$defs/lang" },
+    "id": { "$ref": "#/$defs/puzzleId" },
+    "kind": { "type": "string", "enum": ["pack", "daily", "tutorial", "practice"] },
+    "level": { "type": "integer", "minimum": 1, "maximum": 9 },
+    "title": { "type": "string", "maxLength": 200 },
+    "daily": {
+      "type": "object",
+      "description": "Present only for kind = daily.",
+      "required": ["date", "variant"],
+      "additionalProperties": false,
+      "properties": {
+        "date": { "$ref": "#/$defs/isoDate" },
+        "variant": { "$ref": "#/$defs/dailyVariant" }
+      }
+    },
+    "pack": {
+      "type": "object",
+      "description": "Present only for kind = pack. `index` is the 1-based position inside the pack.",
+      "required": ["id", "index"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 64, "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$" },
+        "index": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "grid": {
+      "type": "object",
+      "required": ["rows", "cols", "colOrigin"],
+      "additionalProperties": false,
+      "properties": {
+        "rows": { "type": "integer", "minimum": 1, "maximum": 64 },
+        "cols": { "type": "integer", "minimum": 1, "maximum": 64 },
+        "colOrigin": { "type": "string", "const": "readingStart" }
+      }
+    },
+    "layout": {
+      "type": "array",
+      "description": "One string per row (row-major), `C` = clue cell, `L` = letter cell. Length of every row equals grid.cols and the array length equals grid.rows.",
+      "minItems": 1,
+      "maxItems": 64,
+      "items": { "type": "string", "pattern": "^[CL]+$", "minLength": 1, "maxLength": 64 }
+    },
+    "clueCells": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["r", "c", "slots"],
+        "additionalProperties": false,
+        "properties": {
+          "r": { "$ref": "#/$defs/coord" },
+          "c": { "$ref": "#/$defs/coord" },
+          "slots": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 2,
+            "items": { "$ref": "#/$defs/clueSlot" }
+          }
+        }
+      }
+    },
+    "words": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/word" }
+    },
+    "solution": {
+      "description": "One symbol id per letter cell in row-major order. `xor1`: base64 of the symbols XOR-ed with a SHA-256 keystream derived from `id` and the codec salt (obfuscation, not secrecy). `plain`: the raw symbol ids.",
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["enc", "data"],
+          "additionalProperties": false,
+          "properties": {
+            "enc": { "const": "xor1" },
+            "data": { "type": "string", "pattern": "^[A-Za-z0-9+/]*={0,2}$" }
+          }
+        },
+        {
+          "type": "object",
+          "required": ["enc", "data"],
+          "additionalProperties": false,
+          "properties": {
+            "enc": { "const": "plain" },
+            "data": { "type": "array", "items": { "type": "integer", "minimum": 0 } }
+          }
+        }
+      ]
+    },
+    "difficulty": {
+      "type": "object",
+      "required": ["score", "band", "features"],
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 100 },
+        "band": { "type": "string", "enum": ["starter", "easy", "medium", "hard", "expert"] },
+        "features": {
+          "type": "object",
+          "description": "Named numeric features used by the difficulty model (meanWordDiff, checkedRatio, ...).",
+          "additionalProperties": { "type": "number" }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "required": ["version"],
+      "additionalProperties": false,
+      "properties": {
+        "generator": {
+          "type": "object",
+          "required": ["version", "seed"],
+          "additionalProperties": false,
+          "properties": {
+            "version": { "type": "string", "minLength": 1 },
+            "seed": { "type": "string", "minLength": 1 },
+            "templateId": { "type": "string", "minLength": 1 },
+            "dictSnapshot": { "type": "string", "minLength": 1 }
+          }
+        },
+        "author": { "type": "string" },
+        "reviewer": { "type": "string" },
+        "createdAt": { "type": "string", "description": "ISO-8601 timestamp (free-form string on the Dart side)." },
+        "publishedAt": { "type": "string", "description": "ISO-8601 timestamp (free-form string on the Dart side)." },
+        "version": { "type": "integer", "minimum": 1 },
+        "checksum": { "$ref": "#/$defs/checksum" }
+      }
+    }
+  },
+  "$defs": {
+    "lang": { "type": "string", "enum": ["he", "en"] },
+    "puzzleId": { "type": "string", "minLength": 1, "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$" },
+    "isoDate": { "type": "string", "format": "date", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$" },
+    "dailyVariant": { "type": "string", "enum": ["easy", "hard"] },
+    "coord": { "type": "integer", "minimum": 0, "maximum": 63 },
+    "pos": {
+      "type": "object",
+      "required": ["r", "c"],
+      "additionalProperties": false,
+      "properties": {
+        "r": { "$ref": "#/$defs/coord" },
+        "c": { "$ref": "#/$defs/coord" }
+      }
+    },
+    "arrow": {
+      "type": "string",
+      "description": "A across, D down, DA down-then-across, AD across-then-down, UA up-then-across (rare), BD back-then-down (rare).",
+      "enum": ["A", "D", "DA", "AD", "UA", "BD"]
+    },
+    "wordId": { "type": "string", "minLength": 1, "maxLength": 16, "pattern": "^[A-Za-z0-9_-]+$" },
+    "clueSlot": {
+      "type": "object",
+      "required": ["pos", "wordId", "arrow", "text", "lines"],
+      "additionalProperties": false,
+      "properties": {
+        "pos": { "type": "string", "enum": ["top", "bottom", "full"] },
+        "wordId": { "$ref": "#/$defs/wordId" },
+        "arrow": { "$ref": "#/$defs/arrow" },
+        "text": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "lines": { "type": "array", "minItems": 1, "maxItems": 4, "items": { "type": "string", "maxLength": 80 } }
+      }
+    },
+    "word": {
+      "type": "object",
+      "required": ["id", "dir", "start", "len", "clueCell", "arrow", "wordCount", "difficulty"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/wordId" },
+        "dir": { "type": "string", "enum": ["A", "D"] },
+        "start": { "$ref": "#/$defs/pos" },
+        "len": { "type": "integer", "minimum": 2, "maximum": 64 },
+        "clueCell": { "$ref": "#/$defs/pos" },
+        "arrow": { "$ref": "#/$defs/arrow" },
+        "clueId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "lemmaId": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "wordCount": { "type": "integer", "minimum": 1 },
+        "difficulty": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "checksum": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+  }
+}

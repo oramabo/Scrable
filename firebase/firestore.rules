@@ -1,0 +1,130 @@
+rules_version = '2';
+
+// Security model (docs/GAME_PLAN.md §6.5):
+//  - players own users/{uid} and its progress/daily subcollections;
+//  - the ledger is append-only for the owner and bounded; the authoritative
+//    balance (wallet) and entitlements are written by Cloud Functions only;
+//  - leaderboards, dailies, manifests and clue stats are read-only for clients;
+//  - telemetry is write-once by signed-in players;
+//  - authoring collections need the `admin` custom claim.
+// Everything not matched below is denied.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    // Fields of users/{uid} that only Cloud Functions may write.
+    function serverOnlyUserFields() {
+      return ['wallet', 'entitlements', 'entitlementsMeta', 'lastLedgerSyncAt'];
+    }
+
+    function touchesServerOnlyUserFields() {
+      return resource == null
+        ? request.resource.data.keys().hasAny(serverOnlyUserFields())
+        : request.resource.data.diff(resource.data).affectedKeys().hasAny(serverOnlyUserFields());
+    }
+
+    // Client-authored ledger entry (schema/ledger-entry.schema.json): UUID v7 id
+    // equal to the document id, a non-server type, bounded integer amount, no
+    // `server` block. Cloud Functions re-validate against the economy and set
+    // server.status; entries without it never count towards the balance.
+    function validClientLedgerEntry(entryId) {
+      let d = request.resource.data;
+      return entryId.matches('^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$')
+        && d.id == entryId
+        && d.keys().hasOnly(['id', 'type', 'amount', 'balanceAfter', 'createdAt', 'deviceId', 'refId', 'lang'])
+        && d.keys().hasAll(['id', 'type', 'amount', 'balanceAfter', 'createdAt', 'deviceId', 'refId'])
+        && d.type in ['earn_complete', 'earn_perfect', 'earn_daily', 'earn_streak', 'earn_ad', 'earn_achievement', 'earn_login',
+                      'spend_letter', 'spend_word', 'spend_check', 'spend_item', 'reconcile']
+        && d.amount is int && d.amount >= -500 && d.amount <= 300
+        && d.balanceAfter is int
+        && d.createdAt is int && d.createdAt >= 0
+        && d.deviceId is string && d.deviceId.size() >= 1 && d.deviceId.size() <= 128
+        && (d.refId == null || (d.refId is string && d.refId.size() >= 1 && d.refId.size() <= 200))
+        && (!('lang' in d) || d.lang in ['he', 'en']);
+    }
+
+    match /users/{uid} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid) && !touchesServerOnlyUserFields();
+      allow delete: if false; // deleteAccount function
+
+      match /progress/{puzzleId} {
+        allow read, write: if isOwner(uid);
+      }
+
+      match /daily/{dailyId} {
+        allow read, create, update: if isOwner(uid);
+        allow delete: if false;
+      }
+
+      match /ledger/{entryId} {
+        allow read: if isOwner(uid);
+        allow create: if isOwner(uid) && validClientLedgerEntry(entryId);
+        allow update, delete: if false;
+      }
+
+      match /claims/{claimId} {
+        allow read: if isOwner(uid);
+        allow write: if false;
+      }
+    }
+
+    match /leaderboards/{boardId} {
+      allow read: if signedIn();
+      allow write: if false;
+
+      match /entries/{entryId} {
+        allow read: if signedIn();
+        allow write: if false;
+      }
+    }
+
+    match /dailies/{dailyId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /manifests/{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /clueStats/{clueId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /telemetry/{document=**} {
+      allow read: if false;
+      allow create: if signedIn() && request.resource.data.size() <= 24;
+      allow update, delete: if false;
+    }
+
+    match /puzzlesAuthoring/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    match /words/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    match /clues/{document=**} {
+      allow read, write: if isAdmin();
+    }
+
+    match /templates/{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

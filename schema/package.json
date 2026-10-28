@@ -1,0 +1,14 @@
+{
+  "name": "chetz-schema",
+  "version": "1.0.0",
+  "private": true,
+  "description": "JSON Schemas shared by the Dart app/tools and the TypeScript Cloud Functions, plus fixture validation.",
+  "type": "module",
+  "scripts": {
+    "validate": "node validate.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
+  }
+}

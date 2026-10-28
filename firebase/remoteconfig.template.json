@@ -1,0 +1,86 @@
+{
+  "conditions": [],
+  "parameterGroups": {
+    "Economy": {
+      "description": "Coin sources and sinks (docs/GAME_PLAN.md §4.1). Server-side ceilings live in functions/src/economy.ts; keep these at or below them.",
+      "parameters": {
+        "economy_starting_wallet": { "defaultValue": { "value": "200" }, "valueType": "NUMBER", "description": "Coins in a new wallet." },
+        "economy_complete_reward_by_level": { "defaultValue": { "value": "{\"1\":20,\"2\":30,\"3\":45,\"4\":60,\"5\":80}" }, "valueType": "JSON", "description": "Coins for completing a pack puzzle, by level." },
+        "economy_three_star_bonus": { "defaultValue": { "value": "0.5" }, "valueType": "NUMBER", "description": "Extra share of the completion reward for a 3-star solve." },
+        "economy_daily_reward_easy": { "defaultValue": { "value": "40" }, "valueType": "NUMBER" },
+        "economy_daily_reward_hard": { "defaultValue": { "value": "120" }, "valueType": "NUMBER" },
+        "economy_daily_reward_both_bonus": { "defaultValue": { "value": "50" }, "valueType": "NUMBER", "description": "Bonus for solving both dailies of a day." },
+        "economy_login_reward": { "defaultValue": { "value": "10" }, "valueType": "NUMBER" },
+        "economy_login_reward_streak_day7": { "defaultValue": { "value": "50" }, "valueType": "NUMBER" },
+        "economy_rewarded_ad_coins": { "defaultValue": { "value": "25" }, "valueType": "NUMBER" },
+        "economy_achievement_reward_min": { "defaultValue": { "value": "50" }, "valueType": "NUMBER" },
+        "economy_achievement_reward_max": { "defaultValue": { "value": "300" }, "valueType": "NUMBER" },
+        "economy_rank_up_reward": { "defaultValue": { "value": "100" }, "valueType": "NUMBER" },
+        "economy_premium_monthly_coins": { "defaultValue": { "value": "300" }, "valueType": "NUMBER", "description": "Monthly coin grant for Premium subscribers." },
+        "economy_premium_hint_discount": { "defaultValue": { "value": "0.5" }, "valueType": "NUMBER" }
+      }
+    },
+    "Hints": {
+      "description": "Hint and item prices in coins (§3.5).",
+      "parameters": {
+        "hint_price_reveal_letter": { "defaultValue": { "value": "15" }, "valueType": "NUMBER", "description": "Chosen letter (long-press)." },
+        "hint_price_random_letter": { "defaultValue": { "value": "10" }, "valueType": "NUMBER" },
+        "hint_price_smart_letter": { "defaultValue": { "value": "20" }, "valueType": "NUMBER", "description": "Letter with the most crossings." },
+        "hint_price_reveal_word_low": { "defaultValue": { "value": "40" }, "valueType": "NUMBER", "description": "Levels 1–3." },
+        "hint_price_reveal_word_high": { "defaultValue": { "value": "70" }, "valueType": "NUMBER", "description": "Levels 4–6." },
+        "hint_price_check_word": { "defaultValue": { "value": "5" }, "valueType": "NUMBER", "description": "Free in Relaxed mode." },
+        "hint_price_check_puzzle": { "defaultValue": { "value": "20" }, "valueType": "NUMBER", "description": "Free in Relaxed mode." },
+        "hint_price_alternative_clue": { "defaultValue": { "value": "10" }, "valueType": "NUMBER" },
+        "hint_price_first_letters": { "defaultValue": { "value": "100" }, "valueType": "NUMBER", "description": "First letter of every word." },
+        "hint_price_streak_freeze": { "defaultValue": { "value": "150" }, "valueType": "NUMBER" },
+        "item_price_archive_day": { "defaultValue": { "value": "50" }, "valueType": "NUMBER" },
+        "item_price_theme_min": { "defaultValue": { "value": "200" }, "valueType": "NUMBER" },
+        "item_price_theme_max": { "defaultValue": { "value": "500" }, "valueType": "NUMBER" },
+        "item_price_avatar_frame_min": { "defaultValue": { "value": "100" }, "valueType": "NUMBER" },
+        "item_price_avatar_frame_max": { "defaultValue": { "value": "300" }, "valueType": "NUMBER" },
+        "hint_free_for_new_players": { "defaultValue": { "value": "5" }, "valueType": "NUMBER" }
+      }
+    },
+    "Ads": {
+      "description": "Ad caps and placement rules (§4.3). All of them are kill switches.",
+      "parameters": {
+        "ads_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN", "description": "Master switch for the ads SDK." },
+        "ads_rewarded_per_day": { "defaultValue": { "value": "6" }, "valueType": "NUMBER", "description": "Rewarded ads credited with coins per day." },
+        "ads_rewarded_free_letter_per_day": { "defaultValue": { "value": "8" }, "valueType": "NUMBER" },
+        "ads_rewarded_free_letter_cooldown_sec": { "defaultValue": { "value": "180" }, "valueType": "NUMBER" },
+        "ads_interstitial_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN" },
+        "ads_interstitial_every_n_completions": { "defaultValue": { "value": "2" }, "valueType": "NUMBER" },
+        "ads_interstitial_min_gap_sec": { "defaultValue": { "value": "180" }, "valueType": "NUMBER" },
+        "ads_interstitial_skip_first_puzzles": { "defaultValue": { "value": "3" }, "valueType": "NUMBER" },
+        "ads_interstitial_buffer_after_reward_sec": { "defaultValue": { "value": "60" }, "valueType": "NUMBER", "description": "No interstitial within this many seconds of a rewarded ad or a purchase." },
+        "ads_banner_pack_browser": { "defaultValue": { "value": "false" }, "valueType": "BOOLEAN" }
+      }
+    },
+    "Progression": {
+      "description": "Pack unlock thresholds and daily rules (§3.2, §3.3).",
+      "parameters": {
+        "unlock_level_stars_required": { "defaultValue": { "value": "{\"2\":6,\"3\":15,\"4\":27,\"5\":42}" }, "valueType": "JSON", "description": "Stars needed to open the first pack of each level (Premium bypasses)." },
+        "unlock_pack_min_completed_in_previous": { "defaultValue": { "value": "0.6" }, "valueType": "NUMBER", "description": "Share of the previous pack to complete before the next pack of the same level opens." },
+        "daily_archive_days_free": { "defaultValue": { "value": "7" }, "valueType": "NUMBER", "description": "Past dailies playable without Premium or the archive-day item." },
+        "daily_prefetch_days": { "defaultValue": { "value": "2" }, "valueType": "NUMBER" },
+        "daily_manifest_ttl_sec": { "defaultValue": { "value": "300" }, "valueType": "NUMBER" },
+        "streak_freeze_max_per_month": { "defaultValue": { "value": "2" }, "valueType": "NUMBER" }
+      }
+    },
+    "Features": {
+      "description": "Feature flags and LiveOps.",
+      "parameters": {
+        "iap_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN" },
+        "english_content_enabled": { "defaultValue": { "value": "false" }, "valueType": "BOOLEAN", "description": "English puzzle content (Phase 2). The English UI language is always available." },
+        "leaderboards_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN" },
+        "achievements_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN" },
+        "share_card_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN" },
+        "report_clue_enabled": { "defaultValue": { "value": "true" }, "valueType": "BOOLEAN" },
+        "double_coin_event_active": { "defaultValue": { "value": "false" }, "valueType": "BOOLEAN" },
+        "event_banner": { "defaultValue": { "value": "{}" }, "valueType": "JSON", "description": "{\"id\":\"...\",\"title_he\":\"...\",\"title_en\":\"...\",\"until\":\"YYYY-MM-DD\"}" },
+        "min_supported_build": { "defaultValue": { "value": "1" }, "valueType": "NUMBER", "description": "Builds below this show a forced-update screen." }
+      }
+    }
+  },
+  "parameters": {}
+}

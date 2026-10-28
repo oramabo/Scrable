@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/publish-index.schema.json",
+  "title": "Chetz publish index",
+  "description": "`publish-index.json` written by `chetz_gen manifest` next to the manifests: one row per generated puzzle with the values the publisher hands to the `publishPuzzle` function (`solutionHash` for the leaderboard, `letterCells`, checksum, file path). Never shipped to players.",
+  "type": "object",
+  "required": [
+    "generatedAt",
+    "lang",
+    "puzzles"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "generatedAt": {
+      "type": "string"
+    },
+    "lang": {
+      "type": "string",
+      "enum": [
+        "he",
+        "en"
+      ]
+    },
+    "puzzles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "lang",
+          "file",
+          "letterCells",
+          "solutionHash",
+          "checksum",
+          "version"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "daily",
+              "pack"
+            ]
+          },
+          "lang": {
+            "type": "string",
+            "enum": [
+              "he",
+              "en"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "variant": {
+            "type": "string",
+            "enum": [
+              "easy",
+              "hard"
+            ]
+          },
+          "packId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "index": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "file": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Path of the puzzle JSON relative to the content root."
+          },
+          "letterCells": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "solutionHash": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "`PuzzleCodec.solutionHash` (plain, never shipped)."
+          },
+          "checksum": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  }
+}

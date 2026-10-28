@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-28T12:05:00.000Z",
+  "lang": "he",
+  "packs": [
+    {
+      "id": "he-l1-p01",
+      "lang": "he",
+      "level": 1,
+      "index": 1,
+      "title": {
+        "he": "רמה 1 · חבילה 1",
+        "en": "Level 1 · Pack 1"
+      },
+      "puzzleCount": 2,
+      "url": "puzzles/he/packs/he-l1-p01/pack.v1.json",
+      "checksum": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "free": true,
+      "puzzles": [
+        {
+          "id": "he-l1-p01-01",
+          "index": 1,
+          "url": "puzzles/he/packs/he-l1-p01/01.v1.json",
+          "checksum": "sha256:cc02d107fdf96cc544f31e371109524d3d99e97e9d8f05dc9b68f51c1b902d41",
+          "difficulty": 20.8,
+          "words": 16
+        },
+        {
+          "id": "he-l1-p01-02",
+          "index": 2,
+          "url": "https://cdn.chetz.app/puzzles/he/packs/he-l1-p01/02.v1.json",
+          "checksum": "sha256:ed8eaf62b6f8cfb215b355aa8c9d1ec85d55916e987f7b4716d7e38cf50b2ece",
+          "version": 1
+        }
+      ]
+    },
+    {
+      "id": "he-l2-p01",
+      "lang": "he",
+      "level": 2,
+      "index": 1,
+      "title": "רמה 2 · חבילה 1",
+      "puzzleCount": 0,
+      "url": "https://cdn.chetz.app/puzzles/he/packs/he-l2-p01/pack.v1.json",
+      "checksum": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "free": false
+    }
+  ]
+}

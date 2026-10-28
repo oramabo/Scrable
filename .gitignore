@@ -1,6 +1,7 @@
 # Dart / Flutter
 .dart_tool/
 .packages
+.pub-cache/
 build/
 *.iml
 .idea/
@@ -14,27 +15,45 @@ apps/mobile/android/app/google-services.json
 apps/mobile/ios/Runner/GoogleService-Info.plist
 apps/mobile/android/key.properties
 apps/mobile/android/*.jks
+**/ios/Pods/
+**/ios/.symlinks/
+**/android/.gradle/
+**/android/local.properties
+*.ipa
+*.apk
+*.aab
+.melos_tool/
 
-# Node
+# Node / TypeScript (functions, schema)
 node_modules/
 functions/lib/
+functions/schema/          # build-time copy of ../schema (scripts/sync-schema.mjs)
+functions/.env
+functions/.env.*
+!functions/.env.example
 coverage/
 *.log
 npm-debug.log*
+*.tsbuildinfo
 
 # Firebase
 .firebase/
 firebase-debug.log
 .firebaserc.local
+*-service-account*.json
 
 # Python
 __pycache__/
 *.pyc
+.venv/
+venv/
 
 # OS / editors
 .DS_Store
 Thumbs.db
 *.swp
+*.swo
 
 # Local scratch
 /tmp/
+*.tmp

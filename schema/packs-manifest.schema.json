@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/packs-manifest.schema.json",
+  "title": "Chetz packs manifest",
+  "description": "CDN file `manifests/{lang}/packs.json`: every published pack of one language with its puzzle list inline. `url` points at the pack file (`puzzles/{lang}/packs/{packId}/pack.v1.json`); `checksum` is the SHA-256 of the pack's `puzzles` list. Written by `chetz_gen manifest` and by the `rebuildManifests` function.",
+  "type": "object",
+  "required": [
+    "version",
+    "generatedAt",
+    "lang",
+    "packs"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lang": {
+      "type": "string",
+      "enum": [
+        "he",
+        "en"
+      ]
+    },
+    "packs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "lang",
+          "level",
+          "index",
+          "title",
+          "puzzleCount",
+          "url",
+          "checksum",
+          "free"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
+          },
+          "lang": {
+            "type": "string",
+            "enum": [
+              "he",
+              "en"
+            ]
+          },
+          "level": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9
+          },
+          "index": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "1-based position of the pack within its level."
+          },
+          "title": {
+            "description": "Display title: a plain string or a map of UI language to string (`{\"he\": ..., \"en\": ...}`).",
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "object",
+                "minProperties": 1,
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 200
+                }
+              }
+            ]
+          },
+          "puzzleCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "Absolute https URL, or a path relative to the CDN root (what `chetz_gen manifest` writes, e.g. `puzzles/he/daily/easy/2026-11-01.v1.json`).",
+            "pattern": "^(https://\\S+|[A-Za-z0-9][^\\s]*)$"
+          },
+          "checksum": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$"
+          },
+          "free": {
+            "type": "boolean"
+          },
+          "puzzles": {
+            "type": "array",
+            "description": "The pack's puzzles in order (optional in the manifest; present in files written by chetz_gen and rebuildManifests).",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "index",
+                "url",
+                "checksum"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "index": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "1-based position inside the pack."
+                },
+                "url": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1000,
+                  "description": "Absolute https URL, or a path relative to the CDN root (what `chetz_gen manifest` writes, e.g. `puzzles/he/daily/easy/2026-11-01.v1.json`).",
+                  "pattern": "^(https://\\S+|[A-Za-z0-9][^\\s]*)$"
+                },
+                "checksum": {
+                  "type": "string",
+                  "pattern": "^sha256:[0-9a-f]{64}$"
+                },
+                "version": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "difficulty": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100,
+                  "description": "`difficulty.score` of the puzzle."
+                },
+                "words": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "description": "Number of words in the puzzle."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

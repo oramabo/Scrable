@@ -1,0 +1,50 @@
+name: content-validate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'tools/generate/**'
+      - 'schema/**'
+      - '.github/workflows/content-validate.yml'
+  pull_request:
+    paths:
+      - 'content/**'
+      - 'tools/generate/**'
+      - 'schema/**'
+      - '.github/workflows/content-validate.yml'
+
+jobs:
+  content:
+    name: validate content with tools/generate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Detect tools/generate
+        id: detect
+        run: echo "present=$([ -f tools/generate/pubspec.yaml ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+      - uses: subosito/flutter-action@v2
+        if: hashFiles('tools/generate/pubspec.yaml') != ''
+        with:
+          channel: stable
+          cache: true
+      - name: dart pub get (tools/generate)
+        if: hashFiles('tools/generate/pubspec.yaml') != ''
+        working-directory: tools/generate
+        run: dart pub get
+      - name: Validate content (chetz_gen validate)
+        if: hashFiles('tools/generate/pubspec.yaml') != ''
+        # Re-validates every puzzle in content/ against the lexicon, layout rules and checksums.
+        run: dart run tools/generate/bin/chetz_gen.dart --content content validate
+      - name: Validate content against the JSON Schemas
+        if: hashFiles('tools/generate/pubspec.yaml') != ''
+        run: |
+          npm ci --prefix schema
+          node schema/validate.mjs --content content
+      - name: Skipped
+        if: steps.detect.outputs.present == 'false'
+        run: echo "tools/generate not present yet; nothing to validate"
