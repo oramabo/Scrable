@@ -13,8 +13,8 @@ class FillConfig {
   const FillConfig({
     this.beam = 14,
     this.sampleLimit = 700,
-    this.baseNodeLimit = 6000,
-    this.maxRestarts = 5,
+    this.baseNodeLimit = 8000,
+    this.maxRestarts = 4,
     this.steer = 0.7,
     this.weightDifficulty = 3.0,
     this.weightCrossing = 0.55,

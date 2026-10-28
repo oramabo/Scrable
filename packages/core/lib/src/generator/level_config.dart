@@ -24,6 +24,7 @@ class LevelConfig {
     this.scoreMin = 0,
     this.scoreMax = 100,
     this.borderLetters = 0,
+    this.lengthMid,
   });
 
   final int level;
@@ -51,15 +52,21 @@ class LevelConfig {
   /// force bent arrows.
   final int borderLetters;
 
+  /// Centre of the word-length distribution used when drawing layouts.
+  /// Defaults to a Hebrew-tuned value; English words are longer.
+  final double? lengthMid;
+
+  double get effectiveLengthMid => lengthMid ?? (3.0 + (level - 1) * 0.6);
+
   double get meanDifficultyTarget => (meanDifficultyMin + meanDifficultyMax) / 2;
 
-  LevelConfig copyWith({int? rows, int? cols, int? targetWords, int? maxWordLen}) => LevelConfig(
+  LevelConfig copyWith({int? rows, int? cols, int? targetWords, int? maxWordLen, double? max2LetterShare, double? lengthMid}) => LevelConfig(
         level: level,
         rows: rows ?? this.rows,
         cols: cols ?? this.cols,
         targetWords: targetWords ?? this.targetWords,
         maxWordLen: maxWordLen ?? this.maxWordLen,
-        max2LetterShare: max2LetterShare,
+        max2LetterShare: max2LetterShare ?? this.max2LetterShare,
         maxWordDifficulty: maxWordDifficulty,
         meanDifficultyMin: meanDifficultyMin,
         meanDifficultyMax: meanDifficultyMax,
@@ -75,6 +82,7 @@ class LevelConfig {
         scoreMin: scoreMin,
         scoreMax: scoreMax,
         borderLetters: borderLetters,
+        lengthMid: lengthMid ?? this.lengthMid,
       );
 
   static const List<Arrow> straight = [Arrow.a, Arrow.d];
@@ -94,8 +102,14 @@ class LevelConfig {
   static LevelConfig forLanguage(String lang, int level) {
     final base = defaults[level];
     if (base == null) throw ArgumentError.value(level, 'level');
-    if (lang == 'en' && level >= 3) {
-      return base.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 2, maxWordLen: base.maxWordLen + 1);
+    if (lang == 'en') {
+      // English answers are longer and two-letter words are scarce.
+      // English has only ~55 usable two-letter words, so English grids avoid two-letter runs entirely.
+      final en = base.copyWith(max2LetterShare: 0.0, lengthMid: base.effectiveLengthMid + 1.4);
+      if (level >= 3) {
+        return en.copyWith(cols: base.cols + 1, targetWords: base.targetWords + 2, maxWordLen: base.maxWordLen + 1);
+      }
+      return en;
     }
     return base;
   }

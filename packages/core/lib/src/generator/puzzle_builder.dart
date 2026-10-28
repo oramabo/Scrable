@@ -12,7 +12,7 @@ import 'lexicon.dart';
 import 'puzzle_validator.dart';
 import 'rng.dart';
 
-const String generatorVersion = '0.1.0';
+const String generatorVersion = '0.2.0';
 
 class BuildRequest {
   const BuildRequest({
@@ -27,7 +27,7 @@ class BuildRequest {
     this.title,
     this.excludeCanonical = const {},
     this.usedClueIds = const {},
-    this.maxTemplates = 10,
+    this.maxTemplates = 12,
   });
 
   final String id;

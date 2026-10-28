@@ -19,7 +19,7 @@ class LayoutGenerator {
   List<double> _lengthWeights() {
     final w = List<double>.filled(config.maxWordLen + 1, 0);
     for (var len = 2; len <= config.maxWordLen; len++) {
-      final mid = 3.0 + (config.level - 1) * 0.6;
+      final mid = config.effectiveLengthMid;
       w[len] = math.exp(-math.pow(len - mid, 2) / (2 * 1.6 * 1.6));
     }
     w[2] *= config.max2LetterShare * 2.2; // two-letter words are a spice, not a diet

@@ -220,6 +220,7 @@ class PackCommand extends _Base {
       scoreMin: cfg.scoreMin,
       scoreMax: cfg.scoreMax,
       borderLetters: cfg.borderLetters,
+      lengthMid: cfg.lengthMid,
     );
   }
 }
