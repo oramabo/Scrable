@@ -1,0 +1,40 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+*.iml
+.idea/
+.vscode/
+pubspec.lock
+!apps/mobile/pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+apps/mobile/.flutter-plugins*
+apps/mobile/android/app/google-services.json
+apps/mobile/ios/Runner/GoogleService-Info.plist
+apps/mobile/android/key.properties
+apps/mobile/android/*.jks
+
+# Node
+node_modules/
+functions/lib/
+coverage/
+*.log
+npm-debug.log*
+
+# Firebase
+.firebase/
+firebase-debug.log
+.firebaserc.local
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editors
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local scratch
+/tmp/
