@@ -17,7 +17,7 @@ configuration. Nothing secret is committed.
 ## 2. Firebase
 1. `firebase projects:create chetz-prod` (or use the console), enable Authentication (Anonymous, Apple, Google), Firestore (production mode), Storage, Remote Config, App Check.
 2. Download `google-services.json` to `apps/mobile/android/app/` and `GoogleService-Info.plist` to `apps/mobile/ios/Runner/`. They are git-ignored.
-3. Deploy rules, indexes and functions: `cd functions && npm ci && npm run build && cd .. && firebase deploy --only firestore,storage,functions,remoteconfig`.
+3. Deploy rules, indexes and functions: `cd functions && npm ci && npm run build && cd ../firebase && firebase deploy --only firestore,storage,functions,remoteconfig` (copy `firebase/.firebaserc.example` to `.firebaserc` first). The `hosting` target `chetz-admin` expects the Phase-2 admin web app at `apps/admin/build/web`; until it exists, deploy without `hosting` and use the editorial gallery (`chetz_gen gallery`) plus the publish script below.
 4. Set secrets: `firebase functions:secrets:set REVENUECAT_WEBHOOK_SECRET` and `DAILY_SEED_SECRET` (the HMAC key used by `tools/generate dailies`; keep it out of git).
 5. Give your editor account the admin claim (one-off script with the Admin SDK: `admin.auth().setCustomUserClaims(uid, {admin: true})`).
 
