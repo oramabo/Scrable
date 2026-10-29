@@ -33,6 +33,7 @@ function parseArgs(argv) {
     if (a === '--content') out.content = next();
     else if (a === '--lang') out.lang = next();
     else if (a === '--only') out.only = next();
+    else if (a === '--images-only') { out.only = 'images'; }
     else if (a === '--from') out.from = next();
     else if (a === '--limit') out.limit = Number(next());
     else if (a === '--no-rebuild') out.rebuild = false;
@@ -42,7 +43,7 @@ function parseArgs(argv) {
     } else throw new Error(`unknown argument ${a}`);
   }
   if (out.lang !== 'he' && out.lang !== 'en') throw new Error('--lang must be he or en');
-  if (!['all', 'daily', 'packs'].includes(out.only)) throw new Error('--only must be all, daily or packs');
+  if (!['all', 'daily', 'packs', 'images'].includes(out.only)) throw new Error('--only must be all, daily, packs or images');
   return out;
 }
 
@@ -61,6 +62,7 @@ async function main() {
 
   const packMeta = new Map();
   let entries = index.puzzles.filter((e) => e.lang === args.lang);
+  if (args.only === 'images') entries = [];
   if (args.only === 'daily') entries = entries.filter((e) => e.kind === 'daily');
   if (args.only === 'packs') entries = entries.filter((e) => e.kind === 'pack');
   if (args.from) entries = entries.filter((e) => e.kind !== 'daily' || e.date >= args.from);
@@ -87,6 +89,21 @@ async function main() {
       failures.push({ id: entry.id, error: err instanceof Error ? err.message : String(err) });
       console.error(`FAILED ${entry.id}: ${failures[failures.length - 1].error}`);
     }
+  }
+  // Picture-clue images: content/<lang>/images/<file> → CDN <lang>/images/<file> (immutable).
+  const imagesIndex = path.join(contentRoot, args.lang, 'images', 'images.jsonl');
+  if (fs.existsSync(imagesIndex) && args.only !== 'daily' && args.only !== 'packs') {
+    const lines = fs.readFileSync(imagesIndex, 'utf8').split('\n').filter(Boolean);
+    let uploaded = 0;
+    for (const line of lines) {
+      const rec = JSON.parse(line);
+      const local = path.join(contentRoot, args.lang, rec.file);
+      if (!fs.existsSync(local)) continue;
+      const dest = `${args.lang}/${rec.file}`;
+      await deps.storage.putBytes(dest, fs.readFileSync(local), { cacheControl: 'public, max-age=31536000, immutable', contentType: local.endsWith('.png') ? 'image/png' : 'image/jpeg' });
+      uploaded++;
+    }
+    console.log(`${uploaded} images uploaded`);
   }
   if (args.rebuild) {
     const r = await rebuildManifests(deps, { lang: args.lang }, Date.now());

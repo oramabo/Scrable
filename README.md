@@ -8,7 +8,7 @@ Arrowword (תשחץ) puzzles for iOS and Android: packs by difficulty, two gener
 |------|------------|-------------|
 | `packages/core` | Dart: puzzle model + JSON codec, language profiles (he/en), solving engine (navigation, checking, hints, final-letter display), generator (layout templates, CSP fill, clue assignment, difficulty, validation), SVG preview | `dart analyze && dart test` |
 | `tools/generate` | CLI `chetz_gen`: `templates`, `pack`, `dailies`, `manifest`, `validate`, `preview`, `gallery`, `stats` | `dart analyze && dart run bin/chetz_gen.dart --help` |
-| `tools/content` | Python: scrape the Mordo clue dictionary, build the Hebrew lexicon + clue DB | `python3 -I tools/content/build_he_content.py RAW OUT` |
+| `tools/content` | Python: scrape the Mordo clue dictionary, build the Hebrew lexicon + clue DB, build the English lexicon (ENABLE + WordNet), fetch freely licensed pictures (Wikidata + Commons) | `python3 -I tools/content/build_he_content.py RAW OUT`, `fetch_images.py --lang he ...` |
 | `content/he` | Lexicon (74k words), clues (257k pairs), 40 templates per level, generated packs and 95 days of dailies, manifests | `dart run tools/generate/bin/chetz_gen.dart --content content validate` |
 | `apps/mobile` | Flutter app (Riverpod, go_router, custom grid painter, custom keyboards, wallet, packs, dailies, settings, onboarding, he/en UI) | `flutter analyze && flutter test` |
 | `functions` | Firebase Functions (TypeScript): RevenueCat webhook, ledger validation, daily leaderboard submission, publishing, manifests, account deletion | `npm ci && npm run build && npm test` |
@@ -25,6 +25,13 @@ dart run tools/generate/bin/chetz_gen.dart --content content stats --lang he
 dart run tools/generate/bin/chetz_gen.dart --content content gallery --lang he --out build/gallery   # browse puzzles
 (cd apps/mobile && flutter pub get && ../../tools/sync_assets.sh && flutter run)
 ```
+
+## Feature map (what exists today)
+- **Play**: packs by level with a star-based progression gate, two dailies per language with streaks and archive, three play modes (relaxed / normal / newspaper), hints with coin prices, the **A→Z letter cycler** for the last empty letter of a word, undo, pencil marks, Hebrew final-letter display, geresh key.
+- **Meta**: 32 achievements, 3 daily + 3 weekly missions (deterministic, coin rewards), lifetime stats, profile with avatar and rank, themes (light/dark/system/high-contrast/custom colours).
+- **Picture clues**: `ClueSlot.image` renders a freely licensed photo (Wikimedia Commons via Wikidata, licence and credit recorded) instead of text; generated with `chetz_gen pack --pictures 0.3`.
+- **Content**: Hebrew 580 + English ~400 puzzles, 2 tutorial puzzles per language, 95 days of dailies per language.
+- **Backend**: ledger validation, purchases webhook, leaderboard submission, publishing, manifests; CI for every package.
 
 ## How a puzzle is made
 1. **Lexicon**: `tools/content` turns the clue dictionary into `words.jsonl.gz` (normalised Hebrew symbols: 22 letters + 5 geresh letters, final letters folded) and `clues.jsonl.gz`, with a difficulty per word from how often crossword setters use it.

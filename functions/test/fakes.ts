@@ -3,8 +3,12 @@ import type { Messaging, PushNotification } from '../src/lib/messaging';
 import type { ObjectStore } from '../src/lib/storage';
 
 export class FakeStorage implements ObjectStore {
-  readonly objects = new Map<string, { data: unknown; cacheControl: string }>();
+  readonly objects = new Map<string, { data: unknown; cacheControl: string; contentType?: string }>();
   constructor(readonly base = 'https://cdn.test') {}
+  async putBytes(path: string, data: Uint8Array, options: { cacheControl: string; contentType: string }): Promise<void> {
+    this.objects.set(path, { data, cacheControl: options.cacheControl, contentType: options.contentType });
+  }
+
   async putJson(path: string, data: unknown, options: { cacheControl: string }): Promise<void> {
     this.objects.set(path, { data: JSON.parse(JSON.stringify(data)) as unknown, cacheControl: options.cacheControl });
   }

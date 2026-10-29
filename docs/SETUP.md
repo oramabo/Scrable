@@ -48,6 +48,20 @@ Content credit: clue/answer pairs were seeded from the public Mordo clue diction
 clues to `approved`. Review the licensing position of imported clues with counsel before launch; our
 recommendation in docs/GAME_PLAN.md is to treat them as drafts and ship editor-approved clues.
 
+## 3b. Picture clues (free images)
+Image-generation services (OpenAI, Google, Stability) refuse to draw real public figures, and likeness/publicity
+rights make generated celebrity images legally risky, so famous people are illustrated with **freely licensed
+photos from Wikimedia Commons**, found through Wikidata:
+```
+python3 -I tools/content/fetch_images.py --lang he --words content/he/lexicon/words.jsonl.gz --out content/he --only-proper --limit 500
+python3 -I tools/content/fetch_images.py --lang en --words content/en/lexicon/words.jsonl.gz --out content/en --limit 500
+dart run tools/generate/bin/chetz_gen.dart --content content pack --lang he --level 2 --pack 4 --pictures 0.3 --title-he "חבילת תמונות" --title-en "Picture Pack"
+```
+Only PD / CC0 / CC BY / CC BY-SA files are kept; credit, licence and source URL travel with each puzzle and are
+shown in the app's image-credits screen (CC BY-SA requires that attribution). Run the fetcher from a normal
+network (Wikimedia rate-limits shared cloud proxies). AI-generated pictures are fine for generic nouns
+(animals, objects) if you want them later: add records to `images.jsonl` with `license: "generated"`.
+
 ## 4. RevenueCat and store products
 Create these products in both stores and in RevenueCat (identifiers must match `functions/src/economy.ts`
 and the app's `StoreService`): consumables `coins_300`, `coins_800`, `coins_2000`, `coins_6000`;

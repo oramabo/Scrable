@@ -6,6 +6,8 @@ type Bucket = ReturnType<Storage['bucket']>;
 export interface ObjectStore {
   /** Writes `data` as UTF-8 JSON at `path` with the given Cache-Control header. */
   putJson(path: string, data: unknown, options: { cacheControl: string }): Promise<void>;
+  /** Writes raw bytes (images) at `path`. */
+  putBytes(path: string, data: Uint8Array, options: { cacheControl: string; contentType: string }): Promise<void>;
   /** Public (CDN) URL of an object. */
   publicUrl(path: string): string;
 }
@@ -26,6 +28,13 @@ export function adminStorage(bucket: Bucket, cdnBaseUrl?: string): ObjectStore {
     async putJson(path, data, options) {
       await bucket.file(path).save(Buffer.from(JSON.stringify(data), 'utf8'), {
         contentType: 'application/json; charset=utf-8',
+        resumable: false,
+        metadata: { cacheControl: options.cacheControl },
+      });
+    },
+    async putBytes(path, data, options) {
+      await bucket.file(path).save(Buffer.from(data), {
+        contentType: options.contentType,
         resumable: false,
         metadata: { cacheControl: options.cacheControl },
       });
