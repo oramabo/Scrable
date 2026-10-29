@@ -37,6 +37,8 @@ dependencies:
   cloud_firestore: ^7.1.0
   cloud_functions: ^7.0.1
   firebase_remote_config: ^7.0.1
+  flutter_local_notifications: ^22.3.3
+  timezone: ^0.11.2
 
 dev_dependencies:
   flutter_test:
@@ -58,12 +60,14 @@ flutter:
     - assets/puzzles/he/daily/hard/
     - assets/puzzles/he/tutorial/
     - assets/puzzles/he/images/
+    - assets/puzzles/he/device/
     - assets/puzzles/he/packs/he-l1-p01/
     - assets/puzzles/he/packs/he-l1-p02/
     - assets/puzzles/he/packs/he-l1-p03/
     - assets/puzzles/he/packs/he-l2-p01/
     - assets/puzzles/he/packs/he-l2-p02/
     - assets/puzzles/he/packs/he-l2-p03/
+    - assets/puzzles/he/packs/he-l3-p04/
     - assets/puzzles/he/packs/he-l3-p01/
     - assets/puzzles/he/packs/he-l3-p02/
     - assets/puzzles/he/packs/he-l3-p03/
@@ -78,6 +82,7 @@ flutter:
     - assets/puzzles/en/daily/hard/
     - assets/puzzles/en/tutorial/
     - assets/puzzles/en/images/
+    - assets/puzzles/en/device/
     - assets/puzzles/en/packs/en-l1-p01/
     - assets/puzzles/en/packs/en-l1-p02/
     - assets/puzzles/en/packs/en-l2-p01/

@@ -6,6 +6,32 @@ import 'package:flutter/foundation.dart';
 
 import '../wallet/ledger.dart';
 
+/// Server-side progression read from `users/{uid}`: lifetime XP, trophies and
+/// season points per season id (`season.<id>.points`).
+class ServerMeta {
+  const ServerMeta({this.xp, this.trophies, this.seasonPoints = const {}});
+  final int? xp;
+  final int? trophies;
+  final Map<String, int> seasonPoints;
+
+  static ServerMeta fromUserDoc(Map<String, dynamic> data) {
+    final season = <String, int>{};
+    final raw = data['season'];
+    if (raw is Map) {
+      for (final e in raw.entries) {
+        final v = e.value;
+        final points = v is Map ? v['points'] : v;
+        if (points is num) season[e.key.toString()] = points.toInt();
+      }
+    }
+    return ServerMeta(
+      xp: (data['xp'] as num?)?.toInt(),
+      trophies: (data['trophies'] as num?)?.toInt(),
+      seasonPoints: season,
+    );
+  }
+}
+
 class SyncLedgerResult {
   const SyncLedgerResult({required this.serverBalance, required this.acceptedIds, required this.rejectedIds});
   final int serverBalance;
@@ -34,6 +60,10 @@ abstract class CloudSync {
 
   /// Writes profile fields (display name, avatar) to `users/{uid}`.
   Future<void> pushProfile(Map<String, dynamic> profile);
+
+  /// Reads the server's progression (xp, trophies, season points); null when
+  /// offline / disabled.
+  Future<ServerMeta?> pullMeta();
 }
 
 class DisabledCloudSync extends CloudSync {
@@ -54,6 +84,8 @@ class DisabledCloudSync extends CloudSync {
   Future<bool> submitDaily({required Puzzle puzzle, required PuzzleProgress progress}) async => false;
   @override
   Future<void> pushProfile(Map<String, dynamic> profile) async {}
+  @override
+  Future<ServerMeta?> pullMeta() async => null;
 }
 
 class FakeCloudSync extends CloudSync {
@@ -61,6 +93,7 @@ class FakeCloudSync extends CloudSync {
   final List<String> submitted = [];
   Map<String, dynamic>? profile;
   int? serverBalance;
+  ServerMeta? serverMeta;
 
   @override
   bool get enabled => true;
@@ -86,6 +119,8 @@ class FakeCloudSync extends CloudSync {
 
   @override
   Future<void> pushProfile(Map<String, dynamic> profile) async => this.profile = profile;
+  @override
+  Future<ServerMeta?> pullMeta() async => serverMeta;
 }
 
 /// Firestore layout from docs/GAME_PLAN.md §6.5:
@@ -197,6 +232,19 @@ class FirebaseCloudSync extends CloudSync {
       await _firestore!.collection('users').doc(_user!.uid).set({'profile': profile}, SetOptions(merge: true));
     } catch (e) {
       debugPrint('push profile failed: $e');
+    }
+  }
+
+  @override
+  Future<ServerMeta?> pullMeta() async {
+    if (!enabled) return null;
+    try {
+      final snap = await _firestore!.collection('users').doc(_user!.uid).get();
+      final data = snap.data();
+      return data == null ? null : ServerMeta.fromUserDoc(data);
+    } catch (e) {
+      debugPrint('pull meta failed: $e');
+      return null;
     }
   }
 }

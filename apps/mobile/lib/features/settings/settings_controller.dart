@@ -76,6 +76,10 @@ class SettingsController extends Notifier<AppSettings> {
   void clearLastPuzzle() => _set(state.copyWith(clearLastPuzzle: true));
   void setAdConsentDone() => _set(state.copyWith(adConsentDone: true));
 
+  void setNotificationsAsked() => _set(state.copyWith(notificationsAsked: true));
+  void setNotifications({bool? daily, bool? streak, int? hour}) =>
+      _set(state.copyWith(notificationsDailyReady: daily, notificationsStreak: streak, notificationsHour: hour, notificationsAsked: true));
+
   void applySeniorsPreset() {
     _set(state.withSeniorsPreset());
     _a11y('seniors_preset', true);

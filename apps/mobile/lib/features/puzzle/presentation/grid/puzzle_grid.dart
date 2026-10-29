@@ -25,6 +25,8 @@ class PuzzleGrid extends ConsumerStatefulWidget {
     required this.onClueCellTap,
     required this.onCellLongPress,
     this.zoomController,
+    this.remoteTints = const {},
+    this.remoteCursors = const {},
   });
 
   final String puzzleId;
@@ -34,6 +36,10 @@ class PuzzleGrid extends ConsumerStatefulWidget {
 
   /// Optional external control (zoom buttons).
   final TransformationController? zoomController;
+
+  /// Co-op overlays: cells other members just filled / their cursors.
+  final Map<int, Color> remoteTints;
+  final Map<int, Color> remoteCursors;
 
   @override
   ConsumerState<PuzzleGrid> createState() => _PuzzleGridState();
@@ -300,6 +306,8 @@ class _PuzzleGridState extends ConsumerState<PuzzleGrid> with TickerProviderStat
                               wash: _washWordId == null ? 0 : _wash.value,
                               flip: _flip.isAnimating || _flip.value > 0 ? _flip.value : 0,
                               flipOrder: _flipOrder,
+                              remoteTints: widget.remoteTints,
+                              remoteCursors: widget.remoteCursors,
                             ),
                             size: childSize,
                           ),

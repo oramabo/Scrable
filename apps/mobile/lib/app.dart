@@ -10,6 +10,7 @@ import 'core/router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/daily/daily_controller.dart';
 import 'features/meta/game_events_controller.dart';
+import 'features/notifications/notifications_controller.dart';
 import 'features/settings/settings_controller.dart';
 import 'features/settings/theme/custom_theme.dart';
 import 'features/wallet/wallet_controller.dart';
@@ -92,7 +93,10 @@ class _StartupState extends ConsumerState<_Startup> with WidgetsBindingObserver 
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.resumed) ref.read(refreshTodayProvider.notifier).bump();
+    if (state == AppLifecycleState.resumed) {
+      ref.read(refreshTodayProvider.notifier).bump();
+      _rescheduleNotifications();
+    }
   }
 
   Future<void> _run() async {
@@ -115,9 +119,21 @@ class _StartupState extends ConsumerState<_Startup> with WidgetsBindingObserver 
 
     if (cloud.enabled) {
       unawaited(ref.read(walletProvider.notifier).syncWithCloud());
+      // Server-side progression (xp / trophies / season points) wins over the local mirror.
+      unawaited(cloud.pullMeta().then((meta) {
+        if (meta != null && mounted) ref.read(metaProvider.notifier).applyServerMeta(meta);
+      }));
       final remote = await fetchRemoteGameConfig();
       if (remote != null && mounted) ref.read(gameConfigProvider.notifier).applyJson(remote);
     }
+    if (mounted) _rescheduleNotifications();
+  }
+
+  void _rescheduleNotifications() {
+    final settings = ref.read(settingsProvider);
+    if (!settings.notificationsDailyReady && !settings.notificationsStreak) return;
+    final l10n = AppLocalizations.of(context);
+    unawaited(ref.read(notificationsProvider.notifier).reschedule(l10n));
   }
 
   void _showUnlocks(BuildContext context) {
@@ -140,6 +156,10 @@ class _StartupState extends ConsumerState<_Startup> with WidgetsBindingObserver 
   Widget build(BuildContext context) {
     ref.listen(metaProvider.select((m) => m.unlockSeq), (prev, next) {
       if (prev != next) WidgetsBinding.instance.addPostFrameCallback((_) => _showUnlocks(context));
+    });
+    // A completed daily clears today's streak-at-risk reminder.
+    ref.listen(dailyHistoryProvider, (prev, next) {
+      if (prev != next) _rescheduleNotifications();
     });
     return widget.child;
   }

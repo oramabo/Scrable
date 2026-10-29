@@ -30,6 +30,35 @@ const tutorialPuzzleId = 'he-tutorial-01';
 /// The dedicated tutorial puzzle of a language (`content/<lang>/puzzles/tutorial/01.json`).
 String tutorialPuzzleIdFor(String lang) => '$lang-tutorial-01';
 
+/// A solving session is keyed by the puzzle id, optionally followed by a
+/// multiplayer context: `<puzzleId>?match=<matchId>` (versus) or
+/// `<puzzleId>?room=<roomId>` (co-op). Multiplayer sessions keep their own
+/// progress row (never the solo one) and leave rewards to the server.
+class SessionKey {
+  const SessionKey(this.puzzleId, {this.matchId, this.roomId});
+
+  final String puzzleId;
+  final String? matchId;
+  final String? roomId;
+
+  bool get isMultiplayer => matchId != null || roomId != null;
+  bool get isVersus => matchId != null;
+  bool get isCoop => roomId != null;
+
+  static SessionKey parse(String key) {
+    final q = key.indexOf('?');
+    if (q < 0) return SessionKey(key);
+    final params = Uri.splitQueryString(key.substring(q + 1));
+    return SessionKey(key.substring(0, q), matchId: params['match'], roomId: params['room']);
+  }
+
+  static String versus(String puzzleId, String matchId) => '$puzzleId?match=$matchId';
+  static String coop(String puzzleId, String roomId) => '$puzzleId?room=$roomId';
+
+  @override
+  String toString() => isVersus ? versus(puzzleId, matchId!) : (isCoop ? coop(puzzleId, roomId!) : puzzleId);
+}
+
 enum HintStatus { applied, insufficientCoins, notApplicable, noSelection }
 
 class HintResult {
@@ -52,9 +81,13 @@ final puzzleTimerEnabledProvider = Provider<bool>((ref) => true);
 /// Persistence dependencies are captured in [build] so the dispose-time flush
 /// never touches `ref` (Riverpod forbids using Ref inside life-cycles).
 class PuzzleController extends AsyncNotifier<PuzzleSession> {
-  PuzzleController(this.puzzleId);
+  PuzzleController(this.sessionId) : key = SessionKey.parse(sessionId);
 
-  final String puzzleId;
+  /// Family argument: puzzle id plus an optional multiplayer context.
+  final String sessionId;
+  final SessionKey key;
+
+  String get puzzleId => key.puzzleId;
 
   static const undoLimit = 50;
 
@@ -93,21 +126,24 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     final config = ref.read(gameConfigProvider);
     final now = ref.read(clockProvider).nowMs;
 
-    var progress = await _repo.load(puzzleId);
+    var progress = await _repo.load(sessionId);
     var fresh = false;
     if (progress == null) {
       fresh = true;
-      final mode = settings.modePerLevel[puzzle.level] ??
-          (puzzle.daily?.variant == DailyVariant.hard ? PlayMode.newspaper : config.defaultModeForLevel(puzzle.level));
+      // Multiplayer races are always played in normal mode (shared rules).
+      final mode = key.isMultiplayer
+          ? PlayMode.normal
+          : settings.modePerLevel[puzzle.level] ??
+              (puzzle.daily?.variant == DailyVariant.hard ? PlayMode.newspaper : config.defaultModeForLevel(puzzle.level));
       progress = PuzzleProgress.fresh(
-        puzzleId: puzzle.id,
+        puzzleId: sessionId,
         puzzleVersion: puzzle.meta.version,
         shape: puzzle.shape,
         mode: mode,
         now: now,
       );
     }
-    if (_cloud.enabled) {
+    if (_cloud.enabled && !key.isMultiplayer) {
       final remote = await _cloud.pullProgress(puzzleId);
       if (remote != null) progress = PuzzleProgress.merge(progress, remote);
     }
@@ -123,7 +159,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
       selection = nav.selectWord(nav.readingOrder.first.id, progress);
     }
 
-    ref.read(settingsProvider.notifier).setLastPuzzle(puzzleId);
+    if (!key.isMultiplayer) ref.read(settingsProvider.notifier).setLastPuzzle(puzzleId);
     final analytics = ref.read(analyticsProvider);
     if (fresh) {
       analytics.track(AnalyticsEvents.puzzleStart, {'level': puzzle.level, 'mode': progress.mode.code, 'puzzle': puzzle.id});
@@ -241,7 +277,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     try {
       final progress = _snapshot(s);
       await _repo.save(progress, s.puzzle);
-      if (_cloud.enabled) unawaited(_cloud.pushProgress(progress));
+      if (_cloud.enabled && !key.isMultiplayer) unawaited(_cloud.pushProgress(progress));
     } catch (e) {
       debugPrint('progress save failed: $e');
     } finally {
@@ -438,6 +474,37 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     _emit(session);
     unawaited(ref.read(hapticsProvider).tick());
     _scheduleSave();
+  }
+
+  /// Co-op: a letter placed (or cleared, [symbol] null) by another member.
+  /// Written without undo history or feedback; the word is evaluated as in
+  /// normal mode and completion is checked. Locked cells are left alone.
+  void applyRemoteLetter(int cell, int? symbol) {
+    final s0 = _s;
+    if (s0 == null || s0.isComplete) return;
+    if (s0.puzzle.shape.kinds[cell] != CellKind.letter) return;
+    final s = _stopCycler(s0);
+    final entry = s.progress.entry(cell);
+    if (entry.isLocked) return;
+    if (entry.symbol == symbol && !entry.pencil) return;
+    final checker = _checker(s);
+    final now = _now;
+    var session = s;
+    if (symbol == null) {
+      if (entry.isEmpty) return;
+      session = s.copyWith(progress: checker.clear(cell, s.progress, now: now), errorsNoticeShown: false);
+    } else {
+      final progress = checker.type(cell, symbol, s.progress, now: now, pencil: false);
+      session = s.copyWith(progress: progress, errorsNoticeShown: false, clearFeedback: true);
+      session = _applyModeFeedback(session, cell, checker, now);
+      session = _checkCompletion(session, checker);
+    }
+    _emit(session);
+    if (session.isComplete) {
+      unawaited(_saveNow(session));
+    } else {
+      _scheduleSave();
+    }
   }
 
   /// Hebrew geresh key: turns the last typed base letter (ג ז צ ת ד) into its
@@ -782,8 +849,11 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     int? streak;
     var completedPack = false;
     final daily = puzzle.daily;
+    // Versus / co-op: the server credits coins, XP and season points.
+    final multiplayer = key.isMultiplayer;
     // FTUE (UX §5): the very first completed puzzle pays a welcome bonus.
-    final firstCompletion = ref.read(metaProvider).stats.puzzlesCompleted == 0 &&
+    final firstCompletion = !multiplayer &&
+        ref.read(metaProvider).stats.puzzlesCompleted == 0 &&
         !ledger.hasEntry(LedgerEntryType.earnComplete, 'first_completion');
     var firstBonus = 0;
     if (firstCompletion) {
@@ -791,7 +861,9 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
       wallet.earn(LedgerEntryType.earnComplete, firstBonus, refId: 'first_completion');
       coins += firstBonus;
     }
-    if (daily != null) {
+    if (multiplayer) {
+      // No local economy; the match / room controller shows the server's rewards.
+    } else if (daily != null) {
       final reward = daily.variant == DailyVariant.easy ? config.dailyEasyReward : config.dailyHardReward;
       final refId = 'daily:${daily.date}:${daily.variant.code}';
       if (!ledger.hasEntry(LedgerEntryType.earnDaily, refId)) {
@@ -816,7 +888,8 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         unawaited(_cloud.submitDaily(puzzle: puzzle, progress: progress));
       }
     } else {
-      final reward = config.completionReward(puzzle.level, stars: stars);
+      // Random on-device puzzles are unranked: half the reward (GameConfig).
+      final reward = config.completionReward(puzzle.level, stars: stars, kind: puzzle.kind);
       if (!ledger.hasEntry(LedgerEntryType.earnComplete, puzzle.id)) {
         wallet.earn(LedgerEntryType.earnComplete, reward, refId: puzzle.id);
         coins += reward;
@@ -857,22 +930,26 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         if (!revealed && checker.isWordCorrect(w, progress)) wordsForEvent++;
       }
     }
-    _events.record(GameEvent.puzzleCompleted(
-      timestampMs: now,
-      lang: puzzle.lang,
-      puzzleId: puzzle.id,
-      level: puzzle.level,
-      mode: progress.mode,
-      elapsedMs: progress.elapsedMs,
-      parMs: config.parMs(puzzle.level),
-      hintsUsed: progress.hintsUsed,
-      wordsSolved: wordsForEvent,
-      isDaily: daily != null,
-      dailyVariant: daily?.variant.code,
-      dailyDate: daily?.date,
-      completedPack: completedPack,
-      localHour: clock.now().hour,
-    ));
+    _events.record(
+      GameEvent.puzzleCompleted(
+        timestampMs: now,
+        lang: puzzle.lang,
+        puzzleId: puzzle.id,
+        level: puzzle.level,
+        mode: progress.mode,
+        elapsedMs: progress.elapsedMs,
+        parMs: config.parMs(puzzle.level),
+        hintsUsed: progress.hintsUsed,
+        wordsSolved: wordsForEvent,
+        isDaily: daily != null,
+        dailyVariant: daily?.variant.code,
+        dailyDate: daily?.date,
+        completedPack: completedPack,
+        localHour: clock.now().hour,
+      ),
+      // Multiplayer XP / season points come from the server's result.
+      progression: !multiplayer,
+    );
 
     final learned = _learnedWords(session);
     _timer?.cancel();
@@ -911,6 +988,13 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     if (pack == null) return null;
     final info = await ref.read(contentRepositoryProvider(_puzzle.lang)).pack(pack.id);
     return info?.puzzleAt(pack.index + 1)?.id;
+  }
+
+  /// Share of letter cells filled (0..1); reported to the opponent in versus.
+  double get filledFraction {
+    final p = _s?.progress;
+    if (p == null || p.letterCount == 0) return 0;
+    return p.filledCount / p.letterCount;
   }
 
   /// Interstitial hook — only from the completion sheet, never during solving.

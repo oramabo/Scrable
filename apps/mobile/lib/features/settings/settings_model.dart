@@ -28,6 +28,10 @@ class AppSettings {
     this.sessionCount = 0,
     this.useCustomTheme = false,
     this.customTheme = const CustomTheme(),
+    this.notificationsAsked = false,
+    this.notificationsDailyReady = false,
+    this.notificationsStreak = false,
+    this.notificationsHour = 9,
   });
 
   final String uiLang;
@@ -58,6 +62,14 @@ class AppSettings {
   /// Player-picked colours (Settings → Theme → custom).
   final bool useCustomTheme;
   final CustomTheme customTheme;
+
+  /// Reminders (opt-in, asked once after the second completed daily).
+  final bool notificationsAsked;
+  final bool notificationsDailyReady;
+  final bool notificationsStreak;
+
+  /// Local hour (0–23) of the "daily ready" reminder.
+  final int notificationsHour;
 
   Locale get uiLocale => Locale(uiLang);
   LanguageProfile get puzzleProfile => Languages.byCode(puzzleLang);
@@ -98,6 +110,10 @@ class AppSettings {
     int? sessionCount,
     bool? useCustomTheme,
     CustomTheme? customTheme,
+    bool? notificationsAsked,
+    bool? notificationsDailyReady,
+    bool? notificationsStreak,
+    int? notificationsHour,
   }) =>
       AppSettings(
         uiLang: uiLang ?? this.uiLang,
@@ -122,6 +138,10 @@ class AppSettings {
         sessionCount: sessionCount ?? this.sessionCount,
         useCustomTheme: useCustomTheme ?? this.useCustomTheme,
         customTheme: customTheme ?? this.customTheme,
+        notificationsAsked: notificationsAsked ?? this.notificationsAsked,
+        notificationsDailyReady: notificationsDailyReady ?? this.notificationsDailyReady,
+        notificationsStreak: notificationsStreak ?? this.notificationsStreak,
+        notificationsHour: notificationsHour ?? this.notificationsHour,
       );
 
   /// The "seniors" preset: large text, high contrast, relaxed mode everywhere,
@@ -159,6 +179,10 @@ class AppSettings {
         'sessionCount': sessionCount,
         'useCustomTheme': useCustomTheme,
         'customTheme': customTheme.toJson(),
+        'notificationsAsked': notificationsAsked,
+        'notificationsDailyReady': notificationsDailyReady,
+        'notificationsStreak': notificationsStreak,
+        'notificationsHour': notificationsHour,
       };
 
   static AppSettings fromJson(Map<String, dynamic> j) {
@@ -193,6 +217,10 @@ class AppSettings {
       sessionCount: (j['sessionCount'] as int?) ?? 0,
       useCustomTheme: (j['useCustomTheme'] as bool?) ?? false,
       customTheme: j['customTheme'] is Map ? CustomTheme.fromJson(j['customTheme'] as Map<String, dynamic>) : const CustomTheme(),
+      notificationsAsked: (j['notificationsAsked'] as bool?) ?? false,
+      notificationsDailyReady: (j['notificationsDailyReady'] as bool?) ?? false,
+      notificationsStreak: (j['notificationsStreak'] as bool?) ?? false,
+      notificationsHour: ((j['notificationsHour'] as num?) ?? 9).toInt().clamp(0, 23),
     );
   }
 }

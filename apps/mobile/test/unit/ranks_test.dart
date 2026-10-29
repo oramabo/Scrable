@@ -1,23 +1,23 @@
+import 'package:chetz_app/features/meta/game_events_controller.dart';
 import 'package:chetz_app/features/profile/profile_model.dart';
+import 'package:chetz_core/meta.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('Ranks (GAME_PLAN §3.4 טירון → מאסטר)', () {
-    test('thresholds by puzzles completed', () {
-      expect(Ranks.forPuzzles(0).nameHe, 'טירון');
-      expect(Ranks.forPuzzles(4).nameHe, 'טירון');
-      expect(Ranks.forPuzzles(5).nameHe, 'חניך');
-      expect(Ranks.forPuzzles(150).nameEn, 'Expert');
-      expect(Ranks.forPuzzles(500).nameHe, 'מאסטר');
-      expect(Ranks.forPuzzles(9999).nameHe, 'מאסטר');
+  group('XP ranks (XpCurve, טירון → מאסטר)', () {
+    test('rank titles follow the XP level', () {
+      expect(rankTitle(XpCurve.rankIndex(XpCurve.levelForXp(0)), 'he'), 'טירון');
+      expect(rankTitle(XpCurve.rankIndex(5), 'he'), 'חובב');
+      expect(rankTitle(XpCurve.rankIndex(20), 'en'), 'Advanced');
+      expect(rankTitle(XpCurve.rankIndex(55), 'he'), 'מאסטר');
+      expect(rankTitle(99, 'en'), 'Master', reason: 'clamped');
     });
 
-    test('progress towards the next rank', () {
-      expect(Ranks.progress(0), 0);
-      expect(Ranks.progress(10), closeTo(0.5, 0.001)); // between 5 and 15
-      expect(Ranks.progress(500), 1);
-      expect(Ranks.next(Ranks.forPuzzles(500)), isNull);
-      expect(Ranks.next(Ranks.forPuzzles(0))!.minPuzzles, 5);
+    test('level progress is 0..1 inside a level', () {
+      expect(XpCurve.levelProgress(0), 0);
+      final mid = XpCurve.xpForLevel(3) + (XpCurve.xpForLevel(4) - XpCurve.xpForLevel(3)) ~/ 2;
+      expect(XpCurve.levelProgress(mid), closeTo(0.5, 0.02));
+      expect(XpCurve.levelForXp(XpCurve.xpForLevel(7)), 7);
     });
   });
 

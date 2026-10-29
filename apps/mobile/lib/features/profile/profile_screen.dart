@@ -107,8 +107,12 @@ class ProfileTab extends ConsumerWidget {
     final profile = ref.watch(profileProvider);
     final stats = ref.watch(playerStatsProvider);
     final lang = ref.watch(settingsProvider.select((s) => s.uiLang));
+    final xp = ref.watch(xpProvider);
+    final level = ref.watch(playerLevelProvider);
     final rank = ref.watch(rankProvider);
-    final nextRank = Ranks.next(rank);
+    final nextLevelXp = XpCurve.xpForLevel(level + 1);
+    final season = ref.watch(seasonInfoProvider);
+    final seasonPoints = ref.watch(seasonPointsProvider);
     final cloud = ref.watch(cloudSyncProvider);
     final firebaseFlag = ref.watch(appConfigProvider).firebaseEnabled;
     final unlocked = AchievementEngine.unlocked(stats).length;
@@ -129,12 +133,12 @@ class ProfileTab extends ConsumerWidget {
             children: [
               Semantics(
                 button: true,
-                label: '${l10n.chooseAvatar}: ${avatar.name(lang)}',
+                label: '${l10n.chooseAvatar}: ${avatar.name(lang)}. ${l10n.xpLevel(level)}',
                 child: ExcludeSemantics(
                   child: InkWell(
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(48),
                     onTap: () => _pickAvatar(context, ref, profile.avatarId, lang),
-                    child: AvatarView(avatar: avatar, size: 80),
+                    child: LevelRing(level: level, progress: XpCurve.levelProgress(xp), child: AvatarView(avatar: avatar, size: 72)),
                   ),
                 ),
               ),
@@ -149,18 +153,24 @@ class ProfileTab extends ConsumerWidget {
                         IconButton(tooltip: l10n.editName, onPressed: () => _editName(context, ref, profile.displayName ?? ''), icon: const Icon(Icons.edit_outlined)),
                       ],
                     ),
-                    Text('${l10n.rankLabel}: ${rank.name(lang)}', style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
+                    Text('${l10n.rankLabel}: ${rankTitle(rank, lang)} · ${l10n.xpLevel(level)}',
+                        style: theme.textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary)),
                     const SizedBox(height: 6),
-                    LinearProgressIndicator(value: Ranks.progress(stats.puzzlesCompleted), minHeight: 6, borderRadius: BorderRadius.circular(3)),
+                    LinearProgressIndicator(value: XpCurve.levelProgress(xp), minHeight: 6, borderRadius: BorderRadius.circular(3)),
                     const SizedBox(height: 4),
-                    Text(
-                      nextRank == null ? l10n.topRank : l10n.nextRank(nextRank.minPuzzles - stats.puzzlesCompleted, nextRank.name(lang)),
-                      style: theme.textTheme.bodySmall,
-                    ),
+                    Text('${l10n.xpProgress(xp, nextLevelXp)} · ${l10n.xpToNext(nextLevelXp - xp, level + 1)}', style: theme.textTheme.bodySmall),
                   ],
                 ),
               ),
             ],
+          ),
+          const SizedBox(height: 12),
+          ActionCard(
+            icon: Icons.military_tech_rounded,
+            title: '${l10n.seasonPassTitle} · ${l10n.seasonNumber(season.number)}',
+            subtitle: '${l10n.seasonPoints(seasonPoints)} · ${l10n.seasonTier(SeasonPass.tierFor(seasonPoints))}',
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => context.push('/season'),
           ),
           SectionHeader(l10n.lifetimeStats, trailing: TextButton(onPressed: () => context.push('/stats'), child: Text(l10n.statsTitle))),
           Wrap(
@@ -212,6 +222,48 @@ class ProfileTab extends ConsumerWidget {
                 ? '${l10n.syncOn} · ${cloud.userId?.substring(0, cloud.userId!.length.clamp(0, 8)) ?? ''}'
                 : (firebaseFlag ? l10n.syncFailed : l10n.syncOff),
             onTap: cloud.enabled ? () => cloud.pushProfile(profile.toJson()) : null,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// Avatar wrapped in the XP level ring with the level number badge.
+class LevelRing extends StatelessWidget {
+  const LevelRing({super.key, required this.level, required this.progress, required this.child, this.size = 92});
+  final int level;
+  final double progress;
+  final Widget child;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          SizedBox(
+            width: size,
+            height: size,
+            child: CircularProgressIndicator(
+              value: progress.clamp(0.0, 1.0),
+              strokeWidth: 5,
+              backgroundColor: theme.colorScheme.surfaceContainerHighest,
+              color: theme.colorScheme.primary,
+            ),
+          ),
+          child,
+          Positioned(
+            bottom: 0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(color: theme.colorScheme.primary, borderRadius: BorderRadius.circular(10)),
+              child: Text('$level', style: theme.textTheme.labelMedium?.copyWith(color: theme.colorScheme.onPrimary, fontWeight: FontWeight.w800)),
+            ),
           ),
         ],
       ),

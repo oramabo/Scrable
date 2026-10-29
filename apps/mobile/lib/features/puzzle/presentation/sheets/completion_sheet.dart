@@ -8,7 +8,7 @@ import '../../../../core/util/clock.dart';
 import '../../../../core/widgets/common.dart';
 import '../../application/puzzle_session.dart';
 
-enum CompletionAction { next, home, leaderboard, daily }
+enum CompletionAction { next, home, leaderboard, daily, another }
 
 Future<CompletionAction?> showCompletionSheet(
   BuildContext context, {
@@ -18,6 +18,7 @@ Future<CompletionAction?> showCompletionSheet(
   required String title,
   VoidCallback? onShared,
   bool showLeaderboard = false,
+  bool isRandom = false,
 }) {
   return showModalBottomSheet<CompletionAction>(
     context: context,
@@ -30,6 +31,7 @@ Future<CompletionAction?> showCompletionSheet(
       title: title,
       onShared: onShared,
       showLeaderboard: showLeaderboard,
+      isRandom: isRandom,
     ),
   );
 }
@@ -43,6 +45,7 @@ class CompletionSheet extends StatefulWidget {
     required this.title,
     this.onShared,
     this.showLeaderboard = false,
+    this.isRandom = false,
   });
 
   final PuzzleSession session;
@@ -53,6 +56,9 @@ class CompletionSheet extends StatefulWidget {
   /// Called after the share sheet was opened (records the game event).
   final VoidCallback? onShared;
   final bool showLeaderboard;
+
+  /// On-device random puzzle: unranked, offers "one more".
+  final bool isRandom;
 
   @override
   State<CompletionSheet> createState() => _CompletionSheetState();
@@ -184,12 +190,23 @@ class _CompletionSheetState extends State<CompletionSheet> with SingleTickerProv
                     ),
                   ),
                 if (s.firstCompletion) const SizedBox(height: 10),
+                if (widget.isRandom)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Text(l10n.randomUnranked, textAlign: TextAlign.center, style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+                  ),
                 // Exactly one primary action (UX §4).
                 if (s.firstCompletion)
                   FilledButton.icon(
                     onPressed: () => Navigator.of(context).pop(CompletionAction.daily),
                     icon: const Icon(Icons.today_rounded),
                     label: Text(l10n.toDaily),
+                  )
+                else if (widget.isRandom)
+                  FilledButton.icon(
+                    onPressed: () => Navigator.of(context).pop(CompletionAction.another),
+                    icon: const Icon(Icons.shuffle_rounded),
+                    label: Text(l10n.oneMore),
                   )
                 else if (widget.hasNext)
                   FilledButton.icon(
@@ -225,7 +242,7 @@ class _CompletionSheetState extends State<CompletionSheet> with SingleTickerProv
                         label: Text(l10n.share),
                       ),
                     ),
-                    if (widget.hasNext || s.firstCompletion) ...[
+                    if (widget.hasNext || s.firstCompletion || widget.isRandom) ...[
                       const SizedBox(width: 10),
                       Expanded(
                         child: OutlinedButton.icon(

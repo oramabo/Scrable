@@ -226,7 +226,7 @@
   "missionsWeekly": "Weekly missions",
   "missionClaim": "Claim",
   "missionClaimed": "Claimed",
-  "missionResetIn": "Resets in {time}",
+  "missionResetIn": "Resets {time}",
   "missionReward": "+{coins} coins",
   "missionProgress": "{done}/{total}",
   "achievementsTitle": "Achievements",
@@ -294,9 +294,9 @@
   "randomPuzzle": "Random puzzle",
   "chooseLevel": "Choose a level",
   "noPuzzleAvailable": "No puzzle available at this level right now",
-  "seasonTeaser": "Season 1 · {points} points to the next reward",
+  "seasonTeaser": "{points} points to the next reward",
   "seasonTier": "Tier {tier}",
-  "dailyResetIn": "Resets in {time}",
+  "dailyResetIn": "Resets {time}",
   "allLevels": "All levels",
   "progressRing": "{percent}% of letters filled",
   "nameScreenTitle": "What should we call you?",
@@ -308,5 +308,272 @@
   "tutorialCycler": "One letter left? The A→Z key runs through the alphabet",
   "continueProgress": "{percent}% done",
   "missionsStripHint": "Tap for all missions",
-  "themeRefused": "This combination is not applied: contrast is below 4.5:1. Pick a lighter or darker background or highlight."
+  "themeRefused": "This combination is not applied: contrast is below 4.5:1. Pick a lighter or darker background or highlight.",
+  "homeGreetingNamed": "Hello, {name}!",
+  "@homeGreetingNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "startFirstPuzzle": "Start your first puzzle",
+  "startFirstPuzzleBody": "Level 1 · Pack 1 · Puzzle 1 — a few minutes, that's it",
+  "relativeHours": "{count, plural, =1{in 1 h} other{in {count} h}}",
+  "@relativeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeMinutes": "{count, plural, =0{right now} =1{in 1 min} other{in {count} min}}",
+  "@relativeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeDays": "{count, plural, =1{in 1 day} other{in {count} days}}",
+  "@relativeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "randomPreparing": "Preparing a puzzle…",
+  "randomFailed": "Couldn't prepare a puzzle right now. Try again.",
+  "randomSectionTitle": "Random",
+  "randomPuzzleTitle": "Random puzzle · {level}",
+  "@randomPuzzleTitle": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "randomUnranked": "Unranked · half the coins",
+  "oneMore": "One more",
+  "randomEmpty": "A random puzzle is generated on your device from the lexicon — new every time.",
+  "seasonPassTitle": "Season Pass",
+  "seasonNumber": "Season {n}",
+  "@seasonNumber": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonDaysLeft": "{count, plural, =0{Last day of the season} =1{1 day left in the season} other{{count} days left in the season}}",
+  "@seasonDaysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonStartsIn": "{count, plural, =0{The season starts today} =1{The season starts tomorrow} other{The season starts in {count} days}}",
+  "@seasonStartsIn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonPoints": "{points} points",
+  "@seasonPoints": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonClaimed": "Claimed",
+  "seasonLocked": "Locked",
+  "seasonAllClaimed": "All season rewards claimed!",
+  "seasonMilestone": "Milestone badge",
+  "seasonHowToEarn": "How to earn points: daily +10 · hard daily +20 · mission +10 · perfect puzzle +5 · versus win +25 · loss +5",
+  "seasonClaimedToast": "+{coins} coins from the Season Pass",
+  "@seasonClaimedToast": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "xpLevel": "Player level {level}",
+  "@xpLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "xpProgress": "{xp}/{next} XP",
+  "@xpProgress": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "next": {
+        "type": "int"
+      }
+    }
+  },
+  "xpToNext": "{xp} XP to level {level}",
+  "@xpToNext": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "xpEarned": "+{xp} XP",
+  "@xpEarned": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "versusFind": "Find an opponent",
+  "versusFindBody": "A random opponent at the same level, same puzzle, first to finish wins",
+  "versusInvite": "Invite a friend",
+  "versusInviteBody": "Share an invite code — your friend joins with the button below",
+  "versusJoin": "Join with a code",
+  "versusSearching": "Looking for an opponent…",
+  "versusCancelSearch": "Cancel search",
+  "versusLobby": "Lobby",
+  "versusWaitingGuest": "Waiting for a friend to join",
+  "versusStart": "Start!",
+  "versusReady": "Ready",
+  "versusReadyDone": "Ready · waiting for the host",
+  "versusOpponent": "Opponent",
+  "versusWin": "You won!",
+  "versusLoss": "Not this time",
+  "versusDraw": "Draw",
+  "versusForfeit": "Opponent forfeited",
+  "versusFinishedFirst": "Finished! Waiting for the opponent…",
+  "trophies": "Trophies",
+  "trophyDelta": "{delta} trophies",
+  "@trophyDelta": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "rematch": "Rematch",
+  "leaveMatchTitle": "Leave the match?",
+  "leaveMatchBody": "Leaving a running match counts as a loss.",
+  "leave": "Leave",
+  "codeCopied": "Code copied",
+  "enterCode": "6-character code",
+  "join": "Join",
+  "multiplayerUnavailable": "Playing together needs an account (Firebase). It is off in this build.",
+  "matchCancelled": "The match was cancelled",
+  "matchFailed": "Couldn't connect to the match. Try again.",
+  "trophyLeaderboardTitle": "Trophy leaderboard",
+  "leagueLabel": "League: {league}",
+  "@leagueLabel": {
+    "placeholders": {
+      "league": {
+        "type": "String"
+      }
+    }
+  },
+  "versusRewards": "Rewards: +{coins} coins · +{xp} XP",
+  "@versusRewards": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "shareInviteText": "Join me for a Chetz versus match! Invite code: {code}",
+  "@shareInviteText": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "versusRunning": "The race is on — good luck!",
+  "versusTime": "Time: {time}",
+  "@versusTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "coopCreate": "Create a room",
+  "coopCreateBody": "Up to 4 players fill one grid together",
+  "coopJoin": "Join a room",
+  "coopRoom": "Co-op room",
+  "coopCode": "Room code",
+  "coopMembers": "{count}/4 players",
+  "@coopMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "coopWaitingHost": "Waiting for the host to start",
+  "coopFinish": "We're done",
+  "coopFinished": "Solved together!",
+  "coopRewards": "Reward for everyone: +{coins} coins · +{xp} XP",
+  "@coopRewards": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "coopNoReward": "A single-player room, or one shorter than a minute, earns no reward.",
+  "coopLeaveBody": "Leave the room? You can rejoin with the code.",
+  "coopHost": "Host",
+  "coopPickPuzzle": "Pick a puzzle for the room",
+  "coopShareText": "Let's solve a Chetz puzzle together! Room code: {code}",
+  "@coopShareText": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "coopGridComplete": "The grid is full — the host can finish",
+  "coopPlaying": "{count} solving together",
+  "@coopPlaying": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsSectionNotifications": "Notifications",
+  "notifDailyReady": "Daily puzzle ready",
+  "notifDailyReadyBody": "A new puzzle is waiting for you in Chetz",
+  "notifStreakRisk": "Streak at risk",
+  "notifStreakRiskBody": "You haven't solved today's daily yet — your streak is waiting",
+  "notifOptInTitle": "Get a daily reminder?",
+  "notifOptInBody": "You've solved two dailies already. We'll send a small reminder when the daily is ready, and one at 20:00 only if your streak is at risk. No spam; you can turn it off in Settings.",
+  "notifEnable": "Yes, remind me",
+  "notifNotNow": "Not now",
+  "settingsNotifDaily": "Daily puzzle reminder",
+  "settingsNotifStreak": "Streak reminder at 20:00",
+  "settingsNotifHour": "Reminder time",
+  "notifDenied": "Notifications are blocked on this device — allow them in the system settings"
 }

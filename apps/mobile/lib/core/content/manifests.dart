@@ -218,7 +218,7 @@ class PacksManifest {
 
 /// `assets/puzzles/<lang>/index.json` written by tools/sync_assets.sh.
 class BundledIndex {
-  const BundledIndex({required this.lang, required this.puzzles, required this.packs, required this.dailies});
+  const BundledIndex({required this.lang, required this.puzzles, required this.packs, required this.dailies, this.device = const {}});
 
   final String lang;
 
@@ -231,12 +231,18 @@ class BundledIndex {
   /// `YYYY-MM-DD/variant` → asset path
   final Map<String, String> dailies;
 
+  /// On-device generator data: `lexicon` / `templates` → gzipped JSON asset.
+  final Map<String, String> device;
+
   static BundledIndex fromJson(Map<String, dynamic> j) => BundledIndex(
         lang: (j['lang'] as String?) ?? 'he',
         puzzles: _strMap(j['puzzles']),
         packs: _strMap(j['packs']),
         dailies: _strMap(j['dailies']),
+        device: _strMap(j['device']),
       );
+
+  bool get hasDeviceData => device.containsKey('lexicon') && device.containsKey('templates');
 
   static Map<String, String> _strMap(Object? v) =>
       v is Map ? v.map((k, val) => MapEntry(k.toString(), val.toString())) : const {};

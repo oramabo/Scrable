@@ -51,6 +51,7 @@ class GameConfig {
     this.lenientGeresh = true,
     this.newspaperFromLevel = 4,
     this.firstCompletionBonus = 100,
+    this.practiceRewardPercent = 50,
   });
 
   static const Map<HintType, int> defaultHintPrices = {
@@ -102,6 +103,10 @@ class GameConfig {
   /// Coins for the very first completed puzzle (the tutorial), UX §5.
   final int firstCompletionBonus;
 
+  /// Share of the completion reward paid for unranked on-device random
+  /// puzzles ([PuzzleKind.practice]).
+  final int practiceRewardPercent;
+
   /// Price of a hint for a puzzle of [level] played in [mode]. Checks are free
   /// in relaxed mode.
   int hintPrice(HintType type, {required int level, required PlayMode mode}) {
@@ -110,10 +115,11 @@ class GameConfig {
     return hintPrices[type] ?? defaultHintPrices[type]!;
   }
 
-  int completionReward(int level, {required int stars}) {
+  int completionReward(int level, {required int stars, PuzzleKind kind = PuzzleKind.pack}) {
     final base = completionRewards[level] ?? completionRewards.values.last;
-    if (stars >= 3) return base + (base * threeStarBonusPercent / 100).round();
-    return base;
+    var reward = stars >= 3 ? base + (base * threeStarBonusPercent / 100).round() : base;
+    if (kind == PuzzleKind.practice) reward = (reward * practiceRewardPercent / 100).round();
+    return reward;
   }
 
   int parMs(int level) => (parMinutes[level] ?? parMinutes.values.last) * 60 * 1000;
@@ -186,6 +192,7 @@ class GameConfig {
       lenientGeresh: b('lenientGeresh', base.lenientGeresh),
       newspaperFromLevel: i('newspaperFromLevel', base.newspaperFromLevel),
       firstCompletionBonus: i('firstCompletionBonus', base.firstCompletionBonus),
+      practiceRewardPercent: i('practiceRewardPercent', base.practiceRewardPercent),
     );
   }
 
@@ -220,5 +227,6 @@ class GameConfig {
         'lenientGeresh': lenientGeresh,
         'newspaperFromLevel': newspaperFromLevel,
         'firstCompletionBonus': firstCompletionBonus,
+        'practiceRewardPercent': practiceRewardPercent,
       };
 }

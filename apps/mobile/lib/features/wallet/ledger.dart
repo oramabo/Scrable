@@ -8,6 +8,7 @@ enum LedgerEntryType {
   earnLogin('earn_login'),
   earnAchievement('earn_achievement'),
   earnMission('earn_mission'),
+  earnSeason('earn_season'),
   spendLetter('spend_letter'),
   spendWord('spend_word'),
   spendCheck('spend_check'),

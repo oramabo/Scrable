@@ -46,7 +46,10 @@ void main() {
       final cells = word.cells.map(s0.puzzle.shape.indexOf).toList();
       expect(controller.cyclerTarget(), isNull, reason: 'empty word: more than one cell left');
       for (final c in cells.take(cells.length - 1)) {
-        controller.tapCell(c);
+        // Keep the active word: tapping the cursor cell would switch to the
+        // crossing word (every cell is crossed in the dense layouts).
+        controller.selectWord(word.id);
+        controller.moveCursor(c);
         controller.typeSymbol(s0.puzzle.solution[c]);
       }
       final s1 = container.read(puzzleSessionProvider(id)).requireValue;
@@ -60,7 +63,10 @@ void main() {
       final word = s0.activeWord!;
       final cells = word.cells.map(s0.puzzle.shape.indexOf).toList();
       for (final c in cells.take(cells.length - 1)) {
-        controller.tapCell(c);
+        // Keep the active word: tapping the cursor cell would switch to the
+        // crossing word (every cell is crossed in the dense layouts).
+        controller.selectWord(word.id);
+        controller.moveCursor(c);
         controller.typeSymbol(s0.puzzle.solution[c]);
       }
       final target = cells.last;
@@ -101,7 +107,10 @@ void main() {
       final word = s0.activeWord!;
       final cells = word.cells.map(s0.puzzle.shape.indexOf).toList();
       for (final c in cells.take(cells.length - 1)) {
-        controller.tapCell(c);
+        // Keep the active word: tapping the cursor cell would switch to the
+        // crossing word (every cell is crossed in the dense layouts).
+        controller.selectWord(word.id);
+        controller.moveCursor(c);
         controller.typeSymbol(s0.puzzle.solution[c]);
       }
       final target = cells.last;
@@ -134,7 +143,10 @@ void main() {
       final word = s0.activeWord!;
       final cells = word.cells.map(s0.puzzle.shape.indexOf).toList();
       for (final c in cells.take(cells.length - 1)) {
-        controller.tapCell(c);
+        // Keep the active word: tapping the cursor cell would switch to the
+        // crossing word (every cell is crossed in the dense layouts).
+        controller.selectWord(word.id);
+        controller.moveCursor(c);
         controller.typeSymbol(s0.puzzle.solution[c]);
       }
       final target = cells.last;

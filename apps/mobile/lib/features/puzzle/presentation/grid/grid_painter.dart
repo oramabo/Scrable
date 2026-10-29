@@ -100,6 +100,8 @@ class GridPainter extends CustomPainter {
     this.shakeDx = 0,
     this.flip = 0,
     this.flipOrder = const [],
+    this.remoteTints = const {},
+    this.remoteCursors = const {},
   });
 
   final PuzzleSession session;
@@ -130,6 +132,12 @@ class GridPainter extends CustomPainter {
 
   /// 0..1 intensity of the wrong-word outline.
   final double pulse;
+
+  /// Co-op: cells another member just filled → their colour (alpha applied).
+  final Map<int, Color> remoteTints;
+
+  /// Co-op: other members' cursor cells → their colour.
+  final Map<int, Color> remoteCursors;
 
   Puzzle get puzzle => session.puzzle;
   TextDirection get textDirection => geometry.rtl ? TextDirection.rtl : TextDirection.ltr;
@@ -346,6 +354,42 @@ class GridPainter extends CustomPainter {
         }
       }
     }
+    _paintCoopOverlays(canvas, cell, shape);
+  }
+
+  /// Co-op overlays: fresh remote letters (tint) and other members' cursors.
+  void _paintCoopOverlays(Canvas canvas, double cell, GridShape shape) {
+    if (remoteTints.isNotEmpty || remoteCursors.isNotEmpty) {
+      final gap = colors.cellGap / 2;
+      for (final e in remoteTints.entries) {
+        if (e.key < 0 || e.key >= shape.cellCount) continue;
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(geometry.rectOfIndex(e.key).deflate(gap), Radius.circular(cell * 0.08)),
+          Paint()..color = e.value,
+        );
+      }
+      for (final e in remoteCursors.entries) {
+        if (e.key < 0 || e.key >= shape.cellCount) continue;
+        final r = geometry.rectOfIndex(e.key).deflate(gap);
+        final size = cell * 0.26;
+        // Small arrow in the start-top corner pointing into the cell.
+        final startX = geometry.rtl ? r.right : r.left;
+        final sx = geometry.rtl ? -1.0 : 1.0;
+        final path = Path()
+          ..moveTo(startX, r.top)
+          ..lineTo(startX + sx * size, r.top)
+          ..lineTo(startX, r.top + size)
+          ..close();
+        canvas.drawPath(path, Paint()..color = e.value);
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(r, Radius.circular(cell * 0.08)),
+          Paint()
+            ..color = e.value
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = math.max(1.5, cell * 0.045),
+        );
+      }
+    }
   }
 
   /// Picture clues carry a short text hint instead of pre-broken lines.
@@ -492,5 +536,7 @@ class GridPainter extends CustomPainter {
       old.wash != wash ||
       old.washWordId != washWordId ||
       old.shakeDx != shakeDx ||
-      old.flip != flip;
+      old.flip != flip ||
+      !identical(old.remoteTints, remoteTints) ||
+      !identical(old.remoteCursors, remoteCursors);
 }

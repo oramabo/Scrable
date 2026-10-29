@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:chetz_core/chetz_core.dart';
+import 'package:chetz_core/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,14 +10,18 @@ import 'package:go_router/go_router.dart';
 import '../../core/content/manifests.dart';
 import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
+import '../../core/util/relative_time.dart';
 import '../../core/widgets/common.dart';
 import '../daily/daily_controller.dart';
 import '../meta/game_events_controller.dart';
 import '../meta/missions_section.dart';
 import '../packs/packs_providers.dart';
 import '../packs/progression.dart';
+import '../profile/profile_controller.dart';
 import '../puzzle/application/progress_providers.dart';
 import '../puzzle/data/progress_repository.dart';
+import '../random/random_puzzle_flow.dart';
+import '../random/random_puzzle_providers.dart';
 import '../settings/settings_controller.dart';
 import '../wallet/wallet_controller.dart';
 
@@ -51,12 +56,18 @@ class HomeShell extends StatelessWidget {
 class HomeTab extends ConsumerStatefulWidget {
   const HomeTab({super.key});
 
+  /// Tests: allow the once-per-launch login bonus to run again.
+  @visibleForTesting
+  static void debugResetLoginBonus() => _HomeTabState._loginBonusChecked = false;
+
   @override
   ConsumerState<HomeTab> createState() => _HomeTabState();
 }
 
 class _HomeTabState extends ConsumerState<HomeTab> {
   static bool _loginBonusChecked = false;
+  final GlobalKey _coinKey = GlobalKey();
+  final GlobalKey _greetingKey = GlobalKey();
 
   @override
   void initState() {
@@ -64,19 +75,23 @@ class _HomeTabState extends ConsumerState<HomeTab> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _grantLoginBonus());
   }
 
-  void _grantLoginBonus() {
+  /// Daily login bonus: coins fly into the counter, then a one-line toast.
+  Future<void> _grantLoginBonus() async {
     if (_loginBonusChecked || !mounted) return;
     _loginBonusChecked = true;
     final today = ref.read(todayProvider);
     final streak = ref.read(streakProvider);
     ref.read(metaProvider.notifier).recordLoginDay(today);
     final granted = ref.read(walletProvider.notifier).grantLoginBonus(date: today, streak: streak);
-    if (granted) {
-      ref.read(dailyHistoryProvider.notifier).setLoginDate(today);
-      final ledger = ref.read(walletProvider);
-      final amount = ledger.entries.last.amount;
-      showSnack(context, context.l10n.loginBonus(amount));
+    if (!granted) return;
+    ref.read(dailyHistoryProvider.notifier).setLoginDate(today);
+    final amount = ref.read(walletProvider).entries.last.amount;
+    final to = centerOf(_coinKey);
+    final from = centerOf(_greetingKey);
+    if (to != null && from != null && ref.read(uiTimersEnabledProvider)) {
+      await flyCoins(context, from: from, to: to, coins: amount);
     }
+    if (mounted) showSnack(context, context.l10n.loginBonus(amount), icon: Icons.monetization_on_rounded);
   }
 
   @override
@@ -89,7 +104,9 @@ class _HomeTabState extends ConsumerState<HomeTab> {
     final atRisk = ref.watch(streakAtRiskProvider);
     final today = ref.watch(todayProvider);
     final cont = ref.watch(continuePuzzleProvider);
-    final hasContent = ref.watch(languageHasContentProvider(settings.puzzleLang)).value ?? true;
+    final name = ref.watch(profileProvider.select((p) => p.displayName));
+    final greeting = name == null || name.trim().isEmpty ? l10n.homeGreeting : l10n.homeGreetingNamed(name.trim());
+    final randoms = ref.watch(randomPuzzlesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -103,7 +120,7 @@ class _HomeTabState extends ConsumerState<HomeTab> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 8, left: 8),
-            child: CoinChip(balance: balance, onTap: () => context.push('/store')),
+            child: KeyedSubtree(key: _coinKey, child: CoinChip(balance: balance, onTap: () => context.push('/store'))),
           ),
         ],
       ),
@@ -112,7 +129,7 @@ class _HomeTabState extends ConsumerState<HomeTab> {
         children: [
           Row(
             children: [
-              Expanded(child: Text(l10n.homeGreeting, style: theme.textTheme.titleLarge)),
+              Expanded(child: Text(greeting, key: _greetingKey, style: theme.textTheme.titleLarge, maxLines: 1, overflow: TextOverflow.ellipsis)),
               StreakFlame(streak: streak, label: l10n.streakDays(streak)),
             ],
           ),
@@ -123,21 +140,8 @@ class _HomeTabState extends ConsumerState<HomeTab> {
             ),
           const SizedBox(height: 12),
           _PuzzleLanguageSwitcher(current: settings.puzzleLang),
-          if (!hasContent)
-            Padding(
-              padding: const EdgeInsets.only(top: 8),
-              child: Text(l10n.comingSoon, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
-            ),
           SectionHeader(l10n.continueTitle),
-          if (cont != null)
-            _ContinueCard(summary: cont)
-          else
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(l10n.continueEmpty, style: theme.textTheme.bodyLarge),
-              ),
-            ),
+          if (cont != null) _ContinueCard(summary: cont) else _StartFirstPuzzleCard(lang: settings.puzzleLang),
           SectionHeader(l10n.dailyTitle, trailing: TextButton(onPressed: () => context.go('/daily'), child: Text(l10n.tabDaily))),
           _DailyCard(date: today, variant: DailyVariant.easy, streak: streak),
           const SizedBox(height: 10),
@@ -147,9 +151,69 @@ class _HomeTabState extends ConsumerState<HomeTab> {
           for (final level in LevelInfo.all) _PackShelf(level: level),
           const SizedBox(height: 8),
           const _RandomPuzzleButton(),
+          if (randoms.isNotEmpty) ...[
+            SectionHeader(l10n.randomSectionTitle),
+            for (final r in randoms.take(5)) _RandomPuzzleRow(summary: r),
+          ],
           const SizedBox(height: 12),
           const _SeasonTeaser(),
         ],
+      ),
+    );
+  }
+}
+
+/// Empty "continue" state (UX §6): one big primary CTA into pack 1 puzzle 1 of
+/// the active puzzle language.
+class _StartFirstPuzzleCard extends StatelessWidget {
+  const _StartFirstPuzzleCard({required this.lang});
+  final String lang;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final theme = Theme.of(context);
+    final id = '$lang-l1-p01-01';
+    return Card(
+      color: theme.colorScheme.primary.withValues(alpha: 0.10),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(l10n.startFirstPuzzleBody, style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant)),
+            const SizedBox(height: 12),
+            FilledButton.icon(
+              style: FilledButton.styleFrom(minimumSize: const Size.fromHeight(56), textStyle: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+              onPressed: () => context.push('/play/$id'),
+              icon: const Icon(Icons.play_arrow_rounded),
+              label: Text(l10n.startFirstPuzzle),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A random (practice) puzzle the player opened: level, progress, stars.
+class _RandomPuzzleRow extends StatelessWidget {
+  const _RandomPuzzleRow({required this.summary});
+  final ProgressSummary summary;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final s = summary;
+    final status = s.completed ? l10n.dailyCompleted : l10n.continueSubtitle(l10n.randomPuzzleTitle(l10n.levelName(s.level)), s.filledCount, s.letterCount);
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: ActionCard(
+        icon: Icons.shuffle_rounded,
+        title: l10n.randomPuzzleTitle(l10n.levelName(s.level)),
+        subtitle: '$status · ${l10n.randomUnranked}',
+        trailing: s.completed ? StarsRow(stars: s.stars) : const Icon(Icons.chevron_right_rounded),
+        onTap: () => context.push('/play/${s.puzzleId}'),
       ),
     );
   }
@@ -186,8 +250,9 @@ class _PuzzleLanguageSwitcher extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
-    final enHasContent = ref.watch(languageHasContentProvider('en')).value ?? false;
     final theme = Theme.of(context);
+    // Switching really switches: catalogue, dailies, tutorial and the random
+    // generator all follow `settings.puzzleLang` (the UI language stays put).
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -197,24 +262,12 @@ class _PuzzleLanguageSwitcher extends ConsumerWidget {
           expandedInsets: EdgeInsets.zero,
           segments: [
             ButtonSegment(value: 'he', label: Text(l10n.languageHebrew)),
-            ButtonSegment(
-              value: 'en',
-              label: Text(l10n.languageEnglish),
-              icon: enHasContent ? null : const Icon(Icons.schedule_rounded, size: 16),
-            ),
+            ButtonSegment(value: 'en', label: Text(l10n.languageEnglish)),
           ],
           selected: {current},
           onSelectionChanged: (s) => ref.read(settingsProvider.notifier).setPuzzleLang(s.first),
           showSelectedIcon: false,
         ),
-        if (!enHasContent)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: Text(
-              '${l10n.languageEnglish}: ${l10n.comingSoon}',
-              style: theme.textTheme.bodySmall?.copyWith(color: theme.colorScheme.onSurfaceVariant),
-            ),
-          ),
       ],
     );
   }
@@ -224,6 +277,7 @@ String summaryTitle(AppLocalizations l10n, ProgressSummary s) {
   if (s.dailyDate != null) return '${l10n.dailyVariantName(s.dailyVariant!)} · ${s.dailyDate}';
   if (s.packIndex != null) return '${l10n.levelName(s.level)} · ${l10n.puzzleNumber(s.packIndex!)}';
   if (s.kind == PuzzleKind.tutorial) return l10n.tutorialTitle;
+  if (s.kind == PuzzleKind.practice) return l10n.randomPuzzleTitle(l10n.levelName(s.level));
   return s.puzzleId;
 }
 
@@ -283,11 +337,8 @@ class _ContinueCard extends StatelessWidget {
   }
 }
 
-String countdownText(Duration d) {
-  final h = d.inHours;
-  final m = d.inMinutes % 60;
-  return '${h}h ${m.toString().padLeft(2, '0')}m';
-}
+/// Locale-aware countdown ("בעוד 12 שעות" / "in 12 h").
+String countdownText(AppLocalizations l10n, Duration d) => relativeDuration(l10n, d);
 
 class _DailyCard extends ConsumerWidget {
   const _DailyCard({required this.date, required this.variant, required this.streak});
@@ -315,7 +366,7 @@ class _DailyCard extends ConsumerWidget {
     return ActionCard(
       icon: variant == DailyVariant.easy ? Icons.wb_sunny_outlined : Icons.local_fire_department_outlined,
       title: l10n.dailyVariantName(variant),
-      subtitle: '$status · ${l10n.dailyResetIn(countdownText(untilNextDay(now)))}',
+      subtitle: '$status · ${l10n.dailyResetIn(countdownText(l10n, untilNextDay(now)))}',
       trailing: done
           ? StarsRow(stars: summary?.stars ?? 1)
           : Icon(available ? Icons.chevron_right_rounded : Icons.cloud_off_outlined),
@@ -522,71 +573,84 @@ class _PackTile extends StatelessWidget {
   }
 }
 
-/// "Random puzzle": pick a level in a sheet, open an unfinished puzzle of an
-/// unlocked pack of that level.
+/// "Random puzzle": pick a level in a sheet, then build a fresh unranked
+/// puzzle on the device from the bundled lexicon (worker isolate).
 class _RandomPuzzleButton extends ConsumerWidget {
   const _RandomPuzzleButton();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+    final available = ref.watch(randomAvailableProvider).value ?? true;
     return FilledButton.tonalIcon(
-      onPressed: () async {
-        final level = await showModalBottomSheet<int>(
-          context: context,
-          builder: (ctx) => SafeArea(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 4, 20, 8),
-                    child: Align(alignment: AlignmentDirectional.centerStart, child: Text(l10n.chooseLevel, style: Theme.of(ctx).textTheme.titleLarge)),
-                  ),
-                  for (final lv in LevelInfo.all)
-                    ListTile(
-                      leading: const Icon(Icons.layers_outlined),
-                      title: Text('${l10n.levelTitle(lv.level)} · ${l10n.levelName(lv.level)}'),
-                      subtitle: Text(l10n.levelGrid(lv.cols, lv.rows)),
-                      onTap: () => Navigator.of(ctx).pop(lv.level),
-                    ),
-                  const SizedBox(height: 8),
-                ],
-              ),
-            ),
-          ),
-        );
-        if (level == null || !context.mounted) return;
-        final id = pickRandomPuzzle(ref, level);
-        if (id == null) {
-          showSnack(context, l10n.noPuzzleAvailable);
-        } else {
-          unawaited(context.push('/play/$id'));
-        }
-      },
+      onPressed: !available
+          ? null
+          : () async {
+              final level = await showRandomLevelSheet(context);
+              if (level == null || !context.mounted) return;
+              final id = await startRandomPuzzle(context, ref, level);
+              if (id != null && context.mounted) unawaited(context.push('/play/$id'));
+            },
       icon: const Icon(Icons.shuffle_rounded),
       label: Text(l10n.randomPuzzle),
     );
   }
 }
 
-/// An unfinished puzzle from an unlocked pack of [level], or null.
-String? pickRandomPuzzle(WidgetRef ref, int level, {math.Random? random}) {
+/// Level picker for a random puzzle; returns the chosen level.
+Future<int?> showRandomLevelSheet(BuildContext context) {
+  final l10n = context.l10n;
+  return showModalBottomSheet<int>(
+    context: context,
+    builder: (ctx) => SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 4, 20, 4),
+              child: Align(alignment: AlignmentDirectional.centerStart, child: Text(l10n.chooseLevel, style: Theme.of(ctx).textTheme.titleLarge)),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+              child: Align(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text('${l10n.randomEmpty} ${l10n.randomUnranked}', style: Theme.of(ctx).textTheme.bodySmall?.copyWith(color: Theme.of(ctx).colorScheme.onSurfaceVariant)),
+              ),
+            ),
+            for (final lv in LevelInfo.all)
+              ListTile(
+                leading: const Icon(Icons.layers_outlined),
+                title: Text('${l10n.levelTitle(lv.level)} · ${l10n.levelName(lv.level)}'),
+                subtitle: Text(l10n.levelGrid(lv.cols, lv.rows)),
+                onTap: () => Navigator.of(ctx).pop(lv.level),
+              ),
+            const SizedBox(height: 8),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+/// A pack puzzle of [level] from an unlocked pack (unfinished unless
+/// [includeCompleted]), or null. Used to pick a shared puzzle for co-op rooms.
+String? pickRandomPuzzle(WidgetRef ref, int level, {math.Random? random, bool includeCompleted = false}) {
   final packs = ref.read(packsOfLevelProvider(level));
   final summaries = ref.read(progressSummariesProvider);
   final candidates = <String>[];
   for (final p in packs) {
     if (!ref.read(packUnlockedProvider(p.id))) continue;
     for (final e in p.puzzles) {
-      if (!(summaries[e.id]?.completed ?? false)) candidates.add(e.id);
+      if (includeCompleted || !(summaries[e.id]?.completed ?? false)) candidates.add(e.id);
     }
   }
   if (candidates.isEmpty) return null;
   return candidates[(random ?? math.Random()).nextInt(candidates.length)];
 }
 
-/// Season pass teaser (placeholder until the season system lands): points
-/// derive from completed puzzles so the track moves.
+/// Season pass teaser (UX §6): season number, current tier and the points to
+/// the next reward; taps open the pass.
 class _SeasonTeaser extends ConsumerWidget {
   const _SeasonTeaser();
 
@@ -594,31 +658,37 @@ class _SeasonTeaser extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    final stats = ref.watch(playerStatsProvider);
-    final points = stats.puzzlesCompleted * 10 + stats.dailiesCompleted * 15;
-    const tierSize = 100;
-    final tier = points ~/ tierSize + 1;
-    final into = points % tierSize;
+    final info = ref.watch(seasonInfoProvider);
+    final points = ref.watch(seasonPointsProvider);
+    const tierSize = SeasonPass.pointsPerTier;
+    final tier = SeasonPass.tierFor(points);
+    final into = points - tier * tierSize;
+    final done = tier >= SeasonPass.tierCount;
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Row(
-          children: [
-            Icon(Icons.military_tech_outlined, color: theme.colorScheme.tertiary, size: 36),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('${l10n.seasonTier(tier)} · ${l10n.comingSoonShort}', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
-                  const SizedBox(height: 4),
-                  LinearProgressIndicator(value: into / tierSize, minHeight: 6, borderRadius: BorderRadius.circular(3)),
-                  const SizedBox(height: 4),
-                  Text(l10n.seasonTeaser(tierSize - into), style: theme.textTheme.bodySmall),
-                ],
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => context.push('/season'),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(Icons.military_tech_outlined, color: theme.colorScheme.tertiary, size: 36),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('${l10n.seasonNumber(info.number)} · ${l10n.seasonTier(tier)}', style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+                    const SizedBox(height: 4),
+                    LinearProgressIndicator(value: done ? 1 : into / tierSize, minHeight: 6, borderRadius: BorderRadius.circular(3)),
+                    const SizedBox(height: 4),
+                    Text(done ? l10n.seasonAllClaimed : l10n.seasonTeaser(tierSize - into), style: theme.textTheme.bodySmall),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const Icon(Icons.chevron_right_rounded),
+            ],
+          ),
         ),
       ),
     );

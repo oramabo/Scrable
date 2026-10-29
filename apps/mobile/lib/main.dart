@@ -13,6 +13,8 @@ import 'core/config/game_config.dart';
 import 'core/providers.dart';
 import 'core/storage/json_store.dart';
 import 'core/util/clock.dart';
+import 'features/notifications/notifications_controller.dart';
+import 'features/notifications/notifications_service.dart';
 import 'features/sync/cloud_sync.dart';
 
 Future<void> main() async {
@@ -45,6 +47,7 @@ Future<void> main() async {
         appConfigProvider.overrideWithValue(config),
         jsonStoreProvider.overrideWithValue(store),
         bootstrapProvider.overrideWithValue(bootstrap),
+        notificationsServiceProvider.overrideWithValue(LocalNotificationsService()),
       ],
       child: const ChetzApp(),
     ),

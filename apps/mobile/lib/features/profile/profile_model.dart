@@ -62,48 +62,6 @@ abstract final class Avatars {
   static Avatar byId(String id) => all.firstWhere((a) => a.id == id, orElse: () => all.first);
 }
 
-/// Ranks from docs/GAME_PLAN.md §3.4 (טירון → מאסטר), by puzzles completed.
-class Rank {
-  const Rank(this.index, this.minPuzzles, {required this.nameHe, required this.nameEn});
-  final int index;
-  final int minPuzzles;
-  final String nameHe;
-  final String nameEn;
-
-  String name(String lang) => lang == 'he' ? nameHe : nameEn;
-}
-
-abstract final class Ranks {
-  static const all = [
-    Rank(0, 0, nameHe: 'טירון', nameEn: 'Rookie'),
-    Rank(1, 5, nameHe: 'חניך', nameEn: 'Trainee'),
-    Rank(2, 15, nameHe: 'פותר', nameEn: 'Solver'),
-    Rank(3, 40, nameHe: 'מתקדם', nameEn: 'Advanced'),
-    Rank(4, 80, nameHe: 'מנוסה', nameEn: 'Experienced'),
-    Rank(5, 150, nameHe: 'מומחה', nameEn: 'Expert'),
-    Rank(6, 300, nameHe: 'אלוף', nameEn: 'Champion'),
-    Rank(7, 500, nameHe: 'מאסטר', nameEn: 'Master'),
-  ];
-
-  static Rank forPuzzles(int completed) {
-    var r = all.first;
-    for (final rank in all) {
-      if (completed >= rank.minPuzzles) r = rank;
-    }
-    return r;
-  }
-
-  static Rank? next(Rank r) => r.index + 1 < all.length ? all[r.index + 1] : null;
-
-  /// 0..1 progress from [r] towards the next rank (1 at the top rank).
-  static double progress(int completed) {
-    final r = forPuzzles(completed);
-    final n = next(r);
-    if (n == null) return 1;
-    return ((completed - r.minPuzzles) / (n.minPuzzles - r.minPuzzles)).clamp(0.0, 1.0);
-  }
-}
-
 abstract class ProfileRepository {
   Future<ProfileData> load();
   Future<void> save(ProfileData profile);

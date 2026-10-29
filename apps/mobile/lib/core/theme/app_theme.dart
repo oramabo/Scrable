@@ -310,7 +310,14 @@ abstract final class AppTheme {
         indicatorColor: grid.activeWord,
         labelTextStyle: WidgetStatePropertyAll(text.labelMedium),
       ),
-      snackBarTheme: SnackBarThemeData(behavior: SnackBarBehavior.floating, contentTextStyle: text.bodyLarge),
+      // Toasts sit on the inverse surface: give them the matching "on" colour
+      // (bodyLarge alone inherits onSurface → invisible dark-on-dark text).
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: scheme.inverseSurface,
+        contentTextStyle: text.bodyLarge?.copyWith(color: scheme.onInverseSurface),
+        actionTextColor: scheme.inversePrimary,
+      ),
       dividerTheme: DividerThemeData(color: grid.gridLine.withValues(alpha: highContrast ? 1 : 0.3)),
       bottomSheetTheme: BottomSheetThemeData(
         backgroundColor: scheme.surfaceContainer,

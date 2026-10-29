@@ -7,6 +7,7 @@ import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
 import '../../core/widgets/common.dart';
 import '../daily/daily_controller.dart';
+import '../notifications/notifications_controller.dart';
 import '../packs/packs_providers.dart';
 import '../puzzle/application/progress_providers.dart';
 import '../wallet/wallet_controller.dart';
@@ -24,7 +25,7 @@ class SettingsTab extends ConsumerWidget {
     final config = ref.watch(gameConfigProvider);
     final lang = s.puzzleProfile;
     final ads = ref.watch(adsServiceProvider);
-    final enHasContent = ref.watch(languageHasContentProvider('en')).value ?? false;
+    final notifications = ref.watch(notificationsServiceProvider);
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.settingsTitle)),
@@ -46,7 +47,6 @@ class SettingsTab extends ConsumerWidget {
           ),
           ListTile(
             title: Text(l10n.settingsPuzzleLanguage),
-            subtitle: enHasContent ? null : Text('${l10n.languageEnglish}: ${l10n.comingSoon}'),
             trailing: SegmentedButton<String>(
               segments: [
                 ButtonSegment(value: 'he', label: Text(l10n.languageHebrew)),
@@ -133,6 +133,55 @@ class SettingsTab extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
             child: Text(l10n.settingsSeniorsPresetDescription, style: Theme.of(context).textTheme.bodySmall),
+          ),
+
+          SectionHeader(l10n.settingsSectionNotifications),
+          SwitchListTile(
+            title: Text(l10n.settingsNotifDaily),
+            value: s.notificationsDailyReady,
+            onChanged: notifications.available
+                ? (on) async {
+                    final l = context.l10n;
+                    if (on) {
+                      final ok = await ref.read(notificationsProvider.notifier).enable(l, daily: true, streak: s.notificationsStreak);
+                      if (!ok && context.mounted) showSnack(context, l.notifDenied);
+                    } else {
+                      ctl.setNotifications(daily: false);
+                      await ref.read(notificationsProvider.notifier).reschedule(l);
+                    }
+                  }
+                : null,
+          ),
+          SwitchListTile(
+            title: Text(l10n.settingsNotifStreak),
+            value: s.notificationsStreak,
+            onChanged: notifications.available
+                ? (on) async {
+                    final l = context.l10n;
+                    if (on) {
+                      final ok = await ref.read(notificationsProvider.notifier).enable(l, daily: s.notificationsDailyReady, streak: true);
+                      if (!ok && context.mounted) showSnack(context, l.notifDenied);
+                    } else {
+                      ctl.setNotifications(streak: false);
+                      await ref.read(notificationsProvider.notifier).reschedule(l);
+                    }
+                  }
+                : null,
+          ),
+          ListTile(
+            title: Text(l10n.settingsNotifHour),
+            enabled: s.notificationsDailyReady,
+            trailing: DropdownButton<int>(
+              value: s.notificationsHour,
+              onChanged: s.notificationsDailyReady
+                  ? (h) async {
+                      if (h == null) return;
+                      ctl.setNotifications(hour: h);
+                      await ref.read(notificationsProvider.notifier).reschedule(context.l10n);
+                    }
+                  : null,
+              items: [for (var h = 5; h <= 22; h++) DropdownMenuItem(value: h, child: Text('${h.toString().padLeft(2, '0')}:00'))],
+            ),
           ),
 
           SectionHeader(l10n.settingsSectionPrivacy),

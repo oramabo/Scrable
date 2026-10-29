@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../l10n/l10n.dart';
@@ -192,11 +194,96 @@ class EmptyState extends StatelessWidget {
   }
 }
 
-/// Shows a floating snackbar, replacing any current one.
-void showSnack(BuildContext context, String message, {Duration duration = const Duration(seconds: 3)}) {
+/// Shows a one-line floating toast, replacing any current one. Colours are
+/// set explicitly (inverse surface + its "on" colour) so the toast never
+/// inherits a transparent background or an unreadable text colour from an
+/// ancestor theme — the login-bonus toast used to render as an empty bar.
+void showSnack(BuildContext context, String message, {Duration duration = const Duration(seconds: 3), IconData? icon}) {
   final messenger = ScaffoldMessenger.maybeOf(context);
   if (messenger == null) return;
+  final scheme = Theme.of(context).colorScheme;
+  final style = Theme.of(context).textTheme.bodyLarge?.copyWith(color: scheme.onInverseSurface);
   messenger
     ..hideCurrentSnackBar()
-    ..showSnackBar(SnackBar(content: Text(message), duration: duration));
+    ..showSnackBar(SnackBar(
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: scheme.inverseSurface,
+      duration: duration,
+      content: Row(
+        children: [
+          if (icon != null) ...[Icon(icon, color: scheme.onInverseSurface, size: 20), const SizedBox(width: 10)],
+          Expanded(child: Text(message, style: style, maxLines: 2, overflow: TextOverflow.ellipsis)),
+        ],
+      ),
+    ));
+}
+
+/// Flies a few coin icons from [from] to [to] (global coordinates) in an
+/// overlay and resolves when they have landed. Reduced motion skips it.
+Future<void> flyCoins(BuildContext context, {required Offset from, required Offset to, required int coins}) async {
+  final overlay = Overlay.maybeOf(context);
+  if (overlay == null) return;
+  final reduceMotion = MediaQuery.maybeDisableAnimationsOf(context) ?? false;
+  if (reduceMotion) return;
+  final count = coins >= 100 ? 8 : (coins >= 40 ? 6 : 4);
+  final entry = OverlayEntry(builder: (_) => FlyingCoins(from: from, to: to, count: count));
+  overlay.insert(entry);
+  await Future<void>.delayed(const Duration(milliseconds: 700));
+  entry.remove();
+}
+
+/// Centre of a widget identified by [key] in global coordinates, or null.
+Offset? centerOf(GlobalKey key) {
+  final box = key.currentContext?.findRenderObject() as RenderBox?;
+  if (box == null || !box.hasSize) return null;
+  return box.localToGlobal(box.size.center(Offset.zero));
+}
+
+/// Coins flying towards the counter (UX §4 "coins fly to the counter").
+class FlyingCoins extends StatefulWidget {
+  const FlyingCoins({super.key, required this.from, required this.to, required this.count});
+  final Offset from;
+  final Offset to;
+  final int count;
+
+  @override
+  State<FlyingCoins> createState() => _FlyingCoinsState();
+}
+
+class _FlyingCoinsState extends State<FlyingCoins> with SingleTickerProviderStateMixin {
+  late final AnimationController _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 650))..forward();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: AnimatedBuilder(
+        animation: _c,
+        builder: (context, _) => Stack(
+          children: [
+            for (var i = 0; i < widget.count; i++)
+              Builder(builder: (_) {
+                final delay = i / widget.count * 0.4;
+                final t = Curves.easeInOut.transform(((_c.value - delay) / (1 - delay)).clamp(0.0, 1.0));
+                final spread = Offset((i - widget.count / 2) * 18.0, -40.0 * math.sin(t * math.pi));
+                final pos = Offset.lerp(widget.from, widget.to, t)! + spread * (1 - t);
+                return Positioned(
+                  left: pos.dx - 12,
+                  top: pos.dy - 12,
+                  child: Opacity(
+                    opacity: t < 0.95 ? 1 : (1 - (t - 0.95) / 0.05),
+                    child: const Icon(Icons.monetization_on_rounded, size: 24, color: Color(0xFFE0B64A)),
+                  ),
+                );
+              }),
+          ],
+        ),
+      ),
+    );
+  }
 }

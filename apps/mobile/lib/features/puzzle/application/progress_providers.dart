@@ -1,3 +1,4 @@
+import 'package:chetz_core/chetz_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers.dart';
@@ -34,17 +35,21 @@ final continuePuzzleProvider = Provider<ProgressSummary?>((ref) {
   final summaries = ref.watch(progressSummariesProvider);
   final lastId = ref.watch(settingsProvider.select((s) => s.lastPuzzleId));
   final last = lastId == null ? null : summaries[lastId];
-  if (last != null && !last.completed) return last;
+  if (last != null && !last.completed && !isMultiplayerSessionId(last.puzzleId)) return last;
   ProgressSummary? best;
   for (final s in summaries.values) {
-    if (s.completed || !s.started) continue;
+    if (s.completed || !s.started || isMultiplayerSessionId(s.puzzleId)) continue;
     if (best == null || s.lastPlayedAt > best.lastPlayedAt) best = s;
   }
   return best;
 });
 
+/// Versus / co-op sessions are stored under `<puzzleId>?match=…` / `?room=…`.
+bool isMultiplayerSessionId(String id) => id.contains('?');
+
 /// Per-puzzle aggregates that only the progress index can answer (best times,
-/// stars). Lifetime counters live in the meta layer's `PlayerStats`.
+/// stars). Lifetime counters live in the meta layer's `PlayerStats`. Random
+/// (practice) puzzles are unranked: their stars never count.
 class ProgressAggregates {
   const ProgressAggregates({required this.stars, required this.bestTimeByLevel, required this.solvedByLevel});
 
@@ -57,8 +62,8 @@ class ProgressAggregates {
     final best = <int, int>{};
     final byLevel = <int, int>{};
     for (final s in rows) {
-      if (!s.completed) continue;
-      stars += s.stars;
+      if (!s.completed || isMultiplayerSessionId(s.puzzleId)) continue;
+      if (s.kind != PuzzleKind.practice) stars += s.stars;
       byLevel[s.level] = (byLevel[s.level] ?? 0) + 1;
       if (s.elapsedMs > 0 && (best[s.level] == null || s.elapsedMs < best[s.level]!)) best[s.level] = s.elapsedMs;
     }

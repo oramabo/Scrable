@@ -502,7 +502,7 @@
   "missionsWeekly": "משימות שבועיות",
   "missionClaim": "קבלת הפרס",
   "missionClaimed": "הפרס נאסף",
-  "missionResetIn": "מתאפס בעוד {time}",
+  "missionResetIn": "מתאפס {time}",
   "@missionResetIn": {
     "placeholders": {
       "time": {
@@ -662,7 +662,7 @@
   "randomPuzzle": "תשחץ אקראי",
   "chooseLevel": "בחירת רמה",
   "noPuzzleAvailable": "אין תשחץ פנוי ברמה זו כרגע",
-  "seasonTeaser": "עונה 1 · עוד {points} נקודות לפרס הבא",
+  "seasonTeaser": "עוד {points} נקודות לפרס",
   "@seasonTeaser": {
     "placeholders": {
       "points": {
@@ -678,7 +678,7 @@
       }
     }
   },
-  "dailyResetIn": "מתחדש בעוד {time}",
+  "dailyResetIn": "מתחדש {time}",
   "@dailyResetIn": {
     "placeholders": {
       "time": {
@@ -718,5 +718,272 @@
     }
   },
   "missionsStripHint": "לחצו לכל המשימות",
-  "themeRefused": "השילוב הזה לא מופעל: הניגודיות נמוכה מ-4.5:1. בחרו רקע או הדגשה בהירים/כהים יותר."
+  "themeRefused": "השילוב הזה לא מופעל: הניגודיות נמוכה מ-4.5:1. בחרו רקע או הדגשה בהירים/כהים יותר.",
+  "homeGreetingNamed": "שלום, {name}!",
+  "@homeGreetingNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "startFirstPuzzle": "התחילו את התשחץ הראשון",
+  "startFirstPuzzleBody": "רמה 1 · חבילה 1 · תשחץ 1 — כמה דקות וזהו",
+  "relativeHours": "{count, plural, =1{בעוד שעה} two{בעוד שעתיים} other{בעוד {count} שעות}}",
+  "@relativeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeMinutes": "{count, plural, =0{ממש עכשיו} =1{בעוד דקה} two{בעוד שתי דקות} other{בעוד {count} דקות}}",
+  "@relativeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeDays": "{count, plural, =1{בעוד יום} two{בעוד יומיים} other{בעוד {count} ימים}}",
+  "@relativeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "randomPreparing": "מכינים תשחץ…",
+  "randomFailed": "לא הצלחנו להכין תשחץ כרגע. נסו שוב.",
+  "randomSectionTitle": "אקראיים",
+  "randomPuzzleTitle": "תשחץ אקראי · {level}",
+  "@randomPuzzleTitle": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "randomUnranked": "לא מדורג · חצי מהמטבעות",
+  "oneMore": "עוד אחד",
+  "randomEmpty": "תשחץ אקראי נוצר במכשיר מתוך הלקסיקון — כל פעם חדש.",
+  "seasonPassTitle": "כרטיס העונה",
+  "seasonNumber": "עונה {n}",
+  "@seasonNumber": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonDaysLeft": "{count, plural, =0{היום האחרון של העונה} =1{נותר יום אחד לעונה} two{נותרו יומיים לעונה} other{נותרו {count} ימים לעונה}}",
+  "@seasonDaysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonStartsIn": "{count, plural, =0{העונה מתחילה היום} =1{העונה מתחילה מחר} two{העונה מתחילה בעוד יומיים} other{העונה מתחילה בעוד {count} ימים}}",
+  "@seasonStartsIn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonPoints": "{points} נקודות",
+  "@seasonPoints": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonClaimed": "נאסף",
+  "seasonLocked": "נעול",
+  "seasonAllClaimed": "כל פרסי העונה נאספו!",
+  "seasonMilestone": "תג מיוחד",
+  "seasonHowToEarn": "איך מרוויחים נקודות: תשחץ יומי +10 · אתגר יומי +20 · משימה +10 · תשחץ ללא רמזים +5 · ניצחון בדו-קרב +25 · הפסד +5",
+  "seasonClaimedToast": "+{coins} מטבעות מכרטיס העונה",
+  "@seasonClaimedToast": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "xpLevel": "רמת שחקן {level}",
+  "@xpLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "xpProgress": "{xp}/{next} XP",
+  "@xpProgress": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "next": {
+        "type": "int"
+      }
+    }
+  },
+  "xpToNext": "עוד {xp} XP לרמה {level}",
+  "@xpToNext": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "xpEarned": "+{xp} XP",
+  "@xpEarned": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "versusFind": "מצא יריב",
+  "versusFindBody": "יריב אקראי באותה רמה, אותו תשחץ, מי מסיים קודם",
+  "versusInvite": "הזמן חבר",
+  "versusInviteBody": "קוד הזמנה לשיתוף — החבר מצטרף מהכפתור שלמטה",
+  "versusJoin": "הצטרף עם קוד",
+  "versusSearching": "מחפשים יריב…",
+  "versusCancelSearch": "ביטול החיפוש",
+  "versusLobby": "חדר המתנה",
+  "versusWaitingGuest": "מחכים שחבר יצטרף",
+  "versusStart": "התחלה!",
+  "versusReady": "מוכן/ה",
+  "versusReadyDone": "מוכנים · מחכים למארח",
+  "versusOpponent": "יריב",
+  "versusWin": "ניצחון!",
+  "versusLoss": "הפעם לא",
+  "versusDraw": "תיקו",
+  "versusForfeit": "היריב פרש",
+  "versusFinishedFirst": "סיימתם! מחכים ליריב…",
+  "trophies": "גביעים",
+  "trophyDelta": "{delta} גביעים",
+  "@trophyDelta": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "rematch": "משחק חוזר",
+  "leaveMatchTitle": "לצאת מהמשחק?",
+  "leaveMatchBody": "יציאה באמצע משחק נחשבת להפסד.",
+  "leave": "יציאה",
+  "codeCopied": "הקוד הועתק",
+  "enterCode": "קוד בן 6 תווים",
+  "join": "הצטרפות",
+  "multiplayerUnavailable": "משחק משותף דורש חיבור לחשבון (Firebase). בגרסה זו הוא כבוי.",
+  "matchCancelled": "המשחק בוטל",
+  "matchFailed": "לא הצלחנו להתחבר למשחק. נסו שוב.",
+  "trophyLeaderboardTitle": "לוח הגביעים",
+  "leagueLabel": "ליגה: {league}",
+  "@leagueLabel": {
+    "placeholders": {
+      "league": {
+        "type": "String"
+      }
+    }
+  },
+  "versusRewards": "פרסים: +{coins} מטבעות · +{xp} XP",
+  "@versusRewards": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "shareInviteText": "בואו לדו-קרב בחץ! קוד הזמנה: {code}",
+  "@shareInviteText": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "versusRunning": "הדו-קרב רץ — בהצלחה!",
+  "versusTime": "זמן: {time}",
+  "@versusTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "coopCreate": "פתיחת חדר",
+  "coopCreateBody": "עד 4 שחקנים ממלאים יחד רשת אחת",
+  "coopJoin": "הצטרפות לחדר",
+  "coopRoom": "חדר משותף",
+  "coopCode": "קוד החדר",
+  "coopMembers": "{count}/4 שחקנים",
+  "@coopMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "coopWaitingHost": "מחכים שהמארח יתחיל",
+  "coopFinish": "סיימנו",
+  "coopFinished": "התשחץ הושלם יחד!",
+  "coopRewards": "פרס לכל אחד: +{coins} מטבעות · +{xp} XP",
+  "@coopRewards": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "coopNoReward": "חדר של שחקן יחיד, או קצר מדקה, לא מזכה בפרס.",
+  "coopLeaveBody": "לצאת מהחדר? אפשר לחזור עם הקוד.",
+  "coopHost": "מארח/ת",
+  "coopPickPuzzle": "בחירת תשחץ לחדר",
+  "coopShareText": "בואו לפתור תשחץ יחד בחץ! קוד החדר: {code}",
+  "@coopShareText": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "coopGridComplete": "הרשת מלאה — המארח יכול לסיים",
+  "coopPlaying": "{count} פותרים יחד",
+  "@coopPlaying": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsSectionNotifications": "התראות",
+  "notifDailyReady": "התשחץ היומי מוכן",
+  "notifDailyReadyBody": "תשחץ חדש מחכה לכם בחץ",
+  "notifStreakRisk": "הרצף בסיכון",
+  "notifStreakRiskBody": "עוד לא פתרתם את התשחץ היומי של היום — הרצף שלכם מחכה",
+  "notifOptInTitle": "לקבל תזכורת יומית?",
+  "notifOptInBody": "פתרתם כבר שני תשחצים יומיים. נשלח תזכורת קטנה כשהתשחץ היומי מוכן, ועוד אחת ב-20:00 רק אם הרצף בסיכון. בלי ספאם, אפשר לכבות בהגדרות.",
+  "notifEnable": "כן, תזכירו לי",
+  "notifNotNow": "לא עכשיו",
+  "settingsNotifDaily": "תזכורת לתשחץ היומי",
+  "settingsNotifStreak": "תזכורת רצף ב-20:00",
+  "settingsNotifHour": "שעת התזכורת",
+  "notifDenied": "ההתראות חסומות במכשיר — אפשר לאפשר אותן בהגדרות המערכת"
 }

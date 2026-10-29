@@ -12,9 +12,16 @@ import 'package:chetz_app/core/util/clock.dart';
 import 'package:chetz_app/core/util/feedback.dart';
 import 'package:chetz_app/features/daily/daily_history.dart';
 import 'package:chetz_app/features/meta/meta_state.dart';
+import 'package:chetz_app/features/notifications/notifications_controller.dart';
+import 'package:chetz_app/features/notifications/notifications_service.dart';
 import 'package:chetz_app/features/puzzle/application/puzzle_controller.dart';
+import 'package:chetz_app/features/random/random_puzzle_generator.dart';
+import 'package:chetz_app/features/random/random_puzzle_providers.dart';
 import 'package:chetz_app/features/settings/settings_controller.dart';
 import 'package:chetz_app/features/settings/settings_model.dart';
+import 'package:chetz_app/features/sync/cloud_sync.dart';
+import 'package:chetz_app/features/together/multiplayer_providers.dart';
+import 'package:chetz_app/features/together/multiplayer_service.dart';
 import 'package:chetz_app/features/wallet/ledger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,10 +32,12 @@ import 'package:flutter_test/flutter_test.dart';
 
 /// Reads the bundled content from disk (the test cwd is the package root) into
 /// an in-memory content source, so widget tests never touch rootBundle's
-/// asynchronous asset channel.
-Future<MapContentSource> loadBundledContent({String lang = 'he'}) async {
+/// asynchronous asset channel. [device] also loads the gzipped device
+/// lexicon / templates (random puzzles).
+Future<MapContentSource> loadBundledContent({String lang = 'he', bool device = false}) async {
   final root = Directory.current.path;
   final docs = <String, String>{};
+  final binaries = <String, Uint8List>{};
   Future<void> add(String assetPath) async {
     final f = File('$root/$assetPath');
     if (await f.exists()) docs[assetPath] = await f.readAsString();
@@ -48,9 +57,24 @@ Future<MapContentSource> loadBundledContent({String lang = 'he'}) async {
         }
       }
     }
+    final dev = index['device'];
+    if (device && dev is Map) {
+      for (final path in dev.values) {
+        final f = File('$root/$path');
+        if (await f.exists()) binaries[path as String] = await f.readAsBytes();
+      }
+    }
   }
-  return MapContentSource(docs);
+  return MapContentSource(docs, binaries);
 }
+
+/// An in-process random-puzzle generator over [content]'s device data (no
+/// isolates: widget tests run under FakeAsync).
+RandomPuzzleGenerator inProcessGenerator(MapContentSource content, {int Function()? now}) => DeviceRandomPuzzleGenerator(
+      inProcess: true,
+      now: now,
+      dataFor: (lang) => loadDeviceData(ContentRepository(lang: lang, bundled: content)),
+    );
 
 /// A content source holding only the picture-clue fixture puzzle `he-pic-01`
 /// and its tiny PNG (test/fixtures).
@@ -83,6 +107,10 @@ List<Override> testOverrides({
   DailyHistory? dailyHistory,
   MetaState meta = const MetaState(),
   Ledger? ledger,
+  CloudSync cloudSync = const DisabledCloudSync(),
+  MultiplayerService? multiplayer,
+  NotificationsService? notifications,
+  RandomPuzzleGenerator? generator,
   List<Override> extra = const [],
 }) {
   final s = store ?? MemoryJsonStore();
@@ -93,6 +121,7 @@ List<Override> testOverrides({
     dailyHistory: dailyHistory ?? DailyHistory(),
     summaries: const {},
     meta: meta,
+    cloudSync: cloudSync,
   );
   return [
     appConfigProvider.overrideWithValue(const AppConfig()),
@@ -105,6 +134,9 @@ List<Override> testOverrides({
     contentRepositoryProvider.overrideWith(
       (ref, lang) => ContentRepository(lang: lang, bundled: content, cache: s),
     ),
+    multiplayerServiceProvider.overrideWithValue(multiplayer ?? const DisabledMultiplayerService()),
+    notificationsServiceProvider.overrideWithValue(notifications ?? const DisabledNotificationsService()),
+    randomPuzzleGeneratorProvider.overrideWithValue(generator ?? inProcessGenerator(content, now: () => c.nowMs)),
     ...extra,
   ];
 }
@@ -133,6 +165,18 @@ Future<void> pumpUntilFound(WidgetTester tester, Finder finder, {Duration timeou
     if (finder.evaluate().isNotEmpty) return;
   }
   fail('Timed out waiting for $finder');
+}
+
+/// Pumps a fixed amount of fake time in short frames: use instead of
+/// `pumpAndSettle` on screens with an indeterminate progress indicator
+/// (lobbies waiting for a player), which never settles.
+Future<void> settle(WidgetTester tester, {Duration total = const Duration(milliseconds: 600)}) async {
+  const step = Duration(milliseconds: 100);
+  var elapsed = Duration.zero;
+  while (elapsed < total) {
+    await tester.pump(step);
+    elapsed += step;
+  }
 }
 
 /// Phone-sized test surface (360×760 logical).

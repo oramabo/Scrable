@@ -10,8 +10,13 @@ import 'package:chetz_app/features/puzzle/application/puzzle_controller.dart';
 import 'package:chetz_app/features/puzzle/presentation/keyboard/puzzle_keyboard.dart';
 import 'package:chetz_app/features/puzzle/presentation/puzzle_screen.dart';
 import 'package:chetz_app/features/puzzle/presentation/sheets/completion_sheet.dart';
+import 'package:chetz_app/features/season/season_screen.dart';
 import 'package:chetz_app/features/settings/settings_model.dart';
 import 'package:chetz_app/features/settings/theme/theme_screen.dart';
+import 'package:chetz_app/features/sync/cloud_sync.dart';
+import 'package:chetz_app/features/together/coop_screens.dart';
+import 'package:chetz_app/features/together/multiplayer_service.dart';
+import 'package:chetz_app/features/together/versus_screens.dart';
 import 'package:chetz_core/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -69,12 +74,19 @@ void main() {
         child: boundary(key ?? GlobalKey(), const ChetzApp()),
       );
 
-  Widget screen(Widget home, {required String uiLang, required Brightness brightness, required GlobalKey key, MetaState meta = const MetaState(stats: demoStats)}) =>
+  Widget screen(Widget home,
+          {required String uiLang,
+          required Brightness brightness,
+          required GlobalKey key,
+          MetaState meta = const MetaState(stats: demoStats),
+          FakeMultiplayerService? multiplayer}) =>
       ProviderScope(
         overrides: testOverrides(
           content: content,
           settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true),
           meta: meta,
+          cloudSync: multiplayer == null ? const DisabledCloudSync() : FakeCloudSync(),
+          multiplayer: multiplayer,
         ),
         child: boundary(
           key,
@@ -194,6 +206,56 @@ void main() {
       await tester.pumpWidget(screen(const ProfileTab(), uiLang: 'he', brightness: brightness, key: key));
       await tester.pumpAndSettle();
       await shoot(tester, key, 'profile_he_$suffix');
+    });
+
+    testWidgets('season pass $suffix', (tester) async {
+      useReviewSurface(tester);
+      final key = GlobalKey();
+      final brightness = mode == ThemeMode.dark ? Brightness.dark : Brightness.light;
+      const meta = MetaState(stats: demoStats, xp: 640, seasonPoints: {'2026-S1': 265}, claimedSeasonTiers: {'season:2026-S1:tier:1'}, trophies: 180);
+      await tester.pumpWidget(screen(const SeasonScreen(), uiLang: 'he', brightness: brightness, key: key, meta: meta));
+      await tester.pumpAndSettle();
+      await shoot(tester, key, 'season_pass_he_$suffix');
+    });
+
+    testWidgets('random puzzle level sheet $suffix', (tester) async {
+      useReviewSurface(tester);
+      final key = GlobalKey();
+      await tester.pumpWidget(app(uiLang: 'he', mode: mode, key: key));
+      await pumpUntilFound(tester, find.byType(HomeTab));
+      await tester.pump(const Duration(milliseconds: 400));
+      final list = find.byType(Scrollable).first;
+      await tester.scrollUntilVisible(find.textContaining('עונה 1'), 200, scrollable: list);
+      await tester.ensureVisible(find.text('תשחץ אקראי'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('תשחץ אקראי'));
+      await tester.pumpAndSettle();
+      await shoot(tester, key, 'random_level_sheet_he_$suffix');
+    });
+
+    testWidgets('versus lobby (fake backend) $suffix', (tester) async {
+      useReviewSurface(tester);
+      final key = GlobalKey();
+      final brightness = mode == ThemeMode.dark ? Brightness.dark : Brightness.light;
+      final fake = FakeMultiplayerService();
+      final match = await fake.createMatch(lang: 'he', level: 2);
+      fake.simulateOpponentJoin(match.id);
+      await tester.pumpWidget(screen(MatchLobbyScreen(matchId: match.id), uiLang: 'he', brightness: brightness, key: key, multiplayer: fake));
+      await tester.pumpAndSettle();
+      await shoot(tester, key, 'versus_lobby_he_$suffix');
+    });
+
+    testWidgets('co-op room (fake backend) $suffix', (tester) async {
+      useReviewSurface(tester);
+      final key = GlobalKey();
+      final brightness = mode == ThemeMode.dark ? Brightness.dark : Brightness.light;
+      final fake = FakeMultiplayerService();
+      final room = await fake.createCoopRoom(lang: 'he', puzzleId: 'he-l1-p01-02');
+      fake.simulateMemberJoin(room.id, memberUid: 'u2', name: 'נועה');
+      fake.simulateMemberJoin(room.id, memberUid: 'u3', name: 'יוסי');
+      await tester.pumpWidget(screen(RoomLobbyScreen(roomId: room.id), uiLang: 'he', brightness: brightness, key: key, multiplayer: fake));
+      await tester.pumpAndSettle();
+      await shoot(tester, key, 'coop_room_he_$suffix');
     });
 
     testWidgets('theme picker $suffix', (tester) async {

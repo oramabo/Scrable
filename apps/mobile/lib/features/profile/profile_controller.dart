@@ -37,4 +37,5 @@ class ProfileController extends Notifier<ProfileData> {
 
 final profileProvider = NotifierProvider<ProfileController, ProfileData>(ProfileController.new);
 
-final rankProvider = Provider<Rank>((ref) => Ranks.forPuzzles(ref.watch(playerStatsProvider).puzzlesCompleted));
+/// Rank title index from the XP level ([XpCurve.rankIndex]).
+final rankProvider = Provider<int>((ref) => ref.watch(rankIndexProvider));

@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
+import '../../core/util/relative_time.dart';
 import '../../core/widgets/common.dart';
 import '../settings/settings_controller.dart';
 import 'game_events_controller.dart';
@@ -39,13 +40,6 @@ class _MissionsSectionState extends ConsumerState<MissionsSection> {
     super.dispose();
   }
 
-  String _countdown(Duration d) {
-    final h = d.inHours;
-    final m = d.inMinutes % 60;
-    if (h >= 24) return '${d.inDays}d ${h % 24}h';
-    return '${h}h ${m.toString().padLeft(2, '0')}m';
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
@@ -65,7 +59,7 @@ class _MissionsSectionState extends ConsumerState<MissionsSection> {
                     Expanded(child: Text(title, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700))),
                     Icon(Icons.schedule_rounded, size: 16, color: theme.colorScheme.onSurfaceVariant),
                     const SizedBox(width: 4),
-                    Text(l10n.missionResetIn(_countdown(left)), style: theme.textTheme.bodySmall),
+                    Text(l10n.missionResetIn(relativeDuration(l10n, left)), style: theme.textTheme.bodySmall),
                   ],
                 ),
                 const SizedBox(height: 4),
