@@ -9,8 +9,13 @@ import 'core/providers.dart';
 import 'core/router.dart';
 import 'core/theme/app_theme.dart';
 import 'features/daily/daily_controller.dart';
+import 'features/meta/game_events_controller.dart';
 import 'features/settings/settings_controller.dart';
+import 'features/settings/theme/custom_theme.dart';
 import 'features/wallet/wallet_controller.dart';
+
+/// Messenger above every route (achievement toasts, cross-screen notices).
+final rootScaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
 /// Root widget: theme + locale from settings, go_router, text scaling.
 class ChetzApp extends ConsumerWidget {
@@ -20,16 +25,29 @@ class ChetzApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
     final router = ref.watch(routerProvider);
-    final light = AppTheme.build(brightness: Brightness.light, highContrast: settings.highContrast, uiLang: settings.uiLang);
-    final dark = AppTheme.build(brightness: Brightness.dark, highContrast: settings.highContrast, uiLang: settings.uiLang);
+    final custom = settings.useCustomTheme && ContrastReport.of(settings.customTheme).isApplicable ? settings.customTheme : null;
+    final light = AppTheme.build(
+      brightness: Brightness.light,
+      highContrast: settings.highContrast,
+      uiLang: settings.uiLang,
+      custom: custom,
+    );
+    final dark = AppTheme.build(
+      brightness: Brightness.dark,
+      highContrast: settings.highContrast,
+      uiLang: settings.uiLang,
+      custom: custom,
+    );
 
     return MaterialApp.router(
       onGenerateTitle: (context) => context.l10n.appTitle,
       debugShowCheckedModeBanner: false,
+      scaffoldMessengerKey: rootScaffoldMessengerKey,
       routerConfig: router,
       theme: light,
       darkTheme: dark,
-      themeMode: settings.themeMode,
+      // A custom palette decides its own brightness.
+      themeMode: custom != null ? (custom.brightness == Brightness.dark ? ThemeMode.dark : ThemeMode.light) : settings.themeMode,
       locale: settings.uiLocale,
       supportedLocales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -45,8 +63,9 @@ class ChetzApp extends ConsumerWidget {
   }
 }
 
-/// One-time startup side effects after the first frame: session counter,
-/// ads consent + init, store init, cloud ledger sync, remote config.
+/// One-time startup side effects after the first frame (session counter, ads
+/// consent + init, store init, cloud ledger sync, remote config) and the
+/// achievement-unlock toast.
 class _Startup extends ConsumerStatefulWidget {
   const _Startup({required this.child});
   final Widget child;
@@ -101,6 +120,27 @@ class _StartupState extends ConsumerState<_Startup> with WidgetsBindingObserver 
     }
   }
 
+  void _showUnlocks(BuildContext context) {
+    final meta = ref.read(metaProvider);
+    if (meta.pendingUnlocks.isEmpty) return;
+    final l10n = context.l10n;
+    final lang = ref.read(settingsProvider).uiLang;
+    final messenger = rootScaffoldMessengerKey.currentState;
+    for (final a in meta.pendingUnlocks) {
+      messenger?.showSnackBar(SnackBar(
+        content: Text(l10n.achievementUnlockedToast(a.title(lang), a.rewardCoins)),
+        duration: const Duration(seconds: 4),
+        action: SnackBarAction(label: l10n.viewAchievements, onPressed: () => ref.read(routerProvider).push(Routes.achievements)),
+      ));
+    }
+    ref.read(metaProvider.notifier).consumeUnlocks();
+  }
+
   @override
-  Widget build(BuildContext context) => widget.child;
+  Widget build(BuildContext context) {
+    ref.listen(metaProvider.select((m) => m.unlockSeq), (prev, next) {
+      if (prev != next) WidgetsBinding.instance.addPostFrameCallback((_) => _showUnlocks(context));
+    });
+    return widget.child;
+  }
 }

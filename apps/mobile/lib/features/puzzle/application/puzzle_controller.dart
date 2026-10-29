@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:chetz_core/chetz_core.dart';
+import 'package:chetz_core/meta.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,18 +13,22 @@ import '../../../core/util/debouncer.dart';
 import '../../../core/util/feedback.dart';
 import '../../ads/ads_service.dart';
 import '../../daily/daily_controller.dart';
+import '../../meta/game_events_controller.dart';
+import '../../meta/image_credits.dart';
 import '../../settings/settings_controller.dart';
+import '../../sync/cloud_sync.dart';
 import '../../wallet/ledger.dart';
 import '../../wallet/wallet_controller.dart';
 import '../data/progress_repository.dart';
+import 'alphabet_cycler.dart';
 import 'progress_providers.dart';
 import 'puzzle_session.dart';
 
 /// The bundled puzzle used as the onboarding tutorial (Hebrew).
-const tutorialPuzzleId = 'he-l1-p01-01';
+const tutorialPuzzleId = 'he-tutorial-01';
 
-/// First puzzle of pack 1 / level 1 of a language: the tutorial puzzle.
-String tutorialPuzzleIdFor(String lang) => '$lang-l1-p01-01';
+/// The dedicated tutorial puzzle of a language (`content/<lang>/puzzles/tutorial/01.json`).
+String tutorialPuzzleIdFor(String lang) => '$lang-tutorial-01';
 
 enum HintStatus { applied, insufficientCoins, notApplicable, noSelection }
 
@@ -41,8 +46,11 @@ final puzzleTimerEnabledProvider = Provider<bool>((ref) => true);
 
 /// Owns one solving session: loads puzzle + saved progress, applies every
 /// input through the engine (navigator/checker), handles play-mode feedback,
-/// hints and coins, autosave (debounced 500 ms, immediate on hint/pause/
-/// completion) and completion rewards.
+/// hints and coins, the A→Z cycler, autosave (debounced 500 ms, immediate on
+/// hint/pause/completion) and completion rewards + game events.
+///
+/// Persistence dependencies are captured in [build] so the dispose-time flush
+/// never touches `ref` (Riverpod forbids using Ref inside life-cycles).
 class PuzzleController extends AsyncNotifier<PuzzleSession> {
   PuzzleController(this.puzzleId);
 
@@ -60,12 +68,19 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   final Random _rng = Random();
   bool _saving = false;
   PuzzleSession? _pendingSave;
+  bool _cyclerEventRecorded = false;
+
+  late ProgressRepository _repo;
+  late CloudSync _cloud;
 
   @override
   Future<PuzzleSession> build() async {
+    _repo = ref.read(progressRepositoryProvider);
+    _cloud = ref.read(cloudSyncProvider);
     ref.onDispose(() {
       _timer?.cancel();
       _timer = null;
+      // Flushes a pending autosave through the captured repository only.
       _autosave.flush();
       _autosave.dispose();
     });
@@ -76,10 +91,9 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     final profile = Languages.byCode(puzzle.lang);
     final settings = ref.read(settingsProvider);
     final config = ref.read(gameConfigProvider);
-    final repo = ref.read(progressRepositoryProvider);
     final now = ref.read(clockProvider).nowMs;
 
-    var progress = await repo.load(puzzleId);
+    var progress = await _repo.load(puzzleId);
     var fresh = false;
     if (progress == null) {
       fresh = true;
@@ -93,9 +107,8 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         now: now,
       );
     }
-    final cloud = ref.read(cloudSyncProvider);
-    if (cloud.enabled) {
-      final remote = await cloud.pullProgress(puzzleId);
+    if (_cloud.enabled) {
+      final remote = await _cloud.pullProgress(puzzleId);
       if (remote != null) progress = PuzzleProgress.merge(progress, remote);
     }
     elapsedMs.value = progress.elapsedMs;
@@ -118,6 +131,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         analytics.track(AnalyticsEvents.dailyOpen, {'date': puzzle.daily!.date, 'variant': puzzle.daily!.variant.code});
       }
     }
+    _preloadImages(puzzle);
 
     final session = PuzzleSession(
       puzzle: puzzle,
@@ -126,11 +140,26 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
       finalMask: FinalLetterPolicy.mask(puzzle),
       selection: selection,
       timerRunning: !progress.completed,
-      isTutorial: !settings.tutorialDone && puzzleId == tutorialPuzzleIdFor(puzzle.lang),
+      isTutorial: !settings.tutorialDone && (puzzle.kind == PuzzleKind.tutorial || puzzleId == tutorialPuzzleIdFor(puzzle.lang)),
     );
     if (!progress.completed) _startTimer();
     if (fresh) unawaited(_persist(session));
     return session;
+  }
+
+  /// Starts decoding picture clues and records their credits.
+  void _preloadImages(Puzzle puzzle) {
+    final srcs = <String>[
+      for (final cell in puzzle.clueCells)
+        for (final slot in cell.slots)
+          if (slot.image != null) slot.image!.src,
+    ];
+    if (srcs.isEmpty) return;
+    final store = ref.read(clueImageStoreProvider(puzzle.lang));
+    for (final src in srcs) {
+      unawaited(store.image(puzzle.lang, src));
+    }
+    ref.read(imageCreditsProvider.notifier).addFromPuzzle(puzzle);
   }
 
   static String _langOf(String id) {
@@ -144,6 +173,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   PuzzleSession? get _s => state.value;
   int get _now => ref.read(clockProvider).nowMs;
   Puzzle get _puzzle => _s!.puzzle;
+  GameEventsController get _events => ref.read(metaProvider.notifier);
 
   PuzzleNavigator _nav(PuzzleSession s) {
     final settings = ref.read(settingsProvider);
@@ -165,21 +195,26 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
 
   void _startTimer() {
     _timer?.cancel();
-    if (!ref.read(puzzleTimerEnabledProvider)) return;
+    if (!ref.read(puzzleTimerEnabledProvider) || !ref.read(uiTimersEnabledProvider)) return;
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       final s = _s;
       if (s != null && s.timerRunning && !s.isComplete) elapsedMs.value += 1000;
     });
   }
 
-  PuzzleProgress _snapshot(PuzzleSession s) => s.progress.copyWith(
-        elapsedMs: elapsedMs.value,
-        activeWordId: s.selection?.wordId,
-        clearActiveWord: s.selection == null,
-        cursorCell: s.selection?.cell,
-        clearCursor: s.selection == null,
-        revision: s.progress.revision,
-      );
+  PuzzleProgress _snapshot(PuzzleSession s) {
+    // A cycler preview is transient: never persist it.
+    var progress = s.progress;
+    if (s.cyclerCell != null) progress = progress.withCell(s.cyclerCell!, CellEntry(updatedAt: progress.entry(s.cyclerCell!).updatedAt));
+    return progress.copyWith(
+      elapsedMs: elapsedMs.value,
+      activeWordId: s.selection?.wordId,
+      clearActiveWord: s.selection == null,
+      cursorCell: s.selection?.cell,
+      clearCursor: s.selection == null,
+      revision: s.progress.revision,
+    );
+  }
 
   void _scheduleSave() {
     final s = _s;
@@ -194,8 +229,10 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     return _persist(s);
   }
 
+  /// Writes through the captured repository (no `ref` use: this also runs
+  /// from the dispose flush). The summaries index follows the repository's
+  /// change stream.
   Future<void> _persist(PuzzleSession s) async {
-    // Serialise writes; keep only the latest pending snapshot.
     if (_saving) {
       _pendingSave = s;
       return;
@@ -203,10 +240,8 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     _saving = true;
     try {
       final progress = _snapshot(s);
-      await ref.read(progressRepositoryProvider).save(progress, s.puzzle);
-      ref.read(progressSummariesProvider.notifier).upsert(ProgressSummary.of(progress, s.puzzle));
-      final cloud = ref.read(cloudSyncProvider);
-      if (cloud.enabled) unawaited(cloud.pushProgress(progress));
+      await _repo.save(progress, s.puzzle);
+      if (_cloud.enabled) unawaited(_cloud.pushProgress(progress));
     } catch (e) {
       debugPrint('progress save failed: $e');
     } finally {
@@ -223,9 +258,13 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     final s = _s;
     if (s == null) return;
     if (s.puzzle.shape.kinds[cell] != CellKind.letter) return;
+    if (s.isCycling && s.cyclerCell == cell) {
+      confirmCycler();
+      return;
+    }
     final next = _nav(s).tapCell(cell, s.selection, s.progress);
     if (next == null || next == s.selection) return;
-    _emit(s.copyWith(selection: next));
+    _emit(_stopCycler(s).copyWith(selection: next));
     unawaited(ref.read(hapticsProvider).tick());
     _scheduleSave();
   }
@@ -233,21 +272,23 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   void selectWord(String wordId) {
     final s = _s;
     if (s == null || !s.puzzle.wordById.containsKey(wordId)) return;
-    _emit(s.copyWith(selection: _nav(s).selectWord(wordId, s.progress)));
+    _emit(_stopCycler(s).copyWith(selection: _nav(s).selectWord(wordId, s.progress)));
     _scheduleSave();
   }
 
   void nextWord() {
     final s = _s;
     if (s?.selection == null) return;
-    _emit(s!.copyWith(selection: _nav(s).nextWord(s.selection!, s.progress)));
+    final base = _stopCycler(s!);
+    _emit(base.copyWith(selection: _nav(base).nextWord(base.selection!, base.progress)));
     _scheduleSave();
   }
 
   void prevWord() {
     final s = _s;
     if (s?.selection == null) return;
-    _emit(s!.copyWith(selection: _nav(s).prevWord(s.selection!, s.progress)));
+    final base = _stopCycler(s!);
+    _emit(base.copyWith(selection: _nav(base).prevWord(base.selection!, base.progress)));
     _scheduleSave();
   }
 
@@ -258,7 +299,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     if (s == null || sel == null) return;
     final other = _nav(s).crossingWord(sel);
     if (other == null) return;
-    _emit(s.copyWith(selection: Selection(wordId: other, cell: sel.cell)));
+    _emit(_stopCycler(s).copyWith(selection: Selection(wordId: other, cell: sel.cell)));
     _scheduleSave();
   }
 
@@ -274,30 +315,41 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   // ------------------------------------------------------------------ typing
 
   void typeSymbol(int symbol) {
-    final s = _s;
-    if (s == null || s.isComplete) return;
-    final sel = s.selection;
+    final s0 = _s;
+    if (s0 == null || s0.isComplete) return;
+    final sel = s0.selection;
     if (sel == null) return;
+    // A normal key press while cycling types into the cycler cell and ends the cycle.
+    final s = s0.isCycling ? _stopCycler(s0).copyWith(selection: Selection(wordId: sel.wordId, cell: s0.cyclerCell!)) : s0;
+    final at = s.selection!;
     final nav = _nav(s);
-    if (s.progress.entry(sel.cell).isLocked) {
+    if (s.progress.entry(at.cell).isLocked) {
       // Skip locked cells (revealed/confirmed) and type into the next one.
-      final next = nav.afterType(sel, s.progress);
-      if (next == sel) return;
+      final next = nav.afterType(at, s.progress);
+      if (next == at) return;
       _emit(s.copyWith(selection: next));
       return typeSymbol(symbol);
     }
+    _applyLetter(s, at, symbol, pencil: s.pencilMode);
+  }
+
+  /// Shared by typing and cycler confirmation: writes [symbol] into [at],
+  /// applies play-mode feedback, advances and checks completion.
+  void _applyLetter(PuzzleSession s, Selection at, int symbol, {required bool pencil}) {
     final checker = _checker(s);
+    final nav = _nav(s);
     final now = _now;
-    final progress = checker.type(sel.cell, symbol, s.progress, now: now, pencil: s.pencilMode);
+    final progress = checker.type(at.cell, symbol, s.progress, now: now, pencil: pencil);
     var session = s.copyWith(
       progress: progress,
       undoStack: _pushUndo(s.undoStack, s.progress),
-      lastTypedCell: sel.cell,
+      lastTypedCell: at.cell,
       errorsNoticeShown: false,
       clearFeedback: true,
+      clearCycler: true,
     );
-    session = _applyModeFeedback(session, sel.cell, checker, now);
-    session = session.copyWith(selection: nav.afterType(sel, session.progress));
+    session = _applyModeFeedback(session, at.cell, checker, now);
+    session = session.copyWith(selection: nav.afterType(at, session.progress));
     session = _checkCompletion(session, checker);
     _emit(session);
     final fb = session.feedback?.kind;
@@ -332,7 +384,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
           if (ok) {
             progress = next;
             correct ??= id;
-            ref.read(analyticsProvider).track(AnalyticsEvents.wordSolved, {'word': id, 'clue_id': w.clueId});
+            _wordSolved(session, w);
           } else {
             wrong ??= id;
           }
@@ -346,7 +398,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         for (final id in words) {
           final w = puzzle.wordById[id]!;
           if (checker.isWordFilled(w, progress) && checker.isWordCorrect(w, progress)) {
-            ref.read(analyticsProvider).track(AnalyticsEvents.wordSolved, {'word': id, 'clue_id': w.clueId});
+            _wordSolved(session, w);
             return _fb(session, FeedbackKind.wordCorrect, wordId: id);
           }
         }
@@ -359,9 +411,15 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     }
   }
 
+  void _wordSolved(PuzzleSession session, PuzzleWord w) {
+    ref.read(analyticsProvider).track(AnalyticsEvents.wordSolved, {'word': w.id, 'clue_id': w.clueId});
+    _events.recordWordSolved(session.puzzle.lang);
+  }
+
   void backspace() {
-    final s = _s;
-    if (s == null || s.isComplete) return;
+    final s0 = _s;
+    if (s0 == null || s0.isComplete) return;
+    final s = _stopCycler(s0);
     final sel = s.selection;
     if (sel == null) return;
     final nav = _nav(s);
@@ -386,19 +444,12 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   /// geresh variant symbol.
   void applyGeresh() {
     final s = _s;
-    if (s == null || s.isComplete) return;
+    if (s == null || s.isComplete || s.isCycling) return;
     final cell = s.lastTypedCell ?? s.selection?.cell;
     if (cell == null) return;
     final entry = s.progress.entry(cell);
     if (entry.isEmpty || entry.isLocked) return;
-    final base = entry.symbol!;
-    int? variant;
-    for (var v = 0; v < s.lang.alphabetSize; v++) {
-      if (v != base && s.lang.baseSymbol(v) == base) {
-        variant = v;
-        break;
-      }
-    }
+    final variant = s.lang.variantOf(entry.symbol!);
     if (variant == null) return;
     final checker = _checker(s);
     final now = _now;
@@ -421,8 +472,9 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   }
 
   void undo() {
-    final s = _s;
-    if (s == null || s.isComplete) return;
+    final s0 = _s;
+    if (s0 == null || s0.isComplete) return;
+    final s = _stopCycler(s0);
     if (s.undoStack.isEmpty) {
       _emit(_fb(s, FeedbackKind.nothingToUndo));
       return;
@@ -452,8 +504,9 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   }
 
   void clearWord(String wordId) {
-    final s = _s;
-    if (s == null || s.isComplete) return;
+    final s0 = _s;
+    if (s0 == null || s0.isComplete) return;
+    final s = _stopCycler(s0);
     final w = s.puzzle.wordById[wordId];
     if (w == null) return;
     final checker = _checker(s);
@@ -472,6 +525,80 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     _scheduleSave();
   }
 
+  // ---------------------------------------------------------------- cycler
+
+  /// Cell the A→Z cycler would write into, or null when unavailable.
+  int? cyclerTarget([PuzzleSession? session]) {
+    final s = session ?? _s;
+    final word = s?.activeWord;
+    if (s == null || word == null || s.isComplete) return null;
+    return AlphabetCycler.targetCell(s.puzzle, word, s.progress, cyclingCell: s.cyclerCell);
+  }
+
+  /// Writes the next alphabet letter into the target cell as a pencil
+  /// preview. No checking happens until [confirmCycler].
+  void cycleNext() {
+    final s = _s;
+    if (s == null || s.isComplete) return;
+    final cell = cyclerTarget(s);
+    if (cell == null) return;
+    final symbol = AlphabetCycler.next(s.lang, s.cyclerSymbol);
+    final existing = s.progress.entry(cell);
+    final progress = s.progress.withCell(
+      cell,
+      CellEntry(symbol: symbol, status: CellStatus.filled, pencil: true, updatedAt: existing.updatedAt),
+    );
+    final session = s.copyWith(
+      progress: progress,
+      selection: Selection(wordId: s.selection!.wordId, cell: cell),
+      cyclerCell: cell,
+      cyclerSymbol: symbol,
+      undoStack: s.isCycling ? s.undoStack : _pushUndo(s.undoStack, s.progress),
+      clearFeedback: true,
+    );
+    if (!_cyclerEventRecorded) {
+      _cyclerEventRecorded = true;
+      _events.recordCyclerUsed();
+      ref.read(analyticsProvider).track('alphabet_cycler_used', {'puzzle': s.puzzle.id});
+    }
+    _emit(session);
+    unawaited(ref.read(hapticsProvider).tick());
+  }
+
+  /// Locks the previewed letter in: it is typed normally (so normal mode
+  /// evaluates the word and relaxed mode checks the letter).
+  void confirmCycler() {
+    final s = _s;
+    if (s == null || !s.isCycling) return;
+    final cell = s.cyclerCell!;
+    final symbol = s.cyclerSymbol!;
+    final restored = _stopCycler(s);
+    _cyclerEventRecorded = false;
+    _applyLetter(restored, Selection(wordId: s.selection!.wordId, cell: cell), symbol, pencil: false);
+  }
+
+  /// Drops the preview letter and ends the cycling session.
+  void cancelCycler() {
+    final s = _s;
+    if (s == null || !s.isCycling) return;
+    _cyclerEventRecorded = false;
+    _emit(_stopCycler(s));
+  }
+
+  /// Session with the cycler preview removed (restores the cell's prior state).
+  PuzzleSession _stopCycler(PuzzleSession s) {
+    if (!s.isCycling) return s;
+    final cell = s.cyclerCell!;
+    final previous = s.undoStack.isNotEmpty ? s.undoStack.last.entry(cell) : CellEntry.blank;
+    final progress = s.progress.withCell(cell, previous);
+    _cyclerEventRecorded = false;
+    return s.copyWith(
+      progress: progress,
+      undoStack: s.undoStack.isNotEmpty ? s.undoStack.sublist(0, s.undoStack.length - 1) : s.undoStack,
+      clearCycler: true,
+    );
+  }
+
   // ------------------------------------------------------------------- hints
 
   int hintPrice(HintType type) {
@@ -481,8 +608,9 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   }
 
   Future<HintResult> useHint(HintType type) async {
-    final s = _s;
-    if (s == null || s.isComplete) return const HintResult(HintStatus.notApplicable);
+    final s0 = _s;
+    if (s0 == null || s0.isComplete) return const HintResult(HintStatus.notApplicable);
+    final s = _stopCycler(s0);
     final sel = s.selection;
     final word = s.activeWord;
     if (sel == null || word == null) return const HintResult(HintStatus.noSelection);
@@ -522,7 +650,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
       if (wallet.freeHintsLeft() > 0) {
         wallet.useFreeHint();
         usedFree = true;
-      } else if (!wallet.spend(_ledgerTypeFor(type), price, refId: '${s.puzzle.id}:${type.code}:$_now')) {
+      } else if (!wallet.spend(_ledgerTypeFor(type), price, refId: '${s.puzzle.id}:${type.code}:$_now', trackEvent: false)) {
         return HintResult(HintStatus.insufficientCoins, price: price);
       }
     }
@@ -572,6 +700,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     if (type == HintType.checkWord || type == HintType.checkPuzzle) {
       analytics.track(AnalyticsEvents.checkUsed, {'scope': type.code, 'wrong': count});
     }
+    _events.recordHintUsed(coins: usedFree ? 0 : price);
     unawaited(ref.read(soundsProvider).play(SoundCue.hint));
     await _saveNow(session);
     return HintResult(HintStatus.applied, price: price, usedFreeHint: usedFree);
@@ -625,6 +754,12 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     if (s != null && s.isTutorial) _emit(s.copyWith(isTutorial: false));
   }
 
+  /// The player shared the result from the completion sheet.
+  void recordShared() {
+    _events.recordShared();
+    ref.read(analyticsProvider).track('result_shared', {'puzzle': puzzleId});
+  }
+
   // -------------------------------------------------------------- completion
 
   PuzzleSession _checkCompletion(PuzzleSession session, PuzzleChecker checker) {
@@ -635,7 +770,8 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
   PuzzleSession _complete(PuzzleSession session) {
     final config = ref.read(gameConfigProvider);
     final puzzle = session.puzzle;
-    final now = _now;
+    final clock = ref.read(clockProvider);
+    final now = clock.nowMs;
     var progress = session.progress.copyWith(completed: true, completedAt: now, elapsedMs: elapsedMs.value);
     final stars = PuzzleChecker.starsFor(progress, parMs: config.parMs(puzzle.level));
     progress = progress.copyWith(stars: stars);
@@ -644,7 +780,17 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     final ledger = ref.read(walletProvider);
     var coins = 0;
     int? streak;
+    var completedPack = false;
     final daily = puzzle.daily;
+    // FTUE (UX §5): the very first completed puzzle pays a welcome bonus.
+    final firstCompletion = ref.read(metaProvider).stats.puzzlesCompleted == 0 &&
+        !ledger.hasEntry(LedgerEntryType.earnComplete, 'first_completion');
+    var firstBonus = 0;
+    if (firstCompletion) {
+      firstBonus = config.firstCompletionBonus;
+      wallet.earn(LedgerEntryType.earnComplete, firstBonus, refId: 'first_completion');
+      coins += firstBonus;
+    }
     if (daily != null) {
       final reward = daily.variant == DailyVariant.easy ? config.dailyEasyReward : config.dailyHardReward;
       final refId = 'daily:${daily.date}:${daily.variant.code}';
@@ -667,7 +813,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         'streak': streak,
       });
       if (daily.variant == DailyVariant.hard) {
-        unawaited(ref.read(cloudSyncProvider).submitDaily(puzzle: puzzle, progress: progress));
+        unawaited(_cloud.submitDaily(puzzle: puzzle, progress: progress));
       }
     } else {
       final reward = config.completionReward(puzzle.level, stars: stars);
@@ -682,6 +828,7 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
         final total = puzzle.kind == PuzzleKind.pack ? 30 : others + 1;
         final packRef = 'pack:${pack.id}';
         if (others + 1 >= total && !ledger.hasEntry(LedgerEntryType.earnComplete, packRef)) {
+          completedPack = true;
           wallet.earn(LedgerEntryType.earnComplete, config.packCompletionBonus, refId: packRef);
           coins += config.packCompletionBonus;
         }
@@ -700,6 +847,33 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
     unawaited(ref.read(hapticsProvider).success());
     unawaited(ref.read(soundsProvider).play(SoundCue.puzzleComplete));
 
+    // Words never reported through wordSolved events (newspaper mode confirms
+    // nothing during play); fully revealed words do not count as solved.
+    final checker = _checker(session);
+    var wordsForEvent = 0;
+    if (progress.mode == PlayMode.newspaper) {
+      for (final w in puzzle.words) {
+        final revealed = w.cells.every((p) => session.progress.entry(puzzle.shape.indexOf(p)).status == CellStatus.revealed);
+        if (!revealed && checker.isWordCorrect(w, progress)) wordsForEvent++;
+      }
+    }
+    _events.record(GameEvent.puzzleCompleted(
+      timestampMs: now,
+      lang: puzzle.lang,
+      puzzleId: puzzle.id,
+      level: puzzle.level,
+      mode: progress.mode,
+      elapsedMs: progress.elapsedMs,
+      parMs: config.parMs(puzzle.level),
+      hintsUsed: progress.hintsUsed,
+      wordsSolved: wordsForEvent,
+      isDaily: daily != null,
+      dailyVariant: daily?.variant.code,
+      dailyDate: daily?.date,
+      completedPack: completedPack,
+      localHour: clock.now().hour,
+    ));
+
     final learned = _learnedWords(session);
     _timer?.cancel();
     _timer = null;
@@ -713,9 +887,11 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
       isDaily: daily != null,
       perfect: progress.hintsUsed == 0,
       streak: streak,
+      firstCompletion: firstCompletion,
+      firstCompletionBonus: firstBonus,
     );
     return _fb(
-      session.copyWith(progress: progress, completion: summary, timerRunning: false),
+      session.copyWith(progress: progress, completion: summary, timerRunning: false, clearCycler: true),
       FeedbackKind.puzzleCompleted,
     );
   }

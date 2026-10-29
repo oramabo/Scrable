@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../features/ads/ads_service.dart';
 import '../features/daily/daily_history.dart';
+import '../features/leaderboard/leaderboard_service.dart';
+import '../features/meta/meta_state.dart';
 import '../features/puzzle/data/progress_repository.dart';
 import '../features/settings/settings_model.dart';
 import '../features/settings/settings_repository.dart';
@@ -11,6 +15,7 @@ import '../features/wallet/ledger.dart';
 import 'analytics/analytics.dart';
 import 'config/app_config.dart';
 import 'config/game_config.dart';
+import 'content/clue_image_store.dart';
 import 'content/content_repository.dart';
 import 'content/content_source.dart';
 import 'storage/json_store.dart';
@@ -25,6 +30,7 @@ class AppBootstrap {
     required this.ledger,
     required this.dailyHistory,
     required this.summaries,
+    this.meta = const MetaState(),
     this.cloudSync = const DisabledCloudSync(),
   });
 
@@ -32,6 +38,7 @@ class AppBootstrap {
   final Ledger ledger;
   final DailyHistory dailyHistory;
   final Map<String, ProgressSummary> summaries;
+  final MetaState meta;
   final CloudSync cloudSync;
 
   static Future<AppBootstrap> load({
@@ -45,11 +52,13 @@ class AppBootstrap {
         Ledger.initial(startingWallet: gameConfig.startingWallet, now: clock.nowMs);
     final history = await JsonDailyRepository(store).load();
     final summaries = await JsonProgressRepository(store).summaries();
+    final meta = await JsonMetaRepository(store).load();
     return AppBootstrap(
       settings: settings,
       ledger: ledger,
       dailyHistory: history,
       summaries: summaries,
+      meta: meta,
       cloudSync: cloudSync,
     );
   }
@@ -67,6 +76,13 @@ final bootstrapProvider = Provider<AppBootstrap>(
 );
 
 final clockProvider = Provider<Clock>((ref) => const SystemClock());
+
+/// Periodic UI timers (solving timer, mission countdowns). Tests override it
+/// to `false` so no timer is left pending.
+final uiTimersEnabledProvider = Provider<bool>((ref) => true);
+
+/// Directory for downloaded content (images). Null = memory only (tests).
+final cacheDirectoryProvider = Provider<Directory?>((ref) => null);
 
 class GameConfigController extends Notifier<GameConfig> {
   @override
@@ -89,6 +105,7 @@ final walletRepositoryProvider = Provider<WalletRepository>((ref) => JsonWalletR
 final progressRepositoryProvider =
     Provider<ProgressRepository>((ref) => JsonProgressRepository(ref.watch(jsonStoreProvider)));
 final dailyRepositoryProvider = Provider<DailyRepository>((ref) => JsonDailyRepository(ref.watch(jsonStoreProvider)));
+final metaRepositoryProvider = Provider<MetaRepository>((ref) => JsonMetaRepository(ref.watch(jsonStoreProvider)));
 
 final adsServiceProvider = Provider<AdsService>((ref) {
   final config = ref.watch(appConfigProvider);
@@ -127,3 +144,18 @@ final contentRepositoryProvider = Provider.family<ContentRepository, String>((re
 final languageHasContentProvider = FutureProvider.family<bool, String>(
   (ref, lang) => ref.watch(contentRepositoryProvider(lang)).hasContent(),
 );
+
+/// Picture-clue images per puzzle language (bundled → file cache → CDN).
+final clueImageStoreProvider = Provider.family<ClueImageStore, String>((ref, lang) {
+  final repo = ref.watch(contentRepositoryProvider(lang));
+  final store = ClueImageStore(bundled: repo.bundled, cdn: repo.cdn, cacheDir: ref.watch(cacheDirectoryProvider));
+  ref.onDispose(store.dispose);
+  return store;
+});
+
+/// Hard-daily leaderboard; Firestore only when cloud sync is on.
+final leaderboardServiceProvider = Provider<LeaderboardService>((ref) {
+  final cloud = ref.watch(cloudSyncProvider);
+  if (!cloud.enabled) return const DisabledLeaderboardService();
+  return FirestoreLeaderboardService(uid: cloud.userId);
+});

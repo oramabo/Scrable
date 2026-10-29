@@ -41,13 +41,13 @@ class _TutorialCoachState extends State<TutorialCoach> {
     final text = switch (_step) {
       0 => l10n.tutorialTapCell,
       1 => l10n.tutorialType,
-      2 => l10n.tutorialClueBar,
+      2 => l10n.tutorialCycler,
       _ => l10n.tutorialDone,
     };
     final icon = switch (_step) {
       0 => Icons.touch_app_outlined,
       1 => Icons.keyboard_alt_outlined,
-      2 => Icons.swap_horiz_rounded,
+      2 => Icons.cached_rounded,
       _ => Icons.celebration_outlined,
     };
     // Steps 0/1 sit at the top (over the grid); step 2 points at the clue bar

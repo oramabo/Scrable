@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/l10n/l10n.dart';
 import '../../application/puzzle_session.dart';
+import '../picture_clue.dart';
 
 enum CellAction { revealLetter, pencilOn, pencilOff, clearWord }
 
@@ -79,7 +80,15 @@ Future<String?> showClueCellSheet(BuildContext context, {required PuzzleSession 
                 for (final slot in cell.slots)
                   ListTile(
                     leading: _ArrowIcon(arrow: slot.arrow, rtl: dir == TextDirection.rtl),
-                    title: Text(slot.text, style: Theme.of(ctx).textTheme.titleMedium),
+                    title: slot.image == null
+                        ? Text(slot.text, style: Theme.of(ctx).textTheme.titleMedium)
+                        : Row(
+                            children: [
+                              PictureClueImage(lang: session.lang.code, image: slot.image!, height: 120),
+                              const SizedBox(width: 12),
+                              Expanded(child: Text(slot.text, style: Theme.of(ctx).textTheme.titleMedium)),
+                            ],
+                          ),
                     subtitle: Text(
                       '${l10n.dirName(slot.arrow.dir)} · ${session.patternOf(session.puzzle.wordById[slot.wordId]!)}',
                     ),

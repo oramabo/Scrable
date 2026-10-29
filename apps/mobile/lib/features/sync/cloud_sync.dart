@@ -31,6 +31,9 @@ abstract class CloudSync {
 
   /// Submits a completed hard daily to the `submitDaily` callable.
   Future<bool> submitDaily({required Puzzle puzzle, required PuzzleProgress progress});
+
+  /// Writes profile fields (display name, avatar) to `users/{uid}`.
+  Future<void> pushProfile(Map<String, dynamic> profile);
 }
 
 class DisabledCloudSync extends CloudSync {
@@ -49,11 +52,14 @@ class DisabledCloudSync extends CloudSync {
   Future<SyncLedgerResult?> syncLedger(Ledger ledger) async => null;
   @override
   Future<bool> submitDaily({required Puzzle puzzle, required PuzzleProgress progress}) async => false;
+  @override
+  Future<void> pushProfile(Map<String, dynamic> profile) async {}
 }
 
 class FakeCloudSync extends CloudSync {
   final Map<String, PuzzleProgress> pushed = {};
   final List<String> submitted = [];
+  Map<String, dynamic>? profile;
   int? serverBalance;
 
   @override
@@ -77,6 +83,9 @@ class FakeCloudSync extends CloudSync {
     submitted.add(puzzle.id);
     return true;
   }
+
+  @override
+  Future<void> pushProfile(Map<String, dynamic> profile) async => this.profile = profile;
 }
 
 /// Firestore layout from docs/GAME_PLAN.md §6.5:
@@ -178,6 +187,16 @@ class FirebaseCloudSync extends CloudSync {
     } catch (e) {
       debugPrint('submitDaily failed: $e');
       return false;
+    }
+  }
+
+  @override
+  Future<void> pushProfile(Map<String, dynamic> profile) async {
+    if (!enabled) return;
+    try {
+      await _firestore!.collection('users').doc(_user!.uid).set({'profile': profile}, SetOptions(merge: true));
+    } catch (e) {
+      debugPrint('push profile failed: $e');
     }
   }
 }

@@ -8,6 +8,8 @@
 #   packs/<lang>-l1-p01/*.json + pack.json   the whole first pack of level 1
 #   packs/*/pack.json                        the pack descriptor of every pack
 #   daily/{easy,hard}/<date>.json            dailies for --days days from --date
+#   tutorial/*.json                          the onboarding tutorial puzzles
+#   images/*                                 picture-clue images (jpg/png/webp)
 #   manifests/{daily,packs}.json             the CDN manifests
 #   index.json                               list of everything copied (the app
 #                                            reads it instead of AssetManifest)
@@ -63,7 +65,7 @@ if [[ $REGEN -eq 1 ]]; then
 fi
 
 rm -rf "$DST"
-mkdir -p "$DST/packs" "$DST/daily/easy" "$DST/daily/hard" "$DST/manifests"
+mkdir -p "$DST/packs" "$DST/daily/easy" "$DST/daily/hard" "$DST/manifests" "$DST/tutorial" "$DST/images"
 
 index_puzzles=()
 index_packs=()
@@ -98,6 +100,26 @@ for ((i = 0; i < DAYS; i++)); do
     fi
   done
 done
+
+# 3b. Tutorial puzzles (ids like he-tutorial-01).
+if [[ -d "$SRC/tutorial" ]]; then
+  for f in "$SRC"/tutorial/*.json; do
+    [[ -f "$f" ]] || continue
+    cp "$f" "$DST/tutorial/$(basename "$f")"
+    id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["id"])' "$f")
+    index_puzzles+=("\"$id\": \"assets/puzzles/$LANG_CODE/tutorial/$(basename "$f")\"")
+  done
+fi
+
+# 3c. Picture-clue images (small, ~320 px). images.jsonl stays in content/.
+images=0
+if [[ -d "$ROOT/content/$LANG_CODE/images" ]]; then
+  for f in "$ROOT/content/$LANG_CODE/images"/*; do
+    case "$f" in
+      *.jpg|*.jpeg|*.png|*.webp) cp "$f" "$DST/images/"; images=$((images + 1)) ;;
+    esac
+  done
+fi
 
 # 4. Manifests.
 for m in daily.json packs.json; do
@@ -136,5 +158,5 @@ while IFS= read -r dir; do
   fi
 done < <(find "$DST" -type d)
 
-echo "synced: ${#index_puzzles[@]} puzzles, ${#index_packs[@]} packs, ${#index_dailies[@]} dailies -> $DST"
+echo "synced: ${#index_puzzles[@]} puzzles (incl. tutorial), ${#index_packs[@]} packs, ${#index_dailies[@]} dailies, $images images -> $DST"
 [[ $missing -eq 0 ]] || echo "add the directories above under flutter.assets in $PUBSPEC" >&2

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:chetz_core/chetz_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/config/game_config.dart';
 import '../../../core/content/content_repository.dart';
 import '../../../core/l10n/l10n.dart';
+import '../../../core/providers.dart';
 import '../../../core/util/clock.dart';
 import '../../../core/widgets/common.dart';
 import '../../onboarding/tutorial_overlay.dart';
@@ -20,6 +23,7 @@ import '../application/puzzle_controller.dart';
 import '../application/puzzle_session.dart';
 import 'clue_bar.dart';
 import 'grid/puzzle_grid.dart';
+import 'keyboard/cycler_key.dart';
 import 'keyboard/puzzle_keyboard.dart';
 import 'sheets/cell_sheets.dart';
 import 'sheets/completion_sheet.dart';
@@ -39,6 +43,8 @@ class PuzzleScreen extends ConsumerStatefulWidget {
 
 class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBindingObserver {
   final TransformationController _zoom = TransformationController();
+  final GlobalKey _coinKey = GlobalKey();
+  final GlobalKey _gridKey = GlobalKey();
   int? _lastFeedbackSeq;
   bool _completionShown = false;
   bool _hintBusy = false;
@@ -105,7 +111,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
         _announce(l10n.puzzleCompletedAnnouncement(s.completion?.stars ?? 0));
         if (!_completionShown) {
           _completionShown = true;
-          WidgetsBinding.instance.addPostFrameCallback((_) => _showCompletion(s));
+          WidgetsBinding.instance.addPostFrameCallback((_) => _celebrateThenShow(s));
         }
     }
   }
@@ -118,26 +124,66 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
     return p.title ?? l10n.appTitle;
   }
 
+  /// UX §4: grid flips cell by cell (≤ 900 ms), coins fly into the counter,
+  /// then the summary slides up. Reduced motion: straight to the summary.
+  Future<void> _celebrateThenShow(PuzzleSession s) async {
+    final reduceMotion = MediaQuery.maybeDisableAnimationsOf(context) ?? false;
+    final coins = s.completion?.coinsEarned ?? 0;
+    if (!reduceMotion && ref.read(uiTimersEnabledProvider)) {
+      await Future<void>.delayed(const Duration(milliseconds: 650));
+      if (!mounted) return;
+      if (coins > 0) await _flyCoins(coins);
+      if (!mounted) return;
+    }
+    await _showCompletion(s);
+  }
+
+  /// A few coin icons travel from the grid centre to the coin chip.
+  Future<void> _flyCoins(int coins) async {
+    final overlay = Overlay.maybeOf(context);
+    final gridBox = _gridKey.currentContext?.findRenderObject() as RenderBox?;
+    final coinBox = _coinKey.currentContext?.findRenderObject() as RenderBox?;
+    if (overlay == null || gridBox == null || coinBox == null) return;
+    final from = gridBox.localToGlobal(gridBox.size.center(Offset.zero));
+    final to = coinBox.localToGlobal(coinBox.size.center(Offset.zero));
+    final count = coins >= 100 ? 8 : (coins >= 40 ? 6 : 4);
+    final entry = OverlayEntry(builder: (_) => _FlyingCoins(from: from, to: to, count: count));
+    overlay.insert(entry);
+    await Future<void>.delayed(const Duration(milliseconds: 700));
+    entry.remove();
+  }
+
   Future<void> _showCompletion(PuzzleSession s) async {
     if (!mounted || s.completion == null) return;
     final controller = _controller;
     final nextId = await controller.nextPuzzleId();
     if (!mounted) return;
+    final isHardDaily = s.puzzle.daily?.variant == DailyVariant.hard;
     final action = await showCompletionSheet(
       context,
       session: s,
       summary: s.completion!,
       hasNext: nextId != null,
       title: _title(s, context.l10n),
+      onShared: controller.recordShared,
+      showLeaderboard: isHardDaily,
     );
     if (!mounted || action == null) return;
+    if (action == CompletionAction.leaderboard) {
+      final d = s.puzzle.daily!;
+      context.go('/leaderboard/${d.date}?lang=${s.puzzle.lang}');
+      return;
+    }
     // The only interstitial placement: leaving the completion screen.
     await controller.showCompletionInterstitial(adsFree: ref.read(adsFreeProvider));
     if (!mounted) return;
     switch (action) {
       case CompletionAction.next:
         context.go('/play/$nextId');
+      case CompletionAction.daily:
+        context.go('/daily');
       case CompletionAction.home:
+      case CompletionAction.leaderboard:
         context.go('/');
     }
   }
@@ -295,14 +341,22 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
         final layout = settings.keyboardLayoutFor(session.lang);
         final controller = ref.read(puzzleSessionProvider(widget.puzzleId).notifier);
         final isHebrew = session.lang.code == 'he';
+        final cyclerCell = controller.cyclerTarget(session);
+        final filledFraction = session.progress.letterCount == 0 ? 0.0 : session.progress.filledCount / session.progress.letterCount;
         return Scaffold(
           appBar: AppBar(
             title: Text(_title(session, l10n), maxLines: 1, overflow: TextOverflow.ellipsis),
             actions: [
-              if (settings.showTimer) _TimerText(elapsed: controller.elapsedMs),
+              if (settings.showTimer)
+                _TimerText(elapsed: controller.elapsedMs)
+              else
+                _ProgressRing(fraction: filledFraction),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 6),
-                child: CoinChip(balance: balance, compact: true, onTap: () => context.push('/store')),
+                child: KeyedSubtree(
+                  key: _coinKey,
+                  child: CoinChip(balance: balance, compact: true, onTap: () => context.push('/store')),
+                ),
               ),
               PopupMenuButton<String>(
                 tooltip: l10n.menu,
@@ -352,6 +406,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                   child: Stack(
                     children: [
                       Positioned.fill(
+                        key: _gridKey,
                         child: Directionality(
                           textDirection: dir,
                           child: PuzzleGrid(
@@ -388,6 +443,29 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                     onNext: controller.nextWord,
                     onSwitch: controller.toggleDirection,
                   ),
+                ),
+                // The A→Z key slides in only when one cell of the word is left (UX §4).
+                AnimatedSize(
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOut,
+                  alignment: Alignment.bottomCenter,
+                  child: cyclerCell != null && !session.isComplete
+                      ? Directionality(
+                          textDirection: dir,
+                          child: Container(
+                            color: Theme.of(context).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
+                            child: CyclerKey(
+                              label: isHebrew ? 'א→ת' : 'A→Z',
+                              cycling: session.isCycling,
+                              previewLabel: session.cyclerCell == null ? null : session.displayAt(session.cyclerCell!),
+                              onNext: controller.cycleNext,
+                              onConfirm: controller.confirmCycler,
+                              onCancel: controller.cancelCycler,
+                              height: settings.bigKeyboard ? 56 : 48,
+                            ),
+                          ),
+                        )
+                      : const SizedBox(width: double.infinity, height: 0),
                 ),
                 Directionality(
                   textDirection: dir,
@@ -439,6 +517,92 @@ class _TimerText extends StatelessWidget {
               style: Theme.of(context).textTheme.titleMedium?.copyWith(fontFeatures: const [FontFeature.tabularFigures()]),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+
+/// Positive framing instead of a visible timer: share of letters filled.
+class _ProgressRing extends StatelessWidget {
+  const _ProgressRing({required this.fraction});
+  final double fraction;
+
+  @override
+  Widget build(BuildContext context) {
+    final percent = (fraction * 100).round();
+    final theme = Theme.of(context);
+    return Semantics(
+      label: context.l10n.progressRing(percent),
+      child: ExcludeSemantics(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6),
+          child: SizedBox(
+            width: 34,
+            height: 34,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                CircularProgressIndicator(
+                  value: fraction.clamp(0.0, 1.0),
+                  strokeWidth: 3.5,
+                  backgroundColor: theme.colorScheme.surfaceContainerHighest,
+                  color: theme.colorScheme.primary,
+                ),
+                Text('$percent', style: theme.textTheme.labelSmall?.copyWith(fontWeight: FontWeight.w700)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Coins flying from the grid to the counter (UX §4 "coins fly to the counter").
+class _FlyingCoins extends StatefulWidget {
+  const _FlyingCoins({required this.from, required this.to, required this.count});
+  final Offset from;
+  final Offset to;
+  final int count;
+
+  @override
+  State<_FlyingCoins> createState() => _FlyingCoinsState();
+}
+
+class _FlyingCoinsState extends State<_FlyingCoins> with SingleTickerProviderStateMixin {
+  late final AnimationController _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 650))..forward();
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: AnimatedBuilder(
+        animation: _c,
+        builder: (context, _) => Stack(
+          children: [
+            for (var i = 0; i < widget.count; i++)
+              Builder(builder: (_) {
+                final delay = i / widget.count * 0.4;
+                final t = Curves.easeInOut.transform(((_c.value - delay) / (1 - delay)).clamp(0.0, 1.0));
+                final spread = Offset((i - widget.count / 2) * 18.0, -40.0 * math.sin(t * math.pi));
+                final pos = Offset.lerp(widget.from, widget.to, t)! + spread * (1 - t);
+                return Positioned(
+                  left: pos.dx - 12,
+                  top: pos.dy - 12,
+                  child: Opacity(
+                    opacity: t < 0.95 ? 1 : (1 - (t - 0.95) / 0.05),
+                    child: const Icon(Icons.monetization_on_rounded, size: 24, color: Color(0xFFE0B64A)),
+                  ),
+                );
+              }),
+          ],
         ),
       ),
     );

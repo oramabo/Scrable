@@ -56,6 +56,8 @@ flutter:
     - assets/puzzles/he/manifests/
     - assets/puzzles/he/daily/easy/
     - assets/puzzles/he/daily/hard/
+    - assets/puzzles/he/tutorial/
+    - assets/puzzles/he/images/
     - assets/puzzles/he/packs/he-l1-p01/
     - assets/puzzles/he/packs/he-l1-p02/
     - assets/puzzles/he/packs/he-l1-p03/
@@ -74,6 +76,8 @@ flutter:
     - assets/puzzles/en/manifests/
     - assets/puzzles/en/daily/easy/
     - assets/puzzles/en/daily/hard/
+    - assets/puzzles/en/tutorial/
+    - assets/puzzles/en/images/
     - assets/puzzles/en/packs/en-l1-p01/
     - assets/puzzles/en/packs/en-l1-p02/
     - assets/puzzles/en/packs/en-l2-p01/

@@ -95,12 +95,16 @@ class PackInfo {
     this.url,
     this.checksum,
     this.free = true,
+    this.pictures = false,
   });
 
   final String id;
   final String lang;
   final int level;
   final int index;
+
+  /// Picture-clue pack.
+  final bool pictures;
 
   /// Title per UI language code.
   final Map<String, String> title;
@@ -140,11 +144,14 @@ class PackInfo {
         url: j['url'] as String?,
         checksum: j['checksum'] as String?,
         free: (j['free'] as bool?) ?? true,
+        pictures: (j['pictures'] as bool?) ?? false,
       );
 
-  /// From a bundled `pack.json` descriptor (puzzles are listed as ids).
+  /// From a bundled `pack.json` descriptor: puzzles are listed as ids, with
+  /// an optional `checksums` map {puzzleId: "sha256:…"} and a `pictures` flag.
   static PackInfo fromDescriptorJson(Map<String, dynamic> j) {
     final ids = ((j['puzzles'] as List?) ?? const []);
+    final checksums = j['checksums'] is Map ? (j['checksums'] as Map).map((k, v) => MapEntry(k.toString(), v.toString())) : const <String, String>{};
     return PackInfo(
       id: j['id'] as String,
       lang: (j['lang'] as String?) ?? 'he',
@@ -155,10 +162,11 @@ class PackInfo {
       puzzles: [
         for (var k = 0; k < ids.length; k++)
           ids[k] is String
-              ? PackPuzzleEntry(id: ids[k] as String, index: k + 1)
+              ? PackPuzzleEntry(id: ids[k] as String, index: k + 1, checksum: checksums[ids[k] as String])
               : PackPuzzleEntry.fromJson(ids[k] as Map<String, dynamic>),
       ],
       free: (j['free'] as bool?) ?? true,
+      pictures: (j['pictures'] as bool?) ?? false,
     );
   }
 
@@ -186,6 +194,7 @@ class PackInfo {
         url: url ?? other.url,
         checksum: checksum ?? other.checksum,
         free: free && other.free,
+        pictures: pictures || other.pictures,
       );
 }
 

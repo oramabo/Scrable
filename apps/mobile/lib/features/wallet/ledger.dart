@@ -6,6 +6,8 @@ enum LedgerEntryType {
   earnDaily('earn_daily'),
   earnAd('earn_ad'),
   earnLogin('earn_login'),
+  earnAchievement('earn_achievement'),
+  earnMission('earn_mission'),
   spendLetter('spend_letter'),
   spendWord('spend_word'),
   spendCheck('spend_check'),

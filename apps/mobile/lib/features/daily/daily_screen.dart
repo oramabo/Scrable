@@ -7,6 +7,7 @@ import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
 import '../../core/widgets/common.dart';
 import '../puzzle/application/progress_providers.dart';
+import '../settings/settings_controller.dart';
 import '../store/store_providers.dart';
 import '../wallet/ledger.dart';
 import '../wallet/wallet_controller.dart';
@@ -113,7 +114,16 @@ class _DailyRow extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(isToday ? '${l10n.today} · $date' : date, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600)),
+            Row(
+              children: [
+                Expanded(child: Text(isToday ? '${l10n.today} · $date' : date, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600))),
+                IconButton(
+                  tooltip: l10n.leaderboardTitle,
+                  onPressed: () => context.push('/leaderboard/$date?lang=${ref.read(settingsProvider).puzzleLang}'),
+                  icon: const Icon(Icons.leaderboard_outlined),
+                ),
+              ],
+            ),
             const SizedBox(height: 8),
             Row(
               children: [

@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers.dart';
+import '../meta/game_events_controller.dart';
 import 'ledger.dart';
 
 class WalletController extends Notifier<Ledger> {
@@ -18,18 +19,26 @@ class WalletController extends Notifier<Ledger> {
   bool canAfford(int amount) => state.canSpend(amount);
 
   /// Returns false (and changes nothing) when the balance is too low.
-  bool spend(LedgerEntryType type, int amount, {required String refId}) {
+  /// [trackEvent] records a `coinsSpent` game event (hints record their own
+  /// `hintUsed` event instead).
+  bool spend(LedgerEntryType type, int amount, {required String refId, bool trackEvent = true}) {
     try {
       _set(state.spend(type, amount, refId: refId, now: _now));
+      if (trackEvent) ref.read(metaProvider.notifier).recordCoinsSpent(amount);
       return true;
     } on InsufficientCoinsException {
       return false;
     }
   }
 
-  /// Idempotent per (type, refId).
-  void earn(LedgerEntryType type, int amount, {required String refId}) =>
-      _set(state.earn(type, amount, refId: refId, now: _now));
+  /// Idempotent per (type, refId). Records a `coinsEarned` game event when
+  /// coins were actually added.
+  void earn(LedgerEntryType type, int amount, {required String refId, bool trackEvent = true}) {
+    final next = state.earn(type, amount, refId: refId, now: _now);
+    if (identical(next, state)) return;
+    _set(next);
+    if (trackEvent) ref.read(metaProvider.notifier).recordCoinsEarned(amount);
+  }
 
   int freeHintsLeft() {
     final total = ref.read(gameConfigProvider).freeHints;

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:ui' as ui;
 
 import 'package:chetz_app/core/config/app_config.dart';
 import 'package:chetz_app/core/content/content_repository.dart';
@@ -8,18 +9,23 @@ import 'package:chetz_app/core/l10n/l10n.dart';
 import 'package:chetz_app/core/providers.dart';
 import 'package:chetz_app/core/storage/json_store.dart';
 import 'package:chetz_app/core/util/clock.dart';
+import 'package:chetz_app/core/util/feedback.dart';
 import 'package:chetz_app/features/daily/daily_history.dart';
+import 'package:chetz_app/features/meta/meta_state.dart';
 import 'package:chetz_app/features/puzzle/application/puzzle_controller.dart';
+import 'package:chetz_app/features/settings/settings_controller.dart';
 import 'package:chetz_app/features/settings/settings_model.dart';
 import 'package:chetz_app/features/wallet/ledger.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 
-/// Reads the bundled Hebrew content from disk (the test cwd is the package
-/// root) into an in-memory content source, so widget tests never touch
-/// rootBundle's asynchronous asset channel.
+/// Reads the bundled content from disk (the test cwd is the package root) into
+/// an in-memory content source, so widget tests never touch rootBundle's
+/// asynchronous asset channel.
 Future<MapContentSource> loadBundledContent({String lang = 'he'}) async {
   final root = Directory.current.path;
   final docs = <String, String>{};
@@ -46,6 +52,26 @@ Future<MapContentSource> loadBundledContent({String lang = 'he'}) async {
   return MapContentSource(docs);
 }
 
+/// A content source holding only the picture-clue fixture puzzle `he-pic-01`
+/// and its tiny PNG (test/fixtures).
+Future<MapContentSource> loadPictureFixture() async {
+  final root = Directory.current.path;
+  final puzzle = await File('$root/test/fixtures/picture_puzzle.json').readAsString();
+  final png = await File('$root/test/fixtures/images/test.png').readAsBytes();
+  return MapContentSource(
+    {
+      'assets/puzzles/he/index.json': jsonEncode({
+        'lang': 'he',
+        'puzzles': {'he-pic-01': 'assets/puzzles/he/packs/pic/01.json'},
+        'packs': {},
+        'dailies': {},
+      }),
+      'assets/puzzles/he/packs/pic/01.json': puzzle,
+    },
+    {'assets/puzzles/he/images/test.png': Uint8List.fromList(png)},
+  );
+}
+
 const testStartingWallet = 200;
 
 /// Provider overrides for a fully offline test app.
@@ -55,14 +81,18 @@ List<Override> testOverrides({
   MemoryJsonStore? store,
   Clock? clock,
   DailyHistory? dailyHistory,
+  MetaState meta = const MetaState(),
+  Ledger? ledger,
+  List<Override> extra = const [],
 }) {
   final s = store ?? MemoryJsonStore();
   final c = clock ?? FixedClock(DateTime(2026, 10, 28, 12));
   final bootstrap = AppBootstrap(
     settings: settings,
-    ledger: Ledger.initial(startingWallet: testStartingWallet, now: c.nowMs),
+    ledger: ledger ?? Ledger.initial(startingWallet: testStartingWallet, now: c.nowMs),
     dailyHistory: dailyHistory ?? DailyHistory(),
     summaries: const {},
+    meta: meta,
   );
   return [
     appConfigProvider.overrideWithValue(const AppConfig()),
@@ -70,17 +100,22 @@ List<Override> testOverrides({
     bootstrapProvider.overrideWithValue(bootstrap),
     clockProvider.overrideWithValue(c),
     puzzleTimerEnabledProvider.overrideWithValue(false),
+    uiTimersEnabledProvider.overrideWithValue(false),
+    hapticsProvider.overrideWithValue(const NoHaptics()),
     contentRepositoryProvider.overrideWith(
       (ref, lang) => ContentRepository(lang: lang, bundled: content, cache: s),
     ),
+    ...extra,
   ];
 }
 
-Widget wrapScreen(Widget home, {required List<Override> overrides, String uiLang = 'he'}) {
+Widget wrapScreen(Widget home, {required List<Override> overrides, String uiLang = 'he', ThemeData? theme}) {
   return ProviderScope(
     overrides: overrides,
     child: MaterialApp(
+      debugShowCheckedModeBanner: false,
       locale: Locale(uiLang),
+      theme: theme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       home: home,
@@ -100,9 +135,66 @@ Future<void> pumpUntilFound(WidgetTester tester, Finder finder, {Duration timeou
   fail('Timed out waiting for $finder');
 }
 
-/// Phone-sized test surface.
+/// Phone-sized test surface (360×760 logical).
 void usePhoneSurface(WidgetTester tester) {
   tester.view.physicalSize = const Size(1080, 2280);
   tester.view.devicePixelRatio = 3;
   addTearDown(tester.view.reset);
+}
+
+/// 390×844 logical (UX review size).
+void useReviewSurface(WidgetTester tester) {
+  tester.view.physicalSize = const Size(390 * 3, 844 * 3);
+  tester.view.devicePixelRatio = 3;
+  addTearDown(tester.view.reset);
+}
+
+bool _fontsLoaded = false;
+
+/// Loads the real UI fonts (and Material icons) so screenshots are readable
+/// instead of Ahem boxes. Call from setUpAll.
+Future<void> loadRealFonts() async {
+  if (_fontsLoaded) return;
+  _fontsLoaded = true;
+  final root = Directory.current.path;
+  Future<void> load(String family, List<String> paths) async {
+    final loader = FontLoader(family);
+    for (final p in paths) {
+      final f = File(p);
+      if (!f.existsSync()) continue;
+      final bytes = f.readAsBytesSync();
+      loader.addFont(Future.value(ByteData.sublistView(bytes)));
+    }
+    await loader.load();
+  }
+
+  await load('NotoSansHebrew', [
+    '$root/assets/fonts/NotoSansHebrew-Regular.ttf',
+    '$root/assets/fonts/NotoSansHebrew-Medium.ttf',
+    '$root/assets/fonts/NotoSansHebrew-SemiBold.ttf',
+    '$root/assets/fonts/NotoSansHebrew-Bold.ttf',
+  ]);
+  await load('Inter', [
+    '$root/assets/fonts/Inter-Regular.ttf',
+    '$root/assets/fonts/Inter-Medium.ttf',
+    '$root/assets/fonts/Inter-SemiBold.ttf',
+    '$root/assets/fonts/Inter-Bold.ttf',
+  ]);
+  final flutterRoot = Platform.environment['FLUTTER_ROOT'] ?? '/opt/flutter';
+  await load('MaterialIcons', ['$flutterRoot/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf']);
+}
+
+/// Captures the widget under [key] into `test/screenshots/goldens/<name>.png`.
+Future<String> captureScreenshot(WidgetTester tester, GlobalKey key, String name, {double pixelRatio = 1.5}) async {
+  final boundary = key.currentContext!.findRenderObject() as RenderRepaintBoundary;
+  final path = '${Directory.current.path}/test/screenshots/goldens/$name.png';
+  await tester.runAsync(() async {
+    final image = await boundary.toImage(pixelRatio: pixelRatio);
+    final data = await image.toByteData(format: ui.ImageByteFormat.png);
+    image.dispose();
+    final file = File(path);
+    await file.parent.create(recursive: true);
+    await file.writeAsBytes(data!.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes), flush: true);
+  });
+  return path;
 }

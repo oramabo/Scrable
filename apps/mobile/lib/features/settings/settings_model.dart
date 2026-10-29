@@ -1,6 +1,8 @@
 import 'package:chetz_core/chetz_core.dart';
 import 'package:flutter/material.dart';
 
+import 'theme/custom_theme.dart';
+
 /// User preferences. Persisted as one JSON document.
 class AppSettings {
   const AppSettings({
@@ -24,6 +26,8 @@ class AppSettings {
     this.adConsentDone = false,
     this.installedAt,
     this.sessionCount = 0,
+    this.useCustomTheme = false,
+    this.customTheme = const CustomTheme(),
   });
 
   final String uiLang;
@@ -50,6 +54,10 @@ class AppSettings {
   final bool adConsentDone;
   final int? installedAt;
   final int sessionCount;
+
+  /// Player-picked colours (Settings → Theme → custom).
+  final bool useCustomTheme;
+  final CustomTheme customTheme;
 
   Locale get uiLocale => Locale(uiLang);
   LanguageProfile get puzzleProfile => Languages.byCode(puzzleLang);
@@ -88,6 +96,8 @@ class AppSettings {
     bool? adConsentDone,
     int? installedAt,
     int? sessionCount,
+    bool? useCustomTheme,
+    CustomTheme? customTheme,
   }) =>
       AppSettings(
         uiLang: uiLang ?? this.uiLang,
@@ -110,15 +120,19 @@ class AppSettings {
         adConsentDone: adConsentDone ?? this.adConsentDone,
         installedAt: installedAt ?? this.installedAt,
         sessionCount: sessionCount ?? this.sessionCount,
+        useCustomTheme: useCustomTheme ?? this.useCustomTheme,
+        customTheme: customTheme ?? this.customTheme,
       );
 
   /// The "seniors" preset: large text, high contrast, relaxed mode everywhere,
   /// big keyboard, haptics on.
   AppSettings withSeniorsPreset() => copyWith(
-        textScale: 1.3,
+        textScale: 1.25,
         highContrast: true,
         bigKeyboard: true,
         haptics: true,
+        showTimer: false,
+        useCustomTheme: false,
         modePerLevel: {for (var l = 1; l <= 6; l++) l: PlayMode.relaxed},
       );
 
@@ -143,6 +157,8 @@ class AppSettings {
         'adConsentDone': adConsentDone,
         if (installedAt != null) 'installedAt': installedAt,
         'sessionCount': sessionCount,
+        'useCustomTheme': useCustomTheme,
+        'customTheme': customTheme.toJson(),
       };
 
   static AppSettings fromJson(Map<String, dynamic> j) {
@@ -175,6 +191,8 @@ class AppSettings {
       adConsentDone: (j['adConsentDone'] as bool?) ?? false,
       installedAt: j['installedAt'] as int?,
       sessionCount: (j['sessionCount'] as int?) ?? 0,
+      useCustomTheme: (j['useCustomTheme'] as bool?) ?? false,
+      customTheme: j['customTheme'] is Map ? CustomTheme.fromJson(j['customTheme'] as Map<String, dynamic>) : const CustomTheme(),
     );
   }
 }

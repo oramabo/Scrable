@@ -40,6 +40,8 @@ class CompletionSummary {
     required this.isDaily,
     required this.perfect,
     this.streak,
+    this.firstCompletion = false,
+    this.firstCompletionBonus = 0,
   });
 
   final int elapsedMs;
@@ -50,6 +52,10 @@ class CompletionSummary {
   final bool isDaily;
   final bool perfect;
   final int? streak;
+
+  /// The player's very first completed puzzle (FTUE reward card).
+  final bool firstCompletion;
+  final int firstCompletionBonus;
 }
 
 /// Immutable view-state of a solving session.
@@ -68,6 +74,8 @@ class PuzzleSession {
     this.lastTypedCell,
     this.isTutorial = false,
     this.errorsNoticeShown = false,
+    this.cyclerCell,
+    this.cyclerSymbol,
   });
 
   final Puzzle puzzle;
@@ -89,6 +97,12 @@ class PuzzleSession {
 
   /// Newspaper mode: the "has errors" notice was shown for the current fill.
   final bool errorsNoticeShown;
+
+  /// A→Z cycler: the cell holding a preview letter and that letter's symbol.
+  final int? cyclerCell;
+  final int? cyclerSymbol;
+
+  bool get isCycling => cyclerCell != null;
 
   PuzzleWord? get activeWord => selection == null ? null : puzzle.wordById[selection!.wordId];
   bool get isComplete => progress.completed;
@@ -131,6 +145,9 @@ class PuzzleSession {
     bool clearLastTyped = false,
     bool? isTutorial,
     bool? errorsNoticeShown,
+    int? cyclerCell,
+    int? cyclerSymbol,
+    bool clearCycler = false,
   }) =>
       PuzzleSession(
         puzzle: puzzle,
@@ -146,5 +163,7 @@ class PuzzleSession {
         lastTypedCell: clearLastTyped ? null : (lastTypedCell ?? this.lastTypedCell),
         isTutorial: isTutorial ?? this.isTutorial,
         errorsNoticeShown: errorsNoticeShown ?? this.errorsNoticeShown,
+        cyclerCell: clearCycler ? null : (cyclerCell ?? this.cyclerCell),
+        cyclerSymbol: clearCycler ? null : (cyclerSymbol ?? this.cyclerSymbol),
       );
 }

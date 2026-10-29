@@ -100,19 +100,20 @@ class SettingsTab extends ConsumerWidget {
               ),
             ),
           ),
-          SwitchListTile(title: Text(l10n.settingsHighContrast), value: s.highContrast, onChanged: ctl.setHighContrast),
           ListTile(
+            leading: const Icon(Icons.palette_outlined),
             title: Text(l10n.settingsTheme),
-            trailing: SegmentedButton<ThemeMode>(
-              segments: [
-                ButtonSegment(value: ThemeMode.system, label: Text(l10n.themeSystem)),
-                ButtonSegment(value: ThemeMode.light, label: Text(l10n.themeLight)),
-                ButtonSegment(value: ThemeMode.dark, label: Text(l10n.themeDark)),
-              ],
-              selected: {s.themeMode},
-              onSelectionChanged: (v) => ctl.setThemeMode(v.first),
-              showSelectedIcon: false,
-            ),
+            subtitle: Text(s.useCustomTheme
+                ? l10n.themeCustom
+                : s.highContrast
+                    ? l10n.themeHighContrast
+                    : switch (s.themeMode) {
+                        ThemeMode.system => l10n.themeSystem,
+                        ThemeMode.light => l10n.themeLight,
+                        ThemeMode.dark => l10n.themeDark,
+                      }),
+            trailing: const Icon(Icons.chevron_right_rounded),
+            onTap: () => context.push('/settings/theme'),
           ),
 
           SectionHeader(l10n.settingsSectionFeedback),

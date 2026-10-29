@@ -4,7 +4,9 @@ import 'package:chetz_core/chetz_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../core/content/clue_image_store.dart';
 import '../../../../core/l10n/l10n.dart';
+import '../../../../core/providers.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../application/puzzle_controller.dart';
 import '../../application/puzzle_session.dart';
@@ -39,8 +41,12 @@ class PuzzleGrid extends ConsumerStatefulWidget {
 
 class _PuzzleGridState extends ConsumerState<PuzzleGrid> with TickerProviderStateMixin {
   late final TransformationController _transform = widget.zoomController ?? TransformationController();
-  late final AnimationController _pulse = AnimationController(vsync: this, duration: const Duration(milliseconds: 700));
+  late final AnimationController _pulse = AnimationController(vsync: this, duration: const Duration(milliseconds: 450));
+  late final AnimationController _wash = AnimationController(vsync: this, duration: const Duration(milliseconds: 650));
+  late final AnimationController _flip = AnimationController(vsync: this, duration: const Duration(milliseconds: 900));
   late final AnimationController _pan = AnimationController(vsync: this, duration: const Duration(milliseconds: 220));
+  String? _washWordId;
+  List<int> _flipOrder = const [];
   Animation<Matrix4>? _panAnim;
   ClueTextLayout? _clueText;
   String? _pulseWordId;
@@ -50,6 +56,7 @@ class _PuzzleGridState extends ConsumerState<PuzzleGrid> with TickerProviderStat
   Offset _origin = Offset.zero;
   GridGeometry? _geometry;
   bool _initialised = false;
+  ClueImageStore? _images;
 
   @override
   void initState() {
@@ -58,11 +65,20 @@ class _PuzzleGridState extends ConsumerState<PuzzleGrid> with TickerProviderStat
       final a = _panAnim;
       if (a != null) _transform.value = a.value;
     });
+    _images = ref.read(clueImageStoreProvider(widget.session.puzzle.lang));
+    _images!.version.addListener(_onImages);
+  }
+
+  void _onImages() {
+    if (mounted) setState(() {});
   }
 
   @override
   void dispose() {
+    _images?.version.removeListener(_onImages);
     _pulse.dispose();
+    _wash.dispose();
+    _flip.dispose();
     _pan.dispose();
     if (widget.zoomController == null) _transform.dispose();
     _clueText?.invalidate();
@@ -75,7 +91,37 @@ class _PuzzleGridState extends ConsumerState<PuzzleGrid> with TickerProviderStat
     final fb = widget.session.feedback;
     if (fb != null && fb.seq != _lastSeenFeedback) {
       _lastSeenFeedback = fb.seq;
-      if (fb.kind == FeedbackKind.wordWrong && fb.wordId != null) _startPulse(fb.wordId!);
+      final reduceMotion = MediaQuery.maybeDisableAnimationsOf(context) ?? false;
+      switch (fb.kind) {
+        case FeedbackKind.wordWrong:
+          if (fb.wordId != null) _startPulse(fb.wordId!);
+        case FeedbackKind.wordCorrect:
+          if (fb.wordId != null) {
+            _washWordId = fb.wordId;
+            if (reduceMotion) {
+              _wash.value = 1;
+              _wash.animateTo(2, duration: const Duration(milliseconds: 250)).whenComplete(() {
+                if (mounted) setState(() => _washWordId = null);
+              });
+            } else {
+              _wash
+                ..reset()
+                ..animateTo(2).whenComplete(() {
+                  if (mounted) setState(() => _washWordId = null);
+                });
+            }
+          }
+        case FeedbackKind.puzzleCompleted:
+          if (!reduceMotion) {
+            final puzzle = widget.session.puzzle;
+            _flipOrder = puzzle.letterCellIndices;
+            _flip
+              ..reset()
+              ..forward();
+          }
+        default:
+          break;
+      }
     }
     final cell = widget.session.selection?.cell;
     if (cell != null && cell != _lastCell) {
@@ -232,18 +278,28 @@ class _PuzzleGridState extends ConsumerState<PuzzleGrid> with TickerProviderStat
                       onLongPressStart: (d) => _handleLongPress(d.localPosition),
                       child: ExcludeSemantics(
                         child: AnimatedBuilder(
-                          animation: _pulse,
+                          animation: Listenable.merge([_pulse, _wash, _flip]),
                           builder: (context, _) => CustomPaint(
                             isComplex: true,
-                            willChange: _pulseWordId != null,
+                            willChange: _pulseWordId != null || _washWordId != null || _flip.isAnimating,
                             painter: GridPainter(
                               session: session,
                               geometry: geometry,
                               colors: colors,
                               clueText: _clueText!,
                               letterFontFamily: fontFamily,
+                              imageFor: (slot) => _images?.imageIfLoaded(puzzle.lang, slot.image!.src),
+                              imagesVersion: _images?.version.value ?? 0,
                               pulseWordId: _pulseWordId,
-                              pulse: _pulseWordId == null ? 0 : (1 - _pulse.value) * 0.5 + 0.5 * math.sin(_pulse.value * math.pi * 3).abs(),
+                              pulse: _pulseWordId == null ? 0 : (1 - _pulse.value * 0.6),
+                              // Two shakes of ±4 dp, decaying.
+                              shakeDx: _pulseWordId == null
+                                  ? 0
+                                  : math.sin(_pulse.value * math.pi * 4) * 4 * (1 - _pulse.value),
+                              washWordId: _washWordId,
+                              wash: _washWordId == null ? 0 : _wash.value,
+                              flip: _flip.isAnimating || _flip.value > 0 ? _flip.value : 0,
+                              flipOrder: _flipOrder,
                             ),
                             size: childSize,
                           ),

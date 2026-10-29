@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
 import '../../core/widgets/common.dart';
+import '../meta/image_credits.dart';
 
 class AboutScreen extends ConsumerWidget {
   const AboutScreen({super.key});
@@ -13,6 +14,7 @@ class AboutScreen extends ConsumerWidget {
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final version = ref.watch(appConfigProvider).appVersion;
+    final credits = ref.watch(imageCreditsProvider);
     return Scaffold(
       appBar: AppBar(title: Text(l10n.aboutTitle)),
       body: ListView(
@@ -30,6 +32,20 @@ class AboutScreen extends ConsumerWidget {
           SectionHeader(l10n.aboutCredits),
           ListTile(leading: const Icon(Icons.menu_book_outlined), title: Text(l10n.aboutMordo)),
           ListTile(leading: const Icon(Icons.text_fields_rounded), title: Text(l10n.aboutFonts)),
+          SectionHeader(l10n.imageCredits),
+          if (credits.isEmpty)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Text(l10n.imageCreditsEmpty, style: theme.textTheme.bodyMedium),
+            )
+          else
+            for (final c in credits)
+              ListTile(
+                dense: true,
+                leading: const Icon(Icons.image_outlined),
+                title: Text(l10n.imageCreditLine(c.credit ?? '—', c.license ?? '—')),
+                subtitle: c.sourceUrl == null ? null : Text(c.sourceUrl!, maxLines: 1, overflow: TextOverflow.ellipsis, textDirection: TextDirection.ltr),
+              ),
           const SizedBox(height: 8),
           OutlinedButton.icon(
             onPressed: () => showLicensePage(

@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:chetz_core/chetz_core.dart';
 import 'package:flutter/material.dart';
@@ -92,6 +93,13 @@ class GridPainter extends CustomPainter {
     required this.letterFontFamily,
     required this.pulseWordId,
     required this.pulse,
+    this.imageFor,
+    this.imagesVersion = 0,
+    this.washWordId,
+    this.wash = 0,
+    this.shakeDx = 0,
+    this.flip = 0,
+    this.flipOrder = const [],
   });
 
   final PuzzleSession session;
@@ -100,6 +108,25 @@ class GridPainter extends CustomPainter {
   final ClueTextLayout clueText;
   final String letterFontFamily;
   final String? pulseWordId;
+
+  /// Decoded picture for a picture clue, or null while loading / missing (the
+  /// text hint is drawn instead).
+  final ui.Image? Function(ClueSlot slot)? imageFor;
+
+  /// Bumped by the image store; part of [shouldRepaint].
+  final int imagesVersion;
+
+  /// Correct-word wash: teal sweeps along [washWordId] as [wash] goes 0→1,
+  /// then fades (values > 1 fade out, up to 2).
+  final String? washWordId;
+  final double wash;
+
+  /// Horizontal offset of the wrong-word outline (shake).
+  final double shakeDx;
+
+  /// Completion flip 0→1; [flipOrder] lists letter cells in flip order.
+  final double flip;
+  final List<int> flipOrder;
 
   /// 0..1 intensity of the wrong-word outline.
   final double pulse;
@@ -121,9 +148,10 @@ class GridPainter extends CustomPainter {
     final fill = Paint()..style = PaintingStyle.fill;
     canvas.drawRect(Offset.zero & size, fill..color = colors.paper);
 
+    final gap = colors.cellGap / 2;
     // 1. Cell backgrounds.
     for (var i = 0; i < shape.cellCount; i++) {
-      final rect = geometry.rectOfIndex(i);
+      final rect = geometry.rectOfIndex(i).deflate(gap);
       if (shape.kinds[i] == CellKind.clue) {
         canvas.drawRect(rect, fill..color = colors.clueFill);
         continue;
@@ -151,6 +179,23 @@ class GridPainter extends CustomPainter {
       }
     }
 
+    // 1b. Correct-word wash: a teal band sweeping along the word in reading
+    // order (RTL aware because cells are in word order), then fading.
+    if (washWordId != null && wash > 0) {
+      final w = puzzle.wordById[washWordId];
+      if (w != null) {
+        final cells = w.cells;
+        final n = cells.length;
+        for (var k = 0; k < n; k++) {
+          final local = (wash * (n + 1) - k).clamp(0.0, 1.0);
+          final fade = wash > 1 ? (2 - wash).clamp(0.0, 1.0) : 1.0;
+          final alpha = (local * fade * 0.55).clamp(0.0, 0.55);
+          if (alpha <= 0) continue;
+          canvas.drawRect(geometry.rectOf(cells[k]).deflate(gap), fill..color = colors.correctWash.withValues(alpha: alpha));
+        }
+      }
+    }
+
     // 2. Clue text, dividers and arrows.
     for (final cc in puzzle.clueCells) {
       final rect = geometry.rectOf(cc.pos);
@@ -166,11 +211,18 @@ class GridPainter extends CustomPainter {
       for (var k = 0; k < cc.slots.length; k++) {
         final slot = cc.slots[k];
         final slotRect = _slotRect(rect, slot.pos);
+        final image = slot.isPicture ? imageFor?.call(slot) : null;
+        if (image != null) {
+          _paintPicture(canvas, slotRect.deflate(2), image);
+          _paintArrow(canvas, slotRect, slot.arrow, cell, backing: true);
+          continue;
+        }
         _paintArrow(canvas, slotRect, slot.arrow, cell);
         final area = _textArea(slotRect, slot.arrow, cell);
+        final lines = slot.lines.isNotEmpty ? slot.lines : _breakHint(slot.text);
         final painter = clueText.painterFor(
           key: '${cc.pos.r}:${cc.pos.c}:$k',
-          lines: slot.lines,
+          lines: lines,
           area: area.size,
           cellSize: cell,
           color: colors.clueText,
@@ -208,9 +260,22 @@ class GridPainter extends CustomPainter {
         // Geresh letters are two glyphs: shrink to fit.
         var scale = 1.0;
         if (tp.width > cell * 0.82) scale = cell * 0.82 / tp.width;
+        // Completion flip: each cell flips around its vertical axis in order.
+        var flipX = 1.0;
+        if (flip > 0 && flipOrder.isNotEmpty) {
+          final k = flipOrder.indexOf(i);
+          if (k >= 0) {
+            final start = k / flipOrder.length * 0.7;
+            final local = ((flip - start) / 0.3).clamp(0.0, 1.0);
+            flipX = math.cos(local * math.pi).abs();
+            if (local > 0 && local < 1) {
+              canvas.drawRect(rect.deflate(gap), fill..color = colors.correctWash.withValues(alpha: (1 - flipX) * 0.5));
+            }
+          }
+        }
         canvas.save();
         canvas.translate(rect.center.dx, rect.center.dy + (isPencil ? cell * 0.08 : 0));
-        canvas.scale(scale);
+        canvas.scale(scale * flipX, scale);
         tp.paint(canvas, Offset(-tp.width / 2, -tp.height / 2));
         canvas.restore();
         tp.dispose();
@@ -233,18 +298,20 @@ class GridPainter extends CustomPainter {
       }
     }
 
-    // 4. Grid lines.
-    final line = Paint()
-      ..color = colors.gridLine
-      ..strokeWidth = colors.lineWidth
-      ..style = PaintingStyle.stroke;
-    for (var r = 0; r <= geometry.rows; r++) {
-      final y = r * cell;
-      canvas.drawLine(Offset(0, y), Offset(geometry.width, y), line);
-    }
-    for (var c = 0; c <= geometry.cols; c++) {
-      final x = c * cell;
-      canvas.drawLine(Offset(x, 0), Offset(x, geometry.height), line);
+    // 4. Grid lines (only when cells have no gap, e.g. high contrast).
+    if (colors.cellGap == 0) {
+      final line = Paint()
+        ..color = colors.gridLine
+        ..strokeWidth = colors.lineWidth
+        ..style = PaintingStyle.stroke;
+      for (var r = 0; r <= geometry.rows; r++) {
+        final y = r * cell;
+        canvas.drawLine(Offset(0, y), Offset(geometry.width, y), line);
+      }
+      for (var c = 0; c <= geometry.cols; c++) {
+        final x = c * cell;
+        canvas.drawLine(Offset(x, 0), Offset(x, geometry.height), line);
+      }
     }
 
     // 5. Active cell border.
@@ -259,7 +326,7 @@ class GridPainter extends CustomPainter {
       );
     }
 
-    // 6. Wrong-word pulse: outline the word's bounding box.
+    // 6. Wrong word: the outline shakes twice and fades (no red letters).
     if (pulseWordId != null && pulse > 0) {
       final w = puzzle.wordById[pulseWordId];
       if (w != null) {
@@ -270,7 +337,7 @@ class GridPainter extends CustomPainter {
         }
         if (bounds != null) {
           canvas.drawRRect(
-            RRect.fromRectAndRadius(bounds.deflate(1.5), const Radius.circular(3)),
+            RRect.fromRectAndRadius(bounds.deflate(1.5).shift(Offset(shakeDx, 0)), const Radius.circular(4)),
             Paint()
               ..color = colors.wrongMark.withValues(alpha: pulse.clamp(0, 1))
               ..strokeWidth = 3
@@ -279,6 +346,28 @@ class GridPainter extends CustomPainter {
         }
       }
     }
+  }
+
+  /// Picture clues carry a short text hint instead of pre-broken lines.
+  static List<String> _breakHint(String text) {
+    final words = text.split(' ').where((w) => w.isNotEmpty).toList();
+    if (words.length <= 1) return [text];
+    final mid = (words.length / 2).ceil();
+    return [words.sublist(0, mid).join(' '), words.sublist(mid).join(' ')];
+  }
+
+  /// Draws [image] covering [dst] (centre-cropped), clipped to the slot.
+  void _paintPicture(Canvas canvas, Rect dst, ui.Image image) {
+    final iw = image.width.toDouble();
+    final ih = image.height.toDouble();
+    final scale = math.max(dst.width / iw, dst.height / ih);
+    final sw = dst.width / scale;
+    final sh = dst.height / scale;
+    final src = Rect.fromLTWH((iw - sw) / 2, (ih - sh) / 2, sw, sh);
+    canvas.save();
+    canvas.clipRRect(RRect.fromRectAndRadius(dst, const Radius.circular(2)));
+    canvas.drawImageRect(image, src, dst, Paint()..filterQuality = FilterQuality.medium);
+    canvas.restore();
   }
 
   Rect _slotRect(Rect cell, SlotPos pos) => switch (pos) {
@@ -316,9 +405,9 @@ class GridPainter extends CustomPainter {
 
   /// Arrow glyph near the exit edge of the slot; forward direction is mirrored
   /// for RTL. Straight arrows are a single stroke; bent ones have an elbow.
-  void _paintArrow(Canvas canvas, Rect slot, Arrow arrow, double cell) {
+  void _paintArrow(Canvas canvas, Rect slot, Arrow arrow, double cell, {bool backing = false}) {
     final paint = Paint()
-      ..color = colors.arrow
+      ..color = backing ? const Color(0xFF111111) : colors.arrow
       ..strokeWidth = math.max(1.4, cell * 0.04)
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
@@ -373,6 +462,14 @@ class GridPainter extends CustomPainter {
         path.lineTo(tip.dx, tip.dy);
         dir = const Offset(0, 1);
     }
+    if (backing) {
+      // Legibility over a photo: a translucent light backing along the glyph.
+      final bounds = path.getBounds().inflate(cell * 0.05);
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(bounds.inflate(len * 0.25), Radius.circular(cell * 0.08)),
+        Paint()..color = const Color(0xCCFFFFFF),
+      );
+    }
     canvas.drawPath(path, paint);
     // Arrow head.
     final head = len * 0.45;
@@ -390,5 +487,10 @@ class GridPainter extends CustomPainter {
       old.geometry.cellSize != geometry.cellSize ||
       old.colors != colors ||
       old.pulse != pulse ||
-      old.pulseWordId != pulseWordId;
+      old.pulseWordId != pulseWordId ||
+      old.imagesVersion != imagesVersion ||
+      old.wash != wash ||
+      old.washWordId != washWordId ||
+      old.shakeDx != shakeDx ||
+      old.flip != flip;
 }

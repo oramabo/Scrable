@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../core/l10n/l10n.dart';
 import '../application/puzzle_session.dart';
+import 'picture_clue.dart';
 
 /// The active clue in large type with direction icon, pattern, previous/next
 /// buttons and the crossing clue (tap to switch). Lives inside the puzzle's
@@ -37,6 +38,8 @@ class ClueBar extends StatelessWidget {
     final crossing = crossingId == null ? null : puzzle.wordById[crossingId];
     final textScale = MediaQuery.textScalerOf(context);
     final clueStyle = theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600, height: 1.2);
+    final slot = word == null ? null : puzzle.slotForWord(word.id);
+    final picture = slot?.image;
 
     return Material(
       color: theme.colorScheme.surfaceContainer,
@@ -79,6 +82,10 @@ class ClueBar extends StatelessWidget {
                                       ),
                                     ),
                                     const SizedBox(width: 6),
+                                    if (picture != null) ...[
+                                      PictureClueImage(lang: session.lang.code, image: picture, height: 72),
+                                      const SizedBox(width: 10),
+                                    ],
                                     Expanded(
                                       child: Text(
                                         puzzle.clueTextOf(word.id),

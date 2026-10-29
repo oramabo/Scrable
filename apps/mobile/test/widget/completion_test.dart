@@ -50,18 +50,24 @@ void main() {
     expect(session.progress.stars, 3, reason: 'no hints, under par, normal mode');
     expect(session.completion, isNotNull);
     expect(session.completion!.learned.length, 3);
-    expect(session.completion!.coinsEarned, 30, reason: 'L1 reward 20 + 50% three-star bonus');
+    expect(session.completion!.coinsEarned, 130, reason: 'reward 30 + first-completion bonus 100');
 
-    // Wallet credited once, idempotently.
+    // Wallet: completion reward + first-completion bonus + newly unlocked achievements, each once.
     final ledger = container.read(walletProvider);
-    expect(ledger.balance, testStartingWallet + 30);
     expect(ledger.hasEntry(LedgerEntryType.earnComplete, puzzleId), isTrue);
+    expect(ledger.hasEntry(LedgerEntryType.earnComplete, 'first_completion'), isTrue);
+    final achievementCoins = ledger.entries.where((e) => e.type == LedgerEntryType.earnAchievement).fold(0, (a, e) => a + e.amount);
+    expect(achievementCoins, greaterThan(0), reason: 'first_solve unlocks on the first completion');
+    expect(ledger.balance, testStartingWallet + 30 + 100 + achievementCoins);
+    expect(session.completion!.coinsEarned, 130, reason: 'reward 30 + first-completion bonus 100');
+    expect(session.completion!.firstCompletion, isTrue);
 
     // Completion sheet appears after the frame.
     await tester.pumpAndSettle();
     expect(find.byType(CompletionSheet), findsOneWidget);
-    expect(find.text('כל הכבוד!'), findsOneWidget);
-    expect(find.text('התשחץ הבא'), findsOneWidget, reason: 'pack has a next puzzle');
+    expect(find.text('כל הכבוד'), findsOneWidget);
+    expect(find.text('לתשחץ היומי'), findsOneWidget, reason: 'first completion: the one primary action leads to the daily');
+    expect(find.text('התשחץ הראשון שלך הושלם'), findsOneWidget);
     for (final w in session.completion!.learned) {
       expect(find.text(w.answer), findsOneWidget);
     }

@@ -44,35 +44,35 @@ class ContentRepository {
   final PuzzleCodec codec;
   final String assetRoot;
 
-  BundledIndex? _index;
-  bool _indexLoaded = false;
-  PacksManifest? _packs;
-  bool _packsLoaded = false;
-  DailyManifest? _daily;
-  bool _dailyLoaded = false;
+  // Loads are memoised as futures so concurrent callers share one read
+  // (a flag set before the await would hand the second caller `null`).
+  Future<BundledIndex?>? _indexFuture;
+  Future<PacksManifest?>? _packsFuture;
+  Future<DailyManifest?>? _dailyFuture;
   final Map<String, Puzzle> _puzzles = {};
   final Map<String, PackInfo> _descriptors = {};
 
   String get _base => '$assetRoot/$lang';
 
-  Future<BundledIndex?> index() async {
-    if (_indexLoaded) return _index;
-    _indexLoaded = true;
+  Future<BundledIndex?> index() => _indexFuture ??= _loadIndex();
+
+  Future<BundledIndex?> _loadIndex() async {
     final text = await bundled.readText('$_base/index.json');
-    if (text != null) {
-      try {
-        _index = BundledIndex.fromJson(jsonDecode(text) as Map<String, dynamic>);
-      } on FormatException {
-        _index = null;
-      }
+    if (text == null) return null;
+    try {
+      return BundledIndex.fromJson(jsonDecode(text) as Map<String, dynamic>);
+    } on FormatException {
+      return null;
     }
-    return _index;
   }
 
   /// Bundled manifest, replaced by the CDN manifest when that is newer.
-  Future<PacksManifest?> packsManifest({bool refresh = false}) async {
-    if (_packsLoaded && !refresh) return _packs;
-    _packsLoaded = true;
+  Future<PacksManifest?> packsManifest({bool refresh = false}) {
+    if (refresh) _packsFuture = null;
+    return _packsFuture ??= _loadPacksManifest();
+  }
+
+  Future<PacksManifest?> _loadPacksManifest() async {
     final local = await _readJson(bundled, '$_base/manifests/packs.json');
     PacksManifest? result = local == null ? null : PacksManifest.fromJson(local);
     if (cdn != null) {
@@ -82,12 +82,15 @@ class ContentRepository {
         if (result == null || _newer(rm.generatedAt, result.generatedAt)) result = rm;
       }
     }
-    return _packs = result;
+    return result;
   }
 
-  Future<DailyManifest?> dailyManifest({bool refresh = false}) async {
-    if (_dailyLoaded && !refresh) return _daily;
-    _dailyLoaded = true;
+  Future<DailyManifest?> dailyManifest({bool refresh = false}) {
+    if (refresh) _dailyFuture = null;
+    return _dailyFuture ??= _loadDailyManifest();
+  }
+
+  Future<DailyManifest?> _loadDailyManifest() async {
     final local = await _readJson(bundled, '$_base/manifests/daily.json');
     DailyManifest? result = local == null ? null : DailyManifest.fromJson(local);
     if (cdn != null) {
@@ -97,7 +100,7 @@ class ContentRepository {
         if (result == null || _newer(rm.generatedAt, result.generatedAt)) result = rm;
       }
     }
-    return _daily = result;
+    return result;
   }
 
   /// Whether any content exists for this language at all.
@@ -291,12 +294,9 @@ class ContentRepository {
 
   /// Drops in-memory caches (tests / language switch).
   void reset() {
-    _index = null;
-    _indexLoaded = false;
-    _packs = null;
-    _packsLoaded = false;
-    _daily = null;
-    _dailyLoaded = false;
+    _indexFuture = null;
+    _packsFuture = null;
+    _dailyFuture = null;
     _puzzles.clear();
     _descriptors.clear();
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chetz_core/chetz_core.dart';
 
 import '../../../core/storage/json_store.dart';
@@ -107,6 +109,10 @@ abstract class ProgressRepository {
   Future<void> save(PuzzleProgress progress, Puzzle puzzle);
   Future<Map<String, ProgressSummary>> summaries();
   Future<void> deleteAll();
+
+  /// Emits the summary of every saved progress (listeners keep in-memory
+  /// indexes fresh without the saver touching them directly).
+  Stream<ProgressSummary> get changes;
 }
 
 /// One file per puzzle under `progress/`, plus `progress_index`.
@@ -115,6 +121,10 @@ class JsonProgressRepository implements ProgressRepository {
 
   final JsonStore store;
   Map<String, ProgressSummary>? _index;
+  final StreamController<ProgressSummary> _changes = StreamController<ProgressSummary>.broadcast();
+
+  @override
+  Stream<ProgressSummary> get changes => _changes.stream;
 
   @override
   Future<PuzzleProgress?> load(String puzzleId) async {
@@ -131,8 +141,10 @@ class JsonProgressRepository implements ProgressRepository {
   Future<void> save(PuzzleProgress progress, Puzzle puzzle) async {
     await store.write('progress/${progress.puzzleId}', progress.toJson());
     final index = await summaries();
-    index[progress.puzzleId] = ProgressSummary.of(progress, puzzle);
+    final summary = ProgressSummary.of(progress, puzzle);
+    index[progress.puzzleId] = summary;
     await _writeIndex(index);
+    _changes.add(summary);
   }
 
   @override

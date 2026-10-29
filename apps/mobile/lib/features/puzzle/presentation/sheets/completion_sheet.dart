@@ -8,7 +8,7 @@ import '../../../../core/util/clock.dart';
 import '../../../../core/widgets/common.dart';
 import '../../application/puzzle_session.dart';
 
-enum CompletionAction { next, home }
+enum CompletionAction { next, home, leaderboard, daily }
 
 Future<CompletionAction?> showCompletionSheet(
   BuildContext context, {
@@ -16,12 +16,21 @@ Future<CompletionAction?> showCompletionSheet(
   required CompletionSummary summary,
   required bool hasNext,
   required String title,
+  VoidCallback? onShared,
+  bool showLeaderboard = false,
 }) {
   return showModalBottomSheet<CompletionAction>(
     context: context,
     isScrollControlled: true,
     isDismissible: true,
-    builder: (_) => CompletionSheet(session: session, summary: summary, hasNext: hasNext, title: title),
+    builder: (_) => CompletionSheet(
+      session: session,
+      summary: summary,
+      hasNext: hasNext,
+      title: title,
+      onShared: onShared,
+      showLeaderboard: showLeaderboard,
+    ),
   );
 }
 
@@ -32,12 +41,18 @@ class CompletionSheet extends StatefulWidget {
     required this.summary,
     required this.hasNext,
     required this.title,
+    this.onShared,
+    this.showLeaderboard = false,
   });
 
   final PuzzleSession session;
   final CompletionSummary summary;
   final bool hasNext;
   final String title;
+
+  /// Called after the share sheet was opened (records the game event).
+  final VoidCallback? onShared;
+  final bool showLeaderboard;
 
   @override
   State<CompletionSheet> createState() => _CompletionSheetState();
@@ -159,12 +174,43 @@ class _CompletionSheetState extends State<CompletionSheet> with SingleTickerProv
                   ),
                 ],
                 const SizedBox(height: 20),
-                if (widget.hasNext)
+                if (s.firstCompletion)
+                  Card(
+                    color: theme.colorScheme.primary.withValues(alpha: 0.12),
+                    child: ListTile(
+                      leading: Icon(Icons.celebration_rounded, color: theme.colorScheme.primary),
+                      title: Text(l10n.firstCompletionTitle, style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700)),
+                      subtitle: Text(l10n.firstCompletionBody(s.firstCompletionBonus)),
+                    ),
+                  ),
+                if (s.firstCompletion) const SizedBox(height: 10),
+                // Exactly one primary action (UX §4).
+                if (s.firstCompletion)
+                  FilledButton.icon(
+                    onPressed: () => Navigator.of(context).pop(CompletionAction.daily),
+                    icon: const Icon(Icons.today_rounded),
+                    label: Text(l10n.toDaily),
+                  )
+                else if (widget.hasNext)
                   FilledButton.icon(
                     onPressed: () => Navigator.of(context).pop(CompletionAction.next),
                     icon: const Icon(Icons.arrow_forward_rounded),
                     label: Text(l10n.nextPuzzle),
+                  )
+                else
+                  FilledButton.icon(
+                    onPressed: () => Navigator.of(context).pop(CompletionAction.home),
+                    icon: const Icon(Icons.home_rounded),
+                    label: Text(l10n.backHome),
                   ),
+                if (widget.showLeaderboard) ...[
+                  const SizedBox(height: 10),
+                  OutlinedButton.icon(
+                    onPressed: () => Navigator.of(context).pop(CompletionAction.leaderboard),
+                    icon: const Icon(Icons.leaderboard_rounded),
+                    label: Text(l10n.leaderboardTitle),
+                  ),
+                ],
                 const SizedBox(height: 10),
                 Row(
                   children: [
@@ -173,19 +219,22 @@ class _CompletionSheetState extends State<CompletionSheet> with SingleTickerProv
                         onPressed: () {
                           final text = l10n.shareText(widget.title, time, _starsText(s.stars));
                           SharePlus.instance.share(ShareParams(text: text)).ignore();
+                          widget.onShared?.call();
                         },
                         icon: const Icon(Icons.share_rounded),
                         label: Text(l10n.share),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () => Navigator.of(context).pop(CompletionAction.home),
-                        icon: const Icon(Icons.home_rounded),
-                        label: Text(l10n.backHome),
+                    if (widget.hasNext || s.firstCompletion) ...[
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: OutlinedButton.icon(
+                          onPressed: () => Navigator.of(context).pop(CompletionAction.home),
+                          icon: const Icon(Icons.home_rounded),
+                          label: Text(l10n.backHome),
+                        ),
                       ),
-                    ),
+                    ],
                   ],
                 ),
               ],

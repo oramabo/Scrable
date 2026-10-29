@@ -8,7 +8,19 @@
   "homeGreeting": "שלום!",
   "continueTitle": "המשך",
   "continueSubtitle": "{title} · {filled}/{total} אותיות",
-  "@continueSubtitle": {"placeholders": {"title": {"type": "String"}, "filled": {"type": "int"}, "total": {"type": "int"}}},
+  "@continueSubtitle": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "filled": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "continueEmpty": "עדיין לא התחלתם תשחץ. בחרו חבילה או את התשחץ היומי.",
   "dailyEasyTitle": "התשחץ היומי",
   "dailyHardTitle": "האתגר היומי",
@@ -17,40 +29,118 @@
   "dailyPlay": "לפתרון",
   "dailyUnavailable": "לא זמין במצב לא מקוון",
   "dailyDate": "{date}",
-  "@dailyDate": {"placeholders": {"date": {"type": "String"}}},
-  "streakDays": "{count, plural, =0{אין רצף פעיל} =1{יום אחד ברצף} two{יומיים ברצף} other{{count} ימים ברצף}}",
-  "@streakDays": {"placeholders": {"count": {"type": "int"}}},
+  "@dailyDate": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "streakDays": "{count, plural, =0{עוד אין רצף} =1{הרצף שלך: יום אחד} two{הרצף שלך: יומיים} other{הרצף שלך: {count} ימים}}",
+  "@streakDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "streakAtRisk": "הרצף בסיכון — פתרו תשחץ יומי היום",
   "bestStreak": "הרצף הטוב ביותר: {count}",
-  "@bestStreak": {"placeholders": {"count": {"type": "int"}}},
+  "@bestStreak": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "streakFreeze": "הקפאת רצף",
   "streakFreezeDescription": "שומרת על הרצף ביום שבו לא פתרתם",
   "streakFreezeOwned": "יש לכם הקפאת רצף",
   "streakFreezeBuy": "קנייה ({coins} מטבעות)",
-  "@streakFreezeBuy": {"placeholders": {"coins": {"type": "int"}}},
+  "@streakFreezeBuy": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "levelsTitle": "רמות",
   "levelTitle": "רמה {level}",
-  "@levelTitle": {"placeholders": {"level": {"type": "int"}}},
+  "@levelTitle": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "levelName1": "מתחילים",
   "levelName2": "קל",
   "levelName3": "בינוני",
   "levelName4": "מתקדם",
   "levelName5": "מומחה",
   "levelGrid": "רשת {cols}×{rows}",
-  "@levelGrid": {"placeholders": {"cols": {"type": "int"}, "rows": {"type": "int"}}},
+  "@levelGrid": {
+    "placeholders": {
+      "cols": {
+        "type": "int"
+      },
+      "rows": {
+        "type": "int"
+      }
+    }
+  },
   "packsTitle": "חבילות",
   "packTitle": "חבילה {index}",
-  "@packTitle": {"placeholders": {"index": {"type": "int"}}},
+  "@packTitle": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
   "packLocked": "נעול",
   "packUnlockHint": "נפתח עם {stars} כוכבים או {count} תשחצים שהושלמו בחבילה הקודמת",
-  "@packUnlockHint": {"placeholders": {"stars": {"type": "int"}, "count": {"type": "int"}}},
+  "@packUnlockHint": {
+    "placeholders": {
+      "stars": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "packProgress": "{done}/{total} הושלמו · {stars} כוכבים",
-  "@packProgress": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}, "stars": {"type": "int"}}},
+  "@packProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "stars": {
+        "type": "int"
+      }
+    }
+  },
   "packNotBundled": "חבילה זו נטענת מהרשת",
   "puzzleNumber": "תשחץ {index}",
-  "@puzzleNumber": {"placeholders": {"index": {"type": "int"}}},
+  "@puzzleNumber": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
   "puzzleWords": "{count} מילים",
-  "@puzzleWords": {"placeholders": {"count": {"type": "int"}}},
+  "@puzzleWords": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "noPacksYet": "עוד אין חבילות ברמה זו",
   "comingSoon": "בקרוב",
   "settingsTitle": "הגדרות",
@@ -70,7 +160,13 @@
   "settingsAutoNextWord": "קפיצה אוטומטית למילה הבאה",
   "settingsBigKeyboard": "מקלדת גדולה",
   "settingsDefaultMode": "מצב משחק ברירת מחדל לרמה {level}",
-  "@settingsDefaultMode": {"placeholders": {"level": {"type": "int"}}},
+  "@settingsDefaultMode": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "modeRelaxed": "רגוע",
   "modeNormal": "רגיל",
   "modeNewspaper": "עיתון",
@@ -109,19 +205,37 @@
   "aboutFonts": "גופנים: Noto Sans Hebrew ו-Inter (רישיון SIL OFL 1.1)",
   "aboutLicenses": "רישיונות קוד פתוח",
   "aboutVersion": "גרסה {version}",
-  "@aboutVersion": {"placeholders": {"version": {"type": "String"}}},
+  "@aboutVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
   "statsTitle": "סטטיסטיקה",
   "statsSolved": "תשחצים שנפתרו",
   "statsStars": "כוכבים",
   "statsPerfect": "ללא רמזים",
   "statsHints": "רמזים בשימוש",
   "statsBestTime": "הזמן הטוב ביותר ברמה {level}",
-  "@statsBestTime": {"placeholders": {"level": {"type": "int"}}},
+  "@statsBestTime": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
   "statsDailies": "תשחצים יומיים",
   "statsEmpty": "עוד אין נתונים — פתרו את התשחץ הראשון",
   "coins": "מטבעות",
   "coinsBalance": "{count} מטבעות",
-  "@coinsBalance": {"placeholders": {"count": {"type": "int"}}},
+  "@coinsBalance": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "hintsTitle": "רמזים",
   "hintRevealLetter": "חשיפת האות הנבחרת",
   "hintRandomLetter": "אות אקראית במילה",
@@ -133,25 +247,73 @@
   "hintFirstLetters": "אות ראשונה לכל מילה",
   "hintFree": "חינם",
   "hintCost": "{coins} מטבעות",
-  "@hintCost": {"placeholders": {"coins": {"type": "int"}}},
+  "@hintCost": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "hintFreeLeft": "{count, plural, =0{אין רמזים חינם} =1{נותר רמז חינם אחד} two{נותרו שני רמזים חינם} other{נותרו {count} רמזים חינם}}",
-  "@hintFreeLeft": {"placeholders": {"count": {"type": "int"}}},
+  "@hintFreeLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "hintConfirmTitle": "להשתמש ברמז?",
   "hintConfirmBody": "{name} יעלה {coins} מטבעות.",
-  "@hintConfirmBody": {"placeholders": {"name": {"type": "String"}, "coins": {"type": "int"}}},
+  "@hintConfirmBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "hintConfirmFree": "{name} — אחד מהרמזים החינמיים שלכם.",
-  "@hintConfirmFree": {"placeholders": {"name": {"type": "String"}}},
+  "@hintConfirmFree": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "dontAskAgain": "לא לשאול שוב",
   "useHint": "שימוש ברמז",
   "notEnoughCoins": "אין מספיק מטבעות",
   "notEnoughCoinsBody": "נדרשים {needed} מטבעות, יש לכם {balance}.",
-  "@notEnoughCoinsBody": {"placeholders": {"needed": {"type": "int"}, "balance": {"type": "int"}}},
+  "@notEnoughCoinsBody": {
+    "placeholders": {
+      "needed": {
+        "type": "int"
+      },
+      "balance": {
+        "type": "int"
+      }
+    }
+  },
   "watchAdForCoins": "צפייה בפרסומת (+{coins})",
-  "@watchAdForCoins": {"placeholders": {"coins": {"type": "int"}}},
+  "@watchAdForCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "buyCoins": "קניית מטבעות",
   "adUnavailable": "פרסומת לא זמינה כרגע",
   "adRewardEarned": "+{coins} מטבעות על הצפייה",
-  "@adRewardEarned": {"placeholders": {"coins": {"type": "int"}}},
+  "@adRewardEarned": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "clueAcross": "מאוזן",
   "clueDown": "מאונך",
   "prevWord": "המילה הקודמת",
@@ -164,36 +326,72 @@
   "keyGeresh": "גרש",
   "keyUndo": "ביטול",
   "keySemantics": "האות {name}",
-  "@keySemantics": {"placeholders": {"name": {"type": "String"}}},
+  "@keySemantics": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "cellActions": "פעולות על התא",
   "pencilOn": "סימון בעיפרון",
   "pencilOff": "ביטול סימון עיפרון",
   "clearWord": "ניקוי המילה",
-  "wordWrong": "המילה לא נכונה",
-  "wordCorrect": "המילה נכונה",
-  "puzzleHasErrors": "יש שגיאות בתשחץ",
+  "wordWrong": "כמעט — נסו אות אחרת",
+  "wordCorrect": "יופי, עוד מילה",
+  "puzzleHasErrors": "משהו עוד לא מתאים בתשחץ",
   "puzzleNoErrors": "אין שגיאות עד כה",
   "checkFoundErrors": "{count, plural, =0{אין שגיאות} =1{שגיאה אחת סומנה} two{שתי שגיאות סומנו} other{{count} שגיאות סומנו}}",
-  "@checkFoundErrors": {"placeholders": {"count": {"type": "int"}}},
+  "@checkFoundErrors": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "letterRevealed": "האות נחשפה",
   "undoDone": "הפעולה בוטלה",
   "nothingToUndo": "אין מה לבטל",
-  "completionTitle": "כל הכבוד!",
+  "completionTitle": "כל הכבוד",
   "completionDailyTitle": "התשחץ היומי הושלם!",
   "completionTime": "זמן",
   "completionHints": "רמזים",
   "completionStars": "כוכבים",
   "completionCoins": "+{coins} מטבעות",
-  "@completionCoins": {"placeholders": {"coins": {"type": "int"}}},
+  "@completionCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "completionPerfect": "ללא רמזים!",
   "wordsLearned": "מילים שלמדתם",
   "nextPuzzle": "התשחץ הבא",
   "share": "שיתוף",
   "backHome": "לדף הבית",
   "shareText": "פתרתי את {title} בחץ ב-{time} {stars}",
-  "@shareText": {"placeholders": {"title": {"type": "String"}, "time": {"type": "String"}, "stars": {"type": "String"}}},
+  "@shareText": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      },
+      "stars": {
+        "type": "String"
+      }
+    }
+  },
   "puzzleCompletedAnnouncement": "התשחץ הושלם! {stars} כוכבים",
-  "@puzzleCompletedAnnouncement": {"placeholders": {"stars": {"type": "int"}}},
+  "@puzzleCompletedAnnouncement": {
+    "placeholders": {
+      "stars": {
+        "type": "int"
+      }
+    }
+  },
   "timer": "טיימר",
   "pause": "השהיה",
   "paused": "המשחק מושהה",
@@ -232,18 +430,57 @@
   "puzzleNotAvailable": "התשחץ אינו זמין כרגע",
   "puzzleChecksumFailed": "קובץ התשחץ פגום",
   "loginBonus": "בונוס יומי: +{coins} מטבעות",
-  "@loginBonus": {"placeholders": {"coins": {"type": "int"}}},
+  "@loginBonus": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "cellSemantics": "שורה {row}, עמודה {col}, {letter}, {dir}: {clue}",
-  "@cellSemantics": {"placeholders": {"row": {"type": "int"}, "col": {"type": "int"}, "letter": {"type": "String"}, "dir": {"type": "String"}, "clue": {"type": "String"}}},
+  "@cellSemantics": {
+    "placeholders": {
+      "row": {
+        "type": "int"
+      },
+      "col": {
+        "type": "int"
+      },
+      "letter": {
+        "type": "String"
+      },
+      "dir": {
+        "type": "String"
+      },
+      "clue": {
+        "type": "String"
+      }
+    }
+  },
   "cellSemanticsEmpty": "ריק",
   "cellSemanticsPencil": "בעיפרון",
   "cellSemanticsWrong": "מסומן כשגוי",
   "cellSemanticsRevealed": "נחשף",
   "cellSemanticsCorrect": "נכון",
   "clueCellSemantics": "תא הגדרה: {clues}",
-  "@clueCellSemantics": {"placeholders": {"clues": {"type": "String"}}},
+  "@clueCellSemantics": {
+    "placeholders": {
+      "clues": {
+        "type": "String"
+      }
+    }
+  },
   "gridSemantics": "רשת התשחץ, {rows} שורות ו-{cols} עמודות",
-  "@gridSemantics": {"placeholders": {"rows": {"type": "int"}, "cols": {"type": "int"}}},
+  "@gridSemantics": {
+    "placeholders": {
+      "rows": {
+        "type": "int"
+      },
+      "cols": {
+        "type": "int"
+      }
+    }
+  },
   "zoomIn": "הגדלה",
   "zoomOut": "הקטנה",
   "menu": "תפריט",
@@ -252,5 +489,234 @@
   "dailyEasyShort": "יומי",
   "dailyHardShort": "אתגר",
   "patternLabel": "תבנית: {pattern}",
-  "@patternLabel": {"placeholders": {"pattern": {"type": "String"}}}
+  "@patternLabel": {
+    "placeholders": {
+      "pattern": {
+        "type": "String"
+      }
+    }
+  },
+  "tabProfile": "פרופיל",
+  "missionsTitle": "משימות",
+  "missionsDaily": "משימות יומיות",
+  "missionsWeekly": "משימות שבועיות",
+  "missionClaim": "קבלת הפרס",
+  "missionClaimed": "הפרס נאסף",
+  "missionResetIn": "מתאפס בעוד {time}",
+  "@missionResetIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "missionReward": "+{coins} מטבעות",
+  "@missionReward": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "missionProgress": "{done}/{total}",
+  "@missionProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "achievementsTitle": "הישגים",
+  "achievementsUnlocked": "{count}/{total} הישגים הושגו",
+  "@achievementsUnlocked": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "tierBronze": "ארד",
+  "tierSilver": "כסף",
+  "tierGold": "זהב",
+  "tierPlatinum": "פלטינה",
+  "achievementUnlockedToast": "הישג חדש: {title} (+{coins} מטבעות)",
+  "@achievementUnlockedToast": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      },
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "achievementLocked": "נעול",
+  "achievementUnlockedLabel": "הושג",
+  "viewAchievements": "להישגים",
+  "profileTitle": "פרופיל",
+  "defaultDisplayName": "פותר/ת",
+  "editName": "שינוי שם",
+  "displayName": "שם תצוגה",
+  "chooseAvatar": "בחירת אווטאר",
+  "rankLabel": "דרגה",
+  "nextRank": "{count, plural, =1{תשחץ אחד לדרגת {rank}} two{שני תשחצים לדרגת {rank}} other{{count} תשחצים לדרגת {rank}}}",
+  "@nextRank": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "topRank": "הדרגה הגבוהה ביותר!",
+  "lifetimeStats": "סטטיסטיקה כללית",
+  "syncRow": "התחברות לסנכרון",
+  "syncOn": "מסונכרן (משתמש אנונימי)",
+  "syncOff": "סנכרון בענן זמין בגרסה עם Firebase. ההתקדמות נשמרת במכשיר.",
+  "syncFailed": "הסנכרון לא זמין כרגע — ההתקדמות נשמרת במכשיר",
+  "save": "שמירה",
+  "themeHighContrast": "ניגודיות גבוהה",
+  "themeCustom": "מותאם אישית",
+  "customThemeTitle": "צבעים מותאמים",
+  "colorPrimary": "צבע ראשי",
+  "colorBackground": "צבע רקע",
+  "colorHighlight": "הדגשת המילה הפעילה",
+  "contrastWarning": "ניגודיות נמוכה ({ratio}:1) — הטקסט עשוי להיות קשה לקריאה",
+  "@contrastWarning": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "contrastOk": "ניגודיות תקינה ({ratio}:1)",
+  "@contrastOk": {
+    "placeholders": {
+      "ratio": {
+        "type": "String"
+      }
+    }
+  },
+  "hue": "גוון",
+  "saturation": "רוויה",
+  "brightnessLabel": "בהירות",
+  "hexLabel": "קוד צבע (HEX)",
+  "previewLabel": "תצוגה מקדימה",
+  "resetColors": "איפוס צבעים",
+  "cyclerHint": "לחיצה: האות הבאה. לחיצה ארוכה: ריצה על כל האותיות",
+  "cyclerConfirm": "אישור",
+  "cyclerSemantics": "רצף אותיות א עד ת",
+  "pictureClue": "הגדרה בתמונה",
+  "imageCredits": "קרדיט תמונות",
+  "imageCreditsEmpty": "עוד לא נראו תשחצי תמונות",
+  "imageCreditLine": "{credit} · {license}",
+  "@imageCreditLine": {
+    "placeholders": {
+      "credit": {
+        "type": "String"
+      },
+      "license": {
+        "type": "String"
+      }
+    }
+  },
+  "leaderboardTitle": "לוח התוצאות",
+  "leaderboardUnavailable": "לוח התוצאות זמין כשמחוברים לחשבון ולרשת",
+  "leaderboardEmpty": "עוד אין תוצאות ליום זה",
+  "leaderboardYou": "את/ה",
+  "leaderboardRank": "מקום {rank}",
+  "@leaderboardRank": {
+    "placeholders": {
+      "rank": {
+        "type": "int"
+      }
+    }
+  },
+  "leaderboardOf": "מתוך {total}",
+  "@leaderboardOf": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "statsWords": "מילים שנפתרו",
+  "statsCoinsEarned": "מטבעות שהורווחו",
+  "tabPlay": "משחק",
+  "tabTogether": "מולטי",
+  "tabMe": "אני",
+  "togetherTitle": "משחק משותף",
+  "togetherSoon": "דו-קרב ופתרון משותף בדרך. בינתיים — לוח התוצאות של האתגר היומי.",
+  "togetherVersus": "דו-קרב",
+  "togetherCoop": "פתרון משותף",
+  "inviteCode": "קוד הזמנה",
+  "comingSoonShort": "בקרוב",
+  "randomPuzzle": "תשחץ אקראי",
+  "chooseLevel": "בחירת רמה",
+  "noPuzzleAvailable": "אין תשחץ פנוי ברמה זו כרגע",
+  "seasonTeaser": "עונה 1 · עוד {points} נקודות לפרס הבא",
+  "@seasonTeaser": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonTier": "דרגה {tier}",
+  "@seasonTier": {
+    "placeholders": {
+      "tier": {
+        "type": "int"
+      }
+    }
+  },
+  "dailyResetIn": "מתחדש בעוד {time}",
+  "@dailyResetIn": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "allLevels": "כל הרמות",
+  "progressRing": "{percent}% מהאותיות מולאו",
+  "@progressRing": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "nameScreenTitle": "איך נקרא לך?",
+  "nameScreenBody": "אפשר גם לדלג — השם משמש רק בלוח התוצאות ובפרופיל.",
+  "letsGo": "יאללה, מתחילים",
+  "firstCompletionTitle": "התשחץ הראשון שלך הושלם",
+  "firstCompletionBody": "+{coins} מטבעות פתיחה. התשחץ היומי הראשון שלך מחכה.",
+  "@firstCompletionBody": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "toDaily": "לתשחץ היומי",
+  "tutorialCycler": "נשארה אות אחת? מקש א→ת מריץ את כל האותיות",
+  "continueProgress": "{percent}% הושלם",
+  "@continueProgress": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "missionsStripHint": "לחצו לכל המשימות",
+  "themeRefused": "השילוב הזה לא מופעל: הניגודיות נמוכה מ-4.5:1. בחרו רקע או הדגשה בהירים/כהים יותר."
 }

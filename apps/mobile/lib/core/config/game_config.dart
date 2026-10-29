@@ -50,6 +50,7 @@ class GameConfig {
     this.streakFreezePrice = 150,
     this.lenientGeresh = true,
     this.newspaperFromLevel = 4,
+    this.firstCompletionBonus = 100,
   });
 
   static const Map<HintType, int> defaultHintPrices = {
@@ -97,6 +98,9 @@ class GameConfig {
   final int streakFreezePrice;
   final bool lenientGeresh;
   final int newspaperFromLevel;
+
+  /// Coins for the very first completed puzzle (the tutorial), UX §5.
+  final int firstCompletionBonus;
 
   /// Price of a hint for a puzzle of [level] played in [mode]. Checks are free
   /// in relaxed mode.
@@ -181,6 +185,7 @@ class GameConfig {
       streakFreezePrice: i('streakFreezePrice', base.streakFreezePrice),
       lenientGeresh: b('lenientGeresh', base.lenientGeresh),
       newspaperFromLevel: i('newspaperFromLevel', base.newspaperFromLevel),
+      firstCompletionBonus: i('firstCompletionBonus', base.firstCompletionBonus),
     );
   }
 
@@ -214,5 +219,6 @@ class GameConfig {
         'streakFreezePrice': streakFreezePrice,
         'lenientGeresh': lenientGeresh,
         'newspaperFromLevel': newspaperFromLevel,
+        'firstCompletionBonus': firstCompletionBonus,
       };
 }

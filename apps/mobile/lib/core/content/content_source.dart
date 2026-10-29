@@ -9,6 +9,9 @@ abstract class ContentSource {
 
   /// Returns the document or `null` when it does not exist / cannot be read.
   Future<String?> readText(String path);
+
+  /// Binary content (images). `null` when missing.
+  Future<Uint8List?> readBytes(String path);
 }
 
 class AssetContentSource extends ContentSource {
@@ -22,6 +25,16 @@ class AssetContentSource extends ContentSource {
       return await (bundle ?? rootBundle).loadString(path);
     } on FlutterError {
       return null;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  @override
+  Future<Uint8List?> readBytes(String path) async {
+    try {
+      final data = await (bundle ?? rootBundle).load(path);
+      return data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     } catch (_) {
       return null;
     }
@@ -51,17 +64,37 @@ class HttpContentSource extends ContentSource {
       return null;
     }
   }
+
+  @override
+  Future<Uint8List?> readBytes(String path) async {
+    try {
+      final res = await client.get(resolve(path)).timeout(timeout);
+      if (res.statusCode != 200) return null;
+      return res.bodyBytes;
+    } catch (_) {
+      return null;
+    }
+  }
 }
 
 /// In-memory source for tests.
 class MapContentSource extends ContentSource {
-  MapContentSource([Map<String, String>? docs]) : docs = docs ?? {};
+  MapContentSource([Map<String, String>? docs, Map<String, Uint8List>? binaries])
+      : docs = docs ?? {},
+        binaries = binaries ?? {};
   final Map<String, String> docs;
+  final Map<String, Uint8List> binaries;
   int reads = 0;
 
   @override
   Future<String?> readText(String path) async {
     reads++;
     return docs[path];
+  }
+
+  @override
+  Future<Uint8List?> readBytes(String path) async {
+    reads++;
+    return binaries[path];
   }
 }
