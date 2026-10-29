@@ -10,6 +10,7 @@
 #   daily/{easy,hard}/<date>.json            dailies for --days days from --date
 #   tutorial/*.json                          the onboarding tutorial puzzles
 #   images/*                                 picture-clue images (jpg/png/webp)
+#   device/{lexicon,templates}.json.gz       on-device generator data (random puzzles)
 #   manifests/{daily,packs}.json             the CDN manifests
 #   index.json                               list of everything copied (the app
 #                                            reads it instead of AssetManifest)
@@ -65,7 +66,9 @@ if [[ $REGEN -eq 1 ]]; then
 fi
 
 rm -rf "$DST"
-mkdir -p "$DST/packs" "$DST/daily/easy" "$DST/daily/hard" "$DST/manifests" "$DST/tutorial" "$DST/images"
+mkdir -p "$DST/packs" "$DST/daily/easy" "$DST/daily/hard" "$DST/manifests" "$DST/tutorial" "$DST/images" "$DST/device"
+# pubspec.yaml lists the images directory as an asset folder; keep it tracked even when a language has no pictures yet.
+touch "$DST/images/.gitkeep"
 
 index_puzzles=()
 index_packs=()
@@ -121,6 +124,22 @@ if [[ -d "$ROOT/content/$LANG_CODE/images" ]]; then
   done
 fi
 
+# 3d. On-device generator data: the device lexicon + layout templates
+#     (gzipped JSON) that power "random puzzle" generation in the app.
+device_json=""
+if [[ -d "$ROOT/content/$LANG_CODE/device" ]]; then
+  for name in lexicon templates; do
+    f="$ROOT/content/$LANG_CODE/device/$name.json.gz"
+    if [[ -f "$f" ]]; then
+      cp "$f" "$DST/device/$name.json.gz"
+      [[ -n "$device_json" ]] && device_json+=","
+      device_json+="\"$name\": \"assets/puzzles/$LANG_CODE/device/$name.json.gz\""
+    else
+      echo "warning: device file $f missing (random puzzles unavailable for $LANG_CODE)" >&2
+    fi
+  done
+fi
+
 # 4. Manifests.
 for m in daily.json packs.json; do
   if [[ -f "$SRC/manifests/$m" ]]; then
@@ -138,7 +157,8 @@ join() { local IFS=","; echo "$*"; }
   echo "  \"generatedAt\": \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\","
   echo "  \"puzzles\": {$(join "${index_puzzles[@]+"${index_puzzles[@]}"}")},"
   echo "  \"packs\": {$(join "${index_packs[@]+"${index_packs[@]}"}")},"
-  echo "  \"dailies\": {$(join "${index_dailies[@]+"${index_dailies[@]}"}")}"
+  echo "  \"dailies\": {$(join "${index_dailies[@]+"${index_dailies[@]}"}")},"
+  echo "  \"device\": {$device_json}"
   echo "}"
 } > "$DST/index.json"
 python3 -c 'import json,sys;json.load(open(sys.argv[1]))' "$DST/index.json"
@@ -158,5 +178,5 @@ while IFS= read -r dir; do
   fi
 done < <(find "$DST" -type d)
 
-echo "synced: ${#index_puzzles[@]} puzzles (incl. tutorial), ${#index_packs[@]} packs, ${#index_dailies[@]} dailies, $images images -> $DST"
+echo "synced: ${#index_puzzles[@]} puzzles (incl. tutorial), ${#index_packs[@]} packs, ${#index_dailies[@]} dailies, $images images, device data: ${device_json:+yes}${device_json:-no} -> $DST"
 [[ $missing -eq 0 ]] || echo "add the directories above under flutter.assets in $PUBSPEC" >&2

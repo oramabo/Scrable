@@ -212,19 +212,19 @@ Pipeline: Python tool drafts 4–6 clues per word with an LLM (Claude Sonnet for
 ### 5.3 Generator (the algorithm)
 **Model**: grid `cols×rows`; column 0 is the **first column in the language's reading direction** (rightmost for Hebrew, leftmost for English), so the generator never thinks about left/right. Cell = `LETTER | CLUE`. A clue has an `arrow`: `A` (across: starts in the next cell along the reading direction, runs across), `D` (starts below, runs down), `DA` (starts below, runs across), `AD` (starts in the next cell across, runs down). Extensions kept in the schema for later: `UA` (clue below the first letter, up then across) and `BD` (clue on the far side, back then down). The renderer flips glyphs per direction. A clue cell holds 1–2 clues; in a split cell the **top** half's arrow must exit through the left/right/top edge and the **bottom** half's through left/right/bottom.
 
-**Layout rules** (validator): every maximal across run of ≥ 2 letter cells is exactly one word whose start cell is pointed at by a clue (`A` from the cell just before it in reading order or `DA` from the cell above); every down run of ≥ 2 likewise (`D` from above or `AD` from the cell before it); no letter cell is a 1-run in both directions; word length 2..level max; each clue cell serves 1–2 words (no dead clue cells) with the exit-edge rule; the word graph (words sharing cells) is connected; aesthetics: no 2×2 block of clue cells except the corner, no all-clue row/column except the border; soft targets scored not failed: clue-cell share 25–33 %, checked-letter ratio, 2-letter share, length histogram, bent-arrow count.
+**Layout rules** (validator): every maximal across run of ≥ 2 letter cells is exactly one word whose start cell is pointed at by a clue (`A` from the cell just before it in reading order or `DA` from the cell above); every down run of ≥ 2 likewise (`D` from above or `AD` from the cell before it); no letter cell is a 1-run in both directions; word length 2..level max; each clue cell serves 1–2 words with the exit-edge rule, and **no clue cell is left blank** (a hard violation since generator 0.2.1: a real arrowword has no empty squares, so a corner or border cell that cannot reach a word becomes a letter and its word gets a bent arrow); the word graph (words sharing cells) is connected; aesthetics: no 2×2 block of clue cells except the corner, no all-clue row/column except the border; soft targets scored not failed: clue-cell share 25–33 %, checked-letter ratio, 2-letter share, length histogram, bent-arrow count.
 
 Generator parameters per level (tunable):
 
 | Level | 2-letter max | Max word difficulty | Mean word difficulty | Min checked ratio | Bent arrows |
 |------|---------------|---------------------|----------------------|-------------------|-------------|
-| 1 | 35 % | 0.40 | 0.15–0.30 | 0.65 | none (classic border) |
-| 2 | 30 % | 0.55 | 0.25–0.40 | 0.60 | ≤ 2 |
-| 3 | 25 % | 0.70 | 0.35–0.55 | 0.55 | ≤ 4 |
-| 4 | 20 % | 0.85 | 0.50–0.65 | 0.50 | ≤ 6 |
+| 1 | 35 % | 0.40 | 0.15–0.30 | 0.65 | ≤ 4 (only where a border cell would otherwise be blank) |
+| 2 | 30 % | 0.55 | 0.25–0.40 | 0.60 | ≤ 5 |
+| 3 | 25 % | 0.70 | 0.35–0.55 | 0.55 | ≤ 7 |
+| 4 | 20 % | 0.85 | 0.50–0.65 | 0.50 | ≤ 9 |
 | 5 | 15 % | 1.00 | 0.60–0.80 | 0.45 | unlimited |
 
-**Layout generation** (offline, hybrid): start from the classic border (row 0 and column 0 are clue cells; from L3 flip a few border cells to letters to force bent arrows); cut each row into runs sampled from the level's length histogram; then **simulated annealing** on the clue-cell set (moves: toggle interior cell, shift a clue cell along its row, swap two cells) with energy = 1000 × hard violations + soft deviation. Runs are assigned to `(clue cell, half)` by **min-cost bipartite assignment** (cost 0 for `A`/`D`, 1 for bent arrows). Survivors are deduplicated by canonical hash and stored as a **template library** per level and language (~40–100 each) with stats, curated in the admin; hand-made shapes (holiday silhouettes) drop in the same way. Dailies pick a template by seeded RNG, excluding those used in the last 14 days of that variant.
+**Layout generation** (offline, hybrid): start from the classic border (row 0 and column 0 are clue cells) with the cell next to the corner and 2–4 further border cells opened as letters, so the corner and every border clue cell point at a word (bent arrows `DA`/`AD`) and no square stays blank; cut each row into runs sampled from the level's length histogram; then **simulated annealing** on the clue-cell set (moves: toggle interior cell, shift a clue cell along its row, swap two cells) with energy = 1000 × hard violations + soft deviation. Runs are assigned to `(clue cell, half)` by **min-cost bipartite assignment** (cost 0 for `A`/`D`, 1 for bent arrows). Survivors are deduplicated by canonical hash and stored as a **template library** per level and language (~40–100 each) with stats, curated in the admin; hand-made shapes (holiday silhouettes) drop in the same way. Dailies pick a template by seeded RNG, excluding those used in the last 14 days of that variant.
 
 **Fill (CSP)**:
 ```
