@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import '../lang/language_profile.dart';
+import '../model/puzzle.dart';
 
 /// A word usable as an answer.
 class LexWord {
@@ -42,6 +43,9 @@ class LexWord {
 
   /// Clues attached by [Lexicon.attachClues].
   final List<LexClue> clues = [];
+
+  /// Picture available for this word (picture clues), attached by [Lexicon.attachImages].
+  ClueImage? image;
 
   /// Index into the dictionary (set by DictionaryIndex).
   int dictIndex = -1;
@@ -95,6 +99,31 @@ class Lexicon {
       wordById[c.wordId]?.clues.add(c);
     }
   }
+
+  /// Attaches pictures from `images.jsonl` records ({wordId, file, license,
+  /// credit, sourceUrl, width, height}). Returns how many words got a picture.
+  int attachImages(Iterable<String> imageLines) {
+    var n = 0;
+    for (final line in imageLines) {
+      if (line.trim().isEmpty) continue;
+      final j = jsonDecode(line) as Map<String, dynamic>;
+      final w = wordById[j['wordId'] as String];
+      if (w == null) continue;
+      w.image = ClueImage(
+        id: 'img_${w.id}',
+        src: j['file'] as String,
+        width: j['width'] as int?,
+        height: j['height'] as int?,
+        credit: (j['credit'] as String?)?.isEmpty ?? true ? null : j['credit'] as String,
+        license: j['license'] as String?,
+        sourceUrl: j['sourceUrl'] as String?,
+      );
+      n++;
+    }
+    return n;
+  }
+
+  int get imageCount => words.where((w) => w.image != null).length;
 
   /// Parses JSONL exports (one JSON object per line) produced by the content
   /// tools. Lines that are not valid for the language are skipped.

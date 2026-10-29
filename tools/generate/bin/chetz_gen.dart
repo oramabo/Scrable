@@ -18,6 +18,7 @@ Future<void> main(List<String> args) async {
     ..addCommand(ValidateCommand())
     ..addCommand(PreviewCommand())
     ..addCommand(GalleryCommand())
+    ..addCommand(TutorialCommand())
     ..addCommand(StatsCommand());
   try {
     await runner.run(args);
@@ -36,29 +37,34 @@ bool verboseFailures = false;
 /// Builds a puzzle, retrying with salted seeds when the first seed cannot be
 /// completed (rare: a template whose words have no usable clues). Returns null
 /// after [retries] failures so batch commands can continue.
-BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(String seed, {LevelConfig? fallback}) request, String seed,
+BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(String seed, {LevelConfig? fallback, bool relaxed}) request, String seed,
     {int retries = 3, LevelConfig? fallback, void Function(String)? log}) {
-  for (var attempt = 0; attempt <= retries; attempt++) {
-    final s = attempt == 0 ? seed : '$seed|retry$attempt';
+  BuildOutcome? tryBuild(String s, {LevelConfig? fb, bool relaxed = false, String label = ''}) {
     try {
-      return builder.build(request(s));
+      final out = builder.build(request(s, fallback: fb, relaxed: relaxed));
+      if (label.isNotEmpty) log?.call('  built $label');
+      return out;
     } on BuildFailure catch (e) {
-      log?.call('  attempt ${attempt + 1} failed: ${e.message}');
+      log?.call('  ${label.isEmpty ? 'attempt' : label} failed: ${e.message}');
       if (verboseFailures) log?.call(e.log.map((l) => '    $l').join('\n'));
+      return null;
     }
   }
+
+  for (var attempt = 0; attempt <= retries; attempt++) {
+    final out = tryBuild(attempt == 0 ? seed : '$seed|retry$attempt');
+    if (out != null) return out;
+  }
+  // Drop the "recently used words" exclusion before changing the geometry: a
+  // repeated word is a smaller compromise than an easier grid.
+  final relaxedOut = tryBuild('$seed|relaxed', relaxed: true, label: 'without the recent-word exclusion');
+  if (relaxedOut != null) return relaxedOut;
   if (fallback != null) {
     // Last resort: generate with the next-easier level's geometry/word bands
     // but keep the requested level and ids, so no day or pack slot stays empty.
     for (var attempt = 0; attempt < 2; attempt++) {
-      try {
-        final out = builder.build(request('$seed|fallback$attempt', fallback: fallback));
-        log?.call('  built with fallback config (level ${fallback.level} parameters)');
-        return out;
-      } on BuildFailure catch (e) {
-        log?.call('  fallback attempt ${attempt + 1} failed: ${e.message}');
-        if (verboseFailures) log?.call(e.log.map((l) => '    $l').join('\n'));
-      }
+      final out = tryBuild('$seed|fallback$attempt', fb: fallback, relaxed: true, label: 'with fallback config (level ${fallback.level} parameters)');
+      if (out != null) return out;
     }
   }
   return null;
@@ -131,6 +137,9 @@ class PackCommand extends _Base {
       ..addOption('pack', mandatory: true, help: 'Pack number within the level (1-based)')
       ..addOption('count', defaultsTo: '30')
       ..addOption('salt', defaultsTo: '', help: 'Extra seed salt to regenerate a pack differently')
+      ..addOption('pictures', defaultsTo: '0', help: 'Share of clues shown as pictures (0-1); needs content/<lang>/images')
+      ..addOption('title-he')
+      ..addOption('title-en')
       ..addFlag('force', help: 'Regenerate puzzles that already exist');
   }
 
@@ -147,8 +156,10 @@ class PackCommand extends _Base {
     final count = int.parse(argResults!['count'] as String);
     final salt = argResults!['salt'] as String;
     final force = argResults!['force'] as bool;
+    final pictures = double.parse(argResults!['pictures'] as String);
     final s = store;
     final lexicon = s.loadLexicon();
+    if (pictures > 0) log('${lexicon.imageCount} words have pictures');
     final builder = PuzzleBuilder(lexicon);
     final allTemplates = s.loadTemplates();
     final templates = allTemplates.where((t) => t.level == level).toList();
@@ -176,7 +187,7 @@ class PackCommand extends _Base {
       final shifted = _shiftDifficulty(cfg, ramp);
       final outcome = buildWithRetries(
         builder,
-        (seed, {LevelConfig? fallback}) => BuildRequest(
+        (seed, {LevelConfig? fallback, bool relaxed = false}) => BuildRequest(
           id: id,
           kind: PuzzleKind.pack,
           level: level,
@@ -184,8 +195,9 @@ class PackCommand extends _Base {
           templates: fallback == null ? templates : allTemplates,
           config: fallback ?? shifted,
           pack: PackRef(id: s.packId(level, pack), index: index),
-          excludeCanonical: usedWords,
+          excludeCanonical: relaxed ? const {} : usedWords,
           usedClueIds: usedClues,
+          pictureShare: pictures,
         ),
         Seeds.pack(lang: lang, level: level, pack: pack, index: index, salt: salt),
         fallback: level > 1 ? LevelConfig.forLanguage(lang, level - 1) : null,
@@ -206,14 +218,25 @@ class PackCommand extends _Base {
       s.writePuzzle(file, outcome.puzzle);
       log('${outcome.puzzle.id}: ${outcome.puzzle.words.length} words, score ${outcome.puzzle.difficulty.score} (${sw.elapsed.inSeconds}s)');
     }
+    final checksums = <String, String>{};
+    for (final id in ids) {
+      final index = int.parse(id.substring(id.lastIndexOf('-') + 1));
+      final f = s.packPuzzleFile(level, pack, index);
+      if (f.existsSync()) checksums[id] = s.readPuzzle(f).meta.checksum ?? '';
+    }
     final packJson = {
       'id': s.packId(level, pack),
       'lang': lang,
       'level': level,
       'index': pack,
-      'title': {'he': 'רמה $level · חבילה $pack', 'en': 'Level $level · Pack $pack'},
+      'title': {
+        'he': (argResults!['title-he'] as String?) ?? (pictures > 0 ? 'רמה $level · חבילת תמונות $pack' : 'רמה $level · חבילה $pack'),
+        'en': (argResults!['title-en'] as String?) ?? (pictures > 0 ? 'Level $level · Picture Pack $pack' : 'Level $level · Pack $pack'),
+      },
       'puzzleCount': ids.length,
       'puzzles': ids,
+      'checksums': checksums,
+      'pictures': pictures > 0,
       'free': pack == 1,
     };
     File(p.join(s.packDir(level, pack).path, 'pack.json')).writeAsStringSync(const JsonEncoder.withIndent('  ').convert(packJson));
@@ -258,6 +281,7 @@ class DailiesCommand extends _Base {
       ..addOption('days', defaultsTo: '90')
       ..addOption('secret', help: 'Daily seed secret (default: env DAILY_SEED_SECRET or a dev value)')
       ..addMultiOption('variant', defaultsTo: ['easy', 'hard'])
+      ..addOption('pictures', defaultsTo: '0', help: 'Share of clues shown as pictures (0-1)')
       ..addFlag('force');
   }
 
@@ -274,6 +298,7 @@ class DailiesCommand extends _Base {
     final secret = (argResults!['secret'] as String?) ?? Platform.environment['DAILY_SEED_SECRET'] ?? 'dev-daily-secret-change-me';
     final variants = argResults!['variant'] as List<String>;
     final force = argResults!['force'] as bool;
+    final pictures = double.parse(argResults!['pictures'] as String);
     final s = store;
     final lexicon = s.loadLexicon();
     final builder = PuzzleBuilder(lexicon);
@@ -290,7 +315,7 @@ class DailiesCommand extends _Base {
         final recent = s.recentDailyWords(date, variant, 30, lexicon.lang);
         final outcome = buildWithRetries(
           builder,
-          (seed, {LevelConfig? fallback}) => BuildRequest(
+          (seed, {LevelConfig? fallback, bool relaxed = false}) => BuildRequest(
             id: s.dailyId(date, variant),
             kind: PuzzleKind.daily,
             level: cfg.level,
@@ -299,7 +324,8 @@ class DailiesCommand extends _Base {
             config: fallback ?? cfg,
             daily: DailyInfo(date: date, variant: DailyVariant.fromCode(variant)),
             title: lang == 'he' ? (variant == 'easy' ? 'התשחץ היומי' : 'האתגר היומי') : (variant == 'easy' ? 'Daily Arrowword' : 'Daily Challenge'),
-            excludeCanonical: recent,
+            excludeCanonical: relaxed ? const {} : recent,
+            pictureShare: pictures,
           ),
           Seeds.daily(secret: secret, lang: lang, date: date, variant: variant),
           fallback: variant == 'hard' ? LevelConfig.forLanguage(lang, 4) : LevelConfig.forLanguage(lang, 1),
@@ -530,6 +556,84 @@ class GalleryCommand extends _Base {
   }
 
   static String _esc(String s) => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+}
+
+class TutorialCommand extends _Base {
+  TutorialCommand() {
+    argParser.addOption('count', defaultsTo: '2', help: 'Number of tutorial puzzles');
+  }
+
+  @override
+  String get name => 'tutorial';
+  @override
+  String get description => 'Generate small tutorial puzzles (5x6, easy words) into puzzles/tutorial/.';
+
+  @override
+  void run() {
+    verboseFailures = verbose;
+    final count = int.parse(argResults!['count'] as String);
+    final s = store;
+    final lexicon = s.loadLexicon(withImages: false);
+    final builder = PuzzleBuilder(lexicon);
+    final base = LevelConfig.forLanguage(lang, 1);
+    final cfg = LevelConfig(
+      level: 1, // clue level bands start at 1; the tutorial templates are passed explicitly so they never mix with level-1 packs
+      rows: 6,
+      cols: 5,
+      targetWords: 7,
+      maxWordLen: 4,
+      max2LetterShare: base.max2LetterShare,
+      maxWordDifficulty: 0.4,
+      meanDifficultyMin: 0.05,
+      meanDifficultyMax: 0.3,
+      minCheckedRatio: 0.6,
+      maxBentArrows: 0,
+      allowedArrows: LevelConfig.straight,
+      clueDifficultyMin: 0,
+      clueDifficultyMax: 0.5,
+      allowMultiword: false,
+      allowProper: false,
+      parSeconds: 120,
+      letterDensityTarget: 0.6,
+      scoreMin: 0,
+      scoreMax: 40,
+      lengthMid: lang == 'en' ? 3.6 : 3.0,
+    );
+    final gen = LayoutGenerator(cfg, iterations: 6000);
+    final templates = <LayoutTemplate>[];
+    for (var i = 0; templates.length < 6 && i < 20; i++) {
+      final t = gen.generate(SeededRandom.fromString('tutorial|$lang|$i'), id: '$lang-tutorial-t$i');
+      if (t != null) templates.add(t);
+    }
+    if (templates.isEmpty) throw UsageException('could not anneal a tutorial layout', usage);
+    final e = builder.eligibilityFor(cfg);
+    log('eligible words per length: ${[for (var len = 2; len <= cfg.maxWordLen; len++) '$len:${e.full[len]?.cardinality}/${e.half[len]?.cardinality}'].join(' ')}');
+    log('template runs: ${templates.first.assignments.map((a) => a.run.len).toList()}');
+    for (var n = 1; n <= count; n++) {
+      final outcome = buildWithRetries(
+        builder,
+        (seed, {LevelConfig? fallback, bool relaxed = false}) => BuildRequest(
+          id: '$lang-tutorial-${n.toString().padLeft(2, '0')}',
+          kind: PuzzleKind.tutorial,
+          level: 1,
+          seed: seed,
+          templates: templates,
+          config: cfg,
+          title: lang == 'he' ? 'תשחץ לימוד' : 'Tutorial',
+        ),
+        Seeds.pack(lang: lang, level: 0, pack: 0, index: n),
+        log: log,
+      );
+      if (outcome == null) {
+        stderr.writeln('FAILED tutorial $n');
+        exitCode = 1;
+        continue;
+      }
+      final file = File(p.join(s.tutorialDir, '${n.toString().padLeft(2, '0')}.json'));
+      s.writePuzzle(file, outcome.puzzle);
+      log('${outcome.puzzle.id}: ${outcome.puzzle.words.length} words, score ${outcome.puzzle.difficulty.score} -> ${file.path}');
+    }
+  }
 }
 
 class StatsCommand extends _Base {

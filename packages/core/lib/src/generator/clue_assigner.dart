@@ -1,4 +1,5 @@
 import '../model/geometry.dart';
+import '../model/puzzle.dart';
 import 'bitset.dart';
 import 'dictionary_index.dart';
 import 'fill.dart';
@@ -9,12 +10,15 @@ import 'rng.dart';
 
 /// A clue chosen for a slot, with its cell line breaks.
 class AssignedClue {
-  const AssignedClue({required this.clue, required this.text, required this.lines});
+  const AssignedClue({required this.clue, required this.text, required this.lines, this.image});
   final LexClue clue;
 
-  /// Text as shown (includes the multi-word suffix).
+  /// Text as shown (includes the multi-word suffix); for picture clues a short hint.
   final String text;
   final List<String> lines;
+
+  /// Picture clue (cell shows the image; [lines] is empty).
+  final ClueImage? image;
 }
 
 class ClueAssignment {
@@ -32,12 +36,20 @@ class ClueAssignment {
 /// Chooses clues for filled words and computes which words are eligible for
 /// which slot geometry.
 class ClueAssigner {
-  ClueAssigner(this.lexicon, this.fit, this.level, {this.recentDays = 120});
+  ClueAssigner(this.lexicon, this.fit, this.level, {this.recentDays = 120, this.pictureShare = 0.0});
 
   final Lexicon lexicon;
   final FitModel fit;
   final LevelConfig level;
   final int recentDays;
+
+  /// Share of full-cell clues that become picture clues when the word has an image.
+  final double pictureShare;
+
+  /// Hint text shown in the clue bar for a picture clue.
+  String pictureHint(LexWord w) => lexicon.lang.code == 'he'
+      ? (w.wordCount > 1 ? 'בתמונה ${lexicon.lang.multiWordSuffix(w.wordCount)}' : 'בתמונה')
+      : (w.wordCount > 1 ? 'pictured ${lexicon.lang.multiWordSuffix(w.wordCount)}' : 'pictured');
 
   static const Set<String> _usableStatus = {'approved', 'imported'};
 
@@ -90,9 +102,21 @@ class ClueAssigner {
     // Fewest usable clues first so scarce words get first pick.
     final order = List<int>.generate(slots.length, (i) => i)
       ..sort((a, b) => words[a].clues.length - words[b].clues.length);
+    var pictures = 0;
+    final maxPictures = (slots.length * pictureShare).round();
     for (final i in order) {
       final slot = slots[i];
       final word = words[i];
+      if (pictureShare > 0 && word.image != null && slot.slotPos == SlotPos.full && pictures < maxPictures && rng.nextDouble() < 0.85) {
+        // A picture clue still needs a textual clue record for ids/stats: use the easiest usable one.
+        final usable = word.clues.where(_clueUsable).toList()..sort((a, b) => a.difficulty.compareTo(b.difficulty));
+        if (usable.isNotEmpty) {
+          pictures++;
+          chosenIds.add(usable.first.id);
+          out[i] = AssignedClue(clue: usable.first, text: pictureHint(word), lines: const [], image: word.image);
+          continue;
+        }
+      }
       final candidates = <(LexClue, String, List<String>, double)>[];
       final reasons = <String, int>{};
       void reject(String why) => reasons[why] = (reasons[why] ?? 0) + 1;

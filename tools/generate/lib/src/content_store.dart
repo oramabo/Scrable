@@ -16,6 +16,8 @@ class ContentStore {
 
   String get wordsPath => p.join(langDir, 'lexicon', 'words.jsonl.gz');
   String get cluesPath => p.join(langDir, 'clues', 'clues.jsonl.gz');
+  String get imagesIndexPath => p.join(langDir, 'images', 'images.jsonl');
+  String get tutorialDir => p.join(puzzlesDir, 'tutorial');
   String get templatesDir => p.join(langDir, 'templates');
   String get puzzlesDir => p.join(langDir, 'puzzles');
   String get packsDir => p.join(puzzlesDir, 'packs');
@@ -35,9 +37,14 @@ class ContentStore {
     return '$lang-${h.substring(0, 10)}';
   }
 
-  Lexicon loadLexicon() {
+  Lexicon loadLexicon({bool withImages = true}) {
     final profile = Languages.byCode(lang);
-    return Lexicon.fromJsonl(profile, wordLines: readJsonlGz(wordsPath), clueLines: readJsonlGz(cluesPath), snapshotId: snapshotId());
+    final lexicon = Lexicon.fromJsonl(profile, wordLines: readJsonlGz(wordsPath), clueLines: readJsonlGz(cluesPath), snapshotId: snapshotId());
+    final images = File(imagesIndexPath);
+    if (withImages && images.existsSync()) {
+      lexicon.attachImages(const LineSplitter().convert(images.readAsStringSync()));
+    }
+    return lexicon;
   }
 
   File templateFile(int level) => File(p.join(templatesDir, 'L$level.json'));

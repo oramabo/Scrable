@@ -28,11 +28,13 @@ class DifficultyModel {
   const DifficultyModel({this.weights = const DifficultyWeights()});
   final DifficultyWeights weights;
 
-  PuzzleDifficulty score({required List<LexWord> words, required List<LexClue> clues, required LayoutStats layout}) {
+  PuzzleDifficulty score({required List<LexWord> words, required List<LexClue> clues, required LayoutStats layout, int pictureClues = 0}) {
     final diffs = words.map((w) => w.difficulty).toList()..sort();
     final mean = diffs.isEmpty ? 0.0 : diffs.reduce((a, b) => a + b) / diffs.length;
     final p90 = diffs.isEmpty ? 0.0 : diffs[((diffs.length - 1) * 0.9).round()];
-    final clueMean = clues.isEmpty ? 0.0 : clues.map((c) => c.difficulty).reduce((a, b) => a + b) / clues.length;
+    // picture clues read as easy clues (0.25) whatever the textual record behind them
+    final clueSum = clues.map((c) => c.difficulty).fold(0.0, (a, b) => a + b);
+    final clueMean = clues.isEmpty ? 0.0 : (clueSum - clueSum / clues.length * pictureClues + 0.25 * pictureClues) / clues.length;
     final avgLen = words.isEmpty ? 0.0 : words.map((w) => w.length).reduce((a, b) => a + b) / words.length;
     final proper = words.isEmpty ? 0.0 : words.where((w) => w.isProper).length / words.length;
     final multi = words.isEmpty ? 0.0 : words.where((w) => w.isMultiword).length / words.length;

@@ -56,7 +56,12 @@ class PuzzleValidator {
         if (slot.arrow != w.arrow) errors.add('word ${w.id}: slot arrow differs');
         if (w.clueId != null && !lexicon.clueById.containsKey(w.clueId)) errors.add('word ${w.id}: unknown clue ${w.clueId}');
         if (w.clueId != null && lexicon.clueById[w.clueId]?.wordId != w.lemmaId) errors.add('word ${w.id}: clue belongs to another word');
-        if (slot.lines.isEmpty || fit.breakLines(slot.text, slot.pos) == null) errors.add('word ${w.id}: clue does not fit the cell');
+        if (slot.image != null) {
+          if (slot.pos != SlotPos.full) errors.add('word ${w.id}: picture clues need a full cell');
+          if (slot.lines.isNotEmpty) errors.add('word ${w.id}: picture clue must not carry text lines');
+        } else if (slot.lines.isEmpty || fit.breakLines(slot.text, slot.pos) == null) {
+          errors.add('word ${w.id}: clue does not fit the cell');
+        }
       }
     }
     // Clue cells: 1–2 slots with the exit rule.

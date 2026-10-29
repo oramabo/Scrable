@@ -112,7 +112,7 @@ class Filler {
   /// Fills [tpl]. [forbid] maps slot index to dictionary indices that must not
   /// be used there (words whose clues failed to fit). [excludeCanonical]
   /// keeps recently used words out of the grid.
-  FillResult fill(LayoutTemplate tpl, SeededRandom rng, {Map<int, Set<int>> forbid = const {}, Set<String> excludeCanonical = const {}}) {
+  FillResult fill(LayoutTemplate tpl, SeededRandom rng, {Map<int, Set<int>> forbid = const {}, Set<String> excludeCanonical = const {}, double imageBonus = 0.0}) {
     final slots = buildSlots(tpl);
     final cellCount = tpl.shape.cellCount;
     final grid = List<int>.filled(cellCount, -1);
@@ -190,6 +190,7 @@ class Filler {
       for (final w in sample) {
         final word = words[w];
         var score = -config.weightDifficulty * (word.difficulty - target).abs() + config.jitter * r.nextDouble();
+        if (imageBonus > 0 && word.image != null && s.slotPos == SlotPos.full) score += imageBonus;
         for (final x in s.crossings) {
           if (grid[x.cell] >= 0) continue;
           final other = slots[x.other];

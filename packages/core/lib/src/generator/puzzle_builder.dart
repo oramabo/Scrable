@@ -28,6 +28,7 @@ class BuildRequest {
     this.excludeCanonical = const {},
     this.usedClueIds = const {},
     this.maxTemplates = 12,
+    this.pictureShare = 0.0,
   });
 
   final String id;
@@ -48,6 +49,9 @@ class BuildRequest {
   final Set<String> excludeCanonical;
   final Set<String> usedClueIds;
   final int maxTemplates;
+
+  /// Share of clues rendered as pictures (words need an attached image).
+  final double pictureShare;
 }
 
 class BuildFailure implements Exception {
@@ -80,10 +84,10 @@ class PuzzleBuilder {
   final FillConfig fillConfig;
   final DictionaryIndex dict;
 
-  final Map<int, Eligibility> _eligibility = {};
+  final Map<String, Eligibility> _eligibility = {};
 
-  Eligibility eligibilityFor(LevelConfig cfg) =>
-      _eligibility.putIfAbsent(cfg.level, () => ClueAssigner(lexicon, fit, cfg).eligibility(dict));
+  Eligibility eligibilityFor(LevelConfig cfg) => _eligibility.putIfAbsent(
+      '${cfg.level}|${cfg.maxWordDifficulty}|${cfg.allowMultiword}|${cfg.allowProper}', () => ClueAssigner(lexicon, fit, cfg).eligibility(dict));
 
   BuildOutcome build(BuildRequest req) {
     final cfg = req.config ?? LevelConfig.forLanguage(lexicon.lang.code, req.level);
@@ -94,7 +98,7 @@ class PuzzleBuilder {
     rng.shuffle(templates);
     final eligibility = eligibilityFor(cfg);
     final filler = Filler(dict, cfg, eligibility, config: fillConfig);
-    final assigner = ClueAssigner(lexicon, fit, cfg);
+    final assigner = ClueAssigner(lexicon, fit, cfg, pictureShare: req.pictureShare);
     final validator = PuzzleValidator(lexicon, fit);
 
     BuildOutcome? best;
@@ -105,7 +109,7 @@ class PuzzleBuilder {
       final forbid = <int, Set<int>>{};
       for (var round = 0; round < 6; round++) {
         final fillRng = rng.fork('tpl${tpl.id}-round$round');
-        final fill = filler.fill(tpl, fillRng, forbid: forbid, excludeCanonical: req.excludeCanonical);
+        final fill = filler.fill(tpl, fillRng, forbid: forbid, excludeCanonical: req.excludeCanonical, imageBonus: req.pictureShare > 0 ? 1.5 : 0.0);
         if (!fill.ok) {
           log.add('template ${tpl.id}: fill failed (${fill.failure})');
           break;
@@ -184,7 +188,7 @@ class PuzzleBuilder {
         wordCount: word.wordCount,
         difficulty: word.difficulty,
       ));
-      slotsByCell.putIfAbsent(a.clueCell, () => []).add(ClueSlot(pos: a.slot, wordId: ids[i], arrow: a.arrow, text: clue.text, lines: clue.lines));
+      slotsByCell.putIfAbsent(a.clueCell, () => []).add(ClueSlot(pos: a.slot, wordId: ids[i], arrow: a.arrow, text: clue.text, lines: clue.lines, image: clue.image));
     }
     final clueCells = <ClueCell>[];
     final cellIndices = slotsByCell.keys.toList()..sort();
@@ -193,7 +197,8 @@ class PuzzleBuilder {
       clueCells.add(ClueCell(pos: shape.pos(c), slots: slots));
     }
     final lexClues = [for (final c in clues) c.clue];
-    final diff = difficulty.score(words: words, clues: lexClues, layout: tpl.stats);
+    final pictureCount = clues.where((c) => c.image != null).length;
+    final diff = difficulty.score(words: words, clues: lexClues, layout: tpl.stats, pictureClues: pictureCount);
     final puzzle = Puzzle(
       id: req.id,
       lang: lexicon.lang.code,

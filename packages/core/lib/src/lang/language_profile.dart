@@ -40,6 +40,14 @@ abstract class LanguageProfile {
   /// Whether [symbol] is a variant (e.g. a geresh letter) of another symbol.
   bool isVariantSymbol(int symbol) => baseSymbol(symbol) != symbol;
 
+  /// The variant symbol of a base letter (ג → ג׳), or `null` when none exists.
+  int? variantOf(int base) {
+    for (var s = 0; s < alphabetSize; s++) {
+      if (s != base && baseSymbol(s) == base) return s;
+    }
+    return null;
+  }
+
   /// Normalises free text into grid symbols. Returns `null` when the text
   /// contains characters that cannot live in a grid of this language.
   List<int>? normalize(String text);

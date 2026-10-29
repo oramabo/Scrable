@@ -43,6 +43,12 @@ class SvgPreview {
         final height = s.pos == SlotPos.full ? cell : cell / 2;
         final fontSize = s.pos == SlotPos.full ? cell * 0.17 : cell * 0.15;
         final lineH = fontSize * 1.15;
+        if (s.image != null) {
+          buf.writeln('<rect x="${cx + 3}" y="${top + 3}" width="${cell - 6}" height="${height - 6}" fill="#cfd8dc" stroke="#90a4ae"/>');
+          buf.writeln('<text x="${cx + cell / 2}" y="${top + height / 2 + fontSize / 2}" text-anchor="middle" font-size="${fontSize * 1.1}" fill="#37474f">${_esc(s.text)}</text>');
+          buf.writeln(_arrow(s.arrow, cx, top, height, rtl));
+          continue;
+        }
         final startY = top + (height - s.lines.length * lineH) / 2 + fontSize;
         for (var k = 0; k < s.lines.length; k++) {
           buf.writeln('<text x="${cx + cell / 2}" y="${startY + k * lineH}" text-anchor="middle" font-size="$fontSize" direction="${rtl ? 'rtl' : 'ltr'}" fill="#222">${_esc(s.lines[k])}</text>');
