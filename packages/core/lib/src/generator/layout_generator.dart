@@ -67,7 +67,10 @@ class LayoutGenerator {
         }
       }
     }
-    // Flip a few border cells to letters to force bent arrows on higher levels.
+    // The corner clue cell can only serve a word that starts on the border, so
+    // open the cell next to it; then flip a few more border cells to letters so
+    // bent arrows appear and no border square stays blank.
+    kinds[1] = CellKind.letter;
     for (var k = 0; k < config.borderLetters; k++) {
       if (rng.nextBool()) {
         final c = 2 + rng.nextInt(math.max(1, cols - 3));

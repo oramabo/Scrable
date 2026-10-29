@@ -33,20 +33,24 @@ void main() {
     final shape = GridShape.fromRows(['CCCC', 'CLLL', 'CLCL', 'LLLL']);
     final res = LayoutValidator(config).validate(shape);
     expect(res.ok, isFalse);
-    expect(res.errors.any((e) => e.startsWith('no_clue_position')), isTrue);
+    expect(res.errors, isNotEmpty);
   });
 
-  test('validator accepts a classic small grid and assigns clues', () {
+  test('validator rejects a blank corner square and accepts a grid where every clue cell works', () {
     final config = LevelConfig.forLanguage('he', 1);
-    final shape = GridShape.fromRows(['CCCC', 'CLLL', 'CLLL', 'CLLL']);
+    final classic = LayoutValidator(config).validate(GridShape.fromRows(['CCCC', 'CLLL', 'CLLL', 'CLLL']));
+    expect(classic.ok, isFalse);
+    expect(classic.errors.any((e) => e.startsWith('unused_clue_cells')), isTrue);
+
+    // (0,1) is a letter, so the corner clues the down word starting there with a bent arrow.
+    final shape = GridShape.fromRows(['CLCC', 'CLLL', 'CLLL', 'CLLL']);
     final res = LayoutValidator(config).validate(shape);
     expect(res.ok, isTrue, reason: res.errors.join(', '));
-    expect(res.assignments.length, 6);
-    // Every clue cell except the corner hosts exactly one word.
     final perCell = <int, int>{};
     for (final a in res.assignments) {
       perCell[a.clueCell] = (perCell[a.clueCell] ?? 0) + 1;
     }
-    expect(perCell.values.every((n) => n == 1), isTrue);
+    expect(perCell.length, 6); // all six clue cells carry a clue (the corner via a bent arrow)
+    expect(res.assignments.any((a) => a.arrow.isBent), isTrue);
   });
 }

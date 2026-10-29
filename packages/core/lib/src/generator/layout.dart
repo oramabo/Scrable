@@ -229,17 +229,11 @@ class LayoutValidator {
     for (final a in assignments) {
       perCell[a.clueCell] = (perCell[a.clueCell] ?? 0) + 1;
     }
+    // Every clue cell must carry at least one clue: a real arrowword has no blank squares.
     final unusedClueCells = clueCells.where((c) => !perCell.containsKey(c)).length;
-    // Border cells (row 0 / column 0) may stay unused; interior clue cells must work.
-    var unusedInterior = 0;
-    for (final c in clueCells) {
-      if (perCell.containsKey(c)) continue;
-      final p = shape.pos(c);
-      if (p.r > 0 && p.c > 0) unusedInterior++;
-    }
-    if (unusedInterior > 0) {
-      hard += unusedInterior * 0.5;
-      errors.add('unused_clue_cells $unusedInterior');
+    if (unusedClueCells > 0) {
+      hard += unusedClueCells;
+      errors.add('unused_clue_cells $unusedClueCells');
     }
 
     // Connectivity of the word graph.
@@ -330,7 +324,6 @@ class LayoutValidator {
     soft += (checkedRatio < config.minCheckedRatio + 0.08 ? (config.minCheckedRatio + 0.08 - checkedRatio) * 15 : 0);
     soft += stats.splitCells * 0.05; // a few split cells are fine, many are busy
     soft += bent * 0.3;
-    soft += unusedClueCells * 0.4;
     // prefer a spread of lengths: penalise when a single length dominates
     final maxShare = lenHist.values.fold<int>(0, (m, v) => v > m ? v : m) / runs.length;
     soft += maxShare > 0.45 ? (maxShare - 0.45) * 20 : 0;
