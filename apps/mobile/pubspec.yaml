@@ -1,0 +1,105 @@
+name: chetz_app
+description: "Chetz (חץ) — Hebrew + English arrowword puzzles."
+publish_to: 'none'
+
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.7
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Shared engine (puzzle model, codec, navigator, checker, language profiles).
+  chetz_core:
+    path: ../../packages/core
+
+  # State, routing, storage.
+  flutter_riverpod: ^3.4.3
+  go_router: ^18.1.1
+  path_provider: ^2.1.6
+  http: ^1.6.0
+  intl: ^0.20.3
+  collection: ^1.19.1
+  crypto: ^3.0.8
+  share_plus: ^13.3.1
+  cupertino_icons: ^1.0.8
+
+  # Monetisation + cloud. All wrapped behind interfaces and disabled by default
+  # (see lib/core/config/app_config.dart).
+  google_mobile_ads: ^9.2.0
+  purchases_flutter: ^11.0.0
+  firebase_core: ^5.1.0
+  firebase_auth: ^7.0.1
+  cloud_firestore: ^7.1.0
+  cloud_functions: ^7.0.1
+  firebase_remote_config: ^7.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
+
+  assets:
+    - assets/fonts/OFL-Inter.txt
+    - assets/fonts/OFL-NotoSansHebrew.txt
+    # Bundled puzzle content. Regenerate with tools/sync_assets.sh; every
+    # directory it creates must be listed here (Flutter does not recurse).
+    - assets/puzzles/he/
+    - assets/puzzles/he/manifests/
+    - assets/puzzles/he/daily/easy/
+    - assets/puzzles/he/daily/hard/
+    - assets/puzzles/he/packs/he-l1-p01/
+    - assets/puzzles/he/packs/he-l1-p02/
+    - assets/puzzles/he/packs/he-l1-p03/
+    - assets/puzzles/he/packs/he-l2-p01/
+    - assets/puzzles/he/packs/he-l2-p02/
+    - assets/puzzles/he/packs/he-l2-p03/
+    - assets/puzzles/he/packs/he-l3-p01/
+    - assets/puzzles/he/packs/he-l3-p02/
+    - assets/puzzles/he/packs/he-l3-p03/
+    - assets/puzzles/he/packs/he-l4-p01/
+    - assets/puzzles/he/packs/he-l4-p02/
+    - assets/puzzles/he/packs/he-l5-p01/
+    - assets/puzzles/he/packs/he-l5-p02/
+    # English content (packs/dailies/manifests; pack 1 of level 1 bundled).
+    - assets/puzzles/en/
+    - assets/puzzles/en/manifests/
+    - assets/puzzles/en/daily/easy/
+    - assets/puzzles/en/daily/hard/
+    - assets/puzzles/en/packs/en-l1-p01/
+    - assets/puzzles/en/packs/en-l1-p02/
+    - assets/puzzles/en/packs/en-l2-p01/
+    - assets/puzzles/en/packs/en-l2-p02/
+    - assets/puzzles/en/packs/en-l3-p01/
+    - assets/puzzles/en/packs/en-l4-p01/
+    - assets/puzzles/en/packs/en-l5-p01/
+
+  fonts:
+    - family: NotoSansHebrew
+      fonts:
+        - asset: assets/fonts/NotoSansHebrew-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/NotoSansHebrew-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/NotoSansHebrew-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/NotoSansHebrew-Bold.ttf
+          weight: 700
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
