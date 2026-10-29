@@ -2,7 +2,7 @@
 """Build large per-language word banks (2–16 letters) from free sources.
 
 Hebrew: Mordo answers (content/he/lexicon), Hebrew Wiktionary titles, Hebrew Wikipedia single-word titles.
-English: ENABLE, WordNet lemmas, English Wiktionary single-word titles (lower-case, a–z).
+English: ENABLE, WordNet lemmas (English Wiktionary titles were tried and rejected: they mix in every Latin-script language).
 
 Output: OUT/wordbank/words-<len>.txt (one normalised word per line, sorted, deduplicated),
         OUT/wordbank/bank.jsonl.gz ({word, length, sources[]}), OUT/wordbank/stats.json.
