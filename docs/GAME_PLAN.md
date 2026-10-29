@@ -11,6 +11,10 @@ You want to build and sell a **תשחץ** (arrowword / Swedish-style crossword: 
 
 The repository `/home/user/Scrable` is empty, so this plan defines the product, the content pipeline, the puzzle generator, the architecture, the monetisation and the delivery roadmap from scratch. You chose **plan only for now**; §12 lists the first build steps for when you say go.
 
+## Execution status
+
+Built and pushed on branch `docs/game-plan` (PR #1): core engine + generator (45 tests), content CLI, Hebrew and English content (≈1,000 validated puzzles, tutorials, word banks, on-device lexicons, Commons pictures), Firebase backend incl. multiplayer (68 tests, rules smoke-tested on the emulator), JSON schema contract, CI, Flutter app (round 2: 114 tests, debug APK, screenshot tests). In progress: app round 3 (versus/co-op screens, random-puzzle mode, season pass and XP screens, notifications, fixes from the screenshot review) and picture packs once enough images are fetched. Manual production steps (accounts, keys, store listings, legal review of imported clues) are in docs/SETUP.md.
+
 ### What the research found (and how it shaped the plan)
 - **Hebrew competitors**: "התשחץ שלי" (PineApps) is the incumbent: ~1,000 puzzles, daily + leaderboard, head-to-head, 4.6★ from ~12k ratings. Prices: gold subscription ₪9.90/mo · ₪19.90/qtr · ₪59.90/yr; coins 100/₪4.90 → 3000/₪39.90; remove ads ₪24.90; challenge pack ₪24.90. Top complaints: **heavy ads, battery drain, dated UI**. "תשחץ יומי" (KitApp, Oct 2026) is new (3.4★), bundles mini word games, has a "newspaper mode" (no auto-check) and VoiceOver support. Neither has generated dailies at two levels, a modern UX, or serious accessibility.
 - **English competitors**: the mobile arrowword niche is a handful of paid or dated apps (Crosswords Plus, PuzzleLife, "Crossword Daily - Arrow Word") and one multi-language free-to-play title; generic crossword apps are giants. "Arrowword" is the searchable term.
