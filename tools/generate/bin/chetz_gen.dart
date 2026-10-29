@@ -19,6 +19,7 @@ Future<void> main(List<String> args) async {
     ..addCommand(PreviewCommand())
     ..addCommand(GalleryCommand())
     ..addCommand(TutorialCommand())
+    ..addCommand(ExportDeviceCommand())
     ..addCommand(StatsCommand());
   try {
     await runner.run(args);
@@ -633,6 +634,40 @@ class TutorialCommand extends _Base {
       s.writePuzzle(file, outcome.puzzle);
       log('${outcome.puzzle.id}: ${outcome.puzzle.words.length} words, score ${outcome.puzzle.difficulty.score} -> ${file.path}');
     }
+  }
+}
+
+class ExportDeviceCommand extends _Base {
+  ExportDeviceCommand() {
+    argParser
+      ..addOption('max-words', defaultsTo: '30000')
+      ..addOption('clues-per-word', defaultsTo: '2');
+  }
+
+  @override
+  String get name => 'export-device';
+  @override
+  String get description => 'Write the compact on-device lexicon + templates (content/<lang>/device/) used by the random-puzzle mode.';
+
+  @override
+  void run() {
+    final s = store;
+    final lexicon = s.loadLexicon(withImages: false);
+    final fit = FitModel(lexicon.lang);
+    final export = lexicon.exportDevice(
+      fits: (text, half) => fit.fits(text, half ? SlotPos.top : SlotPos.full),
+      maxWords: int.parse(argResults!['max-words'] as String),
+      cluesPerWord: int.parse(argResults!['clues-per-word'] as String),
+    );
+    final dir = Directory(p.join(s.langDir, 'device'))..createSync(recursive: true);
+    final lexFile = File(p.join(dir.path, 'lexicon.json.gz'));
+    lexFile.writeAsBytesSync(gzip.encode(utf8.encode(jsonEncode(export))));
+    final templates = s.loadTemplates();
+    final tplFile = File(p.join(dir.path, 'templates.json.gz'));
+    tplFile.writeAsBytesSync(gzip.encode(utf8.encode(jsonEncode(templates.map((t) => t.toJson()).toList()))));
+    // round-trip check
+    final back = Lexicon.fromDevice(lexicon.lang, jsonDecode(utf8.decode(gzip.decode(lexFile.readAsBytesSync()))) as Map<String, dynamic>);
+    log('device lexicon: ${back.words.length} words, ${back.clues.length} clues, ${(lexFile.lengthSync() / 1024).round()} KB; templates: ${templates.length}, ${(tplFile.lengthSync() / 1024).round()} KB -> ${dir.path}');
   }
 }
 

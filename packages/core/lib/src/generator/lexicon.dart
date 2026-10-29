@@ -62,6 +62,8 @@ class LexClue {
     this.maxLevel = 6,
     this.status = 'approved',
     this.lastDailyUse = const {},
+    this.fitsFull,
+    this.fitsHalf,
   });
 
   final String id;
@@ -72,6 +74,10 @@ class LexClue {
   final int minLevel;
   final int maxLevel;
   final String status;
+
+  /// Precomputed cell-fit flags (device exports); `null` = compute with the fit model.
+  final bool? fitsFull;
+  final bool? fitsHalf;
 
   /// variant -> ISO date of last use in a daily puzzle.
   final Map<String, String> lastDailyUse;
@@ -124,6 +130,84 @@ class Lexicon {
   }
 
   int get imageCount => words.where((w) => w.image != null).length;
+
+  /// Compact single-document export for on-device generation: a stratified
+  /// subset of words with at most [cluesPerWord] fitting clues each and
+  /// precomputed fit flags, so the app can build puzzles without the full
+  /// content pipeline. Returns the JSON map (encode + gzip in the caller).
+  Map<String, dynamic> exportDevice({required bool Function(String text, bool half) fits, int maxWords = 30000, int cluesPerWord = 2}) {
+    final usable = <LexWord>[];
+    for (final w in words) {
+      if (w.blocked || w.status == 'retired' || w.length > 12) continue;
+      final good = w.clues.where((c) => c.status == 'approved' || c.status == 'imported').where((c) => fits(c.text, false) || fits(c.text, true)).toList();
+      if (good.isEmpty) continue;
+      usable.add(w);
+    }
+    // Stratify: keep every short word, then the most-clued words of each length.
+    usable.sort((a, b) => b.clues.length - a.clues.length);
+    final chosen = <LexWord>[];
+    final perLen = <int, int>{};
+    final quota = (maxWords / 9).ceil(); // lengths 2..10 share the budget; longer words take what is left
+    for (final w in usable) {
+      final n = perLen[w.length] ?? 0;
+      if (w.length <= 4 || n < quota) {
+        chosen.add(w);
+        perLen[w.length] = n + 1;
+      }
+      if (chosen.length >= maxWords) break;
+    }
+    final wordsJson = <List<dynamic>>[];
+    for (final w in chosen) {
+      final clues = w.clues.where((c) => c.status == 'approved' || c.status == 'imported').toList()
+        ..sort((a, b) => a.text.length - b.text.length);
+      final picked = <List<dynamic>>[];
+      for (final c in clues) {
+        final full = fits(c.text, false), half = fits(c.text, true);
+        if (!full && !half) continue;
+        picked.add([c.id, c.text, (c.difficulty * 100).round(), full, half]);
+        if (picked.length >= cluesPerWord) break;
+      }
+      if (picked.isEmpty) continue;
+      wordsJson.add([
+        w.id,
+        w.display,
+        (w.difficulty * 100).round(),
+        w.wordCount,
+        (w.isProper ? 1 : 0) | (w.isMultiword ? 2 : 0),
+        picked,
+      ]);
+    }
+    return {'v': 1, 'lang': lang.code, 'snapshot': snapshotId, 'words': wordsJson};
+  }
+
+  /// Inverse of [exportDevice].
+  static Lexicon fromDevice(LanguageProfile lang, Map<String, dynamic> j) {
+    final words = <LexWord>[];
+    final clues = <LexClue>[];
+    for (final row in (j['words'] as List).cast<List>()) {
+      final id = row[0] as String;
+      final display = row[1] as String;
+      final symbols = lang.normalize(display);
+      if (symbols == null) continue;
+      final flags = row[4] as int;
+      words.add(LexWord(
+        id: id,
+        display: display,
+        canonical: lang.canonicalKey(symbols),
+        symbols: symbols,
+        difficulty: (row[2] as int) / 100,
+        wordCount: row[3] as int,
+        isProper: flags & 1 != 0,
+        isMultiword: flags & 2 != 0,
+        hasVariant: symbols.any(lang.isVariantSymbol),
+        status: 'approved',
+      ));
+      for (final c in (row[5] as List).cast<List>()) {
+        clues.add(LexClue(id: c[0] as String, wordId: id, text: c[1] as String, difficulty: (c[2] as int) / 100, fitsFull: c[3] as bool, fitsHalf: c[4] as bool));
+      }
+    }
+    return Lexicon(lang, words: words, clues: clues, snapshotId: (j['snapshot'] as String?) ?? 'device');
+  }
 
   /// Parses JSONL exports (one JSON object per line) produced by the content
   /// tools. Lines that are not valid for the language are skipped.

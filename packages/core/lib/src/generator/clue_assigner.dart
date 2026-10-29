@@ -76,9 +76,14 @@ class ClueAssigner {
         var fitsFull = false, fitsHalf = false;
         for (final c in w.clues) {
           if (!_clueUsable(c)) continue;
-          final text = displayText(w, c);
-          if (!fitsFull && fit.fits(text, SlotPos.full)) fitsFull = true;
-          if (!fitsHalf && fit.fits(text, SlotPos.top)) fitsHalf = true;
+          if (c.fitsFull != null && c.fitsHalf != null && w.wordCount == 1) {
+            fitsFull = fitsFull || c.fitsFull!;
+            fitsHalf = fitsHalf || c.fitsHalf!;
+          } else {
+            final text = displayText(w, c);
+            if (!fitsFull && fit.fits(text, SlotPos.full)) fitsFull = true;
+            if (!fitsHalf && fit.fits(text, SlotPos.top)) fitsHalf = true;
+          }
           if (fitsFull && fitsHalf) break;
         }
         if (fitsFull) f.set(i);

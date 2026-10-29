@@ -146,6 +146,16 @@ New players get 5 free hints; confirmations have a "don't ask again" option.
 **Phase 2**: Premium + archive, leaderboards, achievements, share card, themes/skins (coins), XP/ranks, vocabulary book, L4–L5 packs, themed packs, push notifications, referral (invite → both get coins), Remote Config LiveOps (events, double-coin weekends), tablet layout, **English puzzle content** (packs L1–L3 + both English dailies) and the global store launch.
 **Phase 3**: co-op solving (two phones, one grid), head-to-head duel, weekend giant, kids picture-תשחץ (icons as clues), seasonal pass, UGC puzzle editor with moderation, **bilingual puzzles** (English clues → Hebrew answers and the reverse, for learners), home-screen widgets, endless on-device "אימון" mode (computer-generated, unranked), English L4–L6 packs.
 
+
+### 3.7 Added scope (requested after the first build)
+- **Versus mode**: two players race on the same puzzle; invite by 6-character code or random matchmaking (same language and level); only progress % is shared live; the server timestamps start and finish, rejects implausible times, awards **trophies** (Elo-flavoured +10…+50 / −5…−25), coins, season points and XP; trophy leaderboard per language with leagues (עץ → אגדה).
+- **Co-op mode**: up to 4 players solve one grid together in real time (shared cells with per-player colours and cursors, room code to join); completion rewards every member.
+- **Free season pass**: 6-week seasons from 2026-11-02, 30 tiers × 100 points; points from battle wins/losses, dailies, missions and perfect puzzles; every tier pays coins, milestone tiers add a badge. No purchase.
+- **XP and levels**: XP from puzzles (by level, bonuses for perfect/under-par/daily), battle results, co-op and missions; level curve `100·(n−1)^1.5`; rank titles טירון → מאסטר.
+- **Random puzzle mode**: the generator runs on the device from a compact lexicon export (≈30k words, 2 clues each, precomputed cell-fit flags, 1.3 MB gz per language) and the template library; the player picks a level and gets a fresh, unranked puzzle in well under a second (measured: 0.3–0.8 s on a laptop, in an isolate on device).
+- **Word bank**: 2–16-letter lists per language from the clue dictionary, Wiktionary/Wikipedia titles (Hebrew) and ENABLE + WordNet + Wiktionary (English); words without clues are reference material for clue writing and validation, not yet answers.
+- **Profiles and themes**, **A→Z cycler**, **32 achievements**, **daily/weekly missions**, **picture clues** (Wikimedia Commons photos with licence credits).
+
 ---
 
 ## 4. Economy & monetisation
