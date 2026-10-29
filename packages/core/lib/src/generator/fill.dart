@@ -112,7 +112,10 @@ class Filler {
   /// Fills [tpl]. [forbid] maps slot index to dictionary indices that must not
   /// be used there (words whose clues failed to fit). [excludeCanonical]
   /// keeps recently used words out of the grid.
-  FillResult fill(LayoutTemplate tpl, SeededRandom rng, {Map<int, Set<int>> forbid = const {}, Set<String> excludeCanonical = const {}, double imageBonus = 0.0}) {
+  /// [imageBonus] favours words with pictures and [pictureTarget] is how many
+  /// picture words the search tries to seed before the regular MRV order (the
+  /// target shrinks on every restart so a picture-heavy start never blocks a fill).
+  FillResult fill(LayoutTemplate tpl, SeededRandom rng, {Map<int, Set<int>> forbid = const {}, Set<String> excludeCanonical = const {}, double imageBonus = 0.0, int pictureTarget = 0}) {
     final slots = buildSlots(tpl);
     final cellCount = tpl.shape.cellCount;
     final grid = List<int>.filled(cellCount, -1);
@@ -129,6 +132,19 @@ class Filler {
     }
     final domainCache = List<Bitset?>.filled(slots.length, null);
     final dirty = List<bool>.filled(slots.length, true);
+    // Picture packs: which words carry an image, per length bucket.
+    final imageByLen = <int, Bitset>{};
+    if (imageBonus > 0 && pictureTarget > 0) {
+      for (final entry in dict.byLen.entries) {
+        final b = Bitset(entry.value.length);
+        for (var i = 0; i < entry.value.length; i++) {
+          if (entry.value[i].image != null) b.set(i);
+        }
+        imageByLen[entry.key] = b;
+      }
+    }
+    var picturesPlaced = 0;
+    var pictureGoal = pictureTarget;
     var nodes = 0;
     var placed = 0;
     var runningSum = 0.0;
@@ -161,6 +177,23 @@ class Filler {
 
     Slot? pickSlot() {
       Slot? best;
+      if (picturesPlaced < pictureGoal) {
+        // Seed pictures while the grid is still open: take the longest full-cell
+        // slot whose domain still contains an image word.
+        var bestImages = 0;
+        for (final s in slots) {
+          if (assigned[s.idx] >= 0 || s.slotPos != SlotPos.full || s.len < 4) continue;
+          final mask = imageByLen[s.len];
+          if (mask == null) continue;
+          final n = domain(s).and(mask).cardinality;
+          if (n == 0) continue;
+          if (best == null || s.len > best.len || (s.len == best.len && n > bestImages)) {
+            best = s;
+            bestImages = n;
+          }
+        }
+        if (best != null) return best;
+      }
       var bestSize = 1 << 30;
       for (final s in slots) {
         if (assigned[s.idx] >= 0) continue;
@@ -177,15 +210,22 @@ class Filler {
     List<int> rank(Slot s, Bitset dom, SeededRandom r) {
       final all = dom.toList();
       List<int> sample = all;
+      final words = dict.byLen[s.len]!;
       if (all.length > config.sampleLimit) {
         // reservoir-free sampling: shuffle a copy of indices and take the prefix
         final idx = List<int>.generate(all.length, (i) => i);
         r.shuffle(idx);
         sample = [for (var i = 0; i < config.sampleLimit; i++) all[idx[i]]];
+        if (imageBonus > 0 && s.slotPos == SlotPos.full) {
+          // Picture packs: the few words with images must always be among the candidates.
+          final seen = sample.toSet();
+          for (final w in all) {
+            if (words[w].image != null && seen.add(w)) sample.add(w);
+          }
+        }
       }
       final runningMean = placed == 0 ? target0 : runningSum / placed;
       final target = (target0 + config.steer * (target0 - runningMean)).clamp(0.0, 1.0);
-      final words = dict.byLen[s.len]!;
       final scored = <(int, double)>[];
       for (final w in sample) {
         final word = words[w];
@@ -216,6 +256,7 @@ class Filler {
       usedByLen[s.len]!.set(w);
       // the same canonical word may exist under another id/length-bucket only if lengths differ, which cannot clash
       runningSum += word.difficulty;
+      if (word.image != null && s.slotPos == SlotPos.full) picturesPlaced++;
       placed++;
       markDirty(s);
       return changed;
@@ -227,7 +268,9 @@ class Filler {
       }
       assigned[s.idx] = -1;
       usedByLen[s.len]!.clear(w);
-      runningSum -= dict.byLen[s.len]![w].difficulty;
+      final word = dict.byLen[s.len]![w];
+      runningSum -= word.difficulty;
+      if (word.image != null && s.slotPos == SlotPos.full) picturesPlaced--;
       placed--;
       markDirty(s);
     }
@@ -286,6 +329,8 @@ class Filler {
       }
       placed = 0;
       runningSum = 0;
+      picturesPlaced = 0;
+      pictureGoal = math.max(0, pictureTarget - attempt);
       try {
         if (search(r)) {
           return FillResult(

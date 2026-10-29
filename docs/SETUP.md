@@ -55,7 +55,9 @@ photos from Wikimedia Commons**, found through Wikidata:
 ```
 python3 -I tools/content/fetch_images.py --lang he --words content/he/lexicon/words.jsonl.gz --out content/he --only-proper --limit 500
 python3 -I tools/content/fetch_images.py --lang en --words content/en/lexicon/words.jsonl.gz --out content/en --limit 500
-dart run tools/generate/bin/chetz_gen.dart --content content pack --lang he --level 2 --pack 4 --pictures 0.3 --title-he "חבילת תמונות" --title-en "Picture Pack"
+dart run tools/generate/bin/chetz_gen.dart --content content pack --lang he --level 3 --pack 4 --pictures 0.3 --title-he "חבילת תמונות" --title-en "Picture Pack"
+# Level 3 or higher: most pictured subjects are proper nouns and multi-word names, which levels 1–2 exclude.
+# The filler seeds up to two picture words per puzzle before the normal fill, so a 30-puzzle pack needs ≥ 60 pictured words.
 ```
 Only PD / CC0 / CC BY / CC BY-SA files are kept; credit, licence and source URL travel with each puzzle and are
 shown in the app's image-credits screen (CC BY-SA requires that attribution). Run the fetcher from a normal

@@ -74,6 +74,9 @@ class ClueAssigner {
         if (w.isMultiword && !level.allowMultiword) continue;
         if (w.isProper && !level.allowProper) continue;
         var fitsFull = false, fitsHalf = false;
+        // In a picture pack the image is the clue, so a word with an image only
+        // needs some usable clue record (for ids/stats), not one that fits the cell.
+        if (pictureShare > 0 && w.image != null && w.clues.any(_clueUsable)) fitsFull = true;
         for (final c in w.clues) {
           if (!_clueUsable(c)) continue;
           if (c.fitsFull != null && c.fitsHalf != null && w.wordCount == 1) {

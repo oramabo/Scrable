@@ -86,8 +86,9 @@ class PuzzleBuilder {
 
   final Map<String, Eligibility> _eligibility = {};
 
-  Eligibility eligibilityFor(LevelConfig cfg) => _eligibility.putIfAbsent(
-      '${cfg.level}|${cfg.maxWordDifficulty}|${cfg.allowMultiword}|${cfg.allowProper}', () => ClueAssigner(lexicon, fit, cfg).eligibility(dict));
+  Eligibility eligibilityFor(LevelConfig cfg, {double pictureShare = 0.0}) => _eligibility.putIfAbsent(
+      '${cfg.level}|${cfg.maxWordDifficulty}|${cfg.allowMultiword}|${cfg.allowProper}|${pictureShare > 0}',
+      () => ClueAssigner(lexicon, fit, cfg, pictureShare: pictureShare).eligibility(dict));
 
   BuildOutcome build(BuildRequest req) {
     final cfg = req.config ?? LevelConfig.forLanguage(lexicon.lang.code, req.level);
@@ -96,7 +97,7 @@ class PuzzleBuilder {
     final templates = req.templates.where((t) => t.level == cfg.level).toList();
     if (templates.isEmpty) throw BuildFailure('no templates for level ${cfg.level}', log);
     rng.shuffle(templates);
-    final eligibility = eligibilityFor(cfg);
+    final eligibility = eligibilityFor(cfg, pictureShare: req.pictureShare);
     final filler = Filler(dict, cfg, eligibility, config: fillConfig);
     final assigner = ClueAssigner(lexicon, fit, cfg, pictureShare: req.pictureShare);
     final validator = PuzzleValidator(lexicon, fit);
@@ -109,7 +110,12 @@ class PuzzleBuilder {
       final forbid = <int, Set<int>>{};
       for (var round = 0; round < 6; round++) {
         final fillRng = rng.fork('tpl${tpl.id}-round$round');
-        final fill = filler.fill(tpl, fillRng, forbid: forbid, excludeCanonical: req.excludeCanonical, imageBonus: req.pictureShare > 0 ? 1.5 : 0.0);
+        final fullSlots = tpl.assignments.where((a) => a.slot == SlotPos.full).length;
+        final fill = filler.fill(tpl, fillRng,
+            forbid: forbid,
+            excludeCanonical: req.excludeCanonical,
+            imageBonus: req.pictureShare > 0 ? 6.0 : 0.0,
+            pictureTarget: req.pictureShare > 0 ? (fullSlots * req.pictureShare).round().clamp(0, 2) : 0); // ≤ 2 seeds keeps the few picture words spread across a 30-puzzle pack
         if (!fill.ok) {
           log.add('template ${tpl.id}: fill failed (${fill.failure})');
           break;

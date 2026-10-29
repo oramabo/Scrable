@@ -5,7 +5,7 @@
 #                        [--wait SECONDS] [--regen-manifests]
 #
 # What gets bundled (per language):
-#   packs/<lang>-l1-p01/*.json + pack.json   the whole first pack of level 1
+#   packs/<lang>-lN-p01/*.json + pack.json   the whole first pack of every level, and every picture pack
 #   packs/*/pack.json                        the pack descriptor of every pack
 #   daily/{easy,hard}/<date>.json            dailies for --days days from --date
 #   tutorial/*.json                          the onboarding tutorial puzzles
@@ -74,15 +74,23 @@ index_puzzles=()
 index_packs=()
 index_dailies=()
 
-# 1. Whole first pack of level 1.
-if [[ -d "$SRC/packs/$L1" ]]; then
-  mkdir -p "$DST/packs/$L1"
-  cp "$SRC/packs/$L1"/*.json "$DST/packs/$L1/"
-  for f in "$DST/packs/$L1"/[0-9][0-9].json; do
+# 1. Whole packs: pack 1 of every level (so each difficulty is playable offline from day one)
+#    and every picture pack (its images are bundled anyway). Other packs ship only their
+#    pack.json and are fetched from the CDN manifest when the backend is configured.
+for d in "$SRC"/packs/*/; do
+  pid=$(basename "$d")
+  [[ -f "$d/pack.json" ]] || continue
+  bundle=0
+  [[ "$pid" == *-p01 ]] && bundle=1
+  grep -q '"pictures": true' "$d/pack.json" && bundle=1
+  [[ $bundle == 1 ]] || continue
+  mkdir -p "$DST/packs/$pid"
+  cp "$d"/[0-9][0-9].json "$DST/packs/$pid/"
+  for f in "$DST/packs/$pid"/[0-9][0-9].json; do
     id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["id"])' "$f")
-    index_puzzles+=("\"$id\": \"assets/puzzles/$LANG_CODE/packs/$L1/$(basename "$f")\"")
+    index_puzzles+=("\"$id\": \"assets/puzzles/$LANG_CODE/packs/$pid/$(basename "$f")\"")
   done
-fi
+done
 
 # 2. pack.json of every pack.
 for d in "$SRC"/packs/*/; do
