@@ -582,14 +582,17 @@ class TutorialCommand extends _Base {
       rows: 6,
       cols: 5,
       targetWords: 7,
-      maxWordLen: 4,
+      maxWordLen: 5, // 4 leaves a 5x6 grid no way to clue every square
       max2LetterShare: base.max2LetterShare,
       maxWordDifficulty: 0.4,
       meanDifficultyMin: 0.05,
       meanDifficultyMax: 0.3,
       minCheckedRatio: 0.6,
-      maxBentArrows: 0,
-      allowedArrows: LevelConfig.straight,
+      // Real arrowwords have no blank squares, so even the tutorial needs a bent
+      // arrow or two (the corner clue cell has to point at a word).
+      maxBentArrows: 2,
+      allowedArrows: LevelConfig.withBent,
+      borderLetters: 1,
       clueDifficultyMin: 0,
       clueDifficultyMax: 0.5,
       allowMultiword: false,
@@ -600,7 +603,7 @@ class TutorialCommand extends _Base {
       scoreMax: 40,
       lengthMid: lang == 'en' ? 3.6 : 3.0,
     );
-    final gen = LayoutGenerator(cfg, iterations: 6000);
+    final gen = LayoutGenerator(cfg, iterations: 12000);
     final templates = <LayoutTemplate>[];
     for (var i = 0; templates.length < 6 && i < 20; i++) {
       final t = gen.generate(SeededRandom.fromString('tutorial|$lang|$i'), id: '$lang-tutorial-t$i');
