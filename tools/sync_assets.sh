@@ -121,8 +121,12 @@ join() { local IFS=","; echo "$*"; }
 } > "$DST/index.json"
 python3 -c 'import json,sys;json.load(open(sys.argv[1]))' "$DST/index.json"
 
-# 6. Check pubspec registration.
+# 6. Check pubspec registration. Every registered directory must exist, or the
+#    Flutter build fails, so create the ones that have no content yet.
 PUBSPEC="$ROOT/apps/mobile/pubspec.yaml"
+while IFS= read -r rel; do
+  mkdir -p "$ROOT/apps/mobile/$rel"
+done < <(grep -oE -- "- assets/puzzles/$LANG_CODE/[^ ]*/" "$PUBSPEC" | sed 's/^- //')
 missing=0
 while IFS= read -r dir; do
   rel="${dir#"$ROOT/apps/mobile/"}/"
