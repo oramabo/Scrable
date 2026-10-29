@@ -11,7 +11,7 @@ import 'rng.dart';
 /// Tunables of the CSP filler.
 class FillConfig {
   const FillConfig({
-    this.beam = 14,
+    this.beam = 24,
     this.sampleLimit = 700,
     this.baseNodeLimit = 8000,
     this.maxRestarts = 4,
@@ -254,15 +254,19 @@ class Filler {
         if (forwardCheck(s) && search(r)) return true;
         unplace(s, w, changed);
         tried++;
-        // beam: after the best candidates failed, give up on this branch early
-        if (tried >= config.beam && placed > 0) return false;
+        // beam: when the domain is large and the best candidates all failed, the
+        // problem is upstream; backtrack instead of grinding through the rest
+        if (tried >= config.beam && candidates.length > config.beam * 2 && placed > 0) return false;
       }
       return false;
     }
 
     var attempts = 0;
+    var totalNodes = 0;
     for (var attempt = 0; attempt < config.maxRestarts; attempt++) {
       attempts++;
+      totalNodes += nodes;
+      nodes = 0; // each attempt gets its own budget
       nodeLimit = (config.baseNodeLimit * math.pow(1.6, attempt)).round();
       final r = rng.fork('attempt$attempt');
       // reset state
@@ -287,7 +291,7 @@ class Filler {
             ok: true,
             slots: slots,
             words: [for (final s in slots) dict.byLen[s.len]![assigned[s.idx]]],
-            nodes: nodes,
+            nodes: totalNodes + nodes,
             attempts: attempts,
           );
         }
@@ -295,6 +299,6 @@ class Filler {
         continue;
       }
     }
-    return FillResult(ok: false, slots: slots, words: const [], nodes: nodes, attempts: attempts, failure: 'exhausted after $attempts attempts, $nodes nodes');
+    return FillResult(ok: false, slots: slots, words: const [], nodes: totalNodes + nodes, attempts: attempts, failure: 'exhausted after $attempts attempts, ${totalNodes + nodes} nodes');
   }
 }

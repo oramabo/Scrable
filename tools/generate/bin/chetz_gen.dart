@@ -30,6 +30,9 @@ Future<void> main(List<String> args) async {
   }
 }
 
+/// Set by `--verbose` on batch commands: print the builder log of failed attempts.
+bool verboseFailures = false;
+
 /// Builds a puzzle, retrying with salted seeds when the first seed cannot be
 /// completed (rare: a template whose words have no usable clues). Returns null
 /// after [retries] failures so batch commands can continue.
@@ -41,6 +44,7 @@ BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(Stri
       return builder.build(request(s));
     } on BuildFailure catch (e) {
       log?.call('  attempt ${attempt + 1} failed: ${e.message}');
+      if (verboseFailures) log?.call(e.log.map((l) => '    $l').join('\n'));
     }
   }
   if (fallback != null) {
@@ -53,6 +57,7 @@ BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(Stri
         return out;
       } on BuildFailure catch (e) {
         log?.call('  fallback attempt ${attempt + 1} failed: ${e.message}');
+        if (verboseFailures) log?.call(e.log.map((l) => '    $l').join('\n'));
       }
     }
   }
@@ -61,10 +66,13 @@ BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(Stri
 
 abstract class _Base extends Command<void> {
   _Base() {
-    argParser.addOption('lang', defaultsTo: 'he', help: 'Puzzle language code (he, en)');
+    argParser
+      ..addOption('lang', defaultsTo: 'he', help: 'Puzzle language code (he, en)')
+      ..addFlag('verbose', help: 'Print generator logs for failed builds');
   }
 
   String get lang => argResults!['lang'] as String;
+  bool get verbose => (argResults!['verbose'] as bool?) ?? false;
   ContentStore get store => ContentStore(globalResults!['content'] as String, lang);
 
   void log(String s) => stdout.writeln(s);
@@ -133,6 +141,7 @@ class PackCommand extends _Base {
 
   @override
   void run() {
+    verboseFailures = verbose;
     final level = int.parse(argResults!['level'] as String);
     final pack = int.parse(argResults!['pack'] as String);
     final count = int.parse(argResults!['count'] as String);
@@ -259,6 +268,7 @@ class DailiesCommand extends _Base {
 
   @override
   void run() {
+    verboseFailures = verbose;
     final from = DateTime.parse(argResults!['from'] as String);
     final days = int.parse(argResults!['days'] as String);
     final secret = (argResults!['secret'] as String?) ?? Platform.environment['DAILY_SEED_SECRET'] ?? 'dev-daily-secret-change-me';
