@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/manifest.schema.json",
+  "title": "Chetz CDN manifest (daily or packs)",
+  "description": "Union of the manifest shapes. Prefer the specific schemas: daily-manifest, packs-manifest and publish-index.",
+  "oneOf": [
+    {
+      "$ref": "daily-manifest.schema.json"
+    },
+    {
+      "$ref": "packs-manifest.schema.json"
+    },
+    {
+      "$ref": "publish-index.schema.json"
+    }
+  ]
+}

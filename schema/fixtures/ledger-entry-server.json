@@ -1,0 +1,14 @@
+{
+  "id": "01929f4c-2d3e-7f40-8b1c-7d8e9f0a1b2c",
+  "type": "earn_ad",
+  "amount": 25,
+  "balanceAfter": 240,
+  "createdAt": 1761653000000,
+  "deviceId": "ios-7a1b2c3d",
+  "refId": "rewarded:wallet",
+  "server": {
+    "status": "accepted",
+    "source": "client",
+    "syncedAt": 1761653005000
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/daily-manifest.schema.json",
+  "title": "Chetz daily manifest",
+  "description": "CDN file `manifests/{lang}/daily.json` (5-minute TTL): the published dailies of one language, both variants. Written by `chetz_gen manifest` (content pipeline, relative urls) and by the `rebuildManifests` function (absolute urls, last 365 + next 3 days).",
+  "type": "object",
+  "required": [
+    "version",
+    "generatedAt",
+    "lang",
+    "entries"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Manifest format version."
+    },
+    "generatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lang": {
+      "type": "string",
+      "enum": [
+        "he",
+        "en"
+      ]
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "date",
+          "variant",
+          "id",
+          "url",
+          "checksum",
+          "version"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date",
+            "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+          },
+          "variant": {
+            "type": "string",
+            "enum": [
+              "easy",
+              "hard"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000,
+            "description": "Absolute https URL, or a path relative to the CDN root (what `chetz_gen manifest` writes, e.g. `puzzles/he/daily/easy/2026-11-01.v1.json`).",
+            "pattern": "^(https://\\S+|[A-Za-z0-9][^\\s]*)$"
+          },
+          "checksum": {
+            "type": "string",
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "description": "`meta.checksum` of the puzzle file."
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "`meta.version` of the puzzle file (part of the immutable file name)."
+          }
+        }
+      }
+    }
+  }
+}

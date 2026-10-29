@@ -1,0 +1,10 @@
+{
+  "id": "01929f4b-1c2d-7e3f-9a0b-6c7d8e9f0a1b",
+  "type": "spend_letter",
+  "amount": -15,
+  "balanceAfter": 215,
+  "createdAt": 1761652960000,
+  "deviceId": "android-3f9c2a1b",
+  "refId": "revealLetter",
+  "lang": "he"
+}

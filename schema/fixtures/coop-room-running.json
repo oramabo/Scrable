@@ -1,0 +1,17 @@
+{
+  "lang": "en",
+  "puzzleId": "en-l1-p01-02",
+  "letterCells": 48,
+  "solutionHash": null,
+  "hostUid": "uid_host",
+  "code": "WX4H9T",
+  "members": {
+    "uid_host": { "displayName": "Noa", "color": 0, "joinedAt": 1762084800000, "lastSeenAt": 1762085000000, "cursor": 12 },
+    "uid_b": { "displayName": "Player", "color": 1, "joinedAt": 1762084900000, "lastSeenAt": 1762085005000, "cursor": null }
+  },
+  "status": "running",
+  "createdAt": 1762084800000,
+  "updatedAt": 1762084950000,
+  "lastActivityAt": 1762084950000,
+  "startedAt": 1762084950000
+}

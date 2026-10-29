@@ -1,0 +1,12118 @@
+[
+ {
+  "id": "he-t1-001",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCLCC",
+   "CLLLLLL",
+   "CCLCLLL",
+   "LLCCCLL",
+   "CLLLLLL",
+   "CLLLCCC",
+   "CLLCLLL",
+   "CLLLLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8292682926829268,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 4,
+    "3": 8,
+    "2": 7,
+    "5": 1,
+    "4": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-003",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLCL",
+   "CCCLCLL",
+   "LLLLLLC",
+   "CLLLCLL",
+   "CLLCLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.8333333333333334,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 4,
+    "4": 5,
+    "2": 5,
+    "3": 6,
+    "5": 1
+   },
+   "twoLetterShare": 0.23809523809523808,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-004",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLLC",
+   "CCCLLLL",
+   "LLCLCCL",
+   "CLLLLLL",
+   "CLLCLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.9047619047619048,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 4,
+    "5": 2,
+    "4": 5,
+    "2": 4,
+    "3": 6
+   },
+   "twoLetterShare": 0.19047619047619047,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 4,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-005",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLCLC",
+   "CCCLLLL",
+   "LLCCLCL",
+   "CLLLLLC",
+   "CLLLCLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "3": 7,
+    "4": 5,
+    "2": 6,
+    "5": 1
+   },
+   "twoLetterShare": 0.2727272727272727,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-006",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCL",
+   "CLLLLCL",
+   "CLLLLLL",
+   "CLLCCLL",
+   "CLLLCLL",
+   "CCCLCCL",
+   "LLLLLLC",
+   "CLLCLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 6,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 40,
+   "clueCount": 23,
+   "density": 0.6349206349206349,
+   "checkedRatio": 0.85,
+   "wordCount": 23,
+   "lenHist": {
+    "4": 2,
+    "6": 3,
+    "2": 8,
+    "3": 9,
+    "5": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-007",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCCCCLL",
+   "LLLLLLC",
+   "CLLLCCL",
+   "CLLLLLL",
+   "CLLCLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8780487804878049,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 4,
+    "2": 7,
+    "3": 7,
+    "5": 2,
+    "4": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 5,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-008",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCLCLLL",
+   "LLCCLLL",
+   "CLLLLCC",
+   "CLLCLLL",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "3": 9,
+    "2": 5,
+    "4": 4,
+    "5": 1
+   },
+   "twoLetterShare": 0.22727272727272727,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-009",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLCL",
+   "CLLCCLL",
+   "CLLLCLC",
+   "CCCLLLL",
+   "LLCLLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 6,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 7,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8780487804878049,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "4": 5,
+    "2": 7,
+    "3": 5,
+    "5": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 5,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-010",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCLCCC",
+   "CLLLLLL",
+   "CCCCLLL",
+   "LLLCLCL",
+   "CLLLCLL",
+   "CLLLCLC",
+   "CLLCLLL",
+   "CLLCLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 2,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8048780487804879,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 4,
+    "3": 9,
+    "2": 7,
+    "5": 1,
+    "4": 1
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 8,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-011",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCLCCC",
+   "CLLLLLL",
+   "CCCLLLL",
+   "LLCLCLL",
+   "CLLLCCC",
+   "CLLCLLL",
+   "CLLCLLL",
+   "CLLLLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 3,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "4": 4,
+    "2": 7,
+    "3": 6,
+    "5": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-012",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLCCL",
+   "CCCCLLL",
+   "LLLLLLC",
+   "CLLCLCL",
+   "CLLLCLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8292682926829268,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 4,
+    "3": 7,
+    "2": 7,
+    "4": 4
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-013",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLCLCL",
+   "CLLLLLL",
+   "CCCLCLL",
+   "LLLLLLC",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.8333333333333334,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 4,
+    "2": 7,
+    "3": 4,
+    "5": 3,
+    "4": 3
+   },
+   "twoLetterShare": 0.3333333333333333,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-014",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCCCLLL",
+   "LLLCLLC",
+   "CLLCLLL",
+   "CLLLCCL",
+   "CLLCLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8780487804878049,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "3": 7,
+    "2": 7,
+    "5": 4,
+    "4": 1
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 5,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-015",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCLCC",
+   "CLLCLLL",
+   "CLLCCLL",
+   "CLLLCLL",
+   "CLLLLLL",
+   "CCCLCLC",
+   "LLLLLCL",
+   "CLLCLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 40,
+   "clueCount": 23,
+   "density": 0.6349206349206349,
+   "checkedRatio": 0.825,
+   "wordCount": 23,
+   "lenHist": {
+    "2": 8,
+    "3": 8,
+    "6": 1,
+    "5": 3,
+    "4": 3
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-016",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLLLCCL",
+   "CLCCLLL",
+   "LLLLLCC",
+   "CLLCLLL",
+   "CLLCCLL",
+   "CLLLCCC",
+   "CCCLLLL",
+   "LLCLLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 6,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 7,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 1,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.7804878048780488,
+   "wordCount": 23,
+   "lenHist": {
+    "3": 8,
+    "5": 1,
+    "2": 8,
+    "4": 4,
+    "6": 2
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 4,
+   "splitCells": 1,
+   "uncheckedLetters": 9,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-017",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLCCL",
+   "CLLCLLL",
+   "CCLCLLC",
+   "LLCCLLL",
+   "CLLCLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8780487804878049,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "3": 7,
+    "2": 7,
+    "5": 4,
+    "4": 1
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 5,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-018",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCLC",
+   "CLLLLLL",
+   "CLLLCCL",
+   "CLLLLLL",
+   "CCCLLLC",
+   "LLCLCCL",
+   "CLLLLLL",
+   "CLLCLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8048780487804879,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 4,
+    "3": 8,
+    "2": 7,
+    "4": 3
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 8,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-019",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCCLCLC",
+   "LLLLLCL",
+   "CLLCLLL",
+   "CLLCLLL",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8292682926829268,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 2,
+    "5": 4,
+    "2": 7,
+    "3": 7,
+    "4": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-020",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CCLLLLL",
+   "LLLLLLC",
+   "CCCCLLL",
+   "LLLCLCL",
+   "CLLLLLC",
+   "CLLLCLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "5": 2,
+    "3": 8,
+    "2": 6,
+    "4": 3
+   },
+   "twoLetterShare": 0.2727272727272727,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-021",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCLC",
+   "CLLLCLL",
+   "CLLLCCL",
+   "CLLLLLL",
+   "CLLCLLL",
+   "CLLLLCC",
+   "CCCCLLL",
+   "LLLCLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "3": 9,
+    "2": 6,
+    "6": 4,
+    "4": 2,
+    "5": 1
+   },
+   "twoLetterShare": 0.2727272727272727,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-022",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLLCCLL",
+   "CLCLLLC",
+   "LLCLCCL",
+   "CLLLLLL",
+   "CLLCLLL",
+   "CLLLLCC",
+   "CCLCLLL",
+   "LLLCLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 2,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.7619047619047619,
+   "wordCount": 23,
+   "lenHist": {
+    "2": 8,
+    "3": 10,
+    "6": 4,
+    "4": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 4,
+   "splitCells": 2,
+   "uncheckedLetters": 10,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-023",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CCLLLLL",
+   "LLCCLLL",
+   "CLLLLCC",
+   "CCLCCLL",
+   "LLLLCLL",
+   "CLLLCLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 4,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 23,
+   "lenHist": {
+    "6": 2,
+    "5": 2,
+    "2": 8,
+    "3": 6,
+    "4": 5
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 3,
+   "splitCells": 1,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-024",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLCLLL",
+   "CCCCLLL",
+   "LLLLLCL",
+   "CLLCLLC",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "2": 7,
+    "3": 6,
+    "5": 2,
+    "4": 4
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-025",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLCLC",
+   "CCCCLLL",
+   "LLLLLCL",
+   "CLLCLLL",
+   "CLCLLLL",
+   "LLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 7,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.7857142857142857,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 2,
+    "3": 8,
+    "5": 3,
+    "2": 4,
+    "4": 4
+   },
+   "twoLetterShare": 0.19047619047619047,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 9,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-026",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLLC",
+   "CLLLCLL",
+   "CCCCCLL",
+   "LLLLLCL",
+   "CLLLCLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.8809523809523809,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 3,
+    "5": 5,
+    "3": 6,
+    "2": 5,
+    "4": 2
+   },
+   "twoLetterShare": 0.23809523809523808,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 5,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-027",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCCCLLC",
+   "LLLCLLL",
+   "CLLCCCL",
+   "CLLLLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.9285714285714286,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 5,
+    "2": 5,
+    "3": 5,
+    "4": 4,
+    "5": 2
+   },
+   "twoLetterShare": 0.23809523809523808,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 3,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-028",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCCLLLL",
+   "LLCCLLC",
+   "CLLLLCL",
+   "CLLCLLL",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "4": 5,
+    "2": 6,
+    "3": 7,
+    "5": 1
+   },
+   "twoLetterShare": 0.2727272727272727,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-030",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLLCCLC",
+   "CLCLLLL",
+   "LLCLCLL",
+   "CLLLCCL",
+   "CLLCLLL",
+   "CLLCLLC",
+   "CCLCLLL",
+   "LLLCLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 1,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 2,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.7560975609756098,
+   "wordCount": 23,
+   "lenHist": {
+    "2": 8,
+    "4": 3,
+    "3": 9,
+    "6": 2,
+    "5": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 4,
+   "splitCells": 1,
+   "uncheckedLetters": 10,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-031",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLLCL",
+   "CLLLCLL",
+   "CCLCCLC",
+   "LLCLLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 7,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 43,
+   "clueCount": 20,
+   "density": 0.6825396825396826,
+   "checkedRatio": 0.8604651162790697,
+   "wordCount": 20,
+   "lenHist": {
+    "6": 6,
+    "4": 4,
+    "3": 2,
+    "2": 6,
+    "5": 2
+   },
+   "twoLetterShare": 0.3,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-032",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLCLC",
+   "CLLLLLL",
+   "CCCCLCL",
+   "LLLLCLL",
+   "CLLLCLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 0,
+    "len": 4,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.8571428571428571,
+   "wordCount": 21,
+   "lenHist": {
+    "6": 4,
+    "3": 6,
+    "4": 4,
+    "2": 5,
+    "5": 2
+   },
+   "twoLetterShare": 0.23809523809523808,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-033",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLLLCCC",
+   "CLCCLLL",
+   "LLLCLLL",
+   "CCLCCLL",
+   "LLLLLLC",
+   "CLLLCCL",
+   "CLCLLLL",
+   "LLCLLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 6,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 6,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 7,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 1,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 43,
+   "clueCount": 20,
+   "density": 0.6825396825396826,
+   "checkedRatio": 0.7441860465116279,
+   "wordCount": 21,
+   "lenHist": {
+    "3": 9,
+    "2": 3,
+    "6": 2,
+    "4": 5,
+    "5": 2
+   },
+   "twoLetterShare": 0.14285714285714285,
+   "bentArrows": 4,
+   "splitCells": 1,
+   "uncheckedLetters": 11,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-034",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCCLLLL",
+   "LLCCLLL",
+   "CLLCLCC",
+   "CLLLLLL",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.9024390243902439,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 4,
+    "4": 4,
+    "2": 6,
+    "3": 7,
+    "5": 1
+   },
+   "twoLetterShare": 0.2727272727272727,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 4,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-035",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCLC",
+   "CLLLLLL",
+   "CLLLCLL",
+   "CLLLCCL",
+   "CCCLLLL",
+   "LLCCLLC",
+   "CLLCCLL",
+   "CLLLLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 40,
+   "clueCount": 23,
+   "density": 0.6349206349206349,
+   "checkedRatio": 0.85,
+   "wordCount": 23,
+   "lenHist": {
+    "6": 2,
+    "3": 7,
+    "2": 8,
+    "4": 5,
+    "5": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-036",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLLCLLC",
+   "CLCLLCL",
+   "LLCCLLL",
+   "CLLLCLC",
+   "CCLCLLL",
+   "LLLCLCL",
+   "CLLLCLL",
+   "CLLLLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 2,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 42,
+   "clueCount": 21,
+   "density": 0.6666666666666666,
+   "checkedRatio": 0.6904761904761905,
+   "wordCount": 23,
+   "lenHist": {
+    "2": 8,
+    "3": 10,
+    "6": 2,
+    "4": 2,
+    "5": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 4,
+   "splitCells": 2,
+   "uncheckedLetters": 13,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-037",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCLCCC",
+   "CLLLLLL",
+   "CCCCLLL",
+   "LLLCCLL",
+   "CLLLLLL",
+   "CLLLCCC",
+   "CLLCLLL",
+   "CLLCLLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 2,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 5,
+    "3": 8,
+    "2": 7,
+    "4": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-038",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLLLCCL",
+   "CLCCLLL",
+   "LLLLLCC",
+   "CCLCLLL",
+   "LLCCCLL",
+   "CLLLLLL",
+   "CLLLCCC",
+   "CLLLLLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "top"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 0,
+    "len": 5,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "bottom"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 2,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.7560975609756098,
+   "wordCount": 23,
+   "lenHist": {
+    "3": 10,
+    "5": 2,
+    "2": 8,
+    "6": 2,
+    "4": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 4,
+   "splitCells": 1,
+   "uncheckedLetters": 10,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-039",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCC",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CCLCLLC",
+   "LLCCLLL",
+   "CLLCLCL",
+   "CLLLCLL",
+   "CLLLCLL",
+   "CLLLLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8536585365853658,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "2": 7,
+    "3": 7,
+    "5": 3,
+    "4": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 2,
+   "splitCells": 0,
+   "uncheckedLetters": 6,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-040",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCCCL",
+   "CLLLLCL",
+   "CLLLLLL",
+   "CLLLCLC",
+   "CLLCLLL",
+   "CLLCLCL",
+   "CCCLLLC",
+   "LLCLLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 6,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 7,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 4,
+    "len": 4,
+    "clue": {
+     "r": 3,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 2,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 40,
+   "clueCount": 23,
+   "density": 0.6349206349206349,
+   "checkedRatio": 0.8,
+   "wordCount": 23,
+   "lenHist": {
+    "4": 3,
+    "6": 2,
+    "3": 9,
+    "2": 8,
+    "5": 1
+   },
+   "twoLetterShare": 0.34782608695652173,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 8,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-041",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCLCCC",
+   "CLLLLLL",
+   "CCCLLLL",
+   "LLCCLLL",
+   "CLLCCLC",
+   "CLLLLLL",
+   "CLLLLCL",
+   "CLLLCLL",
+   "CLLCLLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 3,
+    "len": 4,
+    "clue": {
+     "r": 2,
+     "c": 2
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 0,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 3,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 5,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 7,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 3,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 2,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 2,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 4,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 7,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 6,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 6,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8292682926829268,
+   "wordCount": 22,
+   "lenHist": {
+    "6": 3,
+    "4": 3,
+    "2": 7,
+    "3": 7,
+    "5": 2
+   },
+   "twoLetterShare": 0.3181818181818182,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 7,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ },
+ {
+  "id": "he-t1-042",
+  "level": 1,
+  "rows": 9,
+  "cols": 7,
+  "layout": [
+   "CLCCLCC",
+   "CLLCLLL",
+   "CLLCLLL",
+   "CLLLLLC",
+   "CCCCLLL",
+   "LLLCCCL",
+   "CLLLLLL",
+   "CLLLLLL",
+   "CLLLCLL"
+  ],
+  "assignments": [
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 1,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 1,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 1,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 1,
+    "len": 2,
+    "clue": {
+     "r": 2,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 2,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 2,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 3,
+    "c": 1,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 4,
+    "c": 4,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 3
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 5,
+    "c": 0,
+    "len": 3,
+    "clue": {
+     "r": 4,
+     "c": 0
+    },
+    "arrow": "DA",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 6,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 6,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 7,
+    "c": 1,
+    "len": 6,
+    "clue": {
+     "r": 7,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 1,
+    "len": 3,
+    "clue": {
+     "r": 8,
+     "c": 0
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "A",
+    "r": 8,
+    "c": 5,
+    "len": 2,
+    "clue": {
+     "r": 8,
+     "c": 4
+    },
+    "arrow": "A",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 0
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 1,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 1
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 2,
+    "len": 3,
+    "clue": {
+     "r": 0,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 5,
+    "c": 2,
+    "len": 4,
+    "clue": {
+     "r": 4,
+     "c": 2
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 3,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 3
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 0,
+    "c": 4,
+    "len": 5,
+    "clue": {
+     "r": 0,
+     "c": 3
+    },
+    "arrow": "AD",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 4,
+    "len": 2,
+    "clue": {
+     "r": 5,
+     "c": 4
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 5,
+    "len": 4,
+    "clue": {
+     "r": 0,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 6,
+    "c": 5,
+    "len": 3,
+    "clue": {
+     "r": 5,
+     "c": 5
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 1,
+    "c": 6,
+    "len": 2,
+    "clue": {
+     "r": 0,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   },
+   {
+    "dir": "D",
+    "r": 4,
+    "c": 6,
+    "len": 5,
+    "clue": {
+     "r": 3,
+     "c": 6
+    },
+    "arrow": "D",
+    "slot": "full"
+   }
+  ],
+  "stats": {
+   "letterCount": 41,
+   "clueCount": 22,
+   "density": 0.6507936507936508,
+   "checkedRatio": 0.8780487804878049,
+   "wordCount": 22,
+   "lenHist": {
+    "2": 5,
+    "3": 8,
+    "5": 3,
+    "6": 2,
+    "4": 4
+   },
+   "twoLetterShare": 0.22727272727272727,
+   "bentArrows": 3,
+   "splitCells": 0,
+   "uncheckedLetters": 5,
+   "unusedClueCells": 0
+  },
+  "source": "procedural"
+ }
+]

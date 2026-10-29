@@ -1,0 +1,19 @@
+rules_version = '2';
+
+// Published content is world-readable (served through the CDN); every write
+// goes through the Admin SDK in Cloud Functions (publishPuzzle, rebuildManifests).
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /puzzles/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /manifests/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

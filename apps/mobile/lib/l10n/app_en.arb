@@ -1,0 +1,579 @@
+{
+  "@@locale": "en",
+  "appTitle": "Chetz",
+  "tabHome": "Home",
+  "tabPacks": "Packs",
+  "tabDaily": "Daily",
+  "tabSettings": "Settings",
+  "homeGreeting": "Hello!",
+  "continueTitle": "Continue",
+  "continueSubtitle": "{title} · {filled}/{total} letters",
+  "continueEmpty": "You haven't started a puzzle yet. Pick a pack or today's daily.",
+  "dailyEasyTitle": "Daily Arrowword",
+  "dailyHardTitle": "Daily Challenge",
+  "dailyCompleted": "Completed",
+  "dailyInProgress": "In progress",
+  "dailyPlay": "Play",
+  "dailyUnavailable": "Not available offline",
+  "dailyDate": "{date}",
+  "streakDays": "{count, plural, =0{No streak yet} =1{Your streak: 1 day} other{Your streak: {count} days}}",
+  "streakAtRisk": "Streak at risk — solve a daily today",
+  "bestStreak": "Best streak: {count}",
+  "streakFreeze": "Streak freeze",
+  "streakFreezeDescription": "Keeps your streak on a day you miss",
+  "streakFreezeOwned": "You own a streak freeze",
+  "streakFreezeBuy": "Buy ({coins} coins)",
+  "levelsTitle": "Levels",
+  "levelTitle": "Level {level}",
+  "levelName1": "Starter",
+  "levelName2": "Easy",
+  "levelName3": "Medium",
+  "levelName4": "Hard",
+  "levelName5": "Expert",
+  "levelGrid": "{cols}×{rows} grid",
+  "packsTitle": "Packs",
+  "packTitle": "Pack {index}",
+  "packLocked": "Locked",
+  "packUnlockHint": "Unlocks with {stars} stars or {count} completed puzzles in the previous pack",
+  "packProgress": "{done}/{total} completed · {stars} stars",
+  "packNotBundled": "This pack is downloaded",
+  "puzzleNumber": "Puzzle {index}",
+  "puzzleWords": "{count} words",
+  "noPacksYet": "No packs at this level yet",
+  "comingSoon": "Coming soon",
+  "settingsTitle": "Settings",
+  "settingsSectionLanguage": "Language",
+  "settingsUiLanguage": "Interface language",
+  "settingsPuzzleLanguage": "Puzzle language",
+  "languageHebrew": "עברית",
+  "languageEnglish": "English",
+  "settingsSectionPlay": "Play",
+  "settingsKeyboardLayout": "Keyboard layout",
+  "layoutAlphabetical": "Alphabetical",
+  "layoutStandard": "Israeli standard",
+  "layoutQwerty": "QWERTY",
+  "layoutAbc": "ABC",
+  "settingsShowTimer": "Show timer",
+  "settingsSkipFilled": "Skip filled cells",
+  "settingsAutoNextWord": "Jump to the next word automatically",
+  "settingsBigKeyboard": "Large keyboard",
+  "settingsDefaultMode": "Default play mode for level {level}",
+  "modeRelaxed": "Relaxed",
+  "modeNormal": "Normal",
+  "modeNewspaper": "Newspaper",
+  "modeRelaxedDescription": "Every letter is checked instantly. Up to 2 stars.",
+  "modeNormalDescription": "A complete word is checked; a wrong word pulses red without pinpointing the letter.",
+  "modeNewspaperDescription": "Nothing is checked until the grid is full. 3 stars.",
+  "chooseMode": "Play mode",
+  "settingsSectionDisplay": "Display",
+  "settingsTextSize": "Text size",
+  "settingsHighContrast": "High contrast",
+  "settingsTheme": "Theme",
+  "themeSystem": "System",
+  "themeLight": "Light",
+  "themeDark": "Dark",
+  "settingsSectionFeedback": "Feedback",
+  "settingsHaptics": "Haptics",
+  "settingsSounds": "Sounds",
+  "settingsSeniorsPreset": "Comfort mode",
+  "settingsSeniorsPresetDescription": "Large text, high contrast, relaxed mode and a large keyboard",
+  "seniorsApplied": "Comfort settings applied",
+  "settingsSectionPrivacy": "Privacy",
+  "settingsManageConsent": "Manage ad consent",
+  "consentUnavailable": "Consent management is available only when ads are enabled",
+  "settingsDeleteData": "Delete all data",
+  "deleteDataConfirm": "Delete all progress, coins and settings from this device? This cannot be undone.",
+  "deleteDataDone": "All data deleted",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "close": "Close",
+  "settingsAbout": "About",
+  "aboutTitle": "About Chetz",
+  "aboutDescription": "Chetz is an arrowword game in Hebrew and English. New puzzles every day.",
+  "aboutCredits": "Credits",
+  "aboutMordo": "Clues courtesy of the Mordo crossword dictionary (מילון התשחצים מורדו)",
+  "aboutFonts": "Fonts: Noto Sans Hebrew and Inter (SIL OFL 1.1)",
+  "aboutLicenses": "Open-source licences",
+  "aboutVersion": "Version {version}",
+  "statsTitle": "Statistics",
+  "statsSolved": "Puzzles solved",
+  "statsStars": "Stars",
+  "statsPerfect": "Without hints",
+  "statsHints": "Hints used",
+  "statsBestTime": "Best time at level {level}",
+  "statsDailies": "Dailies",
+  "statsEmpty": "No data yet — solve your first puzzle",
+  "coins": "Coins",
+  "coinsBalance": "{count} coins",
+  "hintsTitle": "Hints",
+  "hintRevealLetter": "Reveal selected letter",
+  "hintRandomLetter": "Random letter in word",
+  "hintSmartLetter": "Smart letter",
+  "hintSmartLetterDescription": "The letter that helps the crossing words most",
+  "hintRevealWord": "Reveal word",
+  "hintCheckWord": "Check word",
+  "hintCheckPuzzle": "Check puzzle",
+  "hintFirstLetters": "First letter of every word",
+  "hintFree": "Free",
+  "hintCost": "{coins} coins",
+  "hintFreeLeft": "{count, plural, =0{No free hints left} =1{1 free hint left} other{{count} free hints left}}",
+  "hintConfirmTitle": "Use a hint?",
+  "hintConfirmBody": "{name} costs {coins} coins.",
+  "hintConfirmFree": "{name} — one of your free hints.",
+  "dontAskAgain": "Don't ask again",
+  "useHint": "Use hint",
+  "notEnoughCoins": "Not enough coins",
+  "notEnoughCoinsBody": "You need {needed} coins and have {balance}.",
+  "watchAdForCoins": "Watch an ad (+{coins})",
+  "buyCoins": "Buy coins",
+  "adUnavailable": "No ad available right now",
+  "adRewardEarned": "+{coins} coins for watching",
+  "clueAcross": "Across",
+  "clueDown": "Down",
+  "prevWord": "Previous word",
+  "nextWord": "Next word",
+  "switchWord": "Switch to the crossing word",
+  "clueCellTitle": "Clues in this cell",
+  "keyBackspace": "Backspace",
+  "keyNextWord": "Next",
+  "keyHint": "Hint",
+  "keyGeresh": "Geresh",
+  "keyUndo": "Undo",
+  "keySemantics": "Letter {name}",
+  "cellActions": "Cell actions",
+  "pencilOn": "Mark as pencil",
+  "pencilOff": "Remove pencil mark",
+  "clearWord": "Clear word",
+  "wordWrong": "Almost — try another letter",
+  "wordCorrect": "Nice, one more",
+  "puzzleHasErrors": "Something doesn't fit yet",
+  "puzzleNoErrors": "No errors so far",
+  "checkFoundErrors": "{count, plural, =0{No errors} =1{1 error marked} other{{count} errors marked}}",
+  "letterRevealed": "Letter revealed",
+  "undoDone": "Undone",
+  "nothingToUndo": "Nothing to undo",
+  "completionTitle": "Well done",
+  "completionDailyTitle": "Daily completed!",
+  "completionTime": "Time",
+  "completionHints": "Hints",
+  "completionStars": "Stars",
+  "completionCoins": "+{coins} coins",
+  "completionPerfect": "No hints!",
+  "wordsLearned": "Words you learned",
+  "nextPuzzle": "Next puzzle",
+  "share": "Share",
+  "backHome": "Home",
+  "shareText": "I solved {title} in Chetz in {time} {stars}",
+  "puzzleCompletedAnnouncement": "Puzzle completed! {stars} stars",
+  "timer": "Timer",
+  "pause": "Pause",
+  "paused": "Paused",
+  "resume": "Resume",
+  "onboarding1Title": "Welcome to Chetz",
+  "onboarding1Body": "Arrowword puzzles in Hebrew and English — packs by level and two dailies.",
+  "onboarding2Title": "How to solve",
+  "onboarding2Body": "Tap a cell, type letters, and the arrow leads you to the next word.",
+  "onboarding3Title": "Hints and coins",
+  "onboarding3Body": "You start with 200 coins and 5 free hints. Every puzzle you finish earns coins.",
+  "next": "Next",
+  "skip": "Skip",
+  "startTutorial": "Play your first puzzle",
+  "tutorialTapCell": "Tap a cell to select a word",
+  "tutorialType": "Type the letter on the keyboard",
+  "tutorialClueBar": "The clue appears here. The arrows move between words.",
+  "tutorialDone": "Great! Now solve the puzzle",
+  "gotIt": "Got it",
+  "dailyTitle": "Daily puzzles",
+  "archiveTitle": "Last 7 days",
+  "archivePremium": "The full archive is available with Premium",
+  "today": "Today",
+  "storeTitle": "Store",
+  "storeUnavailable": "The store is not available right now",
+  "storeDisabledHint": "In-app purchases are enabled in the store build",
+  "restorePurchases": "Restore purchases",
+  "restoreDone": "Purchases restored",
+  "premium": "Premium",
+  "premiumDescription": "No ads, every pack unlocked, full archive",
+  "removeAds": "Remove ads",
+  "purchaseFailed": "The purchase was not completed",
+  "purchaseDone": "Thank you! Purchase completed",
+  "loading": "Loading…",
+  "errorGeneric": "Something went wrong",
+  "retry": "Retry",
+  "puzzleNotAvailable": "This puzzle is not available right now",
+  "puzzleChecksumFailed": "The puzzle file is corrupted",
+  "loginBonus": "Daily bonus: +{coins} coins",
+  "cellSemantics": "Row {row}, column {col}, {letter}, {dir}: {clue}",
+  "cellSemanticsEmpty": "empty",
+  "cellSemanticsPencil": "pencil",
+  "cellSemanticsWrong": "marked wrong",
+  "cellSemanticsRevealed": "revealed",
+  "cellSemanticsCorrect": "correct",
+  "clueCellSemantics": "Clue cell: {clues}",
+  "gridSemantics": "Puzzle grid, {rows} rows and {cols} columns",
+  "zoomIn": "Zoom in",
+  "zoomOut": "Zoom out",
+  "menu": "Menu",
+  "back": "Back",
+  "tutorialTitle": "Tutorial puzzle",
+  "dailyEasyShort": "Daily",
+  "dailyHardShort": "Challenge",
+  "patternLabel": "Pattern: {pattern}",
+  "tabProfile": "Profile",
+  "missionsTitle": "Missions",
+  "missionsDaily": "Daily missions",
+  "missionsWeekly": "Weekly missions",
+  "missionClaim": "Claim",
+  "missionClaimed": "Claimed",
+  "missionResetIn": "Resets {time}",
+  "missionReward": "+{coins} coins",
+  "missionProgress": "{done}/{total}",
+  "achievementsTitle": "Achievements",
+  "achievementsUnlocked": "{count}/{total} achievements unlocked",
+  "tierBronze": "Bronze",
+  "tierSilver": "Silver",
+  "tierGold": "Gold",
+  "tierPlatinum": "Platinum",
+  "achievementUnlockedToast": "Achievement unlocked: {title} (+{coins} coins)",
+  "achievementLocked": "Locked",
+  "achievementUnlockedLabel": "Unlocked",
+  "viewAchievements": "View",
+  "profileTitle": "Profile",
+  "defaultDisplayName": "Solver",
+  "editName": "Edit name",
+  "displayName": "Display name",
+  "chooseAvatar": "Choose an avatar",
+  "rankLabel": "Rank",
+  "nextRank": "{count, plural, =1{1 puzzle to {rank}} other{{count} puzzles to {rank}}}",
+  "topRank": "Top rank!",
+  "lifetimeStats": "Lifetime stats",
+  "syncRow": "Sign in to sync",
+  "syncOn": "Synced (anonymous account)",
+  "syncOff": "Cloud sync is available in the Firebase build. Progress is saved on this device.",
+  "syncFailed": "Sync is unavailable right now — progress is saved on this device",
+  "save": "Save",
+  "themeHighContrast": "High contrast",
+  "themeCustom": "Custom",
+  "customThemeTitle": "Custom colours",
+  "colorPrimary": "Primary colour",
+  "colorBackground": "Background colour",
+  "colorHighlight": "Active word highlight",
+  "contrastWarning": "Low contrast ({ratio}:1) — text may be hard to read",
+  "contrastOk": "Contrast OK ({ratio}:1)",
+  "hue": "Hue",
+  "saturation": "Saturation",
+  "brightnessLabel": "Brightness",
+  "hexLabel": "Hex code",
+  "previewLabel": "Preview",
+  "resetColors": "Reset colours",
+  "cyclerHint": "Tap: next letter. Long-press: run through the alphabet",
+  "cyclerConfirm": "Confirm",
+  "cyclerSemantics": "A to Z letter cycler",
+  "pictureClue": "Picture clue",
+  "imageCredits": "Image credits",
+  "imageCreditsEmpty": "No picture puzzles seen yet",
+  "imageCreditLine": "{credit} · {license}",
+  "leaderboardTitle": "Leaderboard",
+  "leaderboardUnavailable": "The leaderboard is available when signed in and online",
+  "leaderboardEmpty": "No results for this day yet",
+  "leaderboardYou": "You",
+  "leaderboardRank": "Rank {rank}",
+  "leaderboardOf": "of {total}",
+  "statsWords": "Words solved",
+  "statsCoinsEarned": "Coins earned",
+  "tabPlay": "Play",
+  "tabTogether": "Together",
+  "tabMe": "Me",
+  "togetherTitle": "Play Together",
+  "togetherSoon": "Versus and co-op are on their way. Meanwhile — the daily challenge leaderboard.",
+  "togetherVersus": "Versus",
+  "togetherCoop": "Co-op",
+  "inviteCode": "Invite code",
+  "comingSoonShort": "Soon",
+  "randomPuzzle": "Random puzzle",
+  "chooseLevel": "Choose a level",
+  "noPuzzleAvailable": "No puzzle available at this level right now",
+  "seasonTeaser": "{points} points to the next reward",
+  "seasonTier": "Tier {tier}",
+  "dailyResetIn": "Resets {time}",
+  "allLevels": "All levels",
+  "progressRing": "{percent}% of letters filled",
+  "nameScreenTitle": "What should we call you?",
+  "nameScreenBody": "You can skip — the name is only used on the leaderboard and your profile.",
+  "letsGo": "Let's go",
+  "firstCompletionTitle": "Your first puzzle is done",
+  "firstCompletionBody": "+{coins} welcome coins. Your first daily is ready.",
+  "toDaily": "To the daily",
+  "tutorialCycler": "One letter left? The A→Z key runs through the alphabet",
+  "continueProgress": "{percent}% done",
+  "missionsStripHint": "Tap for all missions",
+  "themeRefused": "This combination is not applied: contrast is below 4.5:1. Pick a lighter or darker background or highlight.",
+  "homeGreetingNamed": "Hello, {name}!",
+  "@homeGreetingNamed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "startFirstPuzzle": "Start your first puzzle",
+  "startFirstPuzzleBody": "Level 1 · Pack 1 · Puzzle 1 — a few minutes, that's it",
+  "relativeHours": "{count, plural, =1{in 1 h} other{in {count} h}}",
+  "@relativeHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeMinutes": "{count, plural, =0{right now} =1{in 1 min} other{in {count} min}}",
+  "@relativeMinutes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeDays": "{count, plural, =1{in 1 day} other{in {count} days}}",
+  "@relativeDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "randomPreparing": "Preparing a puzzle…",
+  "randomFailed": "Couldn't prepare a puzzle right now. Try again.",
+  "randomSectionTitle": "Random",
+  "randomPuzzleTitle": "Random puzzle · {level}",
+  "@randomPuzzleTitle": {
+    "placeholders": {
+      "level": {
+        "type": "String"
+      }
+    }
+  },
+  "randomUnranked": "Unranked · half the coins",
+  "oneMore": "One more",
+  "randomEmpty": "A random puzzle is generated on your device from the lexicon — new every time.",
+  "seasonPassTitle": "Season Pass",
+  "seasonNumber": "Season {n}",
+  "@seasonNumber": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonDaysLeft": "{count, plural, =0{Last day of the season} =1{1 day left in the season} other{{count} days left in the season}}",
+  "@seasonDaysLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonStartsIn": "{count, plural, =0{The season starts today} =1{The season starts tomorrow} other{The season starts in {count} days}}",
+  "@seasonStartsIn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonPoints": "{points} points",
+  "@seasonPoints": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "seasonClaimed": "Claimed",
+  "seasonLocked": "Locked",
+  "seasonAllClaimed": "All season rewards claimed!",
+  "seasonMilestone": "Milestone badge",
+  "seasonHowToEarn": "How to earn points: daily +10 · hard daily +20 · mission +10 · perfect puzzle +5 · versus win +25 · loss +5",
+  "seasonClaimedToast": "+{coins} coins from the Season Pass",
+  "@seasonClaimedToast": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
+  "xpLevel": "Player level {level}",
+  "@xpLevel": {
+    "placeholders": {
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "xpProgress": "{xp}/{next} XP",
+  "@xpProgress": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "next": {
+        "type": "int"
+      }
+    }
+  },
+  "xpToNext": "{xp} XP to level {level}",
+  "@xpToNext": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      },
+      "level": {
+        "type": "int"
+      }
+    }
+  },
+  "xpEarned": "+{xp} XP",
+  "@xpEarned": {
+    "placeholders": {
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "versusFind": "Find an opponent",
+  "versusFindBody": "A random opponent at the same level, same puzzle, first to finish wins",
+  "versusInvite": "Invite a friend",
+  "versusInviteBody": "Share an invite code — your friend joins with the button below",
+  "versusJoin": "Join with a code",
+  "versusSearching": "Looking for an opponent…",
+  "versusCancelSearch": "Cancel search",
+  "versusLobby": "Lobby",
+  "versusWaitingGuest": "Waiting for a friend to join",
+  "versusStart": "Start!",
+  "versusReady": "Ready",
+  "versusReadyDone": "Ready · waiting for the host",
+  "versusOpponent": "Opponent",
+  "versusWin": "You won!",
+  "versusLoss": "Not this time",
+  "versusDraw": "Draw",
+  "versusForfeit": "Opponent forfeited",
+  "versusFinishedFirst": "Finished! Waiting for the opponent…",
+  "trophies": "Trophies",
+  "trophyDelta": "{delta} trophies",
+  "@trophyDelta": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "rematch": "Rematch",
+  "leaveMatchTitle": "Leave the match?",
+  "leaveMatchBody": "Leaving a running match counts as a loss.",
+  "leave": "Leave",
+  "codeCopied": "Code copied",
+  "enterCode": "6-character code",
+  "join": "Join",
+  "multiplayerUnavailable": "Playing together needs an account (Firebase). It is off in this build.",
+  "matchCancelled": "The match was cancelled",
+  "matchFailed": "Couldn't connect to the match. Try again.",
+  "trophyLeaderboardTitle": "Trophy leaderboard",
+  "leagueLabel": "League: {league}",
+  "@leagueLabel": {
+    "placeholders": {
+      "league": {
+        "type": "String"
+      }
+    }
+  },
+  "versusRewards": "Rewards: +{coins} coins · +{xp} XP",
+  "@versusRewards": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "shareInviteText": "Join me for a Chetz versus match! Invite code: {code}",
+  "@shareInviteText": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "versusRunning": "The race is on — good luck!",
+  "versusTime": "Time: {time}",
+  "@versusTime": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "coopCreate": "Create a room",
+  "coopCreateBody": "Up to 4 players fill one grid together",
+  "coopJoin": "Join a room",
+  "coopRoom": "Co-op room",
+  "coopCode": "Room code",
+  "coopMembers": "{count}/4 players",
+  "@coopMembers": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "coopWaitingHost": "Waiting for the host to start",
+  "coopFinish": "We're done",
+  "coopFinished": "Solved together!",
+  "coopRewards": "Reward for everyone: +{coins} coins · +{xp} XP",
+  "@coopRewards": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      },
+      "xp": {
+        "type": "int"
+      }
+    }
+  },
+  "coopNoReward": "A single-player room, or one shorter than a minute, earns no reward.",
+  "coopLeaveBody": "Leave the room? You can rejoin with the code.",
+  "coopHost": "Host",
+  "coopPickPuzzle": "Pick a puzzle for the room",
+  "coopShareText": "Let's solve a Chetz puzzle together! Room code: {code}",
+  "@coopShareText": {
+    "placeholders": {
+      "code": {
+        "type": "String"
+      }
+    }
+  },
+  "coopGridComplete": "The grid is full — the host can finish",
+  "coopPlaying": "{count} solving together",
+  "@coopPlaying": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsSectionNotifications": "Notifications",
+  "notifDailyReady": "Daily puzzle ready",
+  "notifDailyReadyBody": "A new puzzle is waiting for you in Chetz",
+  "notifStreakRisk": "Streak at risk",
+  "notifStreakRiskBody": "You haven't solved today's daily yet — your streak is waiting",
+  "notifOptInTitle": "Get a daily reminder?",
+  "notifOptInBody": "You've solved two dailies already. We'll send a small reminder when the daily is ready, and one at 20:00 only if your streak is at risk. No spam; you can turn it off in Settings.",
+  "notifEnable": "Yes, remind me",
+  "notifNotNow": "Not now",
+  "settingsNotifDaily": "Daily puzzle reminder",
+  "settingsNotifStreak": "Streak reminder at 20:00",
+  "settingsNotifHour": "Reminder time",
+  "notifDenied": "Notifications are blocked on this device — allow them in the system settings"
+}

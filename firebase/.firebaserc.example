@@ -1,0 +1,11 @@
+{
+  "projects": {
+    "default": "chetz-dev",
+    "dev": "chetz-dev",
+    "prod": "chetz-prod"
+  },
+  "targets": {
+    "chetz-prod": { "hosting": { "chetz-admin": ["chetz-admin"] } },
+    "chetz-dev": { "hosting": { "chetz-admin": ["chetz-admin-dev"] } }
+  }
+}

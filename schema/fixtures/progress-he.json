@@ -1,0 +1,256 @@
+{
+  "puzzleId": "he-d-2026-11-01-easy",
+  "puzzleVersion": 1,
+  "cells": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "s": 18,
+      "st": "filled",
+      "t": 1761652801000
+    },
+    null,
+    {
+      "s": 24,
+      "st": "revealed",
+      "t": 1761652802000
+    },
+    {
+      "s": 6,
+      "st": "wrong",
+      "p": true,
+      "t": 1761652803000
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    null,
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    null,
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    },
+    {
+      "st": "empty",
+      "t": 0
+    }
+  ],
+  "mode": "normal",
+  "elapsedMs": 42000,
+  "lettersRevealed": 1,
+  "wordsRevealed": 0,
+  "checksUsed": 1,
+  "wrongEntries": 1,
+  "completed": false,
+  "stars": 0,
+  "startedAt": 1761652800000,
+  "lastPlayedAt": 1761652803000,
+  "revision": 4,
+  "activeWordId": "a01",
+  "cursorCell": 14
+}

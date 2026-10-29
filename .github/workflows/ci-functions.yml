@@ -1,0 +1,53 @@
+name: ci-functions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'functions/**'
+      - 'schema/**'
+      - 'firebase/**'
+      - '.github/workflows/ci-functions.yml'
+  pull_request:
+    paths:
+      - 'functions/**'
+      - 'schema/**'
+      - 'firebase/**'
+      - '.github/workflows/ci-functions.yml'
+
+jobs:
+  functions:
+    name: build + test (functions) and validate schema fixtures
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            functions/package-lock.json
+            schema/package-lock.json
+      - name: Install (functions)
+        working-directory: functions
+        run: npm ci
+      - name: Build
+        working-directory: functions
+        run: npm run build
+      - name: Typecheck tests
+        working-directory: functions
+        run: npm run typecheck
+      - name: Test
+        working-directory: functions
+        run: npm test -- --ci
+      - name: Install (schema)
+        working-directory: schema
+        run: npm ci
+      - name: Validate schemas and fixtures
+        run: node schema/validate.mjs
+      - name: Check Firebase config parses
+        run: |
+          node -e "JSON.parse(require('fs').readFileSync('firebase/firebase.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('firebase/firestore.indexes.json','utf8'))"
+          node -e "JSON.parse(require('fs').readFileSync('firebase/remoteconfig.template.json','utf8'))"

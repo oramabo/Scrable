@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-10-28T22:48:01.717735Z",
+  "lang": "he",
+  "puzzles": [
+    {
+      "id": "he-d-2026-11-01-easy",
+      "kind": "daily",
+      "lang": "he",
+      "date": "2026-11-01",
+      "variant": "easy",
+      "file": "he/puzzles/daily/easy/2026-11-01.json",
+      "letterCells": 52,
+      "solutionHash": "bb7d1d060a8944dbfc58e3783b47928fc7226552d05e4a7c18e10c8745087a6d",
+      "checksum": "sha256:f18ea90670ae668ae687e85af69256c6451a28b445693b493f01b7312f09ed87",
+      "version": 1
+    },
+    {
+      "id": "he-l1-p01-01",
+      "kind": "pack",
+      "lang": "he",
+      "packId": "he-l1-p01",
+      "index": 1,
+      "file": "he/puzzles/packs/he-l1-p01/01.json",
+      "letterCells": 39,
+      "solutionHash": "1b7c5f1b6063b088df84f400fb719d0cfeb04bb55f22b425a18cd3dab3af5e76",
+      "checksum": "sha256:cc02d107fdf96cc544f31e371109524d3d99e97e9d8f05dc9b68f51c1b902d41",
+      "version": 1
+    }
+  ]
+}

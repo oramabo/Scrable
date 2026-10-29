@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/coop-room.schema.json",
+  "title": "Chetz co-op room",
+  "description": "Firestore document `coopRooms/{roomId}` for up to four players solving one grid together. Written by Cloud Functions (createCoopRoom / joinCoopRoom / startCoopRoom / leaveCoopRoom / finishCoopRoom / expireRooms); each member may update only its own `members.{uid}.cursor` and `members.{uid}.lastSeenAt`. Grid cells live in the subcollection `cells/{cellIndex}` = {symbol: int 0..31 | null, by: uid, at: ms}, written directly by members.",
+  "type": "object",
+  "required": ["lang", "puzzleId", "letterCells", "solutionHash", "hostUid", "code", "members", "status", "createdAt", "updatedAt", "lastActivityAt"],
+  "additionalProperties": false,
+  "properties": {
+    "lang": { "type": "string", "enum": ["he", "en"] },
+    "puzzleId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "letterCells": { "oneOf": [{ "type": "integer", "minimum": 1 }, { "type": "null" }] },
+    "solutionHash": { "description": "Expected `PuzzleCodec.solutionHash`; null when unknown (completion is then taken on the host's word).", "oneOf": [{ "type": "string", "pattern": "^[0-9a-f]{64}$" }, { "type": "null" }] },
+    "hostUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "code": { "description": "Six upper-case alphanumerics (`inviteCodes/{code}`) while the room is open or running; null once released.", "oneOf": [{ "type": "string", "pattern": "^[A-Z0-9]{6}$" }, { "type": "null" }] },
+    "members": {
+      "type": "object",
+      "minProperties": 0,
+      "maxProperties": 4,
+      "additionalProperties": { "$ref": "#/$defs/member" }
+    },
+    "status": { "type": "string", "enum": ["open", "running", "finished"] },
+    "createdAt": { "$ref": "#/$defs/ms" },
+    "updatedAt": { "$ref": "#/$defs/ms" },
+    "lastActivityAt": { "$ref": "#/$defs/ms", "description": "Last function-side change; the scheduled `expireRooms` job also counts members' `lastSeenAt` and closes rooms idle for 2 hours." },
+    "startedAt": { "$ref": "#/$defs/ms" },
+    "finishedAt": { "$ref": "#/$defs/ms" },
+    "finishReason": { "type": "string", "enum": ["solved", "abandoned", "expired"] }
+  },
+  "$defs": {
+    "ms": { "type": "integer", "minimum": 0 },
+    "member": {
+      "type": "object",
+      "required": ["displayName", "color", "joinedAt", "lastSeenAt"],
+      "additionalProperties": false,
+      "properties": {
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "color": { "type": "integer", "minimum": 0, "maximum": 3, "description": "Unique within the room; the client colours cursors and cells with it." },
+        "joinedAt": { "$ref": "#/$defs/ms" },
+        "lastSeenAt": { "$ref": "#/$defs/ms", "description": "Heartbeat written by the member's client." },
+        "cursor": { "description": "Letter-cell index the member is on, written by the member's client.", "oneOf": [{ "type": "integer", "minimum": 0 }, { "type": "null" }] },
+        "rewards": {
+          "type": "object",
+          "description": "Set by finishCoopRoom: coins through `users/{uid}/ledger/coop_{roomId}_{uid}`, XP on the user document.",
+          "required": ["credited", "capped", "coins", "xp", "seasonPoints", "seasonId"],
+          "additionalProperties": false,
+          "properties": {
+            "credited": { "type": "boolean" },
+            "capped": { "type": "boolean" },
+            "coins": { "type": "integer", "minimum": 0 },
+            "xp": { "type": "integer", "minimum": 0 },
+            "seasonPoints": { "type": "integer", "minimum": 0 },
+            "seasonId": { "oneOf": [{ "type": "string" }, { "type": "null" }] }
+          }
+        }
+      }
+    }
+  }
+}

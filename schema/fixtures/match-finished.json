@@ -1,0 +1,49 @@
+{
+  "lang": "he",
+  "level": 2,
+  "puzzleId": "he-l2-p01-03",
+  "letterCells": 64,
+  "solutionHash": "3f1c0a9d2e7b6c5a4f8e9d0c1b2a3948576a6b7c8d9e0f1a2b3c4d5e6f708192",
+  "mode": "invite",
+  "inviteCode": "K7PQ2M",
+  "hostUid": "uid_host",
+  "players": {
+    "uid_host": {
+      "displayName": "דנה",
+      "joinedAt": 1762084800000,
+      "progress": 1,
+      "lastProgressAt": 1762085210000,
+      "ready": true,
+      "finishedAt": 1762085210000,
+      "elapsedMs": 350000,
+      "hintsUsed": 1,
+      "result": "win",
+      "trophiesBefore": 120,
+      "trophiesAfter": 152,
+      "trophyDelta": 32,
+      "rewards": { "credited": true, "capped": false, "coins": 40, "xp": 60, "seasonPoints": 25, "seasonId": "2026-S1" }
+    },
+    "uid_guest": {
+      "displayName": "Player",
+      "joinedAt": 1762084830000,
+      "progress": 1,
+      "lastProgressAt": 1762085300000,
+      "finishedAt": 1762085300000,
+      "elapsedMs": 440000,
+      "hintsUsed": 0,
+      "result": "loss",
+      "trophiesBefore": 160,
+      "trophiesAfter": 143,
+      "trophyDelta": -17,
+      "rewards": { "credited": true, "capped": false, "coins": 10, "xp": 20, "seasonPoints": 5, "seasonId": "2026-S1" }
+    }
+  },
+  "status": "finished",
+  "createdAt": 1762084800000,
+  "updatedAt": 1762085300000,
+  "startedAt": 1762084860000,
+  "firstFinishAt": 1762085210000,
+  "finishedAt": 1762085300000,
+  "closeReason": "both_finished",
+  "expiresAt": 1762086110000
+}

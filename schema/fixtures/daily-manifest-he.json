@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "generatedAt": "2026-10-28T12:05:00.000Z",
+  "lang": "he",
+  "entries": [
+    {
+      "date": "2026-11-01",
+      "variant": "easy",
+      "id": "he-d-2026-11-01-easy",
+      "url": "https://cdn.chetz.app/puzzles/he/daily/easy/2026-11-01.v1.json",
+      "checksum": "sha256:750700ce4913daeeb138113d40b6bf5ce7da1bba1f52c23f8bf1b1f7855ff0d4",
+      "version": 1
+    },
+    {
+      "date": "2026-11-01",
+      "variant": "hard",
+      "id": "he-d-2026-11-01-hard",
+      "url": "https://cdn.chetz.app/puzzles/he/daily/hard/2026-11-01.v1.json",
+      "checksum": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "version": 1
+    }
+  ]
+}
