@@ -31,7 +31,9 @@ dart run tools/generate/bin/chetz_gen.dart --content content gallery --lang he -
 - **Meta**: 32 achievements, 3 daily + 3 weekly missions (deterministic, coin rewards), lifetime stats, profile with avatar and rank, themes (light/dark/system/high-contrast/custom colours).
 - **Picture clues**: `ClueSlot.image` renders a freely licensed photo (Wikimedia Commons via Wikidata, licence and credit recorded) instead of text; generated with `chetz_gen pack --pictures 0.3`.
 - **Content**: Hebrew 580 + English ~400 puzzles, 2 tutorial puzzles per language, 95 days of dailies per language.
-- **Backend**: ledger validation, purchases webhook, leaderboard submission, publishing, manifests; CI for every package.
+- **Multiplayer**: versus races (invite code or random matchmaking) with server-timed finishes, trophies and leagues, trophy leaderboard; co-op rooms for up to 4 players with live shared cells; rewards (coins, season points, XP) credited server-side.
+- **Progression**: XP levels, free 6-week season pass (30 tiers), trophies; random-puzzle mode generates fresh puzzles on the device from a compact lexicon.
+- **Backend**: ledger validation, purchases webhook, daily and trophy leaderboards, matchmaking, co-op rooms, publishing, manifests; CI for every package (68 backend tests).
 
 ## How a puzzle is made
 1. **Lexicon**: `tools/content` turns the clue dictionary into `words.jsonl.gz` (normalised Hebrew symbols: 22 letters + 5 geresh letters, final letters folded) and `clues.jsonl.gz`, with a difficulty per word from how often crossword setters use it.

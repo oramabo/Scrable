@@ -62,6 +62,13 @@ shown in the app's image-credits screen (CC BY-SA requires that attribution). Ru
 network (Wikimedia rate-limits shared cloud proxies). AI-generated pictures are fine for generic nouns
 (animals, objects) if you want them later: add records to `images.jsonl` with `license: "generated"`.
 
+## 3c. Multiplayer
+The publish script also writes `matchPool/{lang}_{level}` documents (pack puzzles with their solution hashes) that random
+matchmaking draws from. Matches, matchmaking queues, trophy boards and co-op rooms live in Firestore and are driven by the
+callables documented in `functions/README.md` ("Multiplayer"); the scheduled jobs `expireMatches` (every minute) and
+`expireRooms` (every 15 minutes) need Cloud Scheduler, which `firebase deploy` sets up. Keep App Check enabled in production
+so only the app can call them.
+
 ## 4. RevenueCat and store products
 Create these products in both stores and in RevenueCat (identifiers must match `functions/src/economy.ts`
 and the app's `StoreService`): consumables `coins_300`, `coins_800`, `coins_2000`, `coins_6000`;
