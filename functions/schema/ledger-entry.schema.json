@@ -16,6 +16,7 @@
       "type": "string",
       "enum": [
         "earn_complete", "earn_perfect", "earn_daily", "earn_streak", "earn_ad", "earn_achievement", "earn_login",
+        "earn_match", "earn_coop", "earn_season", "earn_mission",
         "spend_letter", "spend_word", "spend_check", "spend_item",
         "purchase_bundle", "refund", "reconcile", "admin_adjust"
       ]

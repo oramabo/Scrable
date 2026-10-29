@@ -6,6 +6,10 @@ rules_version = '2';
 //    balance (wallet) and entitlements are written by Cloud Functions only;
 //  - leaderboards, dailies, manifests and clue stats are read-only for clients;
 //  - telemetry is write-once by signed-in players;
+//  - multiplayer: matches are readable by their players, co-op rooms by their
+//    members (who may only write their own cursor/heartbeat and grid cells), the
+//    trophy leaderboard is public; queues, invite codes and results are
+//    function-only;
 //  - authoring collections need the `admin` custom claim.
 // Everything not matched below is denied.
 service cloud.firestore {
@@ -23,9 +27,10 @@ service cloud.firestore {
       return signedIn() && request.auth.token.admin == true;
     }
 
-    // Fields of users/{uid} that only Cloud Functions may write.
+    // Fields of users/{uid} that only Cloud Functions may write (wallet, entitlements,
+    // and the multiplayer progression: trophies, xp, season points).
     function serverOnlyUserFields() {
-      return ['wallet', 'entitlements', 'entitlementsMeta', 'lastLedgerSyncAt'];
+      return ['wallet', 'entitlements', 'entitlementsMeta', 'lastLedgerSyncAt', 'trophies', 'xp', 'season', 'lastMatchAt', 'lastCoopAt'];
     }
 
     function touchesServerOnlyUserFields() {
@@ -45,6 +50,7 @@ service cloud.firestore {
         && d.keys().hasOnly(['id', 'type', 'amount', 'balanceAfter', 'createdAt', 'deviceId', 'refId', 'lang'])
         && d.keys().hasAll(['id', 'type', 'amount', 'balanceAfter', 'createdAt', 'deviceId', 'refId'])
         && d.type in ['earn_complete', 'earn_perfect', 'earn_daily', 'earn_streak', 'earn_ad', 'earn_achievement', 'earn_login',
+                      'earn_season', 'earn_mission',
                       'spend_letter', 'spend_word', 'spend_check', 'spend_item', 'reconcile']
         && d.amount is int && d.amount >= -500 && d.amount <= 300
         && d.balanceAfter is int
@@ -109,6 +115,92 @@ service cloud.firestore {
       allow read: if false;
       allow create: if signedIn() && request.resource.data.size() <= 24;
       allow update, delete: if false;
+    }
+
+    // ---- Multiplayer (functions/README.md "Multiplayer") ----
+
+    // Versus matches: written by Cloud Functions only; readable by the two players.
+    match /matches/{matchId} {
+      allow read: if signedIn() && request.auth.uid in resource.data.players;
+      allow write: if false;
+    }
+
+    // Matchmaking queue: clients call findMatch; a queued player may watch its own
+    // entry to learn the matchId once it has been popped.
+    match /matchQueue/{queueId} {
+      allow read, write: if false;
+
+      match /entries/{entryUid} {
+        allow read: if isOwner(entryUid);
+        allow write: if false;
+      }
+    }
+
+    // Trophy leaderboard: public read, written by the match settlement.
+    match /trophyBoard/{lang} {
+      allow read: if true;
+      allow write: if false;
+
+      match /entries/{entryUid} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+
+    // Invite codes resolve to match / room ids inside the functions only.
+    match /inviteCodes/{code} {
+      allow read, write: if false;
+    }
+
+    // Puzzle pool for random matches (publisher-maintained) and the publish index.
+    match /matchPool/{poolId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /puzzleIndex/{puzzleId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Co-op rooms: membership, status and rewards are managed by the functions. A
+    // member may only touch its own `members.{uid}.cursor` / `members.{uid}.lastSeenAt`.
+    function isRoomMember(roomId) {
+      return signedIn() && request.auth.uid in get(/databases/$(database)/documents/coopRooms/$(roomId)).data.members;
+    }
+
+    function onlyOwnPresenceChanged() {
+      let uid = request.auth.uid;
+      let before = resource.data;
+      let after = request.resource.data;
+      return after.diff(before).affectedKeys().hasOnly(['members'])
+        && after.members.diff(before.members).affectedKeys().hasOnly([uid])
+        && uid in before.members
+        && after.members[uid].diff(before.members[uid]).affectedKeys().hasOnly(['cursor', 'lastSeenAt'])
+        && (!('cursor' in after.members[uid]) || after.members[uid].cursor == null
+            || (after.members[uid].cursor is int && after.members[uid].cursor >= 0 && after.members[uid].cursor < 10000))
+        && after.members[uid].lastSeenAt is int && after.members[uid].lastSeenAt >= 0;
+    }
+
+    match /coopRooms/{roomId} {
+      allow read: if signedIn() && request.auth.uid in resource.data.members;
+      allow create, delete: if false;
+      allow update: if signedIn() && request.auth.uid in resource.data.members
+        && resource.data.status != 'finished'
+        && onlyOwnPresenceChanged();
+
+      // Grid cells filled by the members: {symbol: 0..31 | null, by: own uid, at: ms}.
+      match /cells/{cellIndex} {
+        allow read: if isRoomMember(roomId);
+        allow create, update: if isRoomMember(roomId)
+          && cellIndex.matches('^[0-9]{1,5}$')
+          && request.resource.data.keys().hasOnly(['symbol', 'by', 'at'])
+          && request.resource.data.keys().hasAll(['symbol', 'by', 'at'])
+          && (request.resource.data.symbol == null
+              || (request.resource.data.symbol is int && request.resource.data.symbol >= 0 && request.resource.data.symbol <= 31))
+          && request.resource.data.by == request.auth.uid
+          && request.resource.data.at is int && request.resource.data.at >= 0;
+        allow delete: if false;
+      }
     }
 
     match /puzzlesAuthoring/{document=**} {

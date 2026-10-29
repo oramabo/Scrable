@@ -15,14 +15,16 @@ export const EARN_TYPES = [
   'earn_ad',
   'earn_achievement',
   'earn_login',
+  'earn_season',
+  'earn_mission',
 ] as const;
 export type EarnType = (typeof EARN_TYPES)[number];
 
 export const SPEND_TYPES = ['spend_letter', 'spend_word', 'spend_check', 'spend_item'] as const;
 export type SpendType = (typeof SPEND_TYPES)[number];
 
-/** Types only Cloud Functions may write; rejected when a client submits them. */
-export const SERVER_ONLY_TYPES = ['purchase_bundle', 'refund', 'admin_adjust'] as const;
+/** Types only Cloud Functions may write; rejected when a client submits them. `earn_match` / `earn_coop` are credited by the multiplayer handlers. */
+export const SERVER_ONLY_TYPES = ['purchase_bundle', 'refund', 'admin_adjust', 'earn_match', 'earn_coop'] as const;
 export type ServerOnlyType = (typeof SERVER_ONLY_TYPES)[number];
 
 export const LEDGER_TYPES = [...EARN_TYPES, ...SPEND_TYPES, ...SERVER_ONLY_TYPES, 'reconcile'] as const;
@@ -115,6 +117,10 @@ export const EARN_RULES: Readonly<Record<EarnType, EarnRule>> = {
   earn_ad: { max: 30, perDay: 6 },
   earn_achievement: { max: 300, perDay: 20 },
   earn_login: { max: 50, perDay: 1 },
+  // Season-pass tier reward claimed by the client, once per tier ref (`{seasonId}:{tier}`).
+  earn_season: { max: 500, oncePerRef: true },
+  // Mission (quest) completion, once per mission ref, at most 10 per day.
+  earn_mission: { max: 100, perDay: 10, oncePerRef: true },
 };
 
 /** Largest absolute amount a client-submitted spend of each type may carry (catalogue price × 1). */
@@ -137,3 +143,37 @@ export const MODE_TIME_FACTOR: Readonly<Record<'relaxed' | 'normal' | 'newspaper
   normal: 0.05,
   newspaper: 0,
 };
+
+/** Multiplayer (versus races, co-op rooms): rewards credited by Cloud Functions, see README "Multiplayer". */
+export const MATCH_REWARDS = {
+  winCoins: 40,
+  /** The loser is paid for finishing the puzzle; a forfeit or a draw-by-expiry earns nothing. */
+  lossCoins: 10,
+  winSeasonPoints: 25,
+  lossSeasonPoints: 5,
+  winXp: 60,
+  lossXp: 20,
+} as const;
+/** Rewarded matches per player per UTC day (anti-farming); trophies keep moving after the cap. */
+export const MATCH_REWARDS_PER_DAY = 10;
+
+export const COOP_REWARDS = { coins: 25, xp: 30 } as const;
+/** Rewarded co-op rooms per player per UTC day (anti-farming). */
+export const COOP_REWARDS_PER_DAY = 5;
+/** A co-op room must have at least this many members and have lived this long for its completion to be rewarded. */
+export const COOP_REWARD_MIN_MEMBERS = 2;
+export const COOP_REWARD_MIN_DURATION_MS = 60_000;
+
+/** Trophy formula (src/lib/trophies.ts). */
+export const TROPHY_RULES = {
+  winBase: 30,
+  winMin: 10,
+  winMax: 50,
+  lossBase: 15,
+  lossMin: 5,
+  lossMax: 25,
+  /** Elo K factor; scaled so the ±16 Elo swing becomes the ±20 that spans [winMin, winMax]. */
+  k: 32,
+  kScale: 1.25,
+  eloDivisor: 400,
+} as const;

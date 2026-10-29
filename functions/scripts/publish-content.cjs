@@ -105,6 +105,20 @@ async function main() {
     }
     console.log(`${uploaded} images uploaded`);
   }
+  // Match pools for random versus matchmaking: pack puzzles per level with their solution hashes.
+  if (args.only === 'all' || args.only === 'packs') {
+    const byLevel = new Map();
+    for (const entry of index.puzzles.filter((e) => e.lang === args.lang && e.kind === 'pack')) {
+      const level = Number((entry.packId || '').match(/-l(\d+)-/)?.[1] || 0);
+      if (!level) continue;
+      if (!byLevel.has(level)) byLevel.set(level, []);
+      byLevel.get(level).push({ puzzleId: entry.id, letterCells: entry.letterCells, solutionHash: entry.solutionHash });
+    }
+    for (const [level, puzzles] of byLevel) {
+      await deps.db.setDoc(`matchPool/${args.lang}_${level}`, { lang: args.lang, level, puzzles, updatedAt: Date.now() });
+    }
+    console.log(`match pools written for levels ${[...byLevel.keys()].sort().join(', ')}`);
+  }
   if (args.rebuild) {
     const r = await rebuildManifests(deps, { lang: args.lang }, Date.now());
     console.log(`manifests rebuilt: ${r.dailyEntries} dailies, ${r.packs} packs, ${r.files.length} files`);

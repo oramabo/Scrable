@@ -10,7 +10,7 @@ import * as path from 'node:path';
 import Ajv2020, { type ErrorObject, type ValidateFunction } from 'ajv/dist/2020';
 import addFormats from 'ajv-formats';
 
-export type SchemaName = 'puzzle' | 'progress' | 'ledger-entry' | 'daily-manifest' | 'packs-manifest' | 'manifest';
+export type SchemaName = 'puzzle' | 'progress' | 'ledger-entry' | 'daily-manifest' | 'packs-manifest' | 'manifest' | 'match' | 'coop-room';
 
 const SCHEMA_FILES: Record<SchemaName, string> = {
   puzzle: 'puzzle.schema.json',
@@ -19,6 +19,8 @@ const SCHEMA_FILES: Record<SchemaName, string> = {
   'daily-manifest': 'daily-manifest.schema.json',
   'packs-manifest': 'packs-manifest.schema.json',
   manifest: 'manifest.schema.json',
+  match: 'match.schema.json',
+  'coop-room': 'coop-room.schema.json',
 };
 
 const CANDIDATE_DIRS = [

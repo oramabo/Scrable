@@ -8,6 +8,7 @@ import { HttpsError } from 'firebase-functions/v2/https';
 
 import { type Db, type DocData, getField, readNumber } from '../lib/firestore';
 import { decodeLetterSymbols, letterCellCount, type PuzzleLike, solutionHash as computeSolutionHash, verifyChecksum } from '../lib/puzzleCodec';
+import { puzzleIndexPath } from '../lib/puzzleLookup';
 import { CACHE_IMMUTABLE, type ObjectStore } from '../lib/storage';
 import { validate } from '../lib/validate';
 import { dailyDocPath } from './submitDaily';
@@ -160,6 +161,20 @@ export async function publishPuzzle(deps: PublishDeps, input: unknown, now: numb
   const url = deps.storage.publicUrl(path);
   await deps.storage.putJson(path, p, { cacheControl: CACHE_IMMUTABLE });
   const publishedAt = new Date(now).toISOString();
+
+  // Lookup record for the multiplayer handlers (match / co-op puzzle resolution by id).
+  await deps.db.setDoc(puzzleIndexPath(p.id), {
+    puzzleId: p.id,
+    lang: p.lang,
+    kind: p.kind,
+    level: p.level,
+    letterCells,
+    solutionHash,
+    checksum,
+    version: p.meta.version,
+    path,
+    publishedAt: now,
+  });
 
   if (p.kind === 'daily' && p.daily) {
     const dailyDoc = dailyDocPath(p.lang, p.daily.date, p.daily.variant);

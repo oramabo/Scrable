@@ -129,18 +129,18 @@ class SeasonPass {
 }
 
 /// Trophy (rating) changes for versus matches: Elo-flavoured around a +30/−15
-/// base so active players climb. Mirrors functions/src/lib/trophies.ts.
+/// base so active players climb. Must stay identical to functions/src/lib/trophies.ts.
 class Trophies {
   const Trophies._();
 
   static int winDelta(int mine, int theirs) {
     final expected = 1 / (1 + math.pow(10, (theirs - mine) / 400));
-    return (30 + 32 * (0.5 - expected) * 1.25).round().clamp(10, 50);
+    return (30 + 40 * (0.5 - expected)).round().clamp(10, 50);
   }
 
   static int lossDelta(int mine, int theirs) {
     final expected = 1 / (1 + math.pow(10, (theirs - mine) / 400));
-    return (-15 - 20 * (expected - 0.5)).round().clamp(-25, -5);
+    return (-(15 + 40 * (expected - 0.5))).round().clamp(-25, -5);
   }
 
   static int applyDelta(int trophies, int delta) => math.max(0, trophies + delta);

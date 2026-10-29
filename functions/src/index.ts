@@ -15,6 +15,14 @@ import { onCall, onRequest } from 'firebase-functions/v2/https';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 
 import { calibrateClues as calibrateCluesHandler } from './handlers/calibrateClues';
+import {
+  createCoopRoom as createCoopRoomHandler,
+  expireRooms as expireRoomsHandler,
+  finishCoopRoom as finishCoopRoomHandler,
+  joinCoopRoom as joinCoopRoomHandler,
+  leaveCoopRoom as leaveCoopRoomHandler,
+  startCoopRoom as startCoopRoomHandler,
+} from './handlers/coop';
 import { deleteAccount as deleteAccountHandler } from './handlers/deleteAccount';
 import { publishPuzzle as publishPuzzleHandler } from './handlers/publishPuzzle';
 import { rebuildManifests as rebuildManifestsHandler } from './handlers/rebuildManifests';
@@ -23,6 +31,18 @@ import { serverTime as serverTimeHandler } from './handlers/serverTime';
 import { sendStreakReminders } from './handlers/streakReminders';
 import { submitDaily as submitDailyHandler } from './handlers/submitDaily';
 import { syncLedger as syncLedgerHandler } from './handlers/syncLedger';
+import { trophyLeaderboard as trophyLeaderboardHandler } from './handlers/trophyLeaderboard';
+import {
+  cancelMatch as cancelMatchHandler,
+  createMatch as createMatchHandler,
+  expireMatches as expireMatchesHandler,
+  findMatch as findMatchHandler,
+  finishMatch as finishMatchHandler,
+  joinMatch as joinMatchHandler,
+  leaveMatch as leaveMatchHandler,
+  reportProgress as reportProgressHandler,
+  startMatch as startMatchHandler,
+} from './handlers/versus';
 import { adminUserAdmin, requireAdmin, requireAuth, type UserAdmin } from './lib/auth';
 import type { Db } from './lib/firestore';
 import { adminDb } from './lib/firestoreAdmin';
@@ -94,4 +114,32 @@ export const streakReminders = onSchedule({ schedule: 'every 1 hours', timeZone:
 export const calibrateClues = onSchedule({ schedule: '0 3 * * *', timeZone: 'UTC', timeoutSeconds: 540, memory: '1GiB' }, async () => {
   const result = await calibrateCluesHandler(deps().db, Date.now());
   logger.info('clue calibration', result);
+});
+
+// --- Multiplayer: versus races, trophies, co-op rooms (README "Multiplayer") ---
+
+export const createMatch = onCall({ enforceAppCheck }, (request) => createMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const joinMatch = onCall({ enforceAppCheck }, (request) => joinMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const findMatch = onCall({ enforceAppCheck }, (request) => findMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const startMatch = onCall({ enforceAppCheck }, (request) => startMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const reportProgress = onCall({ enforceAppCheck }, (request) => reportProgressHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const finishMatch = onCall({ enforceAppCheck }, (request) => finishMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const leaveMatch = onCall({ enforceAppCheck }, (request) => leaveMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const cancelMatch = onCall({ enforceAppCheck }, (request) => cancelMatchHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const trophyLeaderboard = onCall({ enforceAppCheck }, (request) => trophyLeaderboardHandler(deps().db, requireAuth(request).uid, request.data));
+
+export const expireMatches = onSchedule({ schedule: 'every 1 minutes', timeZone: 'UTC', timeoutSeconds: 300 }, async () => {
+  const result = await expireMatchesHandler({ db: deps().db }, Date.now());
+  if (result.cancelled + result.forfeited + result.drawn + result.queueEntriesDeleted > 0) logger.info('expired matches', result);
+});
+
+export const createCoopRoom = onCall({ enforceAppCheck }, (request) => createCoopRoomHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const joinCoopRoom = onCall({ enforceAppCheck }, (request) => joinCoopRoomHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const startCoopRoom = onCall({ enforceAppCheck }, (request) => startCoopRoomHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const leaveCoopRoom = onCall({ enforceAppCheck }, (request) => leaveCoopRoomHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+export const finishCoopRoom = onCall({ enforceAppCheck }, (request) => finishCoopRoomHandler({ db: deps().db }, requireAuth(request).uid, request.data, Date.now()));
+
+export const expireRooms = onSchedule({ schedule: 'every 15 minutes', timeZone: 'UTC', timeoutSeconds: 300 }, async () => {
+  const result = await expireRoomsHandler({ db: deps().db }, Date.now());
+  if (result.expired > 0) logger.info('expired co-op rooms', result);
 });

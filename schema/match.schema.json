@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://chetz.app/schema/match.schema.json",
+  "title": "Chetz versus match",
+  "description": "Firestore document `matches/{matchId}` written only by Cloud Functions (createMatch / joinMatch / findMatch / startMatch / reportProgress / finishMatch / leaveMatch / cancelMatch / expireMatches). Readable by its two players. Both players solve the same puzzle; only progress percentages are shared, never the grid.",
+  "type": "object",
+  "required": ["lang", "level", "puzzleId", "letterCells", "solutionHash", "mode", "inviteCode", "hostUid", "players", "status", "createdAt", "updatedAt", "expiresAt"],
+  "additionalProperties": false,
+  "properties": {
+    "lang": { "type": "string", "enum": ["he", "en"] },
+    "level": { "type": "integer", "minimum": 1, "maximum": 9 },
+    "puzzleId": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" },
+    "letterCells": { "description": "Letter cells of the puzzle; null when the server could not resolve the puzzle size.", "oneOf": [{ "type": "integer", "minimum": 1 }, { "type": "null" }] },
+    "solutionHash": { "description": "`PuzzleCodec.solutionHash` the finish must match; null when unknown (then hashes are not checked).", "oneOf": [{ "type": "string", "pattern": "^[0-9a-f]{64}$" }, { "type": "null" }] },
+    "mode": { "type": "string", "enum": ["invite", "random"] },
+    "inviteCode": { "description": "Six upper-case alphanumerics for invite matches; null for random matches.", "oneOf": [{ "type": "string", "pattern": "^[A-Z0-9]{6}$" }, { "type": "null" }] },
+    "hostUid": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "players": {
+      "type": "object",
+      "description": "Keyed by uid; one entry while waiting, two from `ready` on.",
+      "minProperties": 1,
+      "maxProperties": 2,
+      "additionalProperties": { "$ref": "#/$defs/player" }
+    },
+    "status": { "type": "string", "enum": ["waiting", "ready", "running", "finished", "cancelled"] },
+    "createdAt": { "$ref": "#/$defs/ms" },
+    "updatedAt": { "$ref": "#/$defs/ms" },
+    "startedAt": { "$ref": "#/$defs/ms", "description": "Server time the race started (status running)." },
+    "firstFinishAt": { "$ref": "#/$defs/ms", "description": "Set when the first player finishes; the opponent then has 15 minutes." },
+    "finishedAt": { "$ref": "#/$defs/ms", "description": "Set when the match is closed (finished or cancelled)." },
+    "closeReason": { "type": "string", "enum": ["both_finished", "forfeit", "expired", "cancelled"] },
+    "expiresAt": { "$ref": "#/$defs/ms", "description": "When the scheduled `expireMatches` job closes the match if nothing happens: 30 min waiting, 10 min ready, 60 min running, 15 min after the first finish." }
+  },
+  "$defs": {
+    "ms": { "type": "integer", "minimum": 0, "description": "Milliseconds since the Unix epoch (server clock)." },
+    "player": {
+      "type": "object",
+      "required": ["displayName", "joinedAt", "progress"],
+      "additionalProperties": false,
+      "properties": {
+        "displayName": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "joinedAt": { "$ref": "#/$defs/ms" },
+        "progress": { "type": "number", "minimum": 0, "maximum": 1, "description": "Share of letter cells filled, as reported by the player's client (≥ 1 s apart)." },
+        "lastProgressAt": { "$ref": "#/$defs/ms" },
+        "ready": { "type": "boolean" },
+        "finishedAt": { "$ref": "#/$defs/ms" },
+        "elapsedMs": { "type": "integer", "minimum": 0, "description": "Server-measured solve time (startedAt → finish)." },
+        "hintsUsed": { "type": "integer", "minimum": 0 },
+        "result": { "type": "string", "enum": ["win", "loss", "draw", "forfeit"] },
+        "trophiesBefore": { "type": "integer", "minimum": 0 },
+        "trophiesAfter": { "type": "integer", "minimum": 0 },
+        "trophyDelta": { "type": "integer" },
+        "rewards": {
+          "type": "object",
+          "description": "What the settlement credited (coins through `users/{uid}/ledger/match_{matchId}_{uid}`, XP and season points on the user document).",
+          "required": ["credited", "capped", "coins", "xp", "seasonPoints", "seasonId"],
+          "additionalProperties": false,
+          "properties": {
+            "credited": { "type": "boolean" },
+            "capped": { "type": "boolean", "description": "True when the per-day reward cap swallowed this reward." },
+            "coins": { "type": "integer", "minimum": 0 },
+            "xp": { "type": "integer", "minimum": 0 },
+            "seasonPoints": { "type": "integer", "minimum": 0 },
+            "seasonId": { "oneOf": [{ "type": "string", "pattern": "^\\d{4}-S[1-9]\\d*$" }, { "type": "null" }] }
+          }
+        }
+      }
+    }
+  }
+}

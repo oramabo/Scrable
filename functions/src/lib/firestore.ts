@@ -25,10 +25,21 @@ export interface DocSnapshot {
   readonly data: DocData | undefined;
 }
 
+export interface OrderBy {
+  field: string;
+  direction?: 'asc' | 'desc';
+}
+
 export interface QueryOptions {
   limit?: number;
-  /** Order by document id and continue after this id (pagination). */
+  /** Order by document id and continue after this id (pagination). Not combinable with `orderBy`. */
   startAfterId?: string;
+  /**
+   * Order by a field instead of the document id (ties broken by document id in
+   * the same direction, as Firestore does). Documents missing the field are
+   * excluded, as in Firestore.
+   */
+  orderBy?: OrderBy;
 }
 
 export interface SetOptions {
@@ -47,8 +58,9 @@ export interface Db {
   getDoc(path: string): Promise<DocSnapshot>;
   setDoc(path: string, data: DocData, options?: SetOptions): Promise<void>;
   deleteDoc(path: string): Promise<void>;
-  /** Documents of a collection matching all filters, ordered by document id. */
+  /** Documents of a collection matching all filters, ordered by document id (or by `options.orderBy`). */
   queryDocs(collectionPath: string, filters?: Filter[], options?: QueryOptions): Promise<DocSnapshot[]>;
+  /** Number of documents matching all filters (server-side aggregation; no ordering). */
   countDocs(collectionPath: string, filters?: Filter[]): Promise<number>;
   runTransaction<T>(fn: (tx: Transaction) => Promise<T>): Promise<T>;
 }

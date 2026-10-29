@@ -106,6 +106,16 @@ export class FakeFirestore implements Db {
     assertCollectionPath(collectionPath);
     let rows = this.list(collectionPath).map((p) => this.snapshot(p));
     rows = rows.filter((r) => filters.every((f) => matches(getField(r.data, f.field), f.op, f.value)));
+    const orderBy = options?.orderBy;
+    if (orderBy !== undefined) {
+      if (options?.startAfterId !== undefined) throw new Error('startAfterId cannot be combined with orderBy');
+      const sign = orderBy.direction === 'desc' ? -1 : 1;
+      rows = rows.filter((r) => getField(r.data, orderBy.field) !== undefined);
+      rows.sort((a, b) => {
+        const c = compare(getField(a.data, orderBy.field), getField(b.data, orderBy.field)) ?? 0;
+        return c !== 0 ? sign * c : sign * (a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+      });
+    }
     const after = options?.startAfterId;
     if (after !== undefined) rows = rows.filter((r) => r.id > after);
     if (options?.limit !== undefined) rows = rows.slice(0, options.limit);

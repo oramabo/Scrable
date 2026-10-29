@@ -58,6 +58,8 @@ const mapping = [
   ['daily-manifest-', 'daily-manifest.schema.json'],
   ['packs-manifest-', 'packs-manifest.schema.json'],
   ['publish-index-', 'publish-index.schema.json'],
+  ['match-', 'match.schema.json'],
+  ['coop-room-', 'coop-room.schema.json'],
 ];
 
 /** Extra structural checks the JSON Schema cannot express. */
