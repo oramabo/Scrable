@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-10-29T07:01:59.814128Z",
+ "generatedAt": "2026-10-29T07:30:19.860819Z",
  "lang": "en",
  "puzzles": [
   {
@@ -1155,6 +1155,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2026-11-27-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-27",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-27.json",
+   "letterCells": 130,
+   "solutionHash": "5e83f7e0f4ccaba42e386911b7a9a6b3d9e7a832c50455d9e08acb61c55177d7",
+   "checksum": "sha256:349cf68e88b51b23e43e06e263e6b9d31998f9d2174286c3d89c8b51b9bf300d",
+   "version": 1
+  },
+  {
    "id": "en-d-2027-01-17-hard",
    "kind": "daily",
    "lang": "en",
@@ -1164,6 +1176,42 @@
    "letterCells": 126,
    "solutionHash": "f33258365ca54d5a15552b175aa3cb2c5acc8a7cda8808bae88c7f39f5488548",
    "checksum": "sha256:f5256305144fff284f0d7296251865facf704849e40e83d98ff803825c9f8000",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-12-29-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-12-29",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-12-29.json",
+   "letterCells": 129,
+   "solutionHash": "353e9022fd624171e4d26a849535ba70eeaf8cd136102952d92ed4d353a705fa",
+   "checksum": "sha256:6cd3111e3b953d0a43641f18f7d3db5364efb6298e353ab5d1e23eaf8d1eb08a",
+   "version": 1
+  },
+  {
+   "id": "en-d-2027-01-27-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2027-01-27",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2027-01-27.json",
+   "letterCells": 127,
+   "solutionHash": "11f66ba1ba7a84366cc100d7eab0df56e6d70b1a9452b8bd75088c022b9d1c1f",
+   "checksum": "sha256:cb49f404bb6e1b1a20a7090c55c95aa495a2996d0b7802b52fa32703c58b4ca6",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-11-21-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-21",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-21.json",
+   "letterCells": 126,
+   "solutionHash": "439ccd0064e35c01833d3669988570b6cb5f4eede7764bf1f6c04b3797420534",
+   "checksum": "sha256:7e6998d54a5c46bdf804e210d8f8184cc70a39d765a2e108c1bc74be0ae26b2e",
    "version": 1
   },
   {
@@ -1491,6 +1539,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2026-11-22-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-22",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-22.json",
+   "letterCells": 128,
+   "solutionHash": "6b2df458174cc1f3fbc2889a641e980f4ee504fdc69dbce529e106d5a92916fe",
+   "checksum": "sha256:9838873e5d60121ddb3181201363580d4fb35d9ab0f0721d594d47218505a507",
+   "version": 1
+  },
+  {
    "id": "en-d-2027-01-12-hard",
    "kind": "daily",
    "lang": "en",
@@ -1548,6 +1608,18 @@
    "letterCells": 126,
    "solutionHash": "2c9ec9ef899b8a4597f6b8f03ee0b22c4105c9951a98f788cc6d67e8c93ce7b2",
    "checksum": "sha256:f773072d68d0c23ec229d879d49cae00cabe3062b7914e2f17feda733d4f9670",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-11-25-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-25",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-25.json",
+   "letterCells": 127,
+   "solutionHash": "07bb29546b8fe14d0e9ec63a9f59d10d02fd234256909cf71d8180a9210f03d1",
+   "checksum": "sha256:bcd7f1f5390720ac737ebf02f99144102d31452d21715c8f7b22e45015dbe06c",
    "version": 1
   },
   {
@@ -1659,6 +1731,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2026-12-27-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-12-27",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-12-27.json",
+   "letterCells": 126,
+   "solutionHash": "50e8f280fd8f9fc2cc15bb7e1dc542dbe59f6dc91ad682fb23f044d662a06d89",
+   "checksum": "sha256:a41cb5cbe4acb209bf801245a370546ce1168572e2a244a6ef51ec211fff3ed5",
+   "version": 1
+  },
+  {
    "id": "en-d-2026-11-06-hard",
    "kind": "daily",
    "lang": "en",
@@ -1707,6 +1791,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2026-12-26-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-12-26",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-12-26.json",
+   "letterCells": 127,
+   "solutionHash": "30239c1e9adc60213e7d9cc1d22ca436ec90bd9680f3664240175b24353a2dce",
+   "checksum": "sha256:a935dae62c66e03a07219828695f3d78b5dc8efdc5c3340b344cebf76f4b2d36",
+   "version": 1
+  },
+  {
    "id": "en-d-2027-01-02-hard",
    "kind": "daily",
    "lang": "en",
@@ -1719,6 +1815,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2027-01-28-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2027-01-28",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2027-01-28.json",
+   "letterCells": 126,
+   "solutionHash": "b6f4bdee2f5634a81b1fe39f3e9bb10f287538321fc2a8abcbb743021a5a58d8",
+   "checksum": "sha256:68d833da41049890f5bdceb91762be1331d21f9f4000c8a9686927d533b99413",
+   "version": 1
+  },
+  {
    "id": "en-d-2027-01-30-hard",
    "kind": "daily",
    "lang": "en",
@@ -1728,6 +1836,18 @@
    "letterCells": 106,
    "solutionHash": "7c9b5397d9d84537bc58cddf800d40cc78fd62fdc8194dc3ac43e192e7552498",
    "checksum": "sha256:1a01357206bfc4c03e97db9c4317ff257ba4476b337dd40d9356cd9437a64ecd",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-11-26-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-26",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-26.json",
+   "letterCells": 127,
+   "solutionHash": "a462b7067ed528cedc4daef735cce2a2ec939dec304ad208b6d2c8c6bd70651d",
+   "checksum": "sha256:00c611b08c73eba7e3b207e13bad0aaaf507c6f01918e0266b29780df0d1543a",
    "version": 1
   },
   {
@@ -1752,6 +1872,18 @@
    "letterCells": 127,
    "solutionHash": "541a40db7a91777ae2fae7b3280b9c79486f49acea9fc1580f11da1faf063b08",
    "checksum": "sha256:92cbfec6ce51f5e8ad29c2a9401319e2ed883e731a68cd73bece2b44c176f099",
+   "version": 1
+  },
+  {
+   "id": "en-d-2027-01-25-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2027-01-25",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2027-01-25.json",
+   "letterCells": 125,
+   "solutionHash": "dda44c429367b2fc06c55f6ae33bd641a582f1cfb81c8e8df668682689c9841c",
+   "checksum": "sha256:68b8df07d4b9ac64eeff0589b57748d936a3fa717357c4636e917e004424df03",
    "version": 1
   },
   {
@@ -1815,6 +1947,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2026-11-23-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-23",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-23.json",
+   "letterCells": 126,
+   "solutionHash": "d0cad0dd9a7b9b65cb930d2b83803536e9d6ac45c5d98a064ec8385763aad9ca",
+   "checksum": "sha256:86c9c208daa884de67f2069efed5fcb1aa6413ad6db5fd0532e40fdb09915b55",
+   "version": 1
+  },
+  {
    "id": "en-d-2026-11-12-hard",
    "kind": "daily",
    "lang": "en",
@@ -1839,6 +1983,18 @@
    "version": 1
   },
   {
+   "id": "en-d-2027-01-26-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2027-01-26",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2027-01-26.json",
+   "letterCells": 122,
+   "solutionHash": "8e39b447c04bd67bc6c76daf0dd11ede6587787994c1264b328ba2acf45204ac",
+   "checksum": "sha256:2b8565ddc17d771af3ebb900ced149720dec2a8610878c2be545badddd8c412b",
+   "version": 1
+  },
+  {
    "id": "en-d-2026-11-09-hard",
    "kind": "daily",
    "lang": "en",
@@ -1848,6 +2004,42 @@
    "letterCells": 128,
    "solutionHash": "a1315ca5e29b5af50241d90fb8823fcd6b0c78e02b4877fff788ed64a49fc8b7",
    "checksum": "sha256:f5d593450d6959b2b714b03ffe7fe14a78738026c3f6242857812a06bebbf41d",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-11-24-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-24",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-24.json",
+   "letterCells": 128,
+   "solutionHash": "717d41d6cb98206580d4a143bbdeb31e8beaa326a83806e9480dae1b6a074b43",
+   "checksum": "sha256:a091fa83ea109b5c1d6a86a4f6c11669e52517f234028ba3955d172b7c67d163",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-12-23-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-12-23",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-12-23.json",
+   "letterCells": 127,
+   "solutionHash": "61b7ef3909c7045a94ed13e8807b8abd11d0c65ee607cac213315606bccc63a9",
+   "checksum": "sha256:8081b2666ae25e75572c9a8420973af9fcd9867ff61e8c4bc56ffcbcf9add3bd",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-11-28-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-28",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-28.json",
+   "letterCells": 127,
+   "solutionHash": "4094565ac1fffa8a7dcc078dadeae40b89b8e70a07376eb23840c9a8630cf1c2",
+   "checksum": "sha256:14201e2ebd59d563a9e01af2fcb2ab483cfa15f65e493ed05f524ea9e4ce64f2",
    "version": 1
   },
   {
@@ -1911,6 +2103,30 @@
    "version": 1
   },
   {
+   "id": "en-d-2026-12-28-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-12-28",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-12-28.json",
+   "letterCells": 130,
+   "solutionHash": "680f8d5c1645caf6044c0d772926888cdde17d946dbaaef507609dfdc741b673",
+   "checksum": "sha256:5669fbfa60e6e2542b7be5c787c87215b52eea379bf36a6ddbe55e86fa11ff6a",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-11-19-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-11-19",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-11-19.json",
+   "letterCells": 128,
+   "solutionHash": "802524b4210c21a8fecd44a14871bd86b62e34d1731e7fee68132f6bfc6eb28e",
+   "checksum": "sha256:931d9b8bd72dd2a73fe226d937da1b9dfcb048f333a1fca11d3bf48fd044c7ff",
+   "version": 1
+  },
+  {
    "id": "en-d-2026-12-07-hard",
    "kind": "daily",
    "lang": "en",
@@ -1953,9 +2169,9 @@
    "date": "2027-01-20",
    "variant": "hard",
    "file": "en/puzzles/daily/hard/2027-01-20.json",
-   "letterCells": 127,
-   "solutionHash": "d7a7d0a3e3a623c833c114745d95066f9cb4ec966192f8b6020660d3808e1f07",
-   "checksum": "sha256:8b3929b64ca1bfa4cca8d04519239ea88bc7499584445764b39894dbeb2d5b97",
+   "letterCells": 126,
+   "solutionHash": "b914149c32c94f5aa7b69b4ccb2b752c7710fbf583db38c5440d0f5675fdb034",
+   "checksum": "sha256:a64258256e58a205c3e7ce0ec1d68cbec3bb1677f7625cedf807d5ab61e537c3",
    "version": 1
   },
   {
@@ -2052,6 +2268,18 @@
    "letterCells": 127,
    "solutionHash": "4a30b8bfd0081cd76b03c1c36254863a6e5b684d8c349158f0be1d8955bceefa",
    "checksum": "sha256:673c94ddd4b320f665da3e46ff1f27e67ddc53b5f8eee5e648b741a45681d47c",
+   "version": 1
+  },
+  {
+   "id": "en-d-2026-12-25-hard",
+   "kind": "daily",
+   "lang": "en",
+   "date": "2026-12-25",
+   "variant": "hard",
+   "file": "en/puzzles/daily/hard/2026-12-25.json",
+   "letterCells": 126,
+   "solutionHash": "6902fec8fc341af14c0c9851c0765564d8cc8d499f19348b35e59a305bc166c4",
+   "checksum": "sha256:6d8dc9f9f61b574b256f2740b7b9b0c166c856e27026d5b496f22cd76d50f068",
    "version": 1
   },
   {
@@ -4500,6 +4728,30 @@
    "letterCells": 106,
    "solutionHash": "8972845d27c7baa6c69637955670e56cbbdee1b2e04d9246a6901e7d7d7103e0",
    "checksum": "sha256:377a52af33949b51c68087d45b9b1112d3b959600892ca659c690ee970022334",
+   "version": 1
+  },
+  {
+   "id": "en-l5-p01-27",
+   "kind": "pack",
+   "lang": "en",
+   "packId": "en-l5-p01",
+   "index": 27,
+   "file": "en/puzzles/packs/en-l5-p01/27.json",
+   "letterCells": 108,
+   "solutionHash": "d9145d27da09e3711a2a827b85a727f569042c81dd2ac04a5ac39dc64c3426bf",
+   "checksum": "sha256:92ac5a58badd3138f8f6394c881a61cf4ce4073278dd6666a57f7714b7595679",
+   "version": 1
+  },
+  {
+   "id": "en-l5-p01-28",
+   "kind": "pack",
+   "lang": "en",
+   "packId": "en-l5-p01",
+   "index": 28,
+   "file": "en/puzzles/packs/en-l5-p01/28.json",
+   "letterCells": 105,
+   "solutionHash": "9726566888e34ab1509767c227e816143497ab9a15abbefc9a5c0a6bb4647cd4",
+   "checksum": "sha256:0b0d3c3cda690b4cb9f06d1432db777fe7f742f0671a492bff7e42ac06fa1acf",
    "version": 1
   }
  ]

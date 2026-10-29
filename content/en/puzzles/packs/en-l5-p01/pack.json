@@ -7,7 +7,7 @@
     "he": "רמה 5 · חבילה 1",
     "en": "Level 5 · Pack 1"
   },
-  "puzzleCount": 24,
+  "puzzleCount": 26,
   "puzzles": [
     "en-l5-p01-01",
     "en-l5-p01-02",
@@ -32,7 +32,9 @@
     "en-l5-p01-21",
     "en-l5-p01-22",
     "en-l5-p01-23",
-    "en-l5-p01-26"
+    "en-l5-p01-26",
+    "en-l5-p01-27",
+    "en-l5-p01-28"
   ],
   "free": true
 }

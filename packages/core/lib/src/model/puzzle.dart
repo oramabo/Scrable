@@ -47,6 +47,58 @@ class PackRef {
   static PackRef fromJson(Map<String, dynamic> j) => PackRef(id: j['id'] as String, index: j['index'] as int);
 }
 
+/// A picture used as a clue (picture arrowwords). The cell shows the image;
+/// [ClueSlot.text] keeps a short textual hint for the clue bar and screen
+/// readers (e.g. "בתמונה" / "pictured").
+class ClueImage {
+  const ClueImage({
+    required this.id,
+    required this.src,
+    this.width,
+    this.height,
+    this.credit,
+    this.license,
+    this.sourceUrl,
+  });
+
+  /// Stable id (e.g. `img_<wordId>`), also the asset/cache key.
+  final String id;
+
+  /// Relative path under the content root or an absolute URL.
+  final String src;
+  final int? width;
+  final int? height;
+
+  /// Author / credit line required by the licence.
+  final String? credit;
+
+  /// Licence short name, e.g. `CC BY-SA 4.0`, `CC0`, `Public domain`.
+  final String? license;
+
+  /// Page the image came from (Wikimedia Commons file page).
+  final String? sourceUrl;
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'src': src,
+        if (width != null) 'width': width,
+        if (height != null) 'height': height,
+        if (credit != null) 'credit': credit,
+        if (license != null) 'license': license,
+        if (sourceUrl != null) 'sourceUrl': sourceUrl,
+      };
+
+  static ClueImage fromJson(Map<String, dynamic> j) => ClueImage(
+        id: j['id'] as String,
+        src: j['src'] as String,
+        width: j['width'] as int?,
+        height: j['height'] as int?,
+        credit: j['credit'] as String?,
+        license: j['license'] as String?,
+        sourceUrl: j['sourceUrl'] as String?,
+      );
+}
+
 /// One clue inside a clue cell.
 class ClueSlot {
   const ClueSlot({
@@ -55,6 +107,7 @@ class ClueSlot {
     required this.arrow,
     required this.text,
     required this.lines,
+    this.image,
   });
 
   final SlotPos pos;
@@ -64,8 +117,13 @@ class ClueSlot {
   /// Full clue text (shown in the clue bar).
   final String text;
 
-  /// Pre-broken lines for the in-cell rendering.
+  /// Pre-broken lines for the in-cell rendering (empty when an image fills the cell).
   final List<String> lines;
+
+  /// Picture clue; when present the cell renders the image instead of [lines].
+  final ClueImage? image;
+
+  bool get isPicture => image != null;
 
   Map<String, dynamic> toJson() => {
         'pos': pos.code,
@@ -73,6 +131,7 @@ class ClueSlot {
         'arrow': arrow.code,
         'text': text,
         'lines': lines,
+        if (image != null) 'image': image!.toJson(),
       };
 
   static ClueSlot fromJson(Map<String, dynamic> j) => ClueSlot(
@@ -81,6 +140,7 @@ class ClueSlot {
         arrow: Arrow.fromCode(j['arrow'] as String),
         text: j['text'] as String,
         lines: (j['lines'] as List).cast<String>(),
+        image: j['image'] == null ? null : ClueImage.fromJson(j['image'] as Map<String, dynamic>),
       );
 }
 

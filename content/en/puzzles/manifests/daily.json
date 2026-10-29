@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-29T07:01:59.814128Z",
+ "generatedAt": "2026-10-29T07:30:19.860819Z",
  "lang": "en",
  "entries": [
   {
@@ -364,6 +364,14 @@
    "version": 1
   },
   {
+   "date": "2026-11-19",
+   "variant": "hard",
+   "id": "en-d-2026-11-19-hard",
+   "url": "puzzles/en/daily/hard/2026-11-19.v1.json",
+   "checksum": "sha256:931d9b8bd72dd2a73fe226d937da1b9dfcb048f333a1fca11d3bf48fd044c7ff",
+   "version": 1
+  },
+  {
    "date": "2026-11-20",
    "variant": "easy",
    "id": "en-d-2026-11-20-easy",
@@ -388,11 +396,27 @@
    "version": 1
   },
   {
+   "date": "2026-11-21",
+   "variant": "hard",
+   "id": "en-d-2026-11-21-hard",
+   "url": "puzzles/en/daily/hard/2026-11-21.v1.json",
+   "checksum": "sha256:7e6998d54a5c46bdf804e210d8f8184cc70a39d765a2e108c1bc74be0ae26b2e",
+   "version": 1
+  },
+  {
    "date": "2026-11-22",
    "variant": "easy",
    "id": "en-d-2026-11-22-easy",
    "url": "puzzles/en/daily/easy/2026-11-22.v1.json",
    "checksum": "sha256:70a5e90dd40ea3b63d77e21f4026315f59c7f08d5d5a3d2f4931fb5b41028ead",
+   "version": 1
+  },
+  {
+   "date": "2026-11-22",
+   "variant": "hard",
+   "id": "en-d-2026-11-22-hard",
+   "url": "puzzles/en/daily/hard/2026-11-22.v1.json",
+   "checksum": "sha256:9838873e5d60121ddb3181201363580d4fb35d9ab0f0721d594d47218505a507",
    "version": 1
   },
   {
@@ -404,11 +428,27 @@
    "version": 1
   },
   {
+   "date": "2026-11-23",
+   "variant": "hard",
+   "id": "en-d-2026-11-23-hard",
+   "url": "puzzles/en/daily/hard/2026-11-23.v1.json",
+   "checksum": "sha256:86c9c208daa884de67f2069efed5fcb1aa6413ad6db5fd0532e40fdb09915b55",
+   "version": 1
+  },
+  {
    "date": "2026-11-24",
    "variant": "easy",
    "id": "en-d-2026-11-24-easy",
    "url": "puzzles/en/daily/easy/2026-11-24.v1.json",
    "checksum": "sha256:0adb37e354afb2e759b57f8848a94a5be8987a49d385871f08f8ccac178b92be",
+   "version": 1
+  },
+  {
+   "date": "2026-11-24",
+   "variant": "hard",
+   "id": "en-d-2026-11-24-hard",
+   "url": "puzzles/en/daily/hard/2026-11-24.v1.json",
+   "checksum": "sha256:a091fa83ea109b5c1d6a86a4f6c11669e52517f234028ba3955d172b7c67d163",
    "version": 1
   },
   {
@@ -420,11 +460,27 @@
    "version": 1
   },
   {
+   "date": "2026-11-25",
+   "variant": "hard",
+   "id": "en-d-2026-11-25-hard",
+   "url": "puzzles/en/daily/hard/2026-11-25.v1.json",
+   "checksum": "sha256:bcd7f1f5390720ac737ebf02f99144102d31452d21715c8f7b22e45015dbe06c",
+   "version": 1
+  },
+  {
    "date": "2026-11-26",
    "variant": "easy",
    "id": "en-d-2026-11-26-easy",
    "url": "puzzles/en/daily/easy/2026-11-26.v1.json",
    "checksum": "sha256:054e8e81ca33c9256e4d9ea3cc4a8f26dc097fcb7669a3300b9254fb0108bea1",
+   "version": 1
+  },
+  {
+   "date": "2026-11-26",
+   "variant": "hard",
+   "id": "en-d-2026-11-26-hard",
+   "url": "puzzles/en/daily/hard/2026-11-26.v1.json",
+   "checksum": "sha256:00c611b08c73eba7e3b207e13bad0aaaf507c6f01918e0266b29780df0d1543a",
    "version": 1
   },
   {
@@ -436,11 +492,27 @@
    "version": 1
   },
   {
+   "date": "2026-11-27",
+   "variant": "hard",
+   "id": "en-d-2026-11-27-hard",
+   "url": "puzzles/en/daily/hard/2026-11-27.v1.json",
+   "checksum": "sha256:349cf68e88b51b23e43e06e263e6b9d31998f9d2174286c3d89c8b51b9bf300d",
+   "version": 1
+  },
+  {
    "date": "2026-11-28",
    "variant": "easy",
    "id": "en-d-2026-11-28-easy",
    "url": "puzzles/en/daily/easy/2026-11-28.v1.json",
    "checksum": "sha256:99b2139426e3c78278624647e010ad9bbb4e02d0f60ea5f6eff795c52aa289cc",
+   "version": 1
+  },
+  {
+   "date": "2026-11-28",
+   "variant": "hard",
+   "id": "en-d-2026-11-28-hard",
+   "url": "puzzles/en/daily/hard/2026-11-28.v1.json",
+   "checksum": "sha256:14201e2ebd59d563a9e01af2fcb2ab483cfa15f65e493ed05f524ea9e4ce64f2",
    "version": 1
   },
   {
@@ -836,6 +908,14 @@
    "version": 1
   },
   {
+   "date": "2026-12-23",
+   "variant": "hard",
+   "id": "en-d-2026-12-23-hard",
+   "url": "puzzles/en/daily/hard/2026-12-23.v1.json",
+   "checksum": "sha256:8081b2666ae25e75572c9a8420973af9fcd9867ff61e8c4bc56ffcbcf9add3bd",
+   "version": 1
+  },
+  {
    "date": "2026-12-24",
    "variant": "easy",
    "id": "en-d-2026-12-24-easy",
@@ -860,11 +940,27 @@
    "version": 1
   },
   {
+   "date": "2026-12-25",
+   "variant": "hard",
+   "id": "en-d-2026-12-25-hard",
+   "url": "puzzles/en/daily/hard/2026-12-25.v1.json",
+   "checksum": "sha256:6d8dc9f9f61b574b256f2740b7b9b0c166c856e27026d5b496f22cd76d50f068",
+   "version": 1
+  },
+  {
    "date": "2026-12-26",
    "variant": "easy",
    "id": "en-d-2026-12-26-easy",
    "url": "puzzles/en/daily/easy/2026-12-26.v1.json",
    "checksum": "sha256:788c94d9052c2aa56aa447eb1596877f972786daa87fbb02b575afdf529a6c29",
+   "version": 1
+  },
+  {
+   "date": "2026-12-26",
+   "variant": "hard",
+   "id": "en-d-2026-12-26-hard",
+   "url": "puzzles/en/daily/hard/2026-12-26.v1.json",
+   "checksum": "sha256:a935dae62c66e03a07219828695f3d78b5dc8efdc5c3340b344cebf76f4b2d36",
    "version": 1
   },
   {
@@ -876,6 +972,14 @@
    "version": 1
   },
   {
+   "date": "2026-12-27",
+   "variant": "hard",
+   "id": "en-d-2026-12-27-hard",
+   "url": "puzzles/en/daily/hard/2026-12-27.v1.json",
+   "checksum": "sha256:a41cb5cbe4acb209bf801245a370546ce1168572e2a244a6ef51ec211fff3ed5",
+   "version": 1
+  },
+  {
    "date": "2026-12-28",
    "variant": "easy",
    "id": "en-d-2026-12-28-easy",
@@ -884,11 +988,27 @@
    "version": 1
   },
   {
+   "date": "2026-12-28",
+   "variant": "hard",
+   "id": "en-d-2026-12-28-hard",
+   "url": "puzzles/en/daily/hard/2026-12-28.v1.json",
+   "checksum": "sha256:5669fbfa60e6e2542b7be5c787c87215b52eea379bf36a6ddbe55e86fa11ff6a",
+   "version": 1
+  },
+  {
    "date": "2026-12-29",
    "variant": "easy",
    "id": "en-d-2026-12-29-easy",
    "url": "puzzles/en/daily/easy/2026-12-29.v1.json",
    "checksum": "sha256:37a1582b33eb0252a9361dd45372716a335e7bb3f5e851bb59ddb77d75487f12",
+   "version": 1
+  },
+  {
+   "date": "2026-12-29",
+   "variant": "hard",
+   "id": "en-d-2026-12-29-hard",
+   "url": "puzzles/en/daily/hard/2026-12-29.v1.json",
+   "checksum": "sha256:6cd3111e3b953d0a43641f18f7d3db5364efb6298e353ab5d1e23eaf8d1eb08a",
    "version": 1
   },
   {
@@ -1240,7 +1360,7 @@
    "variant": "hard",
    "id": "en-d-2027-01-20-hard",
    "url": "puzzles/en/daily/hard/2027-01-20.v1.json",
-   "checksum": "sha256:8b3929b64ca1bfa4cca8d04519239ea88bc7499584445764b39894dbeb2d5b97",
+   "checksum": "sha256:a64258256e58a205c3e7ce0ec1d68cbec3bb1677f7625cedf807d5ab61e537c3",
    "version": 1
   },
   {
@@ -1316,11 +1436,27 @@
    "version": 1
   },
   {
+   "date": "2027-01-25",
+   "variant": "hard",
+   "id": "en-d-2027-01-25-hard",
+   "url": "puzzles/en/daily/hard/2027-01-25.v1.json",
+   "checksum": "sha256:68b8df07d4b9ac64eeff0589b57748d936a3fa717357c4636e917e004424df03",
+   "version": 1
+  },
+  {
    "date": "2027-01-26",
    "variant": "easy",
    "id": "en-d-2027-01-26-easy",
    "url": "puzzles/en/daily/easy/2027-01-26.v1.json",
    "checksum": "sha256:db62b268f7f0054b853b84220bda3729d622b56f548cc96015bf428388f70ce4",
+   "version": 1
+  },
+  {
+   "date": "2027-01-26",
+   "variant": "hard",
+   "id": "en-d-2027-01-26-hard",
+   "url": "puzzles/en/daily/hard/2027-01-26.v1.json",
+   "checksum": "sha256:2b8565ddc17d771af3ebb900ced149720dec2a8610878c2be545badddd8c412b",
    "version": 1
   },
   {
@@ -1332,11 +1468,27 @@
    "version": 1
   },
   {
+   "date": "2027-01-27",
+   "variant": "hard",
+   "id": "en-d-2027-01-27-hard",
+   "url": "puzzles/en/daily/hard/2027-01-27.v1.json",
+   "checksum": "sha256:cb49f404bb6e1b1a20a7090c55c95aa495a2996d0b7802b52fa32703c58b4ca6",
+   "version": 1
+  },
+  {
    "date": "2027-01-28",
    "variant": "easy",
    "id": "en-d-2027-01-28-easy",
    "url": "puzzles/en/daily/easy/2027-01-28.v1.json",
    "checksum": "sha256:a15e64da53531ca4906a5ad69ecde13d2cc12c929f7064415367f8c5e4521078",
+   "version": 1
+  },
+  {
+   "date": "2027-01-28",
+   "variant": "hard",
+   "id": "en-d-2027-01-28-hard",
+   "url": "puzzles/en/daily/hard/2027-01-28.v1.json",
+   "checksum": "sha256:68d833da41049890f5bdceb91762be1331d21f9f4000c8a9686927d533b99413",
    "version": 1
   },
   {

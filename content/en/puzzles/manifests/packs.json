@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-29T07:01:59.814128Z",
+ "generatedAt": "2026-10-29T07:30:19.860819Z",
  "lang": "en",
  "packs": [
   {
@@ -1548,9 +1548,9 @@
     "he": "רמה 5 · חבילה 1",
     "en": "Level 5 · Pack 1"
    },
-   "puzzleCount": 24,
+   "puzzleCount": 26,
    "url": "puzzles/en/packs/en-l5-p01/pack.v1.json",
-   "checksum": "sha256:9d28e9973487674ee6f65b5a9840ef603b30a7edb34d153e8ef1515b5a6cbe4e",
+   "checksum": "sha256:9262b40a908098ad7ce5dfc74aab77dbe16675cfe49ac0ff1c1e8de3009a3451",
    "free": true,
    "puzzles": [
     {
@@ -1743,6 +1743,22 @@
      "url": "puzzles/en/packs/en-l5-p01/26.v1.json",
      "checksum": "sha256:377a52af33949b51c68087d45b9b1112d3b959600892ca659c690ee970022334",
      "difficulty": 70.3,
+     "words": 43
+    },
+    {
+     "id": "en-l5-p01-27",
+     "index": 27,
+     "url": "puzzles/en/packs/en-l5-p01/27.v1.json",
+     "checksum": "sha256:92ac5a58badd3138f8f6394c881a61cf4ce4073278dd6666a57f7714b7595679",
+     "difficulty": 78.0,
+     "words": 42
+    },
+    {
+     "id": "en-l5-p01-28",
+     "index": 28,
+     "url": "puzzles/en/packs/en-l5-p01/28.v1.json",
+     "checksum": "sha256:0b0d3c3cda690b4cb9f06d1432db777fe7f742f0671a492bff7e42ac06fa1acf",
+     "difficulty": 71.6,
      "words": 43
     }
    ]
