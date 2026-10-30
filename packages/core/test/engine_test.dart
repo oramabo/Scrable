@@ -94,6 +94,17 @@ void main() {
       expect(s2.wordId, 'd02');
       expect(nav.crossingWord(s2), 'a02');
     });
+    test('tapping another cell of the selected word keeps the word, even when it is filled', () {
+      var filled = fresh;
+      for (final r in [1, 2, 3]) {
+        final i = puzzle.shape.index(r, 2);
+        filled = filled.withCell(i, CellEntry(symbol: puzzle.solution[i], status: CellStatus.filled));
+      }
+      final s1 = Selection(wordId: 'd02', cell: puzzle.shape.index(2, 2));
+      final s2 = nav.tapCell(puzzle.shape.index(1, 2), s1, filled)!;
+      expect(s2.wordId, 'd02');
+      expect(s2.cell, puzzle.shape.index(1, 2));
+    });
     test('typing advances along the word and jumps to the next incomplete word', () {
       final start = nav.selectWord('a01', fresh);
       expect(start.cell, puzzle.shape.index(1, 1));

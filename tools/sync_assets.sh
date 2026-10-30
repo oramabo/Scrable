@@ -87,7 +87,7 @@ for d in "$SRC"/packs/*/; do
   mkdir -p "$DST/packs/$pid"
   cp "$d"/[0-9][0-9].json "$DST/packs/$pid/"
   for f in "$DST/packs/$pid"/[0-9][0-9].json; do
-    id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["id"])' "$f")
+    id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1],encoding="utf-8"))["id"])' "$f")
     index_puzzles+=("\"$id\": \"assets/puzzles/$LANG_CODE/packs/$pid/$(basename "$f")\"")
   done
 done
@@ -117,7 +117,7 @@ if [[ -d "$SRC/tutorial" ]]; then
   for f in "$SRC"/tutorial/*.json; do
     [[ -f "$f" ]] || continue
     cp "$f" "$DST/tutorial/$(basename "$f")"
-    id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["id"])' "$f")
+    id=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1],encoding="utf-8"))["id"])' "$f")
     index_puzzles+=("\"$id\": \"assets/puzzles/$LANG_CODE/tutorial/$(basename "$f")\"")
   done
 fi
@@ -169,7 +169,7 @@ join() { local IFS=","; echo "$*"; }
   echo "  \"device\": {$device_json}"
   echo "}"
 } > "$DST/index.json"
-python3 -c 'import json,sys;json.load(open(sys.argv[1]))' "$DST/index.json"
+python3 -c 'import json,sys;json.load(open(sys.argv[1],encoding="utf-8"))' "$DST/index.json"
 
 # 6. Check pubspec registration. Every registered directory must exist, or the
 #    Flutter build fails, so create the ones that have no content yet.

@@ -8,7 +8,9 @@ import 'rng.dart';
 /// Produces valid layout templates by simulated annealing over the set of
 /// clue cells, starting from the classic arrowword border.
 class LayoutGenerator {
-  LayoutGenerator(this.config, {this.iterations = 12000});
+  /// [iterations] defaults to ~190 single-cell moves per grid cell (12 000 on
+  /// the old small grids), which anneals 20×20–30×30 layouts reliably.
+  LayoutGenerator(this.config, {int? iterations}) : iterations = iterations ?? math.max(12000, config.rows * config.cols * 190);
 
   final LevelConfig config;
   final int iterations;

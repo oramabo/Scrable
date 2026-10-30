@@ -49,6 +49,9 @@ class ContentStore {
 
   File templateFile(int level) => File(p.join(templatesDir, 'L$level.json'));
 
+  /// Daily layouts: the level rules of the variant on the daily grid size.
+  File dailyTemplateFile(String variant) => File(p.join(templatesDir, 'daily-$variant.json'));
+
   List<LayoutTemplate> loadTemplates({int? level}) {
     final out = <LayoutTemplate>[];
     final dir = Directory(templatesDir);
@@ -64,8 +67,8 @@ class ContentStore {
     return out;
   }
 
-  void saveTemplates(int level, List<LayoutTemplate> templates) {
-    final f = templateFile(level);
+  void saveTemplates(int level, List<LayoutTemplate> templates, {File? file}) {
+    final f = file ?? templateFile(level);
     f.parent.createSync(recursive: true);
     f.writeAsStringSync(const JsonEncoder.withIndent(' ').convert(templates.map((t) => t.toJson()).toList()));
   }

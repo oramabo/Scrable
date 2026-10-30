@@ -13,24 +13,50 @@ class FillConfig {
   const FillConfig({
     this.beam = 24,
     this.sampleLimit = 700,
-    this.baseNodeLimit = 8000,
+    this.baseNodeLimit = 4000,
     this.maxRestarts = 4,
     this.steer = 0.7,
     this.weightDifficulty = 3.0,
     this.weightCrossing = 0.55,
     this.jitter = 0.6,
+    this.exactBudget = 6000,
   });
 
   final int beam;
 
   /// Candidates ranked per node (a random sample when the domain is larger).
   final int sampleLimit;
+
+  /// Node budget of the first attempt on a 40-slot grid (scaled with the slot
+  /// count); each restart gets 1.6× the previous one. A template that fills
+  /// does so well inside this budget; one that does not rarely recovers.
   final int baseNodeLimit;
   final int maxRestarts;
   final double steer;
+
+  /// Candidate ordering: difficulty steering keeps the puzzle in its score
+  /// band; the crossing weight prefers words leaving the crossings more
+  /// options. Weighting crossings more fills faster but misses the band and
+  /// costs more templates overall.
   final double weightDifficulty;
   final double weightCrossing;
   final double jitter;
+
+  /// Work (in 32-bit word steps) up to which the letter counts of a crossing
+  /// slot are exact; beyond it they are estimated from letter frequencies.
+  final int exactBudget;
+
+  FillConfig copyWith({int? maxRestarts, int? baseNodeLimit}) => FillConfig(
+        beam: beam,
+        sampleLimit: sampleLimit,
+        baseNodeLimit: baseNodeLimit ?? this.baseNodeLimit,
+        maxRestarts: maxRestarts ?? this.maxRestarts,
+        steer: steer,
+        weightDifficulty: weightDifficulty,
+        weightCrossing: weightCrossing,
+        jitter: jitter,
+        exactBudget: exactBudget,
+      );
 }
 
 /// Which words may be used for slots of each geometry, per length.
@@ -63,7 +89,7 @@ class Crossing {
 }
 
 class FillResult {
-  const FillResult({required this.ok, required this.slots, required this.words, required this.nodes, required this.attempts, this.failure});
+  const FillResult({required this.ok, required this.slots, required this.words, required this.nodes, required this.attempts, this.deepest = 0, this.failure});
   final bool ok;
   final List<Slot> slots;
 
@@ -71,6 +97,9 @@ class FillResult {
   final List<LexWord?> words;
   final int nodes;
   final int attempts;
+
+  /// Most slots filled at once (tells a thrashing finish from a hard start).
+  final int deepest;
   final String? failure;
 }
 
@@ -79,7 +108,8 @@ class _Restart implements Exception {
 }
 
 /// Constraint-satisfaction filler: most-constrained slot first, bitset
-/// domains, forward checking, difficulty steering, seeded restarts.
+/// domains, letter-level forward checking, least-constraining-value ordering
+/// with difficulty steering, seeded restarts.
 class Filler {
   Filler(this.dict, this.level, this.eligibility, {this.config = const FillConfig()});
 
@@ -117,21 +147,40 @@ class Filler {
   /// target shrinks on every restart so a picture-heavy start never blocks a fill).
   FillResult fill(LayoutTemplate tpl, SeededRandom rng, {Map<int, Set<int>> forbid = const {}, Set<String> excludeCanonical = const {}, double imageBonus = 0.0, int pictureTarget = 0}) {
     final slots = buildSlots(tpl);
+    final n = slots.length;
     final cellCount = tpl.shape.cellCount;
+    final alphabet = dict.lexicon.lang.alphabetSize;
     final grid = List<int>.filled(cellCount, -1);
-    final assigned = List<int>.filled(slots.length, -1);
+    final assigned = List<int>.filled(n, -1);
     final usedByLen = <int, Bitset>{for (final len in dict.byLen.keys) len: Bitset(dict.count(len))};
-    // Pre-mark excluded and forbidden words.
-    final excludedByLen = <int, Bitset>{for (final len in dict.byLen.keys) len: Bitset(dict.count(len))};
-    if (excludeCanonical.isNotEmpty) {
-      for (final entry in dict.byLen.entries) {
+    // What a slot of each (length, clue position) may take regardless of the
+    // grid: eligible for the level and not excluded.
+    final allowedByLen = <int, List<Bitset>>{};
+    for (final entry in dict.byLen.entries) {
+      final len = entry.key;
+      Bitset? excluded;
+      if (excludeCanonical.isNotEmpty) {
+        excluded = Bitset(entry.value.length);
         for (var i = 0; i < entry.value.length; i++) {
-          if (excludeCanonical.contains(entry.value[i].canonical)) excludedByLen[entry.key]!.set(i);
+          if (excludeCanonical.contains(entry.value[i].canonical)) excluded.set(i);
         }
       }
+      allowedByLen[len] = [
+        for (final pos in SlotPos.values)
+          if (excluded == null) eligibility.forSlot(pos, len) else eligibility.forSlot(pos, len).andNot(excluded),
+      ];
     }
-    final domainCache = List<Bitset?>.filled(slots.length, null);
-    final dirty = List<bool>.filled(slots.length, true);
+    // Per slot: the words matching its grid pattern among the allowed ones,
+    // before removing words used elsewhere (those change too often to bake
+    // in), and the count that does exclude them, kept up to date as words are
+    // placed. A slot goes dirty when a crossing word changes its pattern.
+    final domainCache = List<Bitset?>.filled(n, null);
+    final card = List<int>.filled(n, 0);
+    final dirty = List<bool>.filled(n, true);
+    final slotsByLen = <int, List<int>>{};
+    for (final s in slots) {
+      slotsByLen.putIfAbsent(s.len, () => []).add(s.idx);
+    }
     // Picture packs: which words carry an image, per length bucket.
     final imageByLen = <int, Bitset>{};
     if (imageBonus > 0 && pictureTarget > 0) {
@@ -147,16 +196,14 @@ class Filler {
     var pictureGoal = pictureTarget;
     var nodes = 0;
     var placed = 0;
+    var deepest = 0;
     var runningSum = 0.0;
     final target0 = level.meanDifficultyTarget;
 
-    Bitset domain(Slot s) {
-      if (!dirty[s.idx] && domainCache[s.idx] != null) return domainCache[s.idx]!;
+    void recompute(Slot s) {
       final pattern = [for (final c in s.cells) grid[c]];
       final base = dict.lookup(pattern).copy();
-      base.andInPlace(eligibility.forSlot(s.slotPos, s.len));
-      base.andNotInPlace(usedByLen[s.len]!);
-      base.andNotInPlace(excludedByLen[s.len]!);
+      base.andInPlace(allowedByLen[s.len]![s.slotPos.index]);
       final f = forbid[s.idx];
       if (f != null) {
         for (final w in f) {
@@ -165,14 +212,66 @@ class Filler {
       }
       domainCache[s.idx] = base;
       dirty[s.idx] = false;
-      return base;
+      card[s.idx] = base.cardinalityAndNot(usedByLen[s.len]!);
+    }
+
+    void ensure(Slot s) {
+      if (dirty[s.idx]) recompute(s);
     }
 
     void markDirty(Slot s) {
-      dirty[s.idx] = true;
       for (final x in s.crossings) {
         dirty[x.other] = true;
       }
+    }
+
+    // Marks [w] and its twins (un)used and adjusts the counts of the clean,
+    // open slots of that length that contain them.
+    void setUsed(int len, int w, bool on) {
+      final used = usedByLen[len]!;
+      for (final id in dict.twins[len]![w] ?? [w]) {
+        if (used.get(id) == on) continue;
+        if (on) {
+          used.set(id);
+        } else {
+          used.clear(id);
+        }
+        for (final i in slotsByLen[len]!) {
+          if (assigned[i] >= 0 || dirty[i]) continue;
+          if (domainCache[i]!.get(id)) card[i] += on ? -1 : 1;
+        }
+      }
+    }
+
+    // How many words slot [o] still has for each symbol at position [p].
+    // Exact while that is cheap (walking a small domain word by word, or a
+    // pass per letter over a small length bucket); a large domain gets the
+    // length's letter frequencies scaled to its size instead, which orders
+    // candidates nearly as well and never reports a false zero.
+    List<int> symbolCounts(Slot o, int p) {
+      ensure(o);
+      final dom = domainCache[o.idx]!;
+      final used = usedByLen[o.len]!;
+      final counts = List<int>.filled(alphabet, 0);
+      final c = card[o.idx];
+      final walkCost = c * 4;
+      final passCost = alphabet * dom.wordCount;
+      if (walkCost <= passCost && walkCost <= config.exactBudget) {
+        final words = dict.byLen[o.len]!;
+        dom.forEachSetAndNot(used, (i) => counts[words[i].symbols[p]]++);
+      } else if (passCost <= config.exactBudget) {
+        final table = dict.symbolBitsets(o.len, p);
+        for (var sym = 0; sym < alphabet; sym++) {
+          counts[sym] = dom.cardinalityAndAndNot(table[sym], used);
+        }
+      } else {
+        final total = dict.count(o.len);
+        for (var sym = 0; sym < alphabet; sym++) {
+          final f = dict.countAt(o.len, p, sym);
+          counts[sym] = f == 0 ? 0 : math.max(1, f * c ~/ total);
+        }
+      }
+      return counts;
     }
 
     Slot? pickSlot() {
@@ -185,7 +284,8 @@ class Filler {
           if (assigned[s.idx] >= 0 || s.slotPos != SlotPos.full || s.len < 4) continue;
           final mask = imageByLen[s.len];
           if (mask == null) continue;
-          final n = domain(s).and(mask).cardinality;
+          ensure(s);
+          final n = domainCache[s.idx]!.cardinalityAndAndNot(mask, usedByLen[s.len]!);
           if (n == 0) continue;
           if (best == null || s.len > best.len || (s.len == best.len && n > bestImages)) {
             best = s;
@@ -194,10 +294,15 @@ class Filler {
         }
         if (best != null) return best;
       }
+      // Fewest candidates first. (Rating slots by candidates per open
+      // crossing, or by expected survivors, was tried: it helps a template
+      // full of long half-cell words but costs more everywhere else.)
       var bestSize = 1 << 30;
       for (final s in slots) {
         if (assigned[s.idx] >= 0) continue;
-        final size = domain(s).cardinality;
+        ensure(s);
+        final size = card[s.idx];
+        if (size == 0) return s;
         if (size < bestSize ||
             (size == bestSize && best != null && (s.len > best.len || (s.len == best.len && s.crossings.length > best.crossings.length)))) {
           bestSize = size;
@@ -207,10 +312,30 @@ class Filler {
       return best;
     }
 
-    List<int> rank(Slot s, Bitset dom, SeededRandom r) {
-      final all = dom.toList();
-      List<int> sample = all;
+    List<int> rank(Slot s, SeededRandom r) {
+      ensure(s);
+      final dom = domainCache[s.idx]!;
+      final used = usedByLen[s.len]!;
       final words = dict.byLen[s.len]!;
+      // Per open crossing, what the crossing slot can still take at the shared cell.
+      final crossPos = <int>[];
+      final crossCounts = <List<int>>[];
+      for (final x in s.crossings) {
+        if (grid[x.cell] >= 0 || assigned[x.other] >= 0) continue;
+        crossPos.add(x.posInThis);
+        crossCounts.add(symbolCounts(slots[x.other], x.posInOther));
+      }
+      // Only words that leave every crossing slot at least one option: the
+      // rest would fail forward checking right after being placed.
+      final all = <int>[];
+      dom.forEachSetAndNot(used, (w) {
+        final sym = words[w].symbols;
+        for (var k = 0; k < crossPos.length; k++) {
+          if (crossCounts[k][sym[crossPos[k]]] == 0) return;
+        }
+        all.add(w);
+      });
+      List<int> sample = all;
       if (all.length > config.sampleLimit) {
         // reservoir-free sampling: shuffle a copy of indices and take the prefix
         final idx = List<int>.generate(all.length, (i) => i);
@@ -231,10 +356,9 @@ class Filler {
         final word = words[w];
         var score = -config.weightDifficulty * (word.difficulty - target).abs() + config.jitter * r.nextDouble();
         if (imageBonus > 0 && word.image != null && s.slotPos == SlotPos.full) score += imageBonus;
-        for (final x in s.crossings) {
-          if (grid[x.cell] >= 0) continue;
-          final other = slots[x.other];
-          score += config.weightCrossing * math.log(1 + dict.countAt(other.len, x.posInOther, word.symbols[x.posInThis]));
+        // Least constraining value: prefer words that leave the crossings the most choices.
+        for (var k = 0; k < crossPos.length; k++) {
+          score += config.weightCrossing * math.log(1 + crossCounts[k][word.symbols[crossPos[k]]]);
         }
         scored.add((w, score));
       }
@@ -253,11 +377,11 @@ class Filler {
         }
       }
       assigned[s.idx] = w;
-      usedByLen[s.len]!.set(w);
-      // the same canonical word may exist under another id/length-bucket only if lengths differ, which cannot clash
+      setUsed(s.len, w, true);
       runningSum += word.difficulty;
       if (word.image != null && s.slotPos == SlotPos.full) picturesPlaced++;
       placed++;
+      if (placed > deepest) deepest = placed;
       markDirty(s);
       return changed;
     }
@@ -267,7 +391,9 @@ class Filler {
         grid[c] = -1;
       }
       assigned[s.idx] = -1;
-      usedByLen[s.len]!.clear(w);
+      // Its count missed the updates made while it was assigned.
+      dirty[s.idx] = true;
+      setUsed(s.len, w, false);
       final word = dict.byLen[s.len]![w];
       runningSum -= word.difficulty;
       if (word.image != null && s.slotPos == SlotPos.full) picturesPlaced--;
@@ -279,30 +405,75 @@ class Filler {
       for (final x in s.crossings) {
         final o = slots[x.other];
         if (assigned[o.idx] >= 0) continue;
-        if (domain(o).isEmpty) return false;
+        ensure(o);
+        if (card[o.idx] == 0) return false;
       }
       return true;
     }
 
+    // Conflict-directed backjumping. What [s] can take depends on the placed
+    // words crossing it and, through the letter-level check, on those
+    // crossing its open neighbours; nothing else. When [s] runs dry, levels
+    // whose slot is outside that set cannot help and are skipped.
+    Set<int> culprits(Slot s) {
+      final set = <int>{};
+      for (final x in s.crossings) {
+        final o = slots[x.other];
+        if (assigned[o.idx] >= 0) {
+          set.add(o.idx);
+          continue;
+        }
+        for (final y in o.crossings) {
+          if (assigned[y.other] >= 0) set.add(y.other);
+        }
+      }
+      return set;
+    }
+
+    // The dead end reached with the most slots filled, for the failure log.
+    var stuckDepth = -1;
+    var stuck = '';
+    void noteDeadEnd(Slot s) {
+      if (placed < stuckDepth) return;
+      stuckDepth = placed;
+      final pattern = [for (final c in s.cells) grid[c] < 0 ? '.' : dict.lexicon.lang.symbolToDisplay(grid[c])].join();
+      stuck = 'slot ${s.idx} (${s.slotPos.name}, $pattern)';
+    }
+
     late int nodeLimit;
-    bool search(SeededRandom r) {
-      if (placed == slots.length) return true;
+    // Null when the grid is complete, else the slots responsible for the dead end.
+    Set<int>? search(SeededRandom r) {
+      if (placed == n) return null;
       final s = pickSlot()!;
-      final dom = domain(s);
-      if (dom.isEmpty) return false;
-      final candidates = rank(s, dom, r);
+      if (card[s.idx] == 0) {
+        noteDeadEnd(s);
+        return culprits(s);
+      }
+      final candidates = rank(s, r);
+      if (candidates.isEmpty) noteDeadEnd(s);
+      final conflict = culprits(s);
       var tried = 0;
       for (final w in candidates) {
         if (++nodes > nodeLimit) throw const _Restart();
         final changed = place(s, w);
-        if (forwardCheck(s) && search(r)) return true;
-        unplace(s, w, changed);
+        if (forwardCheck(s)) {
+          final deeper = search(r);
+          if (deeper == null) return null;
+          unplace(s, w, changed);
+          // Another word here cannot fix a conflict this slot is not part of.
+          if (!deeper.contains(s.idx)) return deeper;
+          conflict.addAll(deeper);
+        } else {
+          // The emptied crossing slot is constrained by s and by slots already in the set.
+          unplace(s, w, changed);
+        }
         tried++;
         // beam: when the domain is large and the best candidates all failed, the
         // problem is upstream; backtrack instead of grinding through the rest
-        if (tried >= config.beam && candidates.length > config.beam * 2 && placed > 0) return false;
+        if (tried >= config.beam && candidates.length > config.beam * 2 && placed > 0) break;
       }
-      return false;
+      conflict.remove(s.idx);
+      return conflict;
     }
 
     var attempts = 0;
@@ -311,40 +482,48 @@ class Filler {
       attempts++;
       totalNodes += nodes;
       nodes = 0; // each attempt gets its own budget
-      nodeLimit = (config.baseNodeLimit * math.pow(1.6, attempt)).round();
+      // The base budget was tuned on grids of ≤ 40 words; big grids get it per 40 slots.
+      nodeLimit = (config.baseNodeLimit * math.max(1.0, n / 40) * math.pow(1.6, attempt)).round();
       final r = rng.fork('attempt$attempt');
       // reset state
       for (var i = 0; i < cellCount; i++) {
         grid[i] = -1;
       }
-      for (var i = 0; i < slots.length; i++) {
+      for (var i = 0; i < n; i++) {
         assigned[i] = -1;
         dirty[i] = true;
         domainCache[i] = null;
       }
       for (final b in usedByLen.values) {
-        for (var i = 0; i < b.length; i++) {
-          if (b.get(i)) b.clear(i);
-        }
+        b.clearAll();
       }
       placed = 0;
       runningSum = 0;
       picturesPlaced = 0;
       pictureGoal = math.max(0, pictureTarget - attempt);
       try {
-        if (search(r)) {
+        if (search(r) == null) {
           return FillResult(
             ok: true,
             slots: slots,
             words: [for (final s in slots) dict.byLen[s.len]![assigned[s.idx]]],
             nodes: totalNodes + nodes,
             attempts: attempts,
+            deepest: n,
           );
         }
       } on _Restart {
         continue;
       }
     }
-    return FillResult(ok: false, slots: slots, words: const [], nodes: totalNodes + nodes, attempts: attempts, failure: 'exhausted after $attempts attempts, ${totalNodes + nodes} nodes');
+    return FillResult(
+      ok: false,
+      slots: slots,
+      words: const [],
+      nodes: totalNodes + nodes,
+      attempts: attempts,
+      deepest: deepest,
+      failure: 'exhausted after $attempts attempts, ${totalNodes + nodes} nodes, deepest $deepest/$n${stuck.isEmpty ? '' : ', last stuck at depth $stuckDepth on $stuck'}',
+    );
   }
 }

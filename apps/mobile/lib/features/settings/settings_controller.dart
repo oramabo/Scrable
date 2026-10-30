@@ -23,20 +23,15 @@ class SettingsController extends Notifier<AppSettings> {
 
   void update(AppSettings Function(AppSettings) fn) => _set(fn(state));
 
-  void setUiLang(String lang) {
-    if (lang == state.uiLang) return;
-    _set(state.copyWith(uiLang: lang));
+  /// One language for the whole app: the interface and the puzzles switch
+  /// together.
+  void setLanguage(String lang) {
+    if (lang == state.uiLang && lang == state.puzzleLang) return;
+    final puzzleChanged = lang != state.puzzleLang;
+    _set(state.copyWith(uiLang: lang, puzzleLang: lang, clearKeyboardLayout: puzzleChanged));
     ref.read(analyticsProvider)
-      ..setContext(uiLang: lang)
-      ..track(AnalyticsEvents.languageSwitched, {'ui_lang': lang, 'kind': 'ui'});
-  }
-
-  void setPuzzleLang(String lang) {
-    if (lang == state.puzzleLang) return;
-    _set(state.copyWith(puzzleLang: lang, clearKeyboardLayout: true));
-    ref.read(analyticsProvider)
-      ..setContext(lang: lang)
-      ..track(AnalyticsEvents.languageSwitched, {'lang': lang, 'kind': 'puzzle'});
+      ..setContext(uiLang: lang, lang: lang)
+      ..track(AnalyticsEvents.languageSwitched, {'ui_lang': lang, 'lang': lang, 'kind': 'app'});
   }
 
   void setKeyboardLayout(String id) => _set(state.copyWith(keyboardLayoutId: id));
@@ -63,6 +58,8 @@ class SettingsController extends Notifier<AppSettings> {
     _a11y('big_keyboard', on);
   }
 
+  void setSystemKeyboard(bool on) => _set(state.copyWith(systemKeyboard: on));
+
   void setModeForLevel(int level, PlayMode mode) =>
       _set(state.copyWith(modePerLevel: {...state.modePerLevel, level: mode}));
 
@@ -77,6 +74,8 @@ class SettingsController extends Notifier<AppSettings> {
   void setAdConsentDone() => _set(state.copyWith(adConsentDone: true));
 
   void setNotificationsAsked() => _set(state.copyWith(notificationsAsked: true));
+
+  void markReviewPrompted(int nowMs) => _set(state.copyWith(reviewPromptedAt: nowMs, reviewPromptCount: state.reviewPromptCount + 1));
   void setNotifications({bool? daily, bool? streak, int? hour}) =>
       _set(state.copyWith(notificationsDailyReady: daily, notificationsStreak: streak, notificationsHour: hour, notificationsAsked: true));
 

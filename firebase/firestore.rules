@@ -5,7 +5,7 @@ rules_version = '2';
 //  - the ledger is append-only for the owner and bounded; the authoritative
 //    balance (wallet) and entitlements are written by Cloud Functions only;
 //  - leaderboards, dailies, manifests and clue stats are read-only for clients;
-//  - telemetry is write-once by signed-in players;
+//  - telemetry and feedback are write-once by signed-in players;
 //  - multiplayer: matches are readable by their players, co-op rooms by their
 //    members (who may only write their own cursor/heartbeat and grid cells), the
 //    trophy leaderboard is public; queues, invite codes and results are
@@ -28,9 +28,9 @@ service cloud.firestore {
     }
 
     // Fields of users/{uid} that only Cloud Functions may write (wallet, entitlements,
-    // and the multiplayer progression: trophies, xp, season points).
+    // the multiplayer progression: trophies, xp, season points; and the claimed username).
     function serverOnlyUserFields() {
-      return ['wallet', 'entitlements', 'entitlementsMeta', 'lastLedgerSyncAt', 'trophies', 'xp', 'season', 'lastMatchAt', 'lastCoopAt'];
+      return ['wallet', 'entitlements', 'entitlementsMeta', 'lastLedgerSyncAt', 'trophies', 'xp', 'season', 'lastMatchAt', 'lastCoopAt', 'username', 'usernameUpdatedAt'];
     }
 
     function touchesServerOnlyUserFields() {
@@ -115,6 +115,29 @@ service cloud.firestore {
       allow read: if false;
       allow create: if signedIn() && request.resource.data.size() <= 24;
       allow update, delete: if false;
+    }
+
+    // Username reservations (claimUsername / deleteAccount functions only).
+    match /usernames/{key} {
+      allow read, write: if false;
+    }
+
+    // Player feedback and clue reports (app: features/feedback): create-only for the
+    // signed-in author, read and triaged (status) in the admin tools.
+    match /feedback/{reportId} {
+      allow read, update: if isAdmin();
+      allow delete: if false;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly(['kind', 'message', 'email', 'context', 'createdAt', 'uid', 'status', 'receivedAt'])
+        && request.resource.data.kind in ['bug', 'clue', 'idea', 'other']
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0 && request.resource.data.message.size() <= 2000
+        && (!('email' in request.resource.data) || (request.resource.data.email is string && request.resource.data.email.size() <= 200))
+        && request.resource.data.context is map && request.resource.data.context.size() <= 16
+        && request.resource.data.createdAt is int
+        && request.resource.data.status == 'new'
+        && request.resource.data.receivedAt == request.time;
     }
 
     // ---- Multiplayer (functions/README.md "Multiplayer") ----

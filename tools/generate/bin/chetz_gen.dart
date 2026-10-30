@@ -20,7 +20,8 @@ Future<void> main(List<String> args) async {
     ..addCommand(GalleryCommand())
     ..addCommand(TutorialCommand())
     ..addCommand(ExportDeviceCommand())
-    ..addCommand(StatsCommand());
+    ..addCommand(StatsCommand())
+    ..addCommand(ConvertCommand());
   try {
     await runner.run(args);
   } on UsageException catch (e) {
@@ -71,6 +72,14 @@ BuildOutcome? buildWithRetries(PuzzleBuilder builder, BuildRequest Function(Stri
   return null;
 }
 
+/// Words a pack or a run of dailies should not repeat. Big grids need their
+/// short glue words over and over (English ≤ 4 letters, Hebrew ≤ 3), so only
+/// longer answers count; excluding every used word makes most fills fail.
+Set<String> noRepeat(Set<String> used, String lang) {
+  final minLen = lang == 'en' ? 5 : 4;
+  return {for (final w in used) if (w.length >= minLen) w};
+}
+
 abstract class _Base extends Command<void> {
   _Base() {
     argParser
@@ -89,9 +98,10 @@ class TemplatesCommand extends _Base {
   TemplatesCommand() {
     argParser
       ..addOption('level', help: 'Level 1-6 (default: all 1-5)')
+      ..addOption('daily', allowed: ['easy', 'hard'], help: 'Daily layouts of this variant instead of level layouts')
       ..addOption('count', defaultsTo: '40')
       ..addOption('seed', defaultsTo: 'templates-v1')
-      ..addOption('iterations', defaultsTo: '12000');
+      ..addOption('iterations', help: 'Annealing moves per template (default: ~190 per grid cell)');
   }
 
   @override
@@ -101,23 +111,28 @@ class TemplatesCommand extends _Base {
 
   @override
   void run() {
+    final daily = argResults!['daily'] as String?;
     final levels = argResults!['level'] == null ? [1, 2, 3, 4, 5] : [int.parse(argResults!['level'] as String)];
     final count = int.parse(argResults!['count'] as String);
     final seed = argResults!['seed'] as String;
-    final iterations = int.parse(argResults!['iterations'] as String);
-    for (final level in levels) {
-      final cfg = LevelConfig.forLanguage(lang, level);
+    final iterations = argResults!['iterations'] == null ? null : int.parse(argResults!['iterations'] as String);
+    final jobs = daily == null
+        ? [for (final level in levels) (LevelConfig.forLanguage(lang, level), store.templateFile(level), 't$level')]
+        : [(daily == 'easy' ? LevelConfig.dailyEasy(lang) : LevelConfig.dailyHard(lang), store.dailyTemplateFile(daily), 'd${daily[0]}')];
+    for (final (cfg, file, tag) in jobs) {
+      final level = cfg.level;
       final gen = LayoutGenerator(cfg, iterations: iterations);
-      final existing = store.loadTemplates(level: level);
+      // Only same-size layouts count; old sizes in the file are dropped.
+      final existing = store.loadTemplates(level: level).where((t) => t.shape.rows == cfg.rows && t.shape.cols == cfg.cols && t.id.contains('-$tag-')).toList();
       final seen = {for (final t in existing) t.shape.toRows().join('|')};
       final out = [...existing];
       final sw = Stopwatch()..start();
       var attempt = 0;
       var failures = 0;
       while (out.length < count && attempt < count * 4) {
-        final rng = SeededRandom.fromString('$seed|$lang|L$level|$attempt');
+        final rng = SeededRandom.fromString(daily == null ? '$seed|$lang|L$level|$attempt' : '$seed|$lang|daily-$daily|$attempt');
         attempt++;
-        final tpl = gen.generate(rng, id: '$lang-t$level-${attempt.toString().padLeft(3, '0')}');
+        final tpl = gen.generate(rng, id: '$lang-$tag-${attempt.toString().padLeft(3, '0')}');
         if (tpl == null) {
           failures++;
           continue;
@@ -125,8 +140,8 @@ class TemplatesCommand extends _Base {
         final key = tpl.shape.toRows().join('|');
         if (seen.add(key)) out.add(tpl);
       }
-      store.saveTemplates(level, out);
-      log('L$level: ${out.length} templates (${out.length - existing.length} new, $failures failed anneals) in ${sw.elapsed.inSeconds}s -> ${store.templateFile(level).path}');
+      store.saveTemplates(level, out, file: file);
+      log('${daily == null ? 'L$level' : 'daily-$daily'} ${cfg.rows}x${cfg.cols}: ${out.length} templates (${out.length - existing.length} new, $failures failed anneals) in ${sw.elapsed.inSeconds}s -> ${file.path}');
     }
   }
 }
@@ -196,8 +211,9 @@ class PackCommand extends _Base {
           templates: fallback == null ? templates : allTemplates,
           config: fallback ?? shifted,
           pack: PackRef(id: s.packId(level, pack), index: index),
-          excludeCanonical: relaxed ? const {} : usedWords,
-          usedClueIds: usedClues,
+          excludeCanonical: relaxed ? const {} : noRepeat(usedWords, lang),
+          // Last resort late in a pack: clues may repeat across the pack (never inside a puzzle).
+          usedClueIds: relaxed ? const {} : usedClues,
           pictureShare: pictures,
         ),
         Seeds.pack(lang: lang, level: level, pack: pack, index: index, salt: salt),
@@ -325,7 +341,7 @@ class DailiesCommand extends _Base {
             config: fallback ?? cfg,
             daily: DailyInfo(date: date, variant: DailyVariant.fromCode(variant)),
             title: lang == 'he' ? (variant == 'easy' ? 'התשחץ היומי' : 'האתגר היומי') : (variant == 'easy' ? 'Daily Arrowword' : 'Daily Challenge'),
-            excludeCanonical: relaxed ? const {} : recent,
+            excludeCanonical: relaxed ? const {} : noRepeat(recent, lang),
             pictureShare: pictures,
           ),
           Seeds.daily(secret: secret, lang: lang, date: date, variant: variant),
@@ -542,7 +558,8 @@ class GalleryCommand extends _Base {
       final puzzle = s.readPuzzle(f);
       final rows = StringBuffer();
       for (final w in puzzle.words) {
-        final lex = w.lemmaId == null ? null : lexicon.wordById[w.lemmaId!];
+        final lemmaId = w.lemmaId ?? lexicon.clueById[w.clueId]?.wordId;
+        final lex = lemmaId == null ? null : lexicon.wordById[lemmaId];
         rows.writeln('<tr><td>${w.id}</td><td>${w.arrow.code}</td><td><b>${_esc(lex?.display ?? '')}</b></td><td>${_esc(puzzle.clueTextOf(w.id))}</td><td class="meta">${w.difficulty.toStringAsFixed(2)}</td></tr>');
       }
       index
@@ -643,8 +660,8 @@ class TutorialCommand extends _Base {
 class ExportDeviceCommand extends _Base {
   ExportDeviceCommand() {
     argParser
-      ..addOption('max-words', defaultsTo: '30000')
-      ..addOption('clues-per-word', defaultsTo: '2');
+      ..addOption('max-words', defaultsTo: '75000')
+      ..addOption('clues-per-word', defaultsTo: '999', help: 'Fitting clues kept per word (all by default)');
   }
 
   @override
@@ -696,3 +713,74 @@ class StatsCommand extends _Base {
 }
 
 String sha256Hex(String s) => crypto.sha256.convert(utf8.encode(s)).toString();
+
+/// Rewrites puzzle files in the compact format 2 (see `PuzzleCodec`), with a
+/// new checksum, and refreshes the checksums in every `pack.json`. Each file
+/// is decoded again after writing and compared with the original, so nothing
+/// the app shows can change.
+class ConvertCommand extends _Base {
+  @override
+  String get name => 'convert';
+  @override
+  String get description => 'Convert puzzle files to the compact format 2.';
+
+  @override
+  void run() {
+    const codec = PuzzleCodec();
+    final s = store;
+    var converted = 0, bytesBefore = 0, bytesAfter = 0;
+    for (final f in s.allPuzzleFiles()) {
+      final before = f.readAsStringSync();
+      final old = codec.decode(before);
+      if (old.schemaVersion >= Puzzle.currentSchemaVersion) continue;
+      final next = codec.withChecksum(old.copyWith(schemaVersion: Puzzle.currentSchemaVersion));
+      final after = codec.encode(next);
+      final problem = _difference(old, codec.decode(after));
+      if (problem != null) throw StateError('${f.path}: $problem');
+      f.writeAsStringSync(after);
+      converted++;
+      bytesBefore += utf8.encode(before).length;
+      bytesAfter += utf8.encode(after).length;
+    }
+    final packsRoot = Directory(s.packsDir);
+    var packs = 0;
+    if (packsRoot.existsSync()) {
+      for (final dir in packsRoot.listSync().whereType<Directory>()) {
+        final packFile = File(p.join(dir.path, 'pack.json'));
+        if (!packFile.existsSync()) continue;
+        final pack = jsonDecode(packFile.readAsStringSync()) as Map<String, dynamic>;
+        final checksums = <String, String>{};
+        for (final f in dir.listSync().whereType<File>().where((f) => p.basename(f.path) != 'pack.json' && f.path.endsWith('.json'))) {
+          final puzzle = s.readPuzzle(f);
+          checksums[puzzle.id] = puzzle.meta.checksum ?? '';
+        }
+        pack['checksums'] = {for (final id in (pack['puzzles'] as List).cast<String>()) if (checksums[id] != null) id: checksums[id]};
+        packFile.writeAsStringSync(const JsonEncoder.withIndent('  ').convert(pack));
+        packs++;
+      }
+    }
+    String kb(int b) => (b / 1024).toStringAsFixed(0);
+    log('converted $converted puzzles (${kb(bytesBefore)} KB -> ${kb(bytesAfter)} KB), refreshed $packs pack.json files');
+  }
+
+  /// What the app would see differently, or null.
+  String? _difference(Puzzle a, Puzzle b) {
+    if (a.id != b.id || a.kind != b.kind || a.level != b.level || a.title != b.title) return 'header differs';
+    if (a.shape.toRows().join() != b.shape.toRows().join()) return 'layout differs';
+    if (a.solution.join(',') != b.solution.join(',')) return 'solution differs';
+    if (a.difficulty.score != b.difficulty.score || a.difficulty.band != b.difficulty.band) return 'difficulty differs';
+    if (a.words.length != b.words.length) return 'word count differs';
+    for (final w in a.words) {
+      final v = b.wordById[w.id];
+      if (v == null) return 'word ${w.id} missing';
+      if (v.dir != w.dir || v.start != w.start || v.len != w.len || v.clueCell != w.clueCell || v.arrow != w.arrow || v.clueId != w.clueId || v.difficulty != w.difficulty) {
+        return 'word ${w.id} differs';
+      }
+      final sa = a.slotForWord(w.id)!, sb = b.slotForWord(w.id)!;
+      if (sa.pos != sb.pos || sa.text != sb.text || sa.lines.join('\n') != sb.lines.join('\n') || jsonEncode(sa.image?.toJson()) != jsonEncode(sb.image?.toJson())) {
+        return 'clue of ${w.id} differs';
+      }
+    }
+    return null;
+  }
+}

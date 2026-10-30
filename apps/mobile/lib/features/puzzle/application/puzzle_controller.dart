@@ -173,7 +173,8 @@ class PuzzleController extends AsyncNotifier<PuzzleSession> {
       puzzle: puzzle,
       lang: profile,
       progress: progress,
-      finalMask: FinalLetterPolicy.mask(puzzle),
+      // Grids show regular letters only (ף is shown as פ), never final forms.
+      finalMask: List.filled(puzzle.shape.cellCount, false),
       selection: selection,
       timerRunning: !progress.completed,
       isTutorial: !settings.tutorialDone && (puzzle.kind == PuzzleKind.tutorial || puzzleId == tutorialPuzzleIdFor(puzzle.lang)),

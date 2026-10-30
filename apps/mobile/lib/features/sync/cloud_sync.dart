@@ -148,6 +148,10 @@ class FirebaseCloudSync extends CloudSync {
       _firestore ??= FirebaseFirestore.instance;
       _functions ??= FirebaseFunctions.instance;
       _user = _auth!.currentUser ?? (await _auth!.signInAnonymously()).user;
+      // Signing in to an existing store account or signing out changes the uid.
+      _auth!.authStateChanges().listen((user) {
+        if (user != null) _user = user;
+      });
     } catch (e) {
       debugPrint('cloud sync init failed: $e');
       _user = null;

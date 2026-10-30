@@ -1,7 +1,10 @@
 import 'package:chetz_app/core/config/game_config.dart';
 import 'package:chetz_app/core/content/content_source.dart';
 import 'package:chetz_app/features/puzzle/application/puzzle_controller.dart';
+import 'package:chetz_app/features/puzzle/presentation/clue_bar.dart';
 import 'package:chetz_app/features/puzzle/presentation/keyboard/puzzle_keyboard.dart';
+import 'package:chetz_app/features/puzzle/presentation/keyboard/system_keyboard_input.dart';
+import 'package:chetz_app/features/settings/settings_model.dart';
 import 'package:chetz_app/features/puzzle/presentation/puzzle_screen.dart';
 import 'package:chetz_core/chetz_core.dart';
 import 'package:flutter/material.dart';
@@ -33,8 +36,8 @@ void main() {
     expect(session.puzzle.lang, 'he');
     final word = session.activeWord!;
     expect(find.text(session.puzzle.clueTextOf(word.id)), findsWidgets);
-    // Pattern shows one underscore per empty cell.
-    expect(find.text(List.filled(word.len, '_').join(' ')), findsOneWidget);
+    // The word preview shows one box per cell of the word.
+    expect(find.descendant(of: find.byType(WordPreview), matching: find.byType(AnimatedContainer)), findsNWidgets(word.len));
     // The grid, clue bar and keyboard are RTL for Hebrew puzzles.
     expect(Directionality.of(tester.element(find.byType(PuzzleKeyboard))), TextDirection.rtl);
   });
@@ -57,10 +60,16 @@ void main() {
     expect(session.progress.entry(firstCell).status, CellStatus.filled, reason: 'normal mode: no per-letter feedback');
     expect(session.selection!.cell, isNot(firstCell));
     expect(session.selection!.wordId, word.id);
-    // Clue bar pattern now starts with the letter.
+    // The clue bar's word preview now starts with the letter.
     final pattern = session.patternOf(word);
     expect(pattern.split(' ').first, session.displayAt(firstCell));
-    expect(find.text(pattern), findsOneWidget);
+    expect(find.descendant(of: find.byType(WordPreview), matching: find.text(label)), findsWidgets);
+
+    // Tapping a preview box moves the cursor inside the same word.
+    await tester.tap(find.descendant(of: find.byType(WordPreview), matching: find.byKey(ValueKey(firstCell))));
+    await tester.pump();
+    session = container.read(puzzleSessionProvider(puzzleId)).requireValue;
+    expect(session.selection, Selection(wordId: word.id, cell: firstCell));
 
     // Backspace moves back and clears it.
     await tester.tap(find.bySemanticsLabel('מחיקה'));
@@ -118,5 +127,35 @@ void main() {
     expect(after.progress.entry(cell).status, CellStatus.revealed);
     expect(after.progress.entry(cell).symbol, before.puzzle.solution[cell]);
     expect(after.progress.lettersRevealed, 1);
+  });
+
+  testWidgets('phone keyboard: letters and backspace arrive through the hidden field; action keys sit above it', (tester) async {
+    usePhoneSurface(tester);
+    await tester.pumpWidget(wrapScreen(
+      const PuzzleScreen(puzzleId: puzzleId),
+      overrides: testOverrides(content: content, settings: const AppSettings(onboardingDone: true, tutorialDone: true)),
+    ));
+    await pumpUntilFound(tester, find.byType(SystemKeyboardInput));
+    expect(find.byType(PuzzleKeyboard), findsNothing);
+    expect(find.byType(PuzzleActionRow), findsOneWidget);
+    expect(find.bySemanticsLabel('מחיקה'), findsNothing, reason: 'the phone keyboard has its own backspace');
+
+    final container = ProviderScope.containerOf(tester.element(find.byType(PuzzleScreen)));
+    var session = container.read(puzzleSessionProvider(puzzleId)).requireValue;
+    final firstCell = session.selection!.cell;
+    final symbol = session.puzzle.solution[firstCell];
+    final field = find.descendant(of: find.byType(SystemKeyboardInput), matching: find.byType(TextField));
+
+    await tester.enterText(field, '​${session.lang.symbolToDisplay(symbol)}');
+    await tester.pump();
+    session = container.read(puzzleSessionProvider(puzzleId)).requireValue;
+    expect(session.progress.entry(firstCell).symbol, symbol);
+    expect(session.selection!.cell, isNot(firstCell));
+
+    await tester.enterText(field, '');
+    await tester.pump();
+    session = container.read(puzzleSessionProvider(puzzleId)).requireValue;
+    expect(session.progress.entry(firstCell).isEmpty, isTrue);
+    expect(session.selection!.cell, firstCell);
   });
 }

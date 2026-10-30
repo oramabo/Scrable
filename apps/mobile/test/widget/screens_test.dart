@@ -189,5 +189,11 @@ void main() {
     expect(session.puzzle.kind, PuzzleKind.tutorial);
     expect(session.isTutorial, isTrue);
     expect(find.text('לחצו על תא כדי לבחור מילה'), findsOneWidget, reason: 'first coach mark');
+
+    // Nothing is underneath the tutorial: the close button leaves it for home.
+    await tester.tap(find.byTooltip('יציאה מהתשבץ'));
+    await tester.pumpAndSettle();
+    expect(find.byType(PuzzleScreen), findsNothing);
+    expect(container.read(settingsProvider).tutorialDone, isTrue);
   });
 }

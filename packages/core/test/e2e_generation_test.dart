@@ -85,6 +85,8 @@ void languageTests(String root, String langCode) {
       final codec = const PuzzleCodec();
       final again = codec.decode(codec.encode(p));
       expect(again.solution, p.solution);
+      expect(again.schemaVersion, 2);
+      expect([for (final w in again.words) w.id], [for (final w in p.words) w.id], reason: 'v2 keeps the builder word order');
       expect(codec.verifyChecksum(again), isTrue);
       // determinism
       final second = builder.build(BuildRequest(id: '$langCode-test-l$level', kind: PuzzleKind.pack, level: level, seed: Seeds.pack(lang: langCode, level: level, pack: 1, index: 1), templates: templates));

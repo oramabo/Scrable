@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:chetz_core/chetz_core.dart';
+import 'package:chetz_core/generator.dart' show LevelConfig;
 import 'package:chetz_core/meta.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -251,12 +252,12 @@ class _PuzzleLanguageSwitcher extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
-    // Switching really switches: catalogue, dailies, tutorial and the random
-    // generator all follow `settings.puzzleLang` (the UI language stays put).
+    // One language for the whole app: the interface switches with the
+    // catalogue, dailies, tutorial and the random generator.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(l10n.settingsPuzzleLanguage, style: theme.textTheme.bodyLarge),
+        Text(l10n.settingsLanguage, style: theme.textTheme.bodyLarge),
         const SizedBox(height: 6),
         SegmentedButton<String>(
           expandedInsets: EdgeInsets.zero,
@@ -265,7 +266,7 @@ class _PuzzleLanguageSwitcher extends ConsumerWidget {
             ButtonSegment(value: 'en', label: Text(l10n.languageEnglish)),
           ],
           selected: {current},
-          onSelectionChanged: (s) => ref.read(settingsProvider.notifier).setPuzzleLang(s.first),
+          onSelectionChanged: (s) => ref.read(settingsProvider.notifier).setLanguage(s.first),
           showSelectedIcon: false,
         ),
       ],
@@ -477,6 +478,7 @@ class _PackShelf extends ConsumerWidget {
     final packs = ref.watch(packsOfLevelProvider(level.level));
     final progressMap = ref.watch(packProgressMapProvider);
     final uiLang = ref.watch(settingsProvider.select((s) => s.uiLang));
+    final grid = level.grid(ref.watch(settingsProvider.select((s) => s.puzzleLang)));
     if (packs.isEmpty) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -492,7 +494,7 @@ class _PackShelf extends ConsumerWidget {
                       style: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700), maxLines: 1, overflow: TextOverflow.ellipsis),
                 ),
                 const SizedBox(width: 8),
-                Text(l10n.levelGrid(level.cols, level.rows), style: theme.textTheme.bodySmall),
+                Text(l10n.levelGrid(grid.cols, grid.rows), style: theme.textTheme.bodySmall),
                 const Icon(Icons.chevron_right_rounded, size: 18),
               ],
             ),
@@ -586,7 +588,7 @@ class _RandomPuzzleButton extends ConsumerWidget {
       onPressed: !available
           ? null
           : () async {
-              final level = await showRandomLevelSheet(context);
+              final level = await showRandomLevelSheet(context, ref.read(settingsProvider).puzzleLang);
               if (level == null || !context.mounted) return;
               final id = await startRandomPuzzle(context, ref, level);
               if (id != null && context.mounted) unawaited(context.push('/play/$id'));
@@ -598,7 +600,8 @@ class _RandomPuzzleButton extends ConsumerWidget {
 }
 
 /// Level picker for a random puzzle; returns the chosen level.
-Future<int?> showRandomLevelSheet(BuildContext context) {
+/// Levels the device can build quickly in [lang], see [LevelConfig.maxDeviceLevel].
+Future<int?> showRandomLevelSheet(BuildContext context, String lang) {
   final l10n = context.l10n;
   return showModalBottomSheet<int>(
     context: context,
@@ -619,12 +622,13 @@ Future<int?> showRandomLevelSheet(BuildContext context) {
               ),
             ),
             for (final lv in LevelInfo.all)
-              ListTile(
-                leading: const Icon(Icons.layers_outlined),
-                title: Text('${l10n.levelTitle(lv.level)} · ${l10n.levelName(lv.level)}'),
-                subtitle: Text(l10n.levelGrid(lv.cols, lv.rows)),
-                onTap: () => Navigator.of(ctx).pop(lv.level),
-              ),
+              if (lv.level <= LevelConfig.maxDeviceLevel(lang))
+                ListTile(
+                  leading: const Icon(Icons.layers_outlined),
+                  title: Text('${l10n.levelTitle(lv.level)} · ${l10n.levelName(lv.level)}'),
+                  subtitle: Text(l10n.levelGrid(lv.grid(lang).cols, lv.grid(lang).rows)),
+                  onTap: () => Navigator.of(ctx).pop(lv.level),
+                ),
             const SizedBox(height: 8),
           ],
         ),

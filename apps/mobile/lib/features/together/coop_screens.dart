@@ -27,6 +27,7 @@ class _CoopScreenState extends ConsumerState<CoopScreen> {
 
   Future<void> _create() async {
     final l10n = context.l10n;
+    final lang = ref.read(settingsProvider).puzzleLang;
     final level = await showModalBottomSheet<int>(
       context: context,
       builder: (ctx) => SafeArea(
@@ -42,7 +43,7 @@ class _CoopScreenState extends ConsumerState<CoopScreen> {
                 ListTile(
                   leading: const Icon(Icons.layers_outlined),
                   title: Text('${l10n.levelTitle(lv.level)} · ${l10n.levelName(lv.level)}'),
-                  subtitle: Text(l10n.levelGrid(lv.cols, lv.rows)),
+                  subtitle: Text(l10n.levelGrid(lv.grid(lang).cols, lv.grid(lang).rows)),
                   onTap: () => Navigator.of(ctx).pop(lv.level),
                 ),
               const SizedBox(height: 8),

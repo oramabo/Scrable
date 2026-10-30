@@ -36,8 +36,9 @@ class GridGeometry {
   /// Scene x direction of the reading direction (+1 LTR, −1 RTL).
   double get forwardSign => rtl ? -1 : 1;
 
-  /// Minimum comfortable cell size (dp).
-  static const double minCell = 44;
+  /// Minimum comfortable cell size (dp): clue text stays readable, and grids
+  /// wider than the screen (15×15 and up) are dragged instead of shrunk.
+  static const double minCell = 52;
 
   /// Cell size so that the grid fills [viewportWidth] but never shrinks below
   /// [minCell].

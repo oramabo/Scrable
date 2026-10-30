@@ -1,7 +1,7 @@
 import { publishPuzzle } from '../src/handlers/publishPuzzle';
 import { rebuildManifests } from '../src/handlers/rebuildManifests';
 import { dailyDocPath } from '../src/handlers/submitDaily';
-import { letterCellCount, puzzleChecksum, type PuzzleLike } from '../src/lib/puzzleCodec';
+import { letterCellCount, puzzleChecksum, type PuzzleLike, wordCount } from '../src/lib/puzzleCodec';
 import { CACHE_IMMUTABLE, CACHE_SHORT } from '../src/lib/storage';
 import { validate } from '../src/lib/validate';
 import { FakeFirestore } from './fakeFirestore';
@@ -33,6 +33,18 @@ describe('publishPuzzle', () => {
     const dailyDoc = db.get(dailyDocPath('he', '2026-11-01', 'easy'));
     expect(dailyDoc).toMatchObject({ puzzleId: daily.id, letterCells: letterCellCount(daily.layout), solutionHash: loadFixtureText('puzzle-daily-he.solutionHash.txt').trim(), publishedBy: 'admin1', version: 1 });
     expect(db.get('manifests/he_daily')).toMatchObject({ lang: 'he', entries: { '2026-11-01_easy': { id: daily.id, variant: 'easy', checksum: daily.meta.checksum, path: res.path, url: res.url } } });
+  });
+
+  test('publishes a compact format-2 daily with the same solution hash', async () => {
+    const db = new FakeFirestore();
+    const storage = new FakeStorage();
+    const dailyV2 = loadPuzzle('puzzle-daily-he-v2.json');
+    const res = await publishPuzzle({ db, storage }, { puzzle: dailyV2, lang: 'he' }, NOW, 'admin1');
+    expect(res).toMatchObject({ id: daily.id, solutionHash: loadFixtureText('puzzle-daily-he.solutionHash.txt').trim(), letterCells: letterCellCount(daily.layout) });
+    expect(storage.objects.get(res.path)).toEqual({ data: dailyV2, cacheControl: CACHE_IMMUTABLE });
+    const badEntry = clone(dailyV2);
+    (badEntry['clues'] as unknown[][])[0]![3] = 'X';
+    await expect(publishPuzzle({ db, storage }, { puzzle: badEntry, lang: 'he' }, NOW, 'a')).rejects.toMatchObject({ code: 'invalid-argument', message: expect.stringMatching(/schema/) });
   });
 
   test('accepts a matching publisher solutionHash and rejects a wrong one', async () => {
@@ -107,7 +119,7 @@ describe('publishPuzzle', () => {
           index: 1,
           free: true,
           title: { he: 'רמה 1 · חבילה 1', en: 'Level 1 · Pack 1' },
-          puzzles: { '001': { index: 1, id: pack.id, checksum: pack.meta.checksum, difficulty: pack.difficulty.score, words: pack.words.length }, '002': { index: 2, id: 'he-l1-001-02' } },
+          puzzles: { '001': { index: 1, id: pack.id, checksum: pack.meta.checksum, difficulty: pack.difficulty.score, words: wordCount(pack) }, '002': { index: 2, id: 'he-l1-001-02' } },
         },
       },
     });
@@ -133,7 +145,7 @@ describe('rebuildManifests', () => {
 
     const packsManifest = storage.json('manifests/he/packs.json') as { packs: Array<Record<string, unknown>> };
     expect(validate('packs-manifest', packsManifest)).toEqual({ ok: true, errors: [] });
-    const expectedPuzzles = [{ id: pack.id, index: 1, url: 'puzzles/he/packs/he-l1-001/01.v1.json', checksum: pack.meta.checksum, version: 1, difficulty: pack.difficulty.score, words: pack.words.length }];
+    const expectedPuzzles = [{ id: pack.id, index: 1, url: 'puzzles/he/packs/he-l1-001/01.v1.json', checksum: pack.meta.checksum, version: 1, difficulty: pack.difficulty.score, words: wordCount(pack) }];
     expect(packsManifest.packs[0]).toMatchObject({ id: 'he-l1-001', lang: 'he', level: 1, index: 1, title: pack.title, puzzleCount: 1, free: true, url: 'puzzles/he/packs/he-l1-001/pack.v1.json', puzzles: expectedPuzzles });
     const packFile = storage.json('puzzles/he/packs/he-l1-001/pack.v1.json') as { puzzles: Array<{ id: string }>; checksum: string; puzzleCount: number };
     expect(packFile).toMatchObject({ id: 'he-l1-001', lang: 'he', puzzleCount: 1, puzzles: expectedPuzzles });

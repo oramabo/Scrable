@@ -1,4 +1,5 @@
 import 'package:chetz_core/chetz_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,6 +8,7 @@ import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
 import '../../core/widgets/common.dart';
 import '../daily/daily_controller.dart';
+import '../feedback/feedback_sheet.dart';
 import '../notifications/notifications_controller.dart';
 import '../packs/packs_providers.dart';
 import '../puzzle/application/progress_providers.dart';
@@ -23,6 +25,7 @@ class SettingsTab extends ConsumerWidget {
     final s = ref.watch(settingsProvider);
     final ctl = ref.read(settingsProvider.notifier);
     final config = ref.watch(gameConfigProvider);
+    final appConfig = ref.watch(appConfigProvider);
     final lang = s.puzzleProfile;
     final ads = ref.watch(adsServiceProvider);
     final notifications = ref.watch(notificationsServiceProvider);
@@ -34,42 +37,37 @@ class SettingsTab extends ConsumerWidget {
         children: [
           SectionHeader(l10n.settingsSectionLanguage),
           ListTile(
-            title: Text(l10n.settingsUiLanguage),
+            title: Text(l10n.settingsLanguage),
             trailing: SegmentedButton<String>(
               segments: [
                 ButtonSegment(value: 'he', label: Text(l10n.languageHebrew)),
                 ButtonSegment(value: 'en', label: Text(l10n.languageEnglish)),
               ],
               selected: {s.uiLang},
-              onSelectionChanged: (v) => ctl.setUiLang(v.first),
-              showSelectedIcon: false,
-            ),
-          ),
-          ListTile(
-            title: Text(l10n.settingsPuzzleLanguage),
-            trailing: SegmentedButton<String>(
-              segments: [
-                ButtonSegment(value: 'he', label: Text(l10n.languageHebrew)),
-                ButtonSegment(value: 'en', label: Text(l10n.languageEnglish)),
-              ],
-              selected: {s.puzzleLang},
-              onSelectionChanged: (v) => ctl.setPuzzleLang(v.first),
+              onSelectionChanged: (v) => ctl.setLanguage(v.first),
               showSelectedIcon: false,
             ),
           ),
 
           SectionHeader(l10n.settingsSectionPlay),
-          ListTile(
-            title: Text(l10n.settingsKeyboardLayout),
-            trailing: DropdownButton<String>(
-              value: s.keyboardLayoutFor(lang).id,
-              onChanged: (v) => v == null ? null : ctl.setKeyboardLayout(v),
-              items: [
-                for (final layout in lang.keyboardLayouts)
-                  DropdownMenuItem(value: layout.id, child: Text(l10n.layoutName(layout.id))),
-              ],
-            ),
+          SwitchListTile(
+            title: Text(l10n.settingsSystemKeyboard),
+            subtitle: Text(l10n.settingsSystemKeyboardHint),
+            value: s.systemKeyboard,
+            onChanged: ctl.setSystemKeyboard,
           ),
+          if (!s.systemKeyboard)
+            ListTile(
+              title: Text(l10n.settingsKeyboardLayout),
+              trailing: DropdownButton<String>(
+                value: s.keyboardLayoutFor(lang).id,
+                onChanged: (v) => v == null ? null : ctl.setKeyboardLayout(v),
+                items: [
+                  for (final layout in lang.keyboardLayouts)
+                    DropdownMenuItem(value: layout.id, child: Text(l10n.layoutName(layout.id))),
+                ],
+              ),
+            ),
           SwitchListTile(title: Text(l10n.settingsBigKeyboard), value: s.bigKeyboard, onChanged: ctl.setBigKeyboard),
           SwitchListTile(title: Text(l10n.settingsShowTimer), value: s.showTimer, onChanged: ctl.setShowTimer),
           SwitchListTile(title: Text(l10n.settingsSkipFilled), value: s.skipFilled, onChanged: ctl.setSkipFilled),
@@ -202,6 +200,20 @@ class SettingsTab extends ConsumerWidget {
             title: Text(l10n.storeTitle),
             onTap: () => context.push('/store'),
           ),
+          ListTile(
+            leading: const Icon(Icons.feedback_outlined),
+            title: Text(l10n.feedbackSettingsTile),
+            subtitle: Text(l10n.feedbackSettingsHint),
+            onTap: () => showFeedbackSheet(context),
+          ),
+          // iOS needs the App Store id to open the listing.
+          if (defaultTargetPlatform != TargetPlatform.iOS || appConfig.appStoreId.isNotEmpty)
+            ListTile(
+              leading: const Icon(Icons.star_outline_rounded),
+              title: Text(l10n.rateApp),
+              subtitle: Text(l10n.rateAppHint),
+              onTap: () => ref.read(reviewServiceProvider).openStore(),
+            ),
           ListTile(
             leading: const Icon(Icons.info_outline_rounded),
             title: Text(l10n.settingsAbout),

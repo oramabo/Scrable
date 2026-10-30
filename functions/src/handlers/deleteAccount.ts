@@ -1,6 +1,7 @@
 /** `deleteAccount` callable: removes the caller's Firestore data and auth user. */
 import type { UserAdmin } from '../lib/auth';
-import type { Db } from '../lib/firestore';
+import { type Db, readString } from '../lib/firestore';
+import { usernameDocPath, usernameKey } from '../lib/username';
 
 export const USER_SUBCOLLECTIONS = ['progress', 'ledger', 'daily', 'claims'] as const;
 const PAGE = 200;
@@ -26,6 +27,14 @@ export async function deleteAccount(deps: DeleteAccountDeps, uid: string): Promi
     }
   }
   const user = await deps.db.getDoc(`users/${uid}`);
+  const username = readString(user.data, 'username');
+  if (username !== undefined) {
+    const claim = usernameDocPath(usernameKey(username));
+    if (readString((await deps.db.getDoc(claim)).data, 'uid') === uid) {
+      await deps.db.deleteDoc(claim);
+      deletedDocs++;
+    }
+  }
   if (user.exists) {
     await deps.db.deleteDoc(`users/${uid}`);
     deletedDocs++;

@@ -18,6 +18,7 @@ class AppSettings {
     this.skipFilled = true,
     this.autoNextWord = true,
     this.bigKeyboard = false,
+    this.systemKeyboard = true,
     this.modePerLevel = const {},
     this.skipHintConfirm = false,
     this.onboardingDone = false,
@@ -29,6 +30,8 @@ class AppSettings {
     this.useCustomTheme = false,
     this.customTheme = const CustomTheme(),
     this.notificationsAsked = false,
+    this.reviewPromptedAt,
+    this.reviewPromptCount = 0,
     this.notificationsDailyReady = false,
     this.notificationsStreak = false,
     this.notificationsHour = 9,
@@ -49,6 +52,10 @@ class AppSettings {
   final bool autoNextWord;
   final bool bigKeyboard;
 
+  /// Type with the phone's own keyboard (action keys sit above it) instead
+  /// of the in-app [keyboardLayoutFor] keyboard.
+  final bool systemKeyboard;
+
   /// Play mode chosen per level (overrides the config default).
   final Map<int, PlayMode> modePerLevel;
   final bool skipHintConfirm;
@@ -65,6 +72,11 @@ class AppSettings {
 
   /// Reminders (opt-in, asked once after the second completed daily).
   final bool notificationsAsked;
+
+  /// Store rating prompt (see feedback/rating_prompt.dart): when the system
+  /// review dialog was last requested and how many times.
+  final int? reviewPromptedAt;
+  final int reviewPromptCount;
   final bool notificationsDailyReady;
   final bool notificationsStreak;
 
@@ -99,6 +111,7 @@ class AppSettings {
     bool? skipFilled,
     bool? autoNextWord,
     bool? bigKeyboard,
+    bool? systemKeyboard,
     Map<int, PlayMode>? modePerLevel,
     bool? skipHintConfirm,
     bool? onboardingDone,
@@ -111,6 +124,8 @@ class AppSettings {
     bool? useCustomTheme,
     CustomTheme? customTheme,
     bool? notificationsAsked,
+    int? reviewPromptedAt,
+    int? reviewPromptCount,
     bool? notificationsDailyReady,
     bool? notificationsStreak,
     int? notificationsHour,
@@ -128,6 +143,7 @@ class AppSettings {
         skipFilled: skipFilled ?? this.skipFilled,
         autoNextWord: autoNextWord ?? this.autoNextWord,
         bigKeyboard: bigKeyboard ?? this.bigKeyboard,
+        systemKeyboard: systemKeyboard ?? this.systemKeyboard,
         modePerLevel: modePerLevel ?? this.modePerLevel,
         skipHintConfirm: skipHintConfirm ?? this.skipHintConfirm,
         onboardingDone: onboardingDone ?? this.onboardingDone,
@@ -139,6 +155,8 @@ class AppSettings {
         useCustomTheme: useCustomTheme ?? this.useCustomTheme,
         customTheme: customTheme ?? this.customTheme,
         notificationsAsked: notificationsAsked ?? this.notificationsAsked,
+        reviewPromptedAt: reviewPromptedAt ?? this.reviewPromptedAt,
+        reviewPromptCount: reviewPromptCount ?? this.reviewPromptCount,
         notificationsDailyReady: notificationsDailyReady ?? this.notificationsDailyReady,
         notificationsStreak: notificationsStreak ?? this.notificationsStreak,
         notificationsHour: notificationsHour ?? this.notificationsHour,
@@ -169,6 +187,7 @@ class AppSettings {
         'skipFilled': skipFilled,
         'autoNextWord': autoNextWord,
         'bigKeyboard': bigKeyboard,
+        'systemKeyboard': systemKeyboard,
         'modePerLevel': {for (final e in modePerLevel.entries) '${e.key}': e.value.code},
         'skipHintConfirm': skipHintConfirm,
         'onboardingDone': onboardingDone,
@@ -180,6 +199,8 @@ class AppSettings {
         'useCustomTheme': useCustomTheme,
         'customTheme': customTheme.toJson(),
         'notificationsAsked': notificationsAsked,
+        if (reviewPromptedAt != null) 'reviewPromptedAt': reviewPromptedAt,
+        'reviewPromptCount': reviewPromptCount,
         'notificationsDailyReady': notificationsDailyReady,
         'notificationsStreak': notificationsStreak,
         'notificationsHour': notificationsHour,
@@ -207,6 +228,7 @@ class AppSettings {
       skipFilled: (j['skipFilled'] as bool?) ?? true,
       autoNextWord: (j['autoNextWord'] as bool?) ?? true,
       bigKeyboard: (j['bigKeyboard'] as bool?) ?? false,
+      systemKeyboard: (j['systemKeyboard'] as bool?) ?? true,
       modePerLevel: modes,
       skipHintConfirm: (j['skipHintConfirm'] as bool?) ?? false,
       onboardingDone: (j['onboardingDone'] as bool?) ?? false,
@@ -218,6 +240,8 @@ class AppSettings {
       useCustomTheme: (j['useCustomTheme'] as bool?) ?? false,
       customTheme: j['customTheme'] is Map ? CustomTheme.fromJson(j['customTheme'] as Map<String, dynamic>) : const CustomTheme(),
       notificationsAsked: (j['notificationsAsked'] as bool?) ?? false,
+      reviewPromptedAt: j['reviewPromptedAt'] as int?,
+      reviewPromptCount: (j['reviewPromptCount'] as int?) ?? 0,
       notificationsDailyReady: (j['notificationsDailyReady'] as bool?) ?? false,
       notificationsStreak: (j['notificationsStreak'] as bool?) ?? false,
       notificationsHour: ((j['notificationsHour'] as num?) ?? 9).toInt().clamp(0, 23),

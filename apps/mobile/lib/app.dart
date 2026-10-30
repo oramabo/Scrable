@@ -106,6 +106,7 @@ class _StartupState extends ConsumerState<_Startup> with WidgetsBindingObserver 
     ref.read(settingsProvider.notifier).markSession(ref.read(clockProvider).nowMs);
 
     final cloud = ref.read(cloudSyncProvider);
+    unawaited(ref.read(feedbackControllerProvider).flush());
     final store = ref.read(storeServiceProvider);
     unawaited(store.initialize(appUserId: cloud.userId));
 

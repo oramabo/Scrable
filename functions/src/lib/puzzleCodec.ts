@@ -23,13 +23,21 @@ export interface PuzzleLike {
   title?: string;
   grid: { rows: number; cols: number; colOrigin: string };
   layout: string[];
-  words: unknown[];
+  /** Format 1: one object per word. */
+  words?: unknown[];
+  /** Format 2 (`schemaVersion: 2`): one compact array per clue, i.e. per word. */
+  clues?: unknown[];
   difficulty: { score: number; band: string } & Record<string, unknown>;
   solution: PuzzleSolution;
   meta: { version: number; checksum?: string } & Record<string, unknown>;
   daily?: { date: string; variant: string };
   pack?: { id: string; index: number };
   [key: string]: unknown;
+}
+
+/** Number of words in either puzzle format. */
+export function wordCount(puzzle: PuzzleLike): number {
+  return (puzzle.clues ?? puzzle.words ?? []).length;
 }
 
 export function letterCellCount(layout: readonly string[]): number {

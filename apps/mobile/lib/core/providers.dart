@@ -2,8 +2,11 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../features/account/account_service.dart';
 import '../features/ads/ads_service.dart';
 import '../features/daily/daily_history.dart';
+import '../features/feedback/feedback_service.dart';
+import '../features/feedback/review_service.dart';
 import '../features/leaderboard/leaderboard_service.dart';
 import '../features/meta/meta_state.dart';
 import '../features/puzzle/data/progress_repository.dart';
@@ -152,6 +155,28 @@ final clueImageStoreProvider = Provider.family<ClueImageStore, String>((ref, lan
   ref.onDispose(store.dispose);
   return store;
 });
+
+/// Player feedback; Firestore only when cloud sync is on, otherwise reports
+/// wait in the on-device outbox.
+final feedbackServiceProvider = Provider<FeedbackService>((ref) {
+  final cloud = ref.watch(cloudSyncProvider);
+  if (!cloud.enabled) return const DisabledFeedbackService();
+  return FirestoreFeedbackService(uid: cloud.userId);
+});
+
+final feedbackControllerProvider =
+    Provider<FeedbackController>((ref) => FeedbackController(ref.watch(feedbackServiceProvider), ref.watch(jsonStoreProvider)));
+
+/// Google / Apple sign-in and usernames; needs cloud sync (Firebase) on.
+final accountServiceProvider = Provider<AccountService>((ref) {
+  final cloud = ref.watch(cloudSyncProvider);
+  if (!cloud.enabled) return const DisabledAccountService();
+  final clientId = ref.watch(appConfigProvider).googleServerClientId;
+  return FirebaseAccountService(googleServerClientId: clientId.isEmpty ? null : clientId);
+});
+
+/// The stores' own rating dialog (Play In-App Review / StoreKit).
+final reviewServiceProvider = Provider<ReviewService>((ref) => InAppReviewService(appStoreId: ref.watch(appConfigProvider).appStoreId));
 
 /// Hard-daily leaderboard; Firestore only when cloud sync is on.
 final leaderboardServiceProvider = Provider<LeaderboardService>((ref) {

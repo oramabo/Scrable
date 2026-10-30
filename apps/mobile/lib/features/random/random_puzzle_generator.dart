@@ -54,9 +54,13 @@ class DeviceGeneratorCore {
   final PuzzleBuilder builder;
 
   Puzzle build({required int level, required String seed, required String id}) {
+    // "Another random puzzle" from an older, bigger random puzzle stays within reach.
+    final lv = math.min(level, LevelConfig.maxDeviceLevel(lang.code));
     try {
+      // A couple of points outside the score band is noise for an unranked
+      // puzzle; waiting for another template is not.
       return builder
-          .build(BuildRequest(id: id, kind: PuzzleKind.practice, level: level, seed: seed, templates: templates))
+          .build(BuildRequest(id: id, kind: PuzzleKind.practice, level: lv, seed: seed, templates: templates, bandTolerance: 2.5))
           .puzzle;
     } on BuildFailure catch (e) {
       // Keep the tail of the builder log: it names the failing stage.
@@ -76,8 +80,9 @@ String newRandomSeed([math.Random? rng]) {
 }
 
 /// Generator backed by one long-lived worker isolate per language: the
-/// lexicon (≈1.4 MB gzipped, tens of thousands of words) is decoded and
-/// indexed once, then each request takes 0.1–1 s off the UI thread.
+/// lexicon (1.5–2.6 MB gzipped, 38–63k words) is decoded and indexed once,
+/// then each request takes from a fraction of a second to several seconds
+/// (big grids) off the UI thread.
 ///
 /// [inProcess] runs the core on the calling isolate instead (tests, where
 /// real isolates cannot be awaited under FakeAsync, and platforms without

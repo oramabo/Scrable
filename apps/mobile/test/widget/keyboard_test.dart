@@ -46,19 +46,19 @@ void main() {
     expect(emitted, [0, 20]);
   });
 
-  testWidgets('final-form keys show the final glyph but emit the base symbol', (tester) async {
+  testWidgets('grids use regular letters only: the final-form keys are left out', (tester) async {
     final emitted = <int>[];
     final standard = Languages.he.keyboardLayouts.firstWhere((l) => l.id == 'standard');
     await tester.pumpWidget(keyboard(layout: standard, emitted: emitted));
-    expect(find.text('ם'), findsOneWidget);
-    expect(find.text('ך'), findsOneWidget);
-    await tester.tap(find.text('ם'));
+    for (final finalForm in ['ך', 'ם', 'ן', 'ף', 'ץ']) {
+      expect(find.text(finalForm), findsNothing, reason: finalForm);
+    }
+    for (final regular in ['כ', 'מ', 'נ', 'פ', 'צ']) {
+      expect(find.text(regular), findsOneWidget, reason: regular);
+    }
+    await tester.tap(find.text('מ'));
     await tester.pump();
-    await tester.tap(find.text('ך'));
-    await tester.pump();
-    await tester.tap(find.text('ץ'));
-    await tester.pump();
-    expect(emitted, [12, 10, 17], reason: 'ם→מ, ך→כ, ץ→צ');
+    expect(emitted, [12]);
   });
 
   testWidgets('keys are at least 48 dp tall and carry letter names for screen readers', (tester) async {

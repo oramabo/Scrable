@@ -22,9 +22,10 @@ void main() {
           .toList();
       final builder = PuzzleBuilder(lexicon);
       final loadMs = sw.elapsedMilliseconds;
-      for (final level in [1, 3, 5]) {
+      for (final level in {1, 3, LevelConfig.maxDeviceLevel(lang)}) {
         sw.reset();
-        final out = builder.build(BuildRequest(id: '$lang-practice-$level', kind: PuzzleKind.practice, level: level, seed: 'device-$lang-$level', templates: templates));
+        // Same request as the app's random mode, tolerance included.
+        final out = builder.build(BuildRequest(id: '$lang-practice-$level', kind: PuzzleKind.practice, level: level, seed: 'device-$lang-$level', templates: templates, bandTolerance: 2.5));
         // ignore: avoid_print
         print('$lang device L$level: ${out.puzzle.words.length} words, score ${out.puzzle.difficulty.score}, ${sw.elapsedMilliseconds}ms (load ${loadMs}ms)');
         expect(out.puzzle.words.length, greaterThan(10));

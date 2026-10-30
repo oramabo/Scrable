@@ -15,6 +15,8 @@ class AppConfig {
     this.revenueCatApiKey = '',
     this.appVersion = '0.1.0',
     this.umpDebugGeography = false,
+    this.appStoreId = '',
+    this.googleServerClientId = '',
   });
 
   /// Reads `--dart-define` values; falls back to the offline defaults.
@@ -30,6 +32,8 @@ class AppConfig {
         revenueCatApiKey: String.fromEnvironment('CHETZ_REVENUECAT_KEY'),
         appVersion: String.fromEnvironment('CHETZ_VERSION', defaultValue: '0.1.0'),
         umpDebugGeography: bool.fromEnvironment('CHETZ_UMP_DEBUG'),
+        appStoreId: String.fromEnvironment('CHETZ_APP_STORE_ID'),
+        googleServerClientId: String.fromEnvironment('CHETZ_GOOGLE_CLIENT_ID'),
       );
 
   factory AppConfig.fromJson(Map<String, dynamic> j) => AppConfig(
@@ -43,6 +47,8 @@ class AppConfig {
         revenueCatApiKey: (j['revenueCatApiKey'] as String?) ?? '',
         appVersion: (j['appVersion'] as String?) ?? '0.1.0',
         umpDebugGeography: (j['umpDebugGeography'] as bool?) ?? false,
+        appStoreId: (j['appStoreId'] as String?) ?? '',
+        googleServerClientId: (j['googleServerClientId'] as String?) ?? '',
       );
 
   /// Google's public test ad units (Android). Replace before release.
@@ -61,6 +67,14 @@ class AppConfig {
   final String revenueCatApiKey;
   final String appVersion;
   final bool umpDebugGeography;
+
+  /// Apple App Store id (digits) for the iOS "Rate the app" link; Android
+  /// opens the Play listing by package name.
+  final String appStoreId;
+
+  /// OAuth web client id for Google sign-in; empty uses the one in
+  /// google-services.json (`default_web_client_id`).
+  final String googleServerClientId;
 
   bool get cdnEnabled => cdnBaseUrl.isNotEmpty;
 
@@ -82,5 +96,7 @@ class AppConfig {
         revenueCatApiKey: revenueCatApiKey,
         appVersion: appVersion,
         umpDebugGeography: umpDebugGeography,
+        appStoreId: appStoreId,
+        googleServerClientId: googleServerClientId,
       );
 }

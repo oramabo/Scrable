@@ -7,12 +7,14 @@ import 'package:go_router/go_router.dart';
 import '../../core/analytics/analytics.dart';
 import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
+import '../account/account_widgets.dart';
 import '../profile/profile_controller.dart';
 import '../puzzle/application/puzzle_controller.dart';
 import '../settings/settings_controller.dart';
 
-/// FTUE (UX §5): splash with the arrow drawing itself (≤ 1 s) → optional name
-/// → the tutorial puzzle. No permissions, no settings.
+/// FTUE (UX §5): splash with the arrow drawing itself (≤ 1 s) → optional
+/// store-account sign-in + username, or a free-text name as a guest → the
+/// tutorial puzzle. No permissions, no settings.
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -89,6 +91,14 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
                       const SizedBox(height: 10),
                       Text(l10n.nameScreenBody, textAlign: TextAlign.center, style: theme.textTheme.bodyLarge),
                       const SizedBox(height: 24),
+                      // With Firebase on: the store account and a unique username instead of a free-text name.
+                      if (ref.watch(accountServiceProvider).available) ...[
+                        SignInButton(onSignedIn: () => _start(skipName: true)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          child: Text(l10n.playAsGuest, textAlign: TextAlign.center, style: theme.textTheme.bodyMedium),
+                        ),
+                      ],
                       TextField(
                         controller: _name,
                         maxLength: 24,

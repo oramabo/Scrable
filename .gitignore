@@ -13,6 +13,7 @@ pubspec.lock
 apps/mobile/.flutter-plugins*
 apps/mobile/android/app/google-services.json
 apps/mobile/ios/Runner/GoogleService-Info.plist
+apps/mobile/lib/firebase_options.dart
 apps/mobile/android/key.properties
 apps/mobile/android/*.jks
 **/ios/Pods/
@@ -57,3 +58,6 @@ Thumbs.db
 # Local scratch
 /tmp/
 *.tmp
+
+# Firebase Admin SDK keys (tools/seed_firebase.sh --key); keep them outside the repo
+*-firebase-adminsdk-*.json

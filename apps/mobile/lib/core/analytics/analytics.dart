@@ -19,6 +19,10 @@ abstract final class AnalyticsEvents {
   static const onboardingStep = 'onboarding_step';
   static const a11ySettingChanged = 'a11y_setting_changed';
   static const languageSwitched = 'language_switched';
+  static const feedbackSent = 'feedback_sent';
+  static const reviewPrompt = 'review_prompt';
+  static const signedIn = 'signed_in';
+  static const usernameClaimed = 'username_claimed';
 }
 
 /// Product analytics sink. Every event carries `lang` (puzzle language) and

@@ -12,6 +12,9 @@ import '../../../core/l10n/l10n.dart';
 import '../../../core/providers.dart';
 import '../../../core/util/clock.dart';
 import '../../../core/widgets/common.dart';
+import '../../feedback/feedback_service.dart';
+import '../../feedback/feedback_sheet.dart';
+import '../../feedback/rating_prompt.dart';
 import '../../notifications/notifications_controller.dart';
 import '../../onboarding/tutorial_overlay.dart';
 import '../../random/random_puzzle_flow.dart';
@@ -30,11 +33,13 @@ import 'clue_bar.dart';
 import 'grid/puzzle_grid.dart';
 import 'keyboard/cycler_key.dart';
 import 'keyboard/puzzle_keyboard.dart';
+import 'keyboard/system_keyboard_input.dart';
 import 'sheets/cell_sheets.dart';
 import 'sheets/completion_sheet.dart';
 import 'sheets/hint_sheet.dart';
 
-/// The solving screen: top bar, zoomable grid, clue bar and custom keyboard.
+/// The solving screen: top bar, zoomable grid, clue bar and keyboard (the
+/// phone's own with the action keys above it, or the in-app one).
 /// The grid, clue bar and keyboard follow the puzzle language's direction;
 /// the chrome follows the UI locale.
 class PuzzleScreen extends ConsumerStatefulWidget {
@@ -63,6 +68,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
   final TransformationController _zoom = TransformationController();
   final GlobalKey _coinKey = GlobalKey();
   final GlobalKey _gridKey = GlobalKey();
+  final FocusNode _typingFocus = FocusNode(debugLabel: 'system keyboard');
   int? _lastFeedbackSeq;
   bool _completionShown = false;
   bool _hintBusy = false;
@@ -86,6 +92,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     _zoom.dispose();
+    _typingFocus.dispose();
     super.dispose();
   }
 
@@ -182,6 +189,22 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
     entry.remove();
   }
 
+  /// Feedback form about the active clue, with the ids the review queue needs.
+  void _onReportClue(PuzzleSession s) {
+    final word = s.activeWord;
+    showFeedbackSheet(
+      context,
+      initialKind: word == null ? ReportKind.bug : ReportKind.clue,
+      quote: word == null ? null : s.puzzle.clueTextOf(word.id),
+      details: {
+        'puzzleId': s.puzzle.id,
+        if (word != null) 'wordId': word.id,
+        if (word?.clueId != null) 'clueId': word!.clueId,
+        if (word != null) 'clueText': s.puzzle.clueTextOf(word.id),
+      },
+    );
+  }
+
   Future<void> _showCompletion(PuzzleSession s) async {
     if (!mounted || s.completion == null) return;
     final controller = _controller;
@@ -201,7 +224,10 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
     );
     if (!mounted) return;
     // Opt-in to reminders after the second completed daily (UX: ask with a reason).
+    final notificationsAsked = ref.read(settingsProvider).notificationsAsked;
     if (s.puzzle.daily != null) await maybeAskForNotifications(context, ref);
+    // The store rating dialog, never right after another prompt.
+    if (mounted && ref.read(settingsProvider).notificationsAsked == notificationsAsked) await maybeRequestReview(ref);
     if (!mounted || action == null) return;
     if (action == CompletionAction.leaderboard) {
       final d = s.puzzle.daily!;
@@ -291,6 +317,26 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
     if (_isVersus) await ref.read(versusSessionProvider(_sessionId).notifier).leave();
     if (_isCoop) await ref.read(coopSessionProvider(_sessionId).notifier).leave();
     if (mounted) context.go('/together');
+  }
+
+  /// Close button / back on a puzzle with nothing underneath it (the
+  /// onboarding tutorial, a "next puzzle" jump): go home. Leaving the
+  /// tutorial counts as having seen it.
+  void _leaveToHome() {
+    final s = ref.read(puzzleSessionProvider(_sessionId)).value;
+    if (s != null && s.isTutorial) _controller.markTutorialDone();
+    context.go('/');
+  }
+
+  /// A character from the phone's keyboard. Space switches direction like a
+  /// hardware keyboard; a lone apostrophe / geresh applies the geresh.
+  void _onSystemCharacter(String ch, {required bool isHebrew}) {
+    final controller = _controller;
+    if (ch == ' ') {
+      controller.toggleDirection();
+    } else if (!controller.typeCharacter(ch) && isHebrew && (ch == HebrewProfile.geresh || ch == "'" || ch == '’')) {
+      controller.applyGeresh();
+    }
   }
 
   Future<void> _onHint() async {
@@ -420,6 +466,14 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
       _lastFeedbackSeq = fb.seq;
       _handleFeedback(fb, s);
     });
+    // Tapping a cell or clue brings the phone's keyboard back if it was closed.
+    ref.listen(puzzleSessionProvider(_sessionId), (prev, next) {
+      final s = next.value;
+      final before = prev?.value?.selection;
+      if (s == null || s.isComplete || !ref.read(settingsProvider).systemKeyboard) return;
+      if (before != null && before.cell == s.selection?.cell && before.wordId == s.selection?.wordId) return;
+      SystemKeyboardInput.show(_typingFocus);
+    });
     final async = ref.watch(puzzleSessionProvider(_sessionId));
     final settings = ref.watch(settingsProvider);
     final balance = ref.watch(balanceProvider);
@@ -472,14 +526,24 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
             WidgetsBinding.instance.addPostFrameCallback((_) => _showCoopResults(c));
           }
         }
+        final canPopRoute = Navigator.canPop(context);
         return PopScope(
-          canPop: !_isMultiplayer,
+          canPop: !_isMultiplayer && canPopRoute,
           onPopInvokedWithResult: (didPop, _) {
-            if (!didPop) _onLeaveRequested();
+            if (didPop) return;
+            if (_isMultiplayer) {
+              _onLeaveRequested();
+            } else {
+              _leaveToHome();
+            }
           },
           child: Scaffold(
           appBar: AppBar(
-            leading: _isMultiplayer ? IconButton(tooltip: l10n.back, icon: const Icon(Icons.arrow_back_rounded), onPressed: _onLeaveRequested) : null,
+            leading: _isMultiplayer
+                ? IconButton(tooltip: l10n.back, icon: const Icon(Icons.arrow_back_rounded), onPressed: _onLeaveRequested)
+                : canPopRoute
+                    ? null
+                    : IconButton(tooltip: l10n.leavePuzzle, icon: const Icon(Icons.close_rounded), onPressed: _leaveToHome),
             title: Text(_title(session, l10n), maxLines: 1, overflow: TextOverflow.ellipsis),
             actions: [
               if (settings.showTimer)
@@ -505,6 +569,8 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                       _zoomBy(1.25);
                     case 'zoom_out':
                       _zoomBy(0.8);
+                    case 'report':
+                      _onReportClue(session);
                   }
                 },
                 itemBuilder: (_) => [
@@ -528,12 +594,17 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                     value: 'zoom_out',
                     child: ListTile(leading: const Icon(Icons.zoom_out_rounded), title: Text(l10n.zoomOut)),
                   ),
+                  PopupMenuItem(
+                    value: 'report',
+                    child: ListTile(leading: const Icon(Icons.flag_outlined), title: Text(l10n.reportClue)),
+                  ),
                 ],
               ),
             ],
           ),
           body: Focus(
-            autofocus: true,
+            // With the phone's keyboard the hidden text field takes focus.
+            autofocus: !settings.systemKeyboard,
             onKeyEvent: _onKey,
             child: Column(
               children: [
@@ -591,6 +662,7 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                     onPrev: controller.prevWord,
                     onNext: controller.nextWord,
                     onSwitch: controller.toggleDirection,
+                    onCellTap: controller.moveCursor,
                   ),
                 ),
                 // The A→Z key slides in only when one cell of the word is left (UX §4).
@@ -623,18 +695,41 @@ class _PuzzleScreenState extends ConsumerState<PuzzleScreen> with WidgetsBinding
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: SafeArea(
                       top: false,
-                      child: PuzzleKeyboard(
-                        lang: session.lang,
-                        layout: layout,
-                        big: settings.bigKeyboard,
-                        enabled: !session.isComplete,
-                        onSymbol: controller.typeSymbol,
-                        onBackspace: controller.backspace,
-                        onNextWord: controller.nextWord,
-                        onHint: _onHint,
-                        onUndo: controller.undo,
-                        onGeresh: isHebrew ? controller.applyGeresh : null,
-                      ),
+                      child: settings.systemKeyboard
+                          ? Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 6),
+                              child: Stack(
+                                children: [
+                                  SystemKeyboardInput(
+                                    focusNode: _typingFocus,
+                                    enabled: !session.isComplete,
+                                    onCharacter: (ch) => _onSystemCharacter(ch, isHebrew: isHebrew),
+                                    onBackspace: controller.backspace,
+                                    onSubmit: controller.nextWord,
+                                  ),
+                                  PuzzleActionRow(
+                                    height: settings.bigKeyboard ? 52 : 44,
+                                    enabled: !session.isComplete,
+                                    onHint: _onHint,
+                                    onUndo: controller.undo,
+                                    onNextWord: controller.nextWord,
+                                    onGeresh: isHebrew ? controller.applyGeresh : null,
+                                  ),
+                                ],
+                              ),
+                            )
+                          : PuzzleKeyboard(
+                              lang: session.lang,
+                              layout: layout,
+                              big: settings.bigKeyboard,
+                              enabled: !session.isComplete,
+                              onSymbol: controller.typeSymbol,
+                              onBackspace: controller.backspace,
+                              onNextWord: controller.nextWord,
+                              onHint: _onHint,
+                              onUndo: controller.undo,
+                              onGeresh: isHebrew ? controller.applyGeresh : null,
+                            ),
                     ),
                   ),
                 ),

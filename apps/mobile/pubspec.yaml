@@ -40,6 +40,10 @@ dependencies:
   flutter_local_notifications: ^22.3.3
   timezone: ^0.11.2
 
+  # Store rating prompt (Play In-App Review / StoreKit).
+  in_app_review: ^2.0.12
+  google_sign_in: ^7.2.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

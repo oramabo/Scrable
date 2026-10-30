@@ -4,15 +4,19 @@ import '../model/puzzle.dart';
 import 'layout.dart';
 import 'lexicon.dart';
 
-/// Hand-set weights of the logistic difficulty model (v0). Recalibrated from
+/// Hand-set weights of the logistic difficulty model (v1). Recalibrated from
 /// telemetry later; stored with the puzzle so old scores stay reproducible.
+/// v1: grids grew from 16–68 words to 100–280, so the word count term is
+/// centred on the level-1 size (100 words) with a weight that gives the
+/// biggest grid about the boost the old biggest grid had, and bent arrows
+/// count per 16 words.
 class DifficultyWeights {
   const DifficultyWeights({
     this.bias = -3.2,
     this.meanWordDiff = 3.0,
     this.p90WordDiff = 1.2,
     this.meanClueDiff = 1.5,
-    this.wordCount = 0.02,
+    this.wordCount = 0.006,
     this.avgLen = 0.6,
     this.checkedRatio = -1.5,
     this.properShare = 1.0,
@@ -43,12 +47,12 @@ class DifficultyModel {
         w.meanWordDiff * mean +
         w.p90WordDiff * p90 +
         w.meanClueDiff * clueMean +
-        w.wordCount * (layout.wordCount - 16) +
+        w.wordCount * (layout.wordCount - 100) +
         w.avgLen * (avgLen - 3.5) +
         w.checkedRatio * (layout.checkedRatio - 0.7) +
         w.properShare * proper +
         w.multiwordShare * multi +
-        w.bentArrows * layout.bentArrows +
+        w.bentArrows * (layout.wordCount == 0 ? 0 : layout.bentArrows * 16 / layout.wordCount) +
         w.twoLetterShare * layout.twoLetterShare;
     final score = 100 / (1 + math.exp(-z));
     return PuzzleDifficulty(

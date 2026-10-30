@@ -4,6 +4,11 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// google-services.json is git-ignored (docs/SETUP.md §2); without it the app builds offline.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 android {
     namespace = "com.chetz.chetz_app"
     compileSdk = flutter.compileSdkVersion

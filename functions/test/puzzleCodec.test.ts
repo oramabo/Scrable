@@ -1,4 +1,4 @@
-import { canonicalJson, decodeLetterSymbols, letterCellCount, puzzleChecksum, solutionHash, verifyChecksum } from '../src/lib/puzzleCodec';
+import { canonicalJson, decodeLetterSymbols, letterCellCount, puzzleChecksum, solutionHash, verifyChecksum, wordCount } from '../src/lib/puzzleCodec';
 import { loadFixtureText, loadPuzzle } from './helpers';
 
 describe('puzzle codec port (must match packages/core PuzzleCodec)', () => {
@@ -30,5 +30,31 @@ describe('puzzle codec port (must match packages/core PuzzleCodec)', () => {
     const tampered = JSON.parse(JSON.stringify(daily)) as typeof daily;
     (tampered['clueCells'] as Array<{ slots: Array<{ text: string }> }>)[0]!.slots[0]!.text = 'משהו אחר';
     expect(verifyChecksum(tampered).ok).toBe(false);
+  });
+
+  describe('compact format 2', () => {
+    const dailyV2 = loadPuzzle('puzzle-daily-he-v2.json');
+    const packV2 = loadPuzzle('puzzle-pack-he-v2.json');
+
+    test('recomputes the checksum the Dart codec wrote', () => {
+      expect(verifyChecksum(dailyV2).ok).toBe(true);
+      expect(verifyChecksum(packV2).ok).toBe(true);
+    });
+
+    test('keeps the solution and its leaderboard hash', () => {
+      expect(decodeLetterSymbols(dailyV2)).toEqual(decodeLetterSymbols(daily));
+      expect(solutionHash(dailyV2)).toBe(loadFixtureText('puzzle-daily-he.solutionHash.txt').trim());
+    });
+
+    test('counts the same words as format 1', () => {
+      expect(wordCount(dailyV2)).toBe(wordCount(daily));
+      expect(wordCount(packV2)).toBe(wordCount(pack));
+    });
+
+    test('a tampered clue text changes the checksum', () => {
+      const tampered = JSON.parse(JSON.stringify(dailyV2)) as typeof dailyV2;
+      (tampered['clues'] as unknown[][])[0]![7] = 'משהו אחר';
+      expect(verifyChecksum(tampered).ok).toBe(false);
+    });
   });
 });
