@@ -79,10 +79,11 @@ function puzzleSemanticErrors(p) {
   }
   if (p.kind === 'daily' && !p.daily) errs.push('kind=daily without daily{}');
   if (p.kind === 'pack' && !p.pack) errs.push('kind=pack without pack{}');
-  const wordIds = new Set(p.words.map((w) => w.id));
-  if (wordIds.size !== p.words.length) errs.push('duplicate word ids');
+  const { words, clueCells } = p.schemaVersion >= 2 ? expandCompact(p.clues) : p;
+  const wordIds = new Set(words.map((w) => w.id));
+  if (wordIds.size !== words.length) errs.push('duplicate word ids');
   const slotWordIds = new Set();
-  for (const cell of p.clueCells) {
+  for (const cell of clueCells) {
     if (p.layout[cell.r]?.[cell.c] !== 'C') errs.push(`clue cell (${cell.r},${cell.c}) is not a C in layout`);
     for (const s of cell.slots) {
       if (!wordIds.has(s.wordId)) errs.push(`slot in (${cell.r},${cell.c}) references unknown word ${s.wordId}`);
@@ -90,7 +91,7 @@ function puzzleSemanticErrors(p) {
       slotWordIds.add(s.wordId);
     }
   }
-  for (const w of p.words) {
+  for (const w of words) {
     if (!slotWordIds.has(w.id)) errs.push(`word ${w.id} has no clue slot`);
     if (p.layout[w.clueCell.r]?.[w.clueCell.c] !== 'C') errs.push(`word ${w.id} clue cell is not a C`);
     for (let k = 0; k < w.len; k++) {
@@ -100,6 +101,23 @@ function puzzleSemanticErrors(p) {
     }
   }
   return errs;
+}
+
+// Offset from the clue cell to the first letter and the word direction per arrow (geometry.dart `Arrow`).
+const ARROWS = { A: [0, 1, 'A'], D: [1, 0, 'D'], DA: [1, 0, 'A'], AD: [0, 1, 'D'], UA: [-1, 0, 'A'], BD: [0, -1, 'D'] };
+
+/** Format-2 `clues` entries as the format-1 `words` and `clueCells` the checks above walk. */
+function expandCompact(clues) {
+  const words = [];
+  const cells = new Map();
+  for (const [r, c, , arrow, len, id] of clues) {
+    const [dr, dc, dir] = ARROWS[arrow];
+    words.push({ id, dir, len, start: { r: r + dr, c: c + dc }, clueCell: { r, c } });
+    const key = `${r},${c}`;
+    if (!cells.has(key)) cells.set(key, { r, c, slots: [] });
+    cells.get(key).slots.push({ wordId: id });
+  }
+  return { words, clueCells: [...cells.values()] };
 }
 
 const fixturesDir = join(here, 'fixtures');

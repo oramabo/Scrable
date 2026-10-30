@@ -13,6 +13,7 @@ import { inviteCodePath, newId, newInviteCode, normalizeInviteCode, type RandomS
 import { asObject, bad, type Lang, optionalString, PUZZLE_ID, requireLang, requireString, SHA256_HEX } from '../lib/input';
 import { resolvePuzzle } from '../lib/puzzleLookup';
 import { applyReward, readRewardState, type RewardGrant, type RewardOutcome } from '../lib/rewards';
+import { displayNameOf } from '../lib/username';
 
 export type RoomStatus = 'open' | 'running' | 'finished';
 
@@ -66,11 +67,6 @@ export function coopLedgerEntryId(roomId: string, uid: string): string {
 
 function random(deps: CoopDeps): RandomSource {
   return deps.random ?? secureRandom;
-}
-
-function displayNameOf(user: DocSnapshot): string {
-  const name = readString(user.data, 'profile.displayName')?.trim();
-  return name !== undefined && name.length > 0 ? name.slice(0, 40) : 'Player';
 }
 
 function readRoom(snap: DocSnapshot, roomId: string): CoopRoomDoc {

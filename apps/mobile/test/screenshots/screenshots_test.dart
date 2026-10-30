@@ -68,7 +68,7 @@ void main() {
   Widget app({required String uiLang, required ThemeMode mode, GlobalKey? key}) => ProviderScope(
         overrides: testOverrides(
           content: content,
-          settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true, themeMode: mode),
+          settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true, systemKeyboard: false, themeMode: mode),
           meta: const MetaState(stats: demoStats),
         ),
         child: boundary(key ?? GlobalKey(), const ChetzApp()),
@@ -83,7 +83,7 @@ void main() {
       ProviderScope(
         overrides: testOverrides(
           content: content,
-          settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true),
+          settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true, systemKeyboard: false),
           meta: meta,
           cloudSync: multiplayer == null ? const DisabledCloudSync() : FakeCloudSync(),
           multiplayer: multiplayer,
@@ -136,7 +136,7 @@ void main() {
         await tester.pumpWidget(ProviderScope(
           overrides: testOverrides(
             content: source,
-            settings: AppSettings(uiLang: lang, puzzleLang: lang, onboardingDone: true, tutorialDone: true),
+            settings: AppSettings(uiLang: lang, puzzleLang: lang, onboardingDone: true, tutorialDone: true, systemKeyboard: false),
             meta: const MetaState(stats: demoStats),
           ),
           child: boundary(
@@ -265,7 +265,7 @@ void main() {
       await tester.pumpWidget(ProviderScope(
         overrides: testOverrides(
           content: content,
-          settings: const AppSettings(onboardingDone: true, tutorialDone: true, useCustomTheme: true),
+          settings: const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false, useCustomTheme: true),
           meta: const MetaState(stats: demoStats),
         ),
         child: boundary(

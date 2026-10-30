@@ -38,7 +38,7 @@ void main() {
       ProviderScope(
         overrides: testOverrides(
           content: content,
-          settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true),
+          settings: AppSettings(uiLang: uiLang, onboardingDone: true, tutorialDone: true, systemKeyboard: false),
         ),
         child: const ChetzApp(),
       ),
@@ -92,7 +92,7 @@ void main() {
     await store.write('profile', {'displayName': 'דנה', 'avatarId': 'fox', 'updatedAt': 1});
     await tester.pumpWidget(
       ProviderScope(
-        overrides: testOverrides(content: content, store: store, settings: const AppSettings(onboardingDone: true, tutorialDone: true)),
+        overrides: testOverrides(content: content, store: store, settings: const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false)),
         child: const ChetzApp(),
       ),
     );
@@ -109,13 +109,13 @@ void main() {
     expect(tester.widget<PuzzleScreen>(find.byType(PuzzleScreen)).puzzleId, 'he-l1-p01-01');
   });
 
-  testWidgets('switching the puzzle language to English swaps the catalogue while the UI stays Hebrew/RTL', (tester) async {
+  testWidgets('switching to English switches the whole app: catalogue and UI (LTR)', (tester) async {
     usePhoneSurface(tester);
     final en = await loadBundledContentOnce('en');
     final merged = MapContentSource({...content.docs, ...en.docs});
     await tester.pumpWidget(
       ProviderScope(
-        overrides: testOverrides(content: merged, settings: const AppSettings(onboardingDone: true, tutorialDone: true)),
+        overrides: testOverrides(content: merged, settings: const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false)),
         child: const ChetzApp(),
       ),
     );
@@ -125,17 +125,17 @@ void main() {
     await tester.pumpAndSettle();
     final container = ProviderScope.containerOf(tester.element(find.byType(HomeTab)));
     expect(container.read(settingsProvider).puzzleLang, 'en');
-    expect(container.read(settingsProvider).uiLang, 'he');
-    expect(Directionality.of(tester.element(find.byType(HomeTab))), TextDirection.rtl);
+    expect(container.read(settingsProvider).uiLang, 'en');
+    expect(Directionality.of(tester.element(find.byType(HomeTab))), TextDirection.ltr);
     final packs = await container.read(packsProvider.future);
     expect(packs.every((p) => p.id.startsWith('en-')), isTrue, reason: 'English catalogue');
     expect(find.text('English: בקרוב'), findsNothing);
-    await tester.tap(find.text('התחילו את התשחץ הראשון'));
+    await tester.tap(find.text('Start your first puzzle'));
     await tester.pumpAndSettle();
     await pumpUntilFound(tester, find.byType(PuzzleKeyboard));
     final screen = tester.widget<PuzzleScreen>(find.byType(PuzzleScreen));
     expect(screen.puzzleId, 'en-l1-p01-01');
-    // Grid + keyboard follow the puzzle language (LTR) inside the RTL chrome.
+    // Grid + keyboard follow the puzzle language (LTR).
     expect(Directionality.of(tester.element(find.byType(PuzzleKeyboard))), TextDirection.ltr);
     expect(find.text('A→Z'), findsNothing); // cycler only appears when one cell is left
   });
@@ -154,7 +154,7 @@ void main() {
     expect(find.textContaining('טירון'), findsWidgets, reason: 'starting rank');
     await tester.tap(find.byTooltip('הגדרות'));
     await tester.pumpAndSettle();
-    expect(find.text('שפת הממשק'), findsOneWidget);
+    expect(find.text('שפת האפליקציה'), findsOneWidget);
   });
 
   testWidgets('random puzzle shows a progress dialog while generating and a toast when it fails', (tester) async {
@@ -162,7 +162,7 @@ void main() {
     final slow = _SlowGenerator();
     await tester.pumpWidget(
       ProviderScope(
-        overrides: testOverrides(content: content, generator: slow, settings: const AppSettings(onboardingDone: true, tutorialDone: true)),
+        overrides: testOverrides(content: content, generator: slow, settings: const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false)),
         child: const ChetzApp(),
       ),
     );
@@ -190,7 +190,7 @@ void main() {
     final withDevice = await loadBundledContentOnce('he', device: true);
     await tester.pumpWidget(
       ProviderScope(
-        overrides: testOverrides(content: withDevice, settings: const AppSettings(onboardingDone: true, tutorialDone: true)),
+        overrides: testOverrides(content: withDevice, settings: const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false)),
         child: const ChetzApp(),
       ),
     );

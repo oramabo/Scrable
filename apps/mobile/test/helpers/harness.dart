@@ -10,6 +10,7 @@ import 'package:chetz_app/core/providers.dart';
 import 'package:chetz_app/core/storage/json_store.dart';
 import 'package:chetz_app/core/util/clock.dart';
 import 'package:chetz_app/core/util/feedback.dart';
+import 'package:chetz_app/features/feedback/review_service.dart';
 import 'package:chetz_app/features/daily/daily_history.dart';
 import 'package:chetz_app/features/meta/meta_state.dart';
 import 'package:chetz_app/features/notifications/notifications_controller.dart';
@@ -101,7 +102,7 @@ const testStartingWallet = 200;
 /// Provider overrides for a fully offline test app.
 List<Override> testOverrides({
   required MapContentSource content,
-  AppSettings settings = const AppSettings(onboardingDone: true, tutorialDone: true),
+  AppSettings settings = const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false),
   MemoryJsonStore? store,
   Clock? clock,
   DailyHistory? dailyHistory,
@@ -111,6 +112,7 @@ List<Override> testOverrides({
   MultiplayerService? multiplayer,
   NotificationsService? notifications,
   RandomPuzzleGenerator? generator,
+  ReviewService? review,
   List<Override> extra = const [],
 }) {
   final s = store ?? MemoryJsonStore();
@@ -137,6 +139,7 @@ List<Override> testOverrides({
     multiplayerServiceProvider.overrideWithValue(multiplayer ?? const DisabledMultiplayerService()),
     notificationsServiceProvider.overrideWithValue(notifications ?? const DisabledNotificationsService()),
     randomPuzzleGeneratorProvider.overrideWithValue(generator ?? inProcessGenerator(content, now: () => c.nowMs)),
+    reviewServiceProvider.overrideWithValue(review ?? FakeReviewService(available: false)),
     ...extra,
   ];
 }

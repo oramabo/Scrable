@@ -33,7 +33,12 @@ export class FakeMessaging implements Messaging {
 
 export class FakeUserAdmin implements UserAdmin {
   readonly deleted: string[] = [];
+  /** Linked sign-in providers per uid (anonymous when absent). */
+  readonly providers: Record<string, string[]> = {};
   async deleteUser(uid: string): Promise<void> {
     this.deleted.push(uid);
+  }
+  async providerIds(uid: string): Promise<string[]> {
+    return this.providers[uid] ?? [];
   }
 }

@@ -22,12 +22,15 @@ class AssignedClue {
 }
 
 class ClueAssignment {
-  const ClueAssignment({required this.ok, required this.clues, this.failedSlot, this.failureReason});
+  const ClueAssignment({required this.ok, required this.clues, this.failedSlot, this.failedSlots = const [], this.failureReason});
   final bool ok;
   final List<AssignedClue?> clues;
 
-  /// Slot index whose word has no usable clue (fed back to the filler).
+  /// First slot index whose word has no usable clue (fed back to the filler).
   final int? failedSlot;
+
+  /// Every slot without a usable clue, so one refill can avoid them all.
+  final List<int> failedSlots;
 
   /// Why every clue of that word was rejected (for logs and the admin tool).
   final String? failureReason;
@@ -57,9 +60,16 @@ class ClueAssigner {
 
   String displayText(LexWord w, LexClue c) => w.wordCount > 1 ? '${c.text} ${lexicon.lang.multiWordSuffix(w.wordCount)}' : c.text;
 
+  /// Big grids (more than this many words) only use words with at least two
+  /// usable clues: with hundreds of answers, a word whose single clue is taken
+  /// or spells out another answer is a dead end too often.
+  static const bigGridWords = 80;
+
   /// Eligibility masks: a word qualifies when it is allowed at this level and
-  /// has at least one usable clue that fits the slot geometry.
+  /// has at least one usable clue that fits the slot geometry (two usable
+  /// clues on big grids, see [bigGridWords]).
   Eligibility eligibility(DictionaryIndex dict) {
+    final minClues = level.targetWords > bigGridWords ? 2 : 1;
     final full = <int, Bitset>{};
     final half = <int, Bitset>{};
     for (final entry in dict.byLen.entries) {
@@ -73,6 +83,7 @@ class ClueAssigner {
         if (w.difficulty > level.maxWordDifficulty) continue;
         if (w.isMultiword && !level.allowMultiword) continue;
         if (w.isProper && !level.allowProper) continue;
+        if (minClues > 1 && w.clues.where(_clueUsable).length < minClues) continue;
         var fitsFull = false, fitsHalf = false;
         // In a picture pack the image is the clue, so a word with an image only
         // needs some usable clue record (for ids/stats), not one that fits the cell.
@@ -112,6 +123,8 @@ class ClueAssigner {
       ..sort((a, b) => words[a].clues.length - words[b].clues.length);
     var pictures = 0;
     final maxPictures = (slots.length * pictureShare).round();
+    final failed = <int>[];
+    String? firstReason;
     for (final i in order) {
       final slot = slots[i];
       final word = words[i];
@@ -166,7 +179,9 @@ class ClueAssigner {
         }
       }
       if (candidates.isEmpty) {
-        return ClueAssignment(ok: false, clues: out, failedSlot: i, failureReason: '${word.clues.length} clues: ${reasons.entries.map((e) => '${e.key}×${e.value}').join(', ')}');
+        failed.add(i);
+        firstReason ??= '${word.clues.length} clues: ${reasons.entries.map((e) => '${e.key}×${e.value}').join(', ')}';
+        continue;
       }
       // weighted pick: closeness to the target difficulty
       final weights = [for (final c in candidates) 1.0 / (0.15 + (c.$4 - target).abs())];
@@ -183,6 +198,9 @@ class ClueAssigner {
       total = 0;
       chosenIds.add(pick.$1.id);
       out[i] = AssignedClue(clue: pick.$1, text: pick.$2, lines: pick.$3);
+    }
+    if (failed.isNotEmpty) {
+      return ClueAssignment(ok: false, clues: out, failedSlot: failed.first, failedSlots: failed, failureReason: firstReason);
     }
     return ClueAssignment(ok: true, clues: out);
   }

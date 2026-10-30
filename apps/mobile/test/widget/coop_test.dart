@@ -36,7 +36,7 @@ void main() {
         clock: clock,
         cloudSync: FakeCloudSync(),
         multiplayer: fake,
-        settings: const AppSettings(onboardingDone: true, tutorialDone: true),
+        settings: const AppSettings(onboardingDone: true, tutorialDone: true, systemKeyboard: false),
       ),
       child: const ChetzApp(),
     ));

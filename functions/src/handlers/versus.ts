@@ -15,6 +15,7 @@ import { asObject, bad, type Lang, optionalString, PUZZLE_ID, requireInt, requir
 import { pickRandomPuzzle, type PuzzleRef, resolvePuzzle } from '../lib/puzzleLookup';
 import { applyReward, readRewardState, type RewardGrant, type RewardOutcome, type RewardReads } from '../lib/rewards';
 import { applyTrophyDelta, type MatchResult, trophyDelta } from '../lib/trophies';
+import { displayNameOf } from '../lib/username';
 
 export type MatchStatus = 'waiting' | 'ready' | 'running' | 'finished' | 'cancelled';
 export type MatchMode = 'invite' | 'random';
@@ -103,11 +104,6 @@ export function matchLedgerEntryId(matchId: string, uid: string): string {
 
 function random(deps: VersusDeps): RandomSource {
   return deps.random ?? secureRandom;
-}
-
-function displayNameOf(user: DocSnapshot): string {
-  const name = readString(user.data, 'profile.displayName')?.trim();
-  return name !== undefined && name.length > 0 ? name.slice(0, 40) : 'Player';
 }
 
 function readMatch(snap: DocSnapshot, matchId: string): MatchDoc {

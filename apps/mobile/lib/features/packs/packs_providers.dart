@@ -1,3 +1,4 @@
+import 'package:chetz_core/generator.dart' show LevelConfig;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/content/manifests.dart';
@@ -7,21 +8,19 @@ import '../settings/settings_controller.dart';
 import '../store/store_providers.dart';
 import 'progression.dart';
 
-/// Static level table from docs/GAME_PLAN.md §3.2.
+/// The pack levels. Grid sizes come from the generator rules, so the labels
+/// match the shipped puzzles.
 class LevelInfo {
-  const LevelInfo({required this.level, required this.cols, required this.rows, required this.words});
+  const LevelInfo(this.level);
   final int level;
-  final int cols;
-  final int rows;
-  final String words;
 
-  static const all = [
-    LevelInfo(level: 1, cols: 7, rows: 9, words: '14–18'),
-    LevelInfo(level: 2, cols: 8, rows: 10, words: '20–24'),
-    LevelInfo(level: 3, cols: 9, rows: 12, words: '28–32'),
-    LevelInfo(level: 4, cols: 10, rows: 14, words: '36–42'),
-    LevelInfo(level: 5, cols: 11, rows: 15, words: '45–55'),
-  ];
+  static const all = [LevelInfo(1), LevelInfo(2), LevelInfo(3), LevelInfo(4), LevelInfo(5)];
+
+  /// Grid of this level's puzzles in [lang] (English is a column wider from level 3).
+  ({int cols, int rows}) grid(String lang) {
+    final c = LevelConfig.forLanguage(lang, level);
+    return (cols: c.cols, rows: c.rows);
+  }
 }
 
 /// All packs of the active puzzle language, sorted by level and index.

@@ -76,7 +76,7 @@ class ContentRepository {
     final local = await _readJson(bundled, '$_base/manifests/packs.json');
     PacksManifest? result = local == null ? null : PacksManifest.fromJson(local);
     if (cdn != null) {
-      final remote = await _readJson(cdn!, 'puzzles/$lang/manifests/packs.json');
+      final remote = await _readJson(cdn!, 'manifests/$lang/packs.json');
       if (remote != null) {
         final rm = PacksManifest.fromJson(remote);
         if (result == null || _newer(rm.generatedAt, result.generatedAt)) result = rm;
@@ -94,7 +94,7 @@ class ContentRepository {
     final local = await _readJson(bundled, '$_base/manifests/daily.json');
     DailyManifest? result = local == null ? null : DailyManifest.fromJson(local);
     if (cdn != null) {
-      final remote = await _readJson(cdn!, 'puzzles/$lang/manifests/daily.json');
+      final remote = await _readJson(cdn!, 'manifests/$lang/daily.json');
       if (remote != null) {
         final rm = DailyManifest.fromJson(remote);
         if (result == null || _newer(rm.generatedAt, result.generatedAt)) result = rm;

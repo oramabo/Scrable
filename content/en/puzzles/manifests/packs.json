@@ -1,6 +1,6 @@
 {
  "version": 1,
- "generatedAt": "2026-10-29T10:48:57.562502Z",
+ "generatedAt": "2026-10-29T23:39:43.476548Z",
  "lang": "en",
  "packs": [
   {
@@ -14,248 +14,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l1-p01/pack.v1.json",
-   "checksum": "sha256:76022c07784c67f0a9e5a91cf5d4b73bf98d58a9f810d9482c286c3020e06b4d",
+   "checksum": "sha256:423f553a6c6f631241141f27bb7280615ff7680abcec9e50a5d42b5c26e341ca",
    "free": true,
    "puzzles": [
     {
      "id": "en-l1-p01-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l1-p01/01.v1.json",
-     "checksum": "sha256:99cd056e22a5394eb261eac34529d205a353968ac1df29118f66801a9a785762",
-     "difficulty": 27.0,
-     "words": 21
+     "checksum": "sha256:ea02ee74f762bf26090e6b7ad8e7f38651c1bf130ab0b070902093e319aa5ae7",
+     "difficulty": 22.7,
+     "words": 70
     },
     {
      "id": "en-l1-p01-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l1-p01/02.v1.json",
-     "checksum": "sha256:4399d241b59a411f64fc6a5a4150ec86ffda67b71f9bd470fe69afc2a7e7fbd8",
-     "difficulty": 28.7,
-     "words": 20
+     "checksum": "sha256:c0e59af6a072ecfb773d1577019786f665fd67466e2b22923f99a719a60471ed",
+     "difficulty": 21.0,
+     "words": 74
     },
     {
      "id": "en-l1-p01-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l1-p01/03.v1.json",
-     "checksum": "sha256:9c2ac37ac9caedbd713fb78b51e604d407e1eedf4cc12224e1a400052a71ae87",
-     "difficulty": 29.5,
-     "words": 20
+     "checksum": "sha256:7f5c13d521f119a84a138d6f3a5eff4d9b849af8dae69b6c8d51e27ea68a65c2",
+     "difficulty": 20.2,
+     "words": 72
     },
     {
      "id": "en-l1-p01-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l1-p01/04.v1.json",
-     "checksum": "sha256:bcb950138a733a77ba67a1b5f029bd70f966b5b7dc9f5591d633f5bc0ec9c15f",
-     "difficulty": 27.4,
-     "words": 21
+     "checksum": "sha256:496cf2a6049f7ebe06df401db322c4472a9ab98f8b99536c5948f71545cbe740",
+     "difficulty": 20.2,
+     "words": 73
     },
     {
      "id": "en-l1-p01-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l1-p01/05.v1.json",
-     "checksum": "sha256:69868ce6d8f9ab2b943e52fe8e056d47f00a1d3e250686e4fc6763206525c789",
-     "difficulty": 29.7,
-     "words": 20
+     "checksum": "sha256:3348a380546a9f3a803b484b4e8936b73f8e62ca57e1952bc7930d3fd7fba6a0",
+     "difficulty": 23.0,
+     "words": 71
     },
     {
      "id": "en-l1-p01-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l1-p01/06.v1.json",
-     "checksum": "sha256:a35eb50ee0c78bfe340110a1943cdf4f726cebb8604a34bbce98ccae7a785900",
-     "difficulty": 28.8,
-     "words": 20
+     "checksum": "sha256:8654bcda81a18bdec9a1137c7d062133d663d16fbdad9a314b36f72c4fe3b217",
+     "difficulty": 23.4,
+     "words": 73
     },
     {
      "id": "en-l1-p01-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l1-p01/07.v1.json",
-     "checksum": "sha256:75efe0ae92fbd15191e7b4a23b1f6a5103ca1a180c7d6bab37a6d8002e773bdc",
-     "difficulty": 30.5,
-     "words": 20
+     "checksum": "sha256:b65b2b7e13532644b52868a3a356f8022f02a2f43313bd9adf92023362e79fbc",
+     "difficulty": 19.9,
+     "words": 74
     },
     {
      "id": "en-l1-p01-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l1-p01/08.v1.json",
-     "checksum": "sha256:91a755b62d470a69d7005cea13cc4f22423005e3335552ffbea2adf0d215cf06",
-     "difficulty": 29.7,
-     "words": 20
+     "checksum": "sha256:0dbb843ac15ae38507878e20e02ead1c7a2efe670cbe40ae6a76e551ecd28ce5",
+     "difficulty": 22.1,
+     "words": 70
     },
     {
      "id": "en-l1-p01-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l1-p01/09.v1.json",
-     "checksum": "sha256:2dedb4ca1cb802c47958fd913e32b3ac2f9e28c3d415bfeca7f7e4efcc81c72e",
-     "difficulty": 28.3,
-     "words": 20
+     "checksum": "sha256:b73998dae351e46ad5ef7fd506572667e585a56ace8f928a5cbf32a7423d2f1f",
+     "difficulty": 24.5,
+     "words": 73
     },
     {
      "id": "en-l1-p01-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l1-p01/10.v1.json",
-     "checksum": "sha256:c54b30a26a584594a693d35ddc1836213f15e666ff1f7bd93fe708a31c07d60e",
-     "difficulty": 29.9,
-     "words": 20
+     "checksum": "sha256:d34ac928e6b043c9fc19782eecbc9f19d6110dbfd7bd8228f2057740be49ab0d",
+     "difficulty": 24.9,
+     "words": 70
     },
     {
      "id": "en-l1-p01-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l1-p01/11.v1.json",
-     "checksum": "sha256:b66530882a34d1cffe8c09b4ab341cebc978fbac785cd4a022853ce0a886a0e2",
-     "difficulty": 30.0,
-     "words": 20
+     "checksum": "sha256:985879a36df48dbc1ee58494b60f4359ba7da4203c3e8c19b3651cef3299164d",
+     "difficulty": 21.6,
+     "words": 73
     },
     {
      "id": "en-l1-p01-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l1-p01/12.v1.json",
-     "checksum": "sha256:3ce9937ec839b11d5791b5aa21e10a06eba67dc73a6160af2e58338de0b68451",
-     "difficulty": 27.9,
-     "words": 20
+     "checksum": "sha256:3b0d62238599c51af6e4a51f5901e22ce3ab66acfce8d35ea5741183932cd199",
+     "difficulty": 22.2,
+     "words": 73
     },
     {
      "id": "en-l1-p01-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l1-p01/13.v1.json",
-     "checksum": "sha256:05de8d8dd5aed0a022cd968490427c009d77202ad0f6c95eda2a497a8ebff388",
-     "difficulty": 28.5,
-     "words": 21
+     "checksum": "sha256:30e99b8f31a18a98368eed805771b9b47cc3c5b1156023f85d4bf1c4c7203085",
+     "difficulty": 26.5,
+     "words": 73
     },
     {
      "id": "en-l1-p01-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l1-p01/14.v1.json",
-     "checksum": "sha256:54fc78ec4222a916ca80a0c55afc49d3a7ad9fed8eb32018fe220f866cd11a42",
-     "difficulty": 28.9,
-     "words": 20
+     "checksum": "sha256:17c64987773fccb62e394d52089ce53004b7261c1abf8ab4d0d9535b5d8960c5",
+     "difficulty": 25.0,
+     "words": 73
     },
     {
      "id": "en-l1-p01-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l1-p01/15.v1.json",
-     "checksum": "sha256:8dcd3705f95e7ad70609316d2c3f1dc96a2d41430127fc07cc3b9f0a336d6151",
-     "difficulty": 30.2,
-     "words": 21
+     "checksum": "sha256:a9ca33f950264ea0ad2930423cc1a99227cf25e7ec79395e3d54de99d1c4991e",
+     "difficulty": 19.6,
+     "words": 73
     },
     {
      "id": "en-l1-p01-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l1-p01/16.v1.json",
-     "checksum": "sha256:501d022c07df942fd9709bf11ff74bf63c794d95e02ce408017948b508d4fb6f",
-     "difficulty": 30.7,
-     "words": 20
+     "checksum": "sha256:dcabf23a3c9a8ba2a2cd3d369439e345e9e7dbb79b6fa2193ada500a1d4f8ec5",
+     "difficulty": 22.7,
+     "words": 70
     },
     {
      "id": "en-l1-p01-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l1-p01/17.v1.json",
-     "checksum": "sha256:7cc561c2bffb245892b7a8a93dfa1ab933445d6b9507b31ec9b0870f90f6c3b5",
-     "difficulty": 29.5,
-     "words": 21
+     "checksum": "sha256:24fd08aa784df9f274b6e8fcea8980ee17c67619e0ceeb1b075d1aa465bcbf3a",
+     "difficulty": 19.9,
+     "words": 77
     },
     {
      "id": "en-l1-p01-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l1-p01/18.v1.json",
-     "checksum": "sha256:70508453fb7ed5cd441bcfe8c620107c0e8c2e48904f658a0ac81e7e60d94e28",
-     "difficulty": 31.0,
-     "words": 20
+     "checksum": "sha256:008b43c0d7c80f7c9853a5232a16b4a96160c5e415cafc8cbced67aedd714a25",
+     "difficulty": 24.0,
+     "words": 69
     },
     {
      "id": "en-l1-p01-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l1-p01/19.v1.json",
-     "checksum": "sha256:81d83d9a9962eda14d63d4c598e2e9827479f845073392e8fb336c6c105464f8",
-     "difficulty": 29.9,
-     "words": 21
+     "checksum": "sha256:017af3f00e4764de407c37c21812be2c5e768a0ca24206f024af950dd7baa172",
+     "difficulty": 21.2,
+     "words": 73
     },
     {
      "id": "en-l1-p01-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l1-p01/20.v1.json",
-     "checksum": "sha256:6b42418756a9bce13328eb2e773160b64ccfd7e7de313835ccf8c76932ae51dc",
-     "difficulty": 31.5,
-     "words": 20
+     "checksum": "sha256:d68110f41b0258326705412e44305fed2bf4cf37fd452865a7d059dc00ef84c5",
+     "difficulty": 23.3,
+     "words": 72
     },
     {
      "id": "en-l1-p01-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l1-p01/21.v1.json",
-     "checksum": "sha256:2ec2f27d93dcd1fbb906a0a8a2ba354fee3e00a72adc54694bd88cb8b60c32c6",
-     "difficulty": 29.2,
-     "words": 20
+     "checksum": "sha256:80aee7eb586c5a9200f33c81d4bd8cdb3d6ced3c73a20500a833adea5fcb821d",
+     "difficulty": 20.0,
+     "words": 73
     },
     {
      "id": "en-l1-p01-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l1-p01/22.v1.json",
-     "checksum": "sha256:89af000947ed0d237b580f22c302a631a5541de3e7a51882ca0d3c2935c93aa8",
-     "difficulty": 30.8,
-     "words": 20
+     "checksum": "sha256:01a90cadc4c69c6459da2a297ac9fe9c48423de592a22387720eacb4a919f10c",
+     "difficulty": 25.8,
+     "words": 69
     },
     {
      "id": "en-l1-p01-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l1-p01/23.v1.json",
-     "checksum": "sha256:6f9772b1d7d2752b3a2ea47f7a4707abff5ac2024735f9fffd25004392f1086e",
-     "difficulty": 31.7,
-     "words": 20
+     "checksum": "sha256:ae4d5ea0b0f38124b93671a53a7124ddd7581036bc5e8f6e7f8b5f689c124f4a",
+     "difficulty": 24.5,
+     "words": 71
     },
     {
      "id": "en-l1-p01-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l1-p01/24.v1.json",
-     "checksum": "sha256:94c78d685062aafafea550348dbb0ac1e4c809e40565def0fc9434df481d1e29",
-     "difficulty": 32.0,
-     "words": 21
+     "checksum": "sha256:a743df5f94875b12bb13f78300d69fa2b35c3c8ba077697d03283c246555c73f",
+     "difficulty": 23.6,
+     "words": 73
     },
     {
      "id": "en-l1-p01-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l1-p01/25.v1.json",
-     "checksum": "sha256:07c120be3de75c3cd8827c081ec8dd1b9009b8de5d9eb80edc5083c17bac3972",
-     "difficulty": 31.7,
-     "words": 20
+     "checksum": "sha256:48cc64ce750bf16d6de6098dd40eaaa12bf510eda1c6c373096594a38c7c3882",
+     "difficulty": 24.2,
+     "words": 69
     },
     {
      "id": "en-l1-p01-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l1-p01/26.v1.json",
-     "checksum": "sha256:b85186fa2d1c205222ab6374e8694d477c2cf3bc06e6759c414bf343d4e877e1",
-     "difficulty": 32.7,
-     "words": 21
+     "checksum": "sha256:aa463bc34a67afce16d0a82e6f65ed932d9dcf184adffbc8c3e511af5d3134f6",
+     "difficulty": 21.5,
+     "words": 73
     },
     {
      "id": "en-l1-p01-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l1-p01/27.v1.json",
-     "checksum": "sha256:1847d53b1b2ec27ac3e763fc93d6e1fe5ea384d941f8263aff72d46c3d98d035",
-     "difficulty": 33.0,
-     "words": 20
+     "checksum": "sha256:3ab2d77ff394df34653c944ae3974cf34fbccf28429ec81fa3bf9a313b1e075d",
+     "difficulty": 21.8,
+     "words": 73
     },
     {
      "id": "en-l1-p01-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l1-p01/28.v1.json",
-     "checksum": "sha256:ddb46de905ceab9b53429a576344d439add89889076074f0d495cdaf6ff501f2",
-     "difficulty": 34.3,
-     "words": 20
+     "checksum": "sha256:a3f0da7fd9c778e6e047ef85318a80a3cd5c996eec7ca65a3ee6df6197d7f394",
+     "difficulty": 26.5,
+     "words": 70
     },
     {
      "id": "en-l1-p01-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l1-p01/29.v1.json",
-     "checksum": "sha256:a0bc2483fd88ed0e7dcde3c0aeae424a15e598a296ca4729aef9aba89773c91e",
-     "difficulty": 37.8,
-     "words": 20
+     "checksum": "sha256:8bfd687a3640fdddc848c6176540b428a0062165a92fc0085bc123d3e6a210ee",
+     "difficulty": 24.9,
+     "words": 70
     },
     {
      "id": "en-l1-p01-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l1-p01/30.v1.json",
-     "checksum": "sha256:36a3f1f5bf051e56066a07d94ee6671598fe3a1e70bda6637f89b6206b74ee3d",
-     "difficulty": 34.5,
-     "words": 20
+     "checksum": "sha256:288adeb9c06b158dfe87ecba23e8e0992864631c21f9a78b1be84ad281f664b7",
+     "difficulty": 23.9,
+     "words": 73
     }
    ]
   },
@@ -270,248 +270,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l1-p02/pack.v1.json",
-   "checksum": "sha256:3a05a5cd0705dc82f7f778bb6ee3315d1f23f69782a752dd2b1f04566c5618f9",
+   "checksum": "sha256:225df98ce0a9ed184b64d87c660c7b4e301044c17f5a8996a1a19bce329e43f8",
    "free": false,
    "puzzles": [
     {
      "id": "en-l1-p02-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l1-p02/01.v1.json",
-     "checksum": "sha256:9eaee9ec1c8de5d5d3c0abb27bad4a76650839cec99bc7207b3e4ffda4281bd8",
-     "difficulty": 27.4,
-     "words": 20
+     "checksum": "sha256:46aac8b6853caa439a90f8a82b7d4a5b306a6196f93f20f9c7c504b36b38e280",
+     "difficulty": 20.3,
+     "words": 73
     },
     {
      "id": "en-l1-p02-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l1-p02/02.v1.json",
-     "checksum": "sha256:28ba546a3d92c8a4cae4f3552576431129be2228b525c9622eb490ea43dc72ab",
-     "difficulty": 27.0,
-     "words": 21
+     "checksum": "sha256:fea1351582bacee69ace3abb9a02be264b1c9dc2ee21d4c3a3cc2806d4f3e170",
+     "difficulty": 24.1,
+     "words": 69
     },
     {
      "id": "en-l1-p02-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l1-p02/03.v1.json",
-     "checksum": "sha256:61cb754bdcc01c52edbcc8fc90fd39bb56f410ff1bcc5c7231f62be883ad08ce",
-     "difficulty": 29.6,
-     "words": 20
+     "checksum": "sha256:c6455de919fd0e9e162021db1674fe25ca83ee13df4b7474f8ba1feaefb8345c",
+     "difficulty": 21.4,
+     "words": 73
     },
     {
      "id": "en-l1-p02-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l1-p02/04.v1.json",
-     "checksum": "sha256:cebcbebe9c00eb5abecace5b1826283583dcdf21a3f942211a473fa576ba64ee",
-     "difficulty": 26.3,
-     "words": 20
+     "checksum": "sha256:1f8415693a111c870a6e31b3debff767fb1eac6a1b1bcae66159a12fcaf992dc",
+     "difficulty": 21.8,
+     "words": 72
     },
     {
      "id": "en-l1-p02-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l1-p02/05.v1.json",
-     "checksum": "sha256:1f154f9ccb13497e74dd26b86a0ade46d58e6ebbe3511dafa9275705ebcd58b0",
-     "difficulty": 28.6,
-     "words": 21
+     "checksum": "sha256:8b271cddf70b45eec286d982557e6f971287b11275138ccfb89019184d09f914",
+     "difficulty": 20.9,
+     "words": 71
     },
     {
      "id": "en-l1-p02-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l1-p02/06.v1.json",
-     "checksum": "sha256:49021c13eb84ca4b5632d8dec68bf40732f5437a9c104890b227d8ed7521fb41",
-     "difficulty": 30.0,
-     "words": 20
+     "checksum": "sha256:4980fa229e6483c7d0a2ce3b1f8294aeee7c0594e62e9b943351f0bf51c279bb",
+     "difficulty": 24.7,
+     "words": 69
     },
     {
      "id": "en-l1-p02-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l1-p02/07.v1.json",
-     "checksum": "sha256:2e8633662cec85bec1c2cd10f47f8573a55c150619fa0f12a358866abe8f88af",
-     "difficulty": 29.0,
-     "words": 21
+     "checksum": "sha256:5b16ec9b490e36297e9bb3f4ae49d642c0fc086e8d7b7ea2e59d8531873a9f91",
+     "difficulty": 20.5,
+     "words": 73
     },
     {
      "id": "en-l1-p02-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l1-p02/08.v1.json",
-     "checksum": "sha256:349d73d2aa3d626ecae7cf4ca09fc37c8de657b1ba0855f66edb3ffd25a845ea",
-     "difficulty": 25.4,
-     "words": 21
+     "checksum": "sha256:e19408a1d43da4e6a8d5ae2914ef596022e2c4560d5514e0c9f5bc86faddfd70",
+     "difficulty": 21.4,
+     "words": 73
     },
     {
      "id": "en-l1-p02-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l1-p02/09.v1.json",
-     "checksum": "sha256:75d3811f5a2acca7fdba2d54355695d6c69e16e78f92983ed1d33033ac160475",
-     "difficulty": 28.7,
-     "words": 20
+     "checksum": "sha256:2e244d9af745aeb66e57dc0614311e043059c32bfe557713923c9ab2f0851c17",
+     "difficulty": 22.8,
+     "words": 74
     },
     {
      "id": "en-l1-p02-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l1-p02/10.v1.json",
-     "checksum": "sha256:b576712654758ae02e7ef31a549d9eee23c5e6056a657400ee95275d31a525aa",
-     "difficulty": 29.3,
-     "words": 20
+     "checksum": "sha256:c52a34ff1f48261fee063d9f992620049473e8f9c9d5dfafcee1c49b840bc3b9",
+     "difficulty": 23.5,
+     "words": 70
     },
     {
      "id": "en-l1-p02-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l1-p02/11.v1.json",
-     "checksum": "sha256:0de50c3f729bc1cbb2abcc16d64405326a85127a39e5a58b6a2259668ecd8247",
-     "difficulty": 30.1,
-     "words": 20
+     "checksum": "sha256:3d0e7d2fc23626dc05cd5a7b9f815a5daec3281e4027dedba6135363025b027a",
+     "difficulty": 26.3,
+     "words": 70
     },
     {
      "id": "en-l1-p02-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l1-p02/12.v1.json",
-     "checksum": "sha256:1f550e2a5a1ccf73f77d0045b201cea7077f66a4e7a248e240a2918e7ebdfaaa",
-     "difficulty": 28.1,
-     "words": 21
+     "checksum": "sha256:a4fb78dc013050a33dd51f8bff0a949c851e56ee146626f5bf144bf3ba3af690",
+     "difficulty": 27.4,
+     "words": 70
     },
     {
      "id": "en-l1-p02-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l1-p02/13.v1.json",
-     "checksum": "sha256:ed57e9602037e7b00390f76dec4d1c6629f06865508a89e7217ca90dfa05db2b",
-     "difficulty": 30.0,
-     "words": 20
+     "checksum": "sha256:b359496fe7fd0233df6f6263d3be41f239646fbd112a26a9ea37886468174ec6",
+     "difficulty": 25.5,
+     "words": 72
     },
     {
      "id": "en-l1-p02-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l1-p02/14.v1.json",
-     "checksum": "sha256:adc30396d984e5041f8f558035db56c9f7d7e877658847a12940eca221b22afa",
-     "difficulty": 30.7,
-     "words": 19
+     "checksum": "sha256:885ebdece2d09ff5f1fb472e8122160ccc10ed956730ec447a2aaa4ede4b7ef0",
+     "difficulty": 21.1,
+     "words": 73
     },
     {
      "id": "en-l1-p02-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l1-p02/15.v1.json",
-     "checksum": "sha256:c2c4504cebb7c242cbf74bdc337e93418f700dd257be10bea81a4ee99aec1333",
-     "difficulty": 28.7,
-     "words": 21
+     "checksum": "sha256:5c4803c68e46fe37243effa38a6ad7220669d86edb4b97cb845aaa31e0ee7720",
+     "difficulty": 25.9,
+     "words": 69
     },
     {
      "id": "en-l1-p02-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l1-p02/16.v1.json",
-     "checksum": "sha256:98238e6958e479ce41f2666dbe2287712ddd2d7645f325978dd44943369436fa",
-     "difficulty": 31.2,
-     "words": 20
+     "checksum": "sha256:1823e721b6a92dfa6cd73d3286a5febde7560afa90f4c409bc4917c84ecf4d2c",
+     "difficulty": 20.8,
+     "words": 72
     },
     {
      "id": "en-l1-p02-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l1-p02/17.v1.json",
-     "checksum": "sha256:f788306bfad16c01ca78728ea1ad1a0465b089bbb2a7aee31395c0e200a48dd9",
-     "difficulty": 29.9,
-     "words": 21
+     "checksum": "sha256:48f90a9bd8bf9b2dcd3c1ffaae3a47632f3a1aa0eeb6b4b9bbdb526d7673be1b",
+     "difficulty": 21.4,
+     "words": 73
     },
     {
      "id": "en-l1-p02-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l1-p02/18.v1.json",
-     "checksum": "sha256:5fcb7a1d5c69bcd0bf6b0c11e552a7ef8dcfae24717f37aa0021ad123a53fccf",
-     "difficulty": 29.9,
-     "words": 19
+     "checksum": "sha256:5ce310ad664a24fb5d862a3089bb43752ecdb08fba9201faf5c343276eb86dfd",
+     "difficulty": 21.9,
+     "words": 73
     },
     {
      "id": "en-l1-p02-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l1-p02/19.v1.json",
-     "checksum": "sha256:b4b2e84b81239e8d9ec4c7371713653f65ff429d3e8b5a33d273729151de1fc4",
-     "difficulty": 32.4,
-     "words": 20
+     "checksum": "sha256:8f5f768c76d22cdded545356e0e64db8bd2d904a6c5ed02d52f1f0ffcfbb044a",
+     "difficulty": 25.6,
+     "words": 70
     },
     {
      "id": "en-l1-p02-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l1-p02/20.v1.json",
-     "checksum": "sha256:4623bb4887397ee01a6416f0ff2dc634713bbb8a346c92bc10ce43aa412f05ab",
-     "difficulty": 30.2,
-     "words": 20
+     "checksum": "sha256:2c1946918ee77829020232dff13b6feb61a3c83bce61b22bcdf80a87428f289a",
+     "difficulty": 25.2,
+     "words": 70
     },
     {
      "id": "en-l1-p02-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l1-p02/21.v1.json",
-     "checksum": "sha256:de6af7713493c6a4167798be9ad75dc558b6901956ec2398e8e64d89742f399c",
-     "difficulty": 30.3,
-     "words": 20
+     "checksum": "sha256:8925f6a506beaa6342384d0a09f028a58122b21215d6f3a22c31ec433def0d4a",
+     "difficulty": 23.2,
+     "words": 70
     },
     {
      "id": "en-l1-p02-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l1-p02/22.v1.json",
-     "checksum": "sha256:51487530068d30424faed4db2d1526bd02dea5caba4eaf64f9ac4de9c92af023",
-     "difficulty": 32.5,
-     "words": 21
+     "checksum": "sha256:3ac7d22659619f067010d472ff3d6de6170af2566cd8b705f2091ec7d10f2db9",
+     "difficulty": 23.9,
+     "words": 71
     },
     {
      "id": "en-l1-p02-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l1-p02/23.v1.json",
-     "checksum": "sha256:c490caad79b1c14ae54203181ec19df2496e52e85e9d1dab9670b88911896d52",
-     "difficulty": 30.6,
-     "words": 20
+     "checksum": "sha256:0a0d577ce4ee01207ba005f6431f5fa661c9ed9c624ed0932f7163d7a5131ab8",
+     "difficulty": 22.2,
+     "words": 73
     },
     {
      "id": "en-l1-p02-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l1-p02/24.v1.json",
-     "checksum": "sha256:4da50ed21e9cac9ae891274b78a76da48a2a6ae992e364666d8cc9ab147f78df",
-     "difficulty": 33.2,
-     "words": 20
+     "checksum": "sha256:8bb99b6868c4af85c02618036a3fb1ee68b71903adae5853c50889e900442da8",
+     "difficulty": 23.3,
+     "words": 70
     },
     {
      "id": "en-l1-p02-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l1-p02/25.v1.json",
-     "checksum": "sha256:8de9bc6be9dfd4885b88fccaae28a34697785a02818fefe200f7c0041b7cacff",
-     "difficulty": 31.4,
-     "words": 20
+     "checksum": "sha256:4cb3481c4869480dca236583780c1858f4cc6f509b7c3f06dd7574803374159b",
+     "difficulty": 23.1,
+     "words": 70
     },
     {
      "id": "en-l1-p02-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l1-p02/26.v1.json",
-     "checksum": "sha256:2373d3c3a15ce6e38cdb3398dc58db34319fa560a9f93674143706a914afb21f",
-     "difficulty": 32.6,
-     "words": 20
+     "checksum": "sha256:24e1a427c9fb95e1fa123e3206754d5ae05b96a287dd1e8236bc66483b906505",
+     "difficulty": 22.0,
+     "words": 73
     },
     {
      "id": "en-l1-p02-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l1-p02/27.v1.json",
-     "checksum": "sha256:475f0a0bf285d637c5e29cc21558d0dbfea8209c53eebb19be50c349356e728f",
-     "difficulty": 34.9,
-     "words": 21
+     "checksum": "sha256:478239fbdb573681da1b050ac48d442aa1cf4bf81959804d3dcc283ca4890169",
+     "difficulty": 21.2,
+     "words": 73
     },
     {
      "id": "en-l1-p02-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l1-p02/28.v1.json",
-     "checksum": "sha256:8a95f102bc3f708c0fcc6deb18c3d73187c02301ab46ed95fb298bd59e338bec",
-     "difficulty": 35.4,
-     "words": 20
+     "checksum": "sha256:2627978d2968b2aa422a1ac463711cea70ab2bcccba3f0a26113714005b48388",
+     "difficulty": 25.1,
+     "words": 70
     },
     {
      "id": "en-l1-p02-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l1-p02/29.v1.json",
-     "checksum": "sha256:03f7cd6d6f6818f197503ae23b1dfddace68d1f91787f6de981940021758c3dc",
-     "difficulty": 37.6,
-     "words": 20
+     "checksum": "sha256:d7f7618b3859fd970b4d850c93066d0fc4e72c2f04731cc1aca6416c7418e477",
+     "difficulty": 25.6,
+     "words": 70
     },
     {
      "id": "en-l1-p02-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l1-p02/30.v1.json",
-     "checksum": "sha256:14c7e06d0d2bfec9ba467b16e5cdd05eab2e061db6c42548359b301d9f86c0ff",
-     "difficulty": 34.9,
-     "words": 20
+     "checksum": "sha256:68dc68b0274066f89c84b0d10c86ec3989c5a1ce8b4983744937d51d4e6f74c4",
+     "difficulty": 23.2,
+     "words": 71
     }
    ]
   },
@@ -526,248 +526,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l2-p01/pack.v1.json",
-   "checksum": "sha256:5631d2df2829aa09bcb9dba19a4324d4a21f06c0fb3a26264d28639daf1fde20",
+   "checksum": "sha256:c209002c1a29d8ce2c64f08f50c773a80370fd30a77302ceaf80477a48ce5c8f",
    "free": true,
    "puzzles": [
     {
      "id": "en-l2-p01-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l2-p01/01.v1.json",
-     "checksum": "sha256:e0644c4ed4b843ad1eb2aec9904700e0bb1a85f191ee2bb857bf5ec1feebaad3",
-     "difficulty": 44.6,
-     "words": 23
+     "checksum": "sha256:239fbd955f67d44a8ea45551a6837574da0287d433402d6c265bcf128c36a32b",
+     "difficulty": 44.1,
+     "words": 90
     },
     {
      "id": "en-l2-p01-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l2-p01/02.v1.json",
-     "checksum": "sha256:82fa2af9a647d8c405be918d8d63e1f89597831bc0aaef78d243bf4a229df51b",
-     "difficulty": 40.4,
-     "words": 24
+     "checksum": "sha256:ba1a16dd26866c4ff0f19f71a1fb8383bc0997f02fc894b77da75945558620d2",
+     "difficulty": 39.6,
+     "words": 92
     },
     {
      "id": "en-l2-p01-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l2-p01/03.v1.json",
-     "checksum": "sha256:2dfe961a765cb15f93f5661e3c546ddd9ba7daf8387f898851634f389ee3f31f",
-     "difficulty": 43.5,
-     "words": 24
+     "checksum": "sha256:3af7a6d100469bc5bb29072918324fd44ac1d2a27da23e1fcc391622989e272b",
+     "difficulty": 44.9,
+     "words": 89
     },
     {
      "id": "en-l2-p01-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l2-p01/04.v1.json",
-     "checksum": "sha256:19269a8e0aa61579bf3e547e7f74ef697b5237a08a635517ad6c4a8e1166199b",
-     "difficulty": 38.6,
-     "words": 27
+     "checksum": "sha256:6e9b27f60895d7442b2193478a8ffc29e75b4a3083b059236b168e655e420d1b",
+     "difficulty": 43.1,
+     "words": 90
     },
     {
      "id": "en-l2-p01-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l2-p01/05.v1.json",
-     "checksum": "sha256:a6d74ee5abdbad90b67ea615c71ae54d112f199b2259be31c767c3c0b82fd099",
-     "difficulty": 42.6,
-     "words": 24
+     "checksum": "sha256:5c22b4dacb44c5defdaa1d0f9ee8e5a1419a5aacfd18677be97708c37244c729",
+     "difficulty": 43.6,
+     "words": 89
     },
     {
      "id": "en-l2-p01-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l2-p01/06.v1.json",
-     "checksum": "sha256:26581a2b7742b29c9b68f465fbfe23aa422f7cce5c6626e0fb7303b9ef252b97",
-     "difficulty": 42.7,
-     "words": 24
+     "checksum": "sha256:cb7581f4639493ad6c1fbf4175db1464db70a178c9e7615f7148971e41d16fad",
+     "difficulty": 44.7,
+     "words": 89
     },
     {
      "id": "en-l2-p01-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l2-p01/07.v1.json",
-     "checksum": "sha256:81701c07fb349237a5226a5e97a7b39a5b311e40343deee33815d815e779a738",
-     "difficulty": 43.0,
-     "words": 25
+     "checksum": "sha256:dde5543ff1228e023c16ce45f52b9d78f482501da45cb4858ff3fb7b47a55b80",
+     "difficulty": 42.5,
+     "words": 90
     },
     {
      "id": "en-l2-p01-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l2-p01/08.v1.json",
-     "checksum": "sha256:6b1176d0a8d4a135253b6fa55d9e98f277744291bb7c8b763995c964f21c65fc",
-     "difficulty": 43.7,
-     "words": 24
+     "checksum": "sha256:c6b4f62627f76002693c680141f0149df6cf7ef90d1e7496b9bf447b22c1ae0f",
+     "difficulty": 39.3,
+     "words": 92
     },
     {
      "id": "en-l2-p01-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l2-p01/09.v1.json",
-     "checksum": "sha256:813baa12361d994da7f998310d4e4b058204fa3fd2f19e8ebfc50aedfb0b78f2",
-     "difficulty": 39.0,
-     "words": 27
+     "checksum": "sha256:768d02c04381384791a8b6bdeb5a30bd697492b26b5e9afce41f0edbce44df59",
+     "difficulty": 46.5,
+     "words": 89
     },
     {
      "id": "en-l2-p01-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l2-p01/10.v1.json",
-     "checksum": "sha256:b807309628b6c54faa205669638fd1d3322a0a70af9dc75de0d57264ce4f98c0",
-     "difficulty": 41.2,
-     "words": 27
+     "checksum": "sha256:c47fb3d56d864e9773073a22e0fa47e002cdb3ae6b81a745b55eaba413a284e2",
+     "difficulty": 42.2,
+     "words": 92
     },
     {
      "id": "en-l2-p01-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l2-p01/11.v1.json",
-     "checksum": "sha256:52fd85b3b4ebc92dab9903e35a162437e5ab0e6b2393345e8a6065b9ec2c4c30",
-     "difficulty": 44.2,
-     "words": 25
+     "checksum": "sha256:0f7e02a2813ffd8a79f9d4083567b04608d7443e0d3cfc5b8d819b86d2b34449",
+     "difficulty": 46.4,
+     "words": 89
     },
     {
      "id": "en-l2-p01-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l2-p01/12.v1.json",
-     "checksum": "sha256:434ec1647796dc9385505b0e0b3de3dfd251398b340496c9bd26cc7c8b470870",
-     "difficulty": 38.0,
-     "words": 24
+     "checksum": "sha256:52394720ac48f214deccb9df766aba86da564f6bfa124701042e35ac412ef545",
+     "difficulty": 44.1,
+     "words": 90
     },
     {
      "id": "en-l2-p01-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l2-p01/13.v1.json",
-     "checksum": "sha256:0efce82ed57d3981d1c1f65447ddc8b5182800935b8391b1a2c387a06199f765",
-     "difficulty": 39.9,
-     "words": 28
+     "checksum": "sha256:76d15f6f151d3309b9dfdb557315237314bdf5c792c4d58f41a45cf6720c37ab",
+     "difficulty": 26.6,
+     "words": 113
     },
     {
      "id": "en-l2-p01-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l2-p01/14.v1.json",
-     "checksum": "sha256:106aeabc377599dcd7e2c5d070498f3f7b3e7676f68b3d2cc7469779adf8f4b6",
-     "difficulty": 43.7,
-     "words": 23
+     "checksum": "sha256:99e4724bd19909c0058ac69aef33001cb6094b6bdef48fb9e963af7de35eb252",
+     "difficulty": 43.8,
+     "words": 90
     },
     {
      "id": "en-l2-p01-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l2-p01/15.v1.json",
-     "checksum": "sha256:5e162e44e8d20d8f74cbf32ef57c76ca06b70a3fecd144c9641c44d3e829dbaa",
-     "difficulty": 47.7,
-     "words": 24
+     "checksum": "sha256:98bdf86d7abedc42d223d649a2750898d0d126e27f4717048856e500cdd46b93",
+     "difficulty": 44.4,
+     "words": 90
     },
     {
      "id": "en-l2-p01-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l2-p01/16.v1.json",
-     "checksum": "sha256:d7baaef93e00b6672efa3fb96642ecce7e159c117f04b04b1d798f5ead826bd5",
-     "difficulty": 45.4,
-     "words": 23
+     "checksum": "sha256:d7cb19e341aa78c4bc1a45caecf2e28209ece16ab5ba74ee6463892a951601f4",
+     "difficulty": 46.4,
+     "words": 90
     },
     {
      "id": "en-l2-p01-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l2-p01/17.v1.json",
-     "checksum": "sha256:faf685619d3b313df0ac2b1913c81dfc0c82d09c15fdbfe81465ddb6db4b56cb",
-     "difficulty": 42.1,
-     "words": 27
+     "checksum": "sha256:b43cf13b549f09f89ab8c4eb287a167533127304ea775100ce95f70fcfcbe8b2",
+     "difficulty": 42.6,
+     "words": 89
     },
     {
      "id": "en-l2-p01-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l2-p01/18.v1.json",
-     "checksum": "sha256:4c59e3aa3cb367e71e2b896d038cb671565e6768ab5cf5e19508c9616d527544",
-     "difficulty": 42.0,
-     "words": 27
+     "checksum": "sha256:73750238c358532f6521e5de1c272bdc710be202ee1a729265d768d75513989b",
+     "difficulty": 46.9,
+     "words": 89
     },
     {
      "id": "en-l2-p01-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l2-p01/19.v1.json",
-     "checksum": "sha256:db4090e1c909c8d77c44d79618463e62dff3080f87427eb58ef2d6aee20d91ff",
-     "difficulty": 45.0,
-     "words": 24
+     "checksum": "sha256:ebcf1176eb6241919fbdcec69deff7a7d6aa42de879e3f0a36f0e199bfb6dad6",
+     "difficulty": 29.6,
+     "words": 113
     },
     {
      "id": "en-l2-p01-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l2-p01/20.v1.json",
-     "checksum": "sha256:86120a0ff60b0498668cac4a8942523a37629ec3217468207b395501cbbd2a43",
-     "difficulty": 39.9,
-     "words": 27
+     "checksum": "sha256:021629414d2b8d219de490a597b64a82c766211514204afd252afceed755290e",
+     "difficulty": 42.1,
+     "words": 92
     },
     {
      "id": "en-l2-p01-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l2-p01/21.v1.json",
-     "checksum": "sha256:e6435847f179c10038e155a2d93da0ac1fd625f1fcdd71954455784f2b0f65f8",
-     "difficulty": 42.7,
-     "words": 28
+     "checksum": "sha256:bc4fede2c5111635487e77fd933bfd466db08e6bdc1514d0b730195fd0094ba8",
+     "difficulty": 45.0,
+     "words": 90
     },
     {
      "id": "en-l2-p01-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l2-p01/22.v1.json",
-     "checksum": "sha256:b9c0b46d033437982e9fcf5773213de530920924fb8c3a0f331045db2797d966",
-     "difficulty": 40.9,
-     "words": 24
+     "checksum": "sha256:332c028a51f8dd6a0951ebe18055c57e3a357b3d4a2fa0e472f576b662a30d12",
+     "difficulty": 45.7,
+     "words": 89
     },
     {
      "id": "en-l2-p01-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l2-p01/23.v1.json",
-     "checksum": "sha256:fc909f2abc05b8f4f20a7400ff429fda88af97c85919bb0966ff2267075f6b4f",
-     "difficulty": 46.7,
-     "words": 24
+     "checksum": "sha256:0a67af5ec6fae164e2a25d1a6c2eef750341e2675d51dcceaf650505e01d8076",
+     "difficulty": 42.7,
+     "words": 91
     },
     {
      "id": "en-l2-p01-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l2-p01/24.v1.json",
-     "checksum": "sha256:8c0750ecec82786b215f700f911eb9119230bc35f20d5c036f413fd8998d5f1a",
-     "difficulty": 44.4,
-     "words": 28
+     "checksum": "sha256:e18f66c153ec34fd77fd3ef9d8d7ab4decd7f6f512181e43b31d18f3a6d98ac8",
+     "difficulty": 43.0,
+     "words": 91
     },
     {
      "id": "en-l2-p01-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l2-p01/25.v1.json",
-     "checksum": "sha256:31653f523e8a89b09413a6079630654dd007beaa251fd8d698c2345563d5aa6f",
-     "difficulty": 53.0,
-     "words": 23
+     "checksum": "sha256:075fc47f461f3f1246eec91d5e919aaec3d77408fa53fa68c094eb64121e2e62",
+     "difficulty": 48.3,
+     "words": 89
     },
     {
      "id": "en-l2-p01-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l2-p01/26.v1.json",
-     "checksum": "sha256:411c338a9519f94f984f2ee52200d8da5c0d3024f8a4fd5f912545d85fe46c13",
-     "difficulty": 44.3,
-     "words": 24
+     "checksum": "sha256:0aabd2932f8b1ad6b2e9ba88e247804cc06b60f7a9dfc9df2bee81beb6735772",
+     "difficulty": 43.5,
+     "words": 92
     },
     {
      "id": "en-l2-p01-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l2-p01/27.v1.json",
-     "checksum": "sha256:08414840fc105ae8e8cf7c297af8535f11f21aef48573e76eae57d3fedc4c516",
-     "difficulty": 40.9,
-     "words": 27
+     "checksum": "sha256:7f4fa03265bcb8e7e43c875212603c819ac7c83283ca8dba8bf8f01f34d5558c",
+     "difficulty": 47.0,
+     "words": 90
     },
     {
      "id": "en-l2-p01-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l2-p01/28.v1.json",
-     "checksum": "sha256:b96d02d567d484bbc4d199110de8ee50d7736940f9393829bdc9b68ad198d3a6",
-     "difficulty": 47.2,
-     "words": 28
+     "checksum": "sha256:db932290018d588c139890a6ca2ab921eb5dc13e06800a5639a05328130ea44f",
+     "difficulty": 29.9,
+     "words": 113
     },
     {
      "id": "en-l2-p01-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l2-p01/29.v1.json",
-     "checksum": "sha256:dce6ddb8f0bb7ea715008451914f072d6dde6e4c4037768c45f68e5c04347beb",
-     "difficulty": 50.5,
-     "words": 25
+     "checksum": "sha256:e846ef8d00825337b680e1179c3fc857885212c8cdc0dedbf7cbab17abc1ca08",
+     "difficulty": 46.2,
+     "words": 89
     },
     {
      "id": "en-l2-p01-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l2-p01/30.v1.json",
-     "checksum": "sha256:bddfb8d24d1404ab117202d12273f79f64af145ac53b1505eec30bed98bf11cd",
-     "difficulty": 50.9,
-     "words": 23
+     "checksum": "sha256:e21b758b9786c264a24a87f7a3af29ffa3ad39144aad72513209a8f228a38df9",
+     "difficulty": 49.6,
+     "words": 89
     }
    ]
   },
@@ -782,248 +782,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l2-p02/pack.v1.json",
-   "checksum": "sha256:9acc117a37409e2ffe93be8168e113b073f7d2c11111d0ecb846f397604c25d3",
+   "checksum": "sha256:4cd2e74a57b4f6ac51355e1209bfd6695b1d9de1d55491b5baf2571227a11ede",
    "free": false,
    "puzzles": [
     {
      "id": "en-l2-p02-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l2-p02/01.v1.json",
-     "checksum": "sha256:e0e3fc5d771e2e1f855beb10998eb7ee544ca9dd8a6fa16af0cc7960bc1e30a5",
-     "difficulty": 35.6,
-     "words": 27
+     "checksum": "sha256:22667475eaf8752f09c2bb09cb3f441bf72ea8789333427c39b3a0a0b4c75bbc",
+     "difficulty": 43.5,
+     "words": 89
     },
     {
      "id": "en-l2-p02-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l2-p02/02.v1.json",
-     "checksum": "sha256:afed9d0c1852540c5399132f2c466b3178bd333f0ec64238b26e3a58b96e8c7d",
-     "difficulty": 42.6,
-     "words": 24
+     "checksum": "sha256:820a6e1e57814b1fe913ce4492bb1a485fed710831c23cda4714fa93b5d4a83d",
+     "difficulty": 42.8,
+     "words": 89
     },
     {
      "id": "en-l2-p02-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l2-p02/03.v1.json",
-     "checksum": "sha256:40e24dccee756542281af65cfb952109d59b810d45fd51a2f7306e01781a0d92",
-     "difficulty": 44.8,
-     "words": 24
+     "checksum": "sha256:ad6b3de238714a750f7a6bd72e6d0ade969a1e1e8c173a63b8ff09666c5fd96e",
+     "difficulty": 43.9,
+     "words": 89
     },
     {
      "id": "en-l2-p02-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l2-p02/04.v1.json",
-     "checksum": "sha256:cbfd8a34643ee360d03ac91f52e0ccbbb699d4207cca63af09a49439f930a4d0",
-     "difficulty": 44.4,
-     "words": 24
+     "checksum": "sha256:d15a17db87763eb4f12545ce55d7ee30461b100f4cd11aaf3bc3051aefba6fe8",
+     "difficulty": 44.0,
+     "words": 89
     },
     {
      "id": "en-l2-p02-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l2-p02/05.v1.json",
-     "checksum": "sha256:3dc1ffbfd7c5b333eab6e60531762c12f572ef0d9354b1c8757aed54b838599d",
-     "difficulty": 44.9,
-     "words": 24
+     "checksum": "sha256:f3fae23ccb874723d2c740b8a9d61a92f4907011017fde93c318b0af97d08036",
+     "difficulty": 44.3,
+     "words": 89
     },
     {
      "id": "en-l2-p02-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l2-p02/06.v1.json",
-     "checksum": "sha256:305cd5bcdb34adae30c7bf0bf5006b29ad4f38f263995eca3a7c9dbfaaa5257b",
-     "difficulty": 38.6,
-     "words": 24
+     "checksum": "sha256:e4c66763b405dac2f80bc33f086c61d34d79b5f56129066fd34df6386016c875",
+     "difficulty": 43.2,
+     "words": 90
     },
     {
      "id": "en-l2-p02-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l2-p02/07.v1.json",
-     "checksum": "sha256:3f82660bbcf4879495104947c7320221d26695edd0970897f78dd6db68365661",
-     "difficulty": 40.1,
-     "words": 24
+     "checksum": "sha256:3239580f672dc3be13bbf9d8370f6b55fc024d892e458a93dbecd597063dce3c",
+     "difficulty": 45.3,
+     "words": 89
     },
     {
      "id": "en-l2-p02-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l2-p02/08.v1.json",
-     "checksum": "sha256:78ddc5763de9cf7736adc948849f8c063d27b630d0e3f22d462623312668dea3",
-     "difficulty": 38.7,
-     "words": 24
+     "checksum": "sha256:5dc1afc69382ec0b0221147c4e98ad6f976222b17d07d1a4222fd60a07670b16",
+     "difficulty": 43.4,
+     "words": 90
     },
     {
      "id": "en-l2-p02-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l2-p02/09.v1.json",
-     "checksum": "sha256:ef655fac4cfd4873fb4d91f7a77043392e567cbe3f9eb64ef0292158631c4bdd",
-     "difficulty": 37.9,
-     "words": 27
+     "checksum": "sha256:4c9bf0693f40ee58c35362081b127649c7cee4127d08ded7c63f1178a2bbe778",
+     "difficulty": 45.3,
+     "words": 89
     },
     {
      "id": "en-l2-p02-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l2-p02/10.v1.json",
-     "checksum": "sha256:23c7a7aeab51af23e5fe61cdada2c774ff169d40de38db4d57f3e76a3cbc5958",
-     "difficulty": 40.4,
-     "words": 27
+     "checksum": "sha256:5397f899d7701e8bdbdb3bb123383792e4e164db4a00fb066d3e52f80230d7a7",
+     "difficulty": 46.9,
+     "words": 89
     },
     {
      "id": "en-l2-p02-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l2-p02/11.v1.json",
-     "checksum": "sha256:6b871a55ef9ebd416edbaa7f399bfa61857590451d336d11950be9cc731f322a",
-     "difficulty": 44.0,
-     "words": 24
+     "checksum": "sha256:139ec32fd5e6e5f2b959dc95d4e5b4fb9df6e15a5e48a5d981eafebc9847272a",
+     "difficulty": 43.3,
+     "words": 89
     },
     {
      "id": "en-l2-p02-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l2-p02/12.v1.json",
-     "checksum": "sha256:aebac657669093848c3d84e45490ad4338ee2b7e24d1b9f3d8a3195707dee255",
-     "difficulty": 39.5,
-     "words": 24
+     "checksum": "sha256:d0e77f7980b1cd62cc9d0ab7f581cce1a9e487af6e671da761f3cefb18e3a596",
+     "difficulty": 45.1,
+     "words": 90
     },
     {
      "id": "en-l2-p02-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l2-p02/13.v1.json",
-     "checksum": "sha256:1825b4b6f17a20b095d71ef5c4554dad283c407786635e162b2d10ae2d6d4bfe",
-     "difficulty": 40.0,
-     "words": 27
+     "checksum": "sha256:347eb084b6e9d96af5b389d5948c15550a9a9c700a244debb89dd439bbb8a926",
+     "difficulty": 42.9,
+     "words": 89
     },
     {
      "id": "en-l2-p02-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l2-p02/14.v1.json",
-     "checksum": "sha256:7838628f9319d2d0d31352b9636ccaf9514ed3d8ba71b92aa624f0a6d1df92fe",
-     "difficulty": 39.9,
-     "words": 27
+     "checksum": "sha256:25aa65dc9f69e7fc916f1698156f188387bb26ca3e853708a3867295019daa81",
+     "difficulty": 45.0,
+     "words": 89
     },
     {
      "id": "en-l2-p02-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l2-p02/15.v1.json",
-     "checksum": "sha256:9034d73970aac4be31d3ff02c3a6d6af337b5807b5524ce8675b95cef848a6fb",
-     "difficulty": 42.7,
-     "words": 24
+     "checksum": "sha256:f2dfce71597e85f47dc949570a2aa5baa0fec2a06c9e0990bb6c8073a11a191a",
+     "difficulty": 44.5,
+     "words": 92
     },
     {
      "id": "en-l2-p02-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l2-p02/16.v1.json",
-     "checksum": "sha256:84c96632ee058a6cd6f61041766bbda2b2259aa7959fea44567d44df001ec83b",
-     "difficulty": 45.0,
-     "words": 24
+     "checksum": "sha256:1a550916f0f0868ce8705cefb3849efd060962b4a63ef902b75a8feeae58b5ed",
+     "difficulty": 44.6,
+     "words": 90
     },
     {
      "id": "en-l2-p02-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l2-p02/17.v1.json",
-     "checksum": "sha256:2b4b7a555d6f15848ae8df7dbcaeba30736a9342e915eeff49a87f78ccb0fdab",
-     "difficulty": 36.7,
-     "words": 24
+     "checksum": "sha256:42310113df0750c09df2329a8d2d51207fcb4a732bd54c322ac8ae2a0fbc01a7",
+     "difficulty": 45.1,
+     "words": 89
     },
     {
      "id": "en-l2-p02-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l2-p02/18.v1.json",
-     "checksum": "sha256:a99defde1bbdb2f25cd133f526da4164dba2f9e30bc79a2b031e734993f54359",
-     "difficulty": 39.7,
-     "words": 25
+     "checksum": "sha256:1c9f972dd26ef9bca5225bb877b78476915efbcd84493a88b5399d2196cc3ed7",
+     "difficulty": 43.3,
+     "words": 91
     },
     {
      "id": "en-l2-p02-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l2-p02/19.v1.json",
-     "checksum": "sha256:f701e76e55cb75cd108fe9b9645fc386f9a0457e6f3383fb66a5c06715121761",
-     "difficulty": 40.9,
-     "words": 24
+     "checksum": "sha256:77dc2387f24d5d6ec67bdb4014cacfae496cf13004e8d497e09e57813a470715",
+     "difficulty": 45.0,
+     "words": 90
     },
     {
      "id": "en-l2-p02-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l2-p02/20.v1.json",
-     "checksum": "sha256:8002f2fae882b3e0424e2ba4e394ef4cc84fd66d659472a48b6f42ddd2b020b0",
-     "difficulty": 48.6,
-     "words": 24
+     "checksum": "sha256:47334dd6df2c6059a40165043976c8408be72a4a6390213971ad10ce86e98da2",
+     "difficulty": 46.7,
+     "words": 90
     },
     {
      "id": "en-l2-p02-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l2-p02/21.v1.json",
-     "checksum": "sha256:fa8ee1ff3d83a7ec9538690c2102c3822d4a15cd462f9cab63338c3fbefaf0b5",
-     "difficulty": 48.5,
-     "words": 24
+     "checksum": "sha256:d895f6d139475f1cc5ddc85290cf89e432f4904971f545efd39cf3ae92f97e3b",
+     "difficulty": 44.1,
+     "words": 89
     },
     {
      "id": "en-l2-p02-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l2-p02/22.v1.json",
-     "checksum": "sha256:fd1154ce6a97889f75334a795b968b5bd66e3c8856cf6c17487626a1f5bc5b75",
-     "difficulty": 48.8,
-     "words": 24
+     "checksum": "sha256:6ff296112acea1fb02ed16dfc66e79ccce19da5d43596a37ba3bda956bf085aa",
+     "difficulty": 44.0,
+     "words": 92
     },
     {
      "id": "en-l2-p02-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l2-p02/23.v1.json",
-     "checksum": "sha256:2804f5094cec63432258679f0848bb1ba4235e9ea0a52174b693a5059600d7fd",
-     "difficulty": 40.4,
-     "words": 24
+     "checksum": "sha256:d24c855591150a86d49c69e1c6063f910c0de0c775979fe9c3fa824e965691f4",
+     "difficulty": 47.1,
+     "words": 89
     },
     {
      "id": "en-l2-p02-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l2-p02/24.v1.json",
-     "checksum": "sha256:342f3f88f2a6f718e3ca845f7747460787e3e58324a6c133bbd04eb492dee3bc",
-     "difficulty": 43.2,
-     "words": 27
+     "checksum": "sha256:4e8cf27dbd0862663002194b3bff2e00eda98c0661a1ee121755344167ec4b0c",
+     "difficulty": 30.0,
+     "words": 113
     },
     {
      "id": "en-l2-p02-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l2-p02/25.v1.json",
-     "checksum": "sha256:1f3de1cfe3da5441eac2482c94151347980703cb7f3b4d90a87f66a0a8144186",
-     "difficulty": 42.9,
-     "words": 28
+     "checksum": "sha256:ed495110d55a049f9825a6f6059d91a25bbfd141df9c9b2b0de1614d91aca3b4",
+     "difficulty": 45.3,
+     "words": 92
     },
     {
      "id": "en-l2-p02-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l2-p02/26.v1.json",
-     "checksum": "sha256:83f5efcfaa643b319f6edd27257dd563e928c408d6b8eaff9061d6b886f566e7",
-     "difficulty": 48.9,
-     "words": 25
+     "checksum": "sha256:4eb97ce8cabb57198069f86016e92b631804cc5a774d5647f3d178b46afe56cd",
+     "difficulty": 29.9,
+     "words": 113
     },
     {
      "id": "en-l2-p02-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l2-p02/27.v1.json",
-     "checksum": "sha256:95de7aa7bd0762e327f15da49de86e5f7449ac63f7fc66178103d9bea5ba82d3",
-     "difficulty": 53.7,
-     "words": 25
+     "checksum": "sha256:097eab7ccec7e8599295e9059cd6a6aa78debe9ff413f4d9c7efb6a67e166227",
+     "difficulty": 47.2,
+     "words": 92
     },
     {
      "id": "en-l2-p02-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l2-p02/28.v1.json",
-     "checksum": "sha256:2d180b0c4d37ab16ad82845425ad63ad4b6fa1d21ddf670c9317a7d31035a55b",
-     "difficulty": 50.7,
-     "words": 24
+     "checksum": "sha256:6f7f9ca18be590e9f10be10110e6d55fc737355f6cc77d4293f6f8127a626ada",
+     "difficulty": 43.5,
+     "words": 90
     },
     {
      "id": "en-l2-p02-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l2-p02/29.v1.json",
-     "checksum": "sha256:8b5387864359c4f95f643ebf6f32a79e742cbff5b743587a00a32b1350eaf10a",
-     "difficulty": 47.7,
-     "words": 27
+     "checksum": "sha256:9e21ccfdbf551b0054b92968cd03b4241080ed6d18abe768606044428ae7c237",
+     "difficulty": 45.5,
+     "words": 90
     },
     {
      "id": "en-l2-p02-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l2-p02/30.v1.json",
-     "checksum": "sha256:19a0276de04b2b86af09ca792f0cc808bc1b840b0984edf2420caa3db37814c3",
-     "difficulty": 45.8,
-     "words": 24
+     "checksum": "sha256:7296e65e6f5396bef9d35c80070366b4d046b1b0c5ef69e47c1eb1c0c0230436",
+     "difficulty": 30.6,
+     "words": 112
     }
    ]
   },
@@ -1038,248 +1038,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l3-p01/pack.v1.json",
-   "checksum": "sha256:14142ceadec082b9aa3f7185bba9f026cf2c6ee8019dde6f523ab77114c91cf4",
+   "checksum": "sha256:dbf285bca450ae6f5a760fe2a7d4025f5d042e9b9870226301cd23d04af9f125",
    "free": true,
    "puzzles": [
     {
      "id": "en-l3-p01-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l3-p01/01.v1.json",
-     "checksum": "sha256:22d209c3c433d70ec5141ad1b8455b57c8b020b9f304ab2a3430b568896733e6",
-     "difficulty": 66.8,
-     "words": 34
+     "checksum": "sha256:55ea90fb06952ac6df1bd4c886a976f8f483f807806087c71696cdb436a96fbc",
+     "difficulty": 54.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l3-p01/02.v1.json",
-     "checksum": "sha256:f2bcb1f35799765755a42e8fe1153308a58c6b1b598f5b12d8eb0c3086dae629",
-     "difficulty": 68.3,
-     "words": 34
+     "checksum": "sha256:513955c9b87cf6e3a9ea5d78788f1e835d9d7f359b16fcab68b4df654a8dfeec",
+     "difficulty": 51.8,
+     "words": 134
     },
     {
      "id": "en-l3-p01-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l3-p01/03.v1.json",
-     "checksum": "sha256:65c33bd48c85a958f1750be8ee40942b99d5762388ecb4fad57c437bb178eb6b",
-     "difficulty": 66.3,
-     "words": 33
+     "checksum": "sha256:e483e801a6b4d274d8b78d1fd84917995c7403126185830439252a8c4b727298",
+     "difficulty": 52.9,
+     "words": 134
     },
     {
      "id": "en-l3-p01-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l3-p01/04.v1.json",
-     "checksum": "sha256:3306520e6ef7cfa4eaeb25f88bc750b543bb8e148a9950320af3686d97789b03",
-     "difficulty": 70.6,
-     "words": 33
+     "checksum": "sha256:59cac34983ac27989d2e119e4a5b0ddaa6e3f44407e89ae9f4e529483e9f9f9d",
+     "difficulty": 38.7,
+     "words": 162
     },
     {
      "id": "en-l3-p01-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l3-p01/05.v1.json",
-     "checksum": "sha256:9cbbc84e69e42bd6c93963fafdc4ac349e9945a2a7247a7fca592cf93a1bc3f1",
-     "difficulty": 69.3,
-     "words": 34
+     "checksum": "sha256:d63a741b3ba93a1240d57a16125aa6551241c43057906140c4ecafdbdc556dc8",
+     "difficulty": 41.8,
+     "words": 162
     },
     {
      "id": "en-l3-p01-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l3-p01/06.v1.json",
-     "checksum": "sha256:c6593729d66fbf0d4b9abd2c2fe15dd599f1a1a444a5f47a5aaba14ab62e51d1",
-     "difficulty": 60.2,
-     "words": 35
+     "checksum": "sha256:4f3ea79523d98e4a2df6ff916f35866b9f12cb2d05db855c31e08b8c4ca22070",
+     "difficulty": 54.8,
+     "words": 134
     },
     {
      "id": "en-l3-p01-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l3-p01/07.v1.json",
-     "checksum": "sha256:16f9ec89bac31f1d93e80af75baa83d492c2516623288b0731d9fee9c96ded6b",
-     "difficulty": 65.2,
-     "words": 35
+     "checksum": "sha256:353881aeb6e77b6d9e9a24d08b6c1503a917e6ae7c1c3a9500447bdc4573e146",
+     "difficulty": 42.2,
+     "words": 162
     },
     {
      "id": "en-l3-p01-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l3-p01/08.v1.json",
-     "checksum": "sha256:13d3fb3725eb65daabea46c5894ea1f0b826ee5d32421e341d45bcbc2934b0ba",
-     "difficulty": 72.6,
-     "words": 33
+     "checksum": "sha256:c0a240922684d3c3c1ae377a14cf7d38a63ffcdd29fb9aa7dbe1abd2a3c10bc4",
+     "difficulty": 42.8,
+     "words": 162
     },
     {
      "id": "en-l3-p01-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l3-p01/09.v1.json",
-     "checksum": "sha256:7244f5d5d7a45355fed4b265bc0b0f67e95725b6bca8b6cca6889dd59da97cd9",
-     "difficulty": 69.2,
-     "words": 34
+     "checksum": "sha256:02b8982cab2965f09bceebd5d694feee53530f6ae53a88343b81d3fbf14885da",
+     "difficulty": 41.4,
+     "words": 162
     },
     {
      "id": "en-l3-p01-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l3-p01/10.v1.json",
-     "checksum": "sha256:0f0450f301ceedc6b8c2f9e961bd68c2c3c197f5eea106222029e9d038fa9d55",
-     "difficulty": 65.2,
-     "words": 35
+     "checksum": "sha256:1a5f95a6e9631bd8c5fcd46128f186c97e5fe8aafe12abcbca9357cba4b910c1",
+     "difficulty": 42.6,
+     "words": 162
     },
     {
      "id": "en-l3-p01-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l3-p01/11.v1.json",
-     "checksum": "sha256:1a0038d46775ba9bb798f8bd31869f57ae3baf3826c43752e03ea72035631bcd",
-     "difficulty": 67.8,
-     "words": 34
+     "checksum": "sha256:3bbe7ba1c479c58831c50fcc70a0523268dcd3d8b1752b200583ded1806e86dc",
+     "difficulty": 55.6,
+     "words": 134
     },
     {
      "id": "en-l3-p01-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l3-p01/12.v1.json",
-     "checksum": "sha256:13c3c62595c197a8ae90ffba6a7d5bb8909da2cdf5137f07606efabc70700aeb",
-     "difficulty": 67.1,
-     "words": 35
+     "checksum": "sha256:df3995c16b7736681e044e4cd60e5d4626a9f75222cd6a28c358cc386e082ca1",
+     "difficulty": 55.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l3-p01/13.v1.json",
-     "checksum": "sha256:b5a2e6dc272c73f52117877b5b0b8c2571cc3e53b3a9247914db14ef15be33f0",
-     "difficulty": 63.0,
-     "words": 35
+     "checksum": "sha256:26322d2b7d3b4465aae6f931d90a39c303658e585a4f14e0128f5f9758c0f72b",
+     "difficulty": 54.0,
+     "words": 134
     },
     {
      "id": "en-l3-p01-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l3-p01/14.v1.json",
-     "checksum": "sha256:2a5998464ca088b4743fcfb229874496a60c3eac9cd1936286d46b7d27a1fb0e",
-     "difficulty": 66.5,
-     "words": 34
+     "checksum": "sha256:305f1c9d58cbacc6d3869b9ae798764d477cdf1a96858201644c3e2de1ed3867",
+     "difficulty": 57.8,
+     "words": 134
     },
     {
      "id": "en-l3-p01-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l3-p01/15.v1.json",
-     "checksum": "sha256:c7bf852aaeccf09936643f55f9fdbfa08dbfe76bdba9a51e393a6f70a322e9d7",
-     "difficulty": 67.8,
-     "words": 34
+     "checksum": "sha256:d4422b09cc23e6a47e401034eb93990ba6cc54baf811dfe921beab7aa1c7a6c2",
+     "difficulty": 51.9,
+     "words": 134
     },
     {
      "id": "en-l3-p01-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l3-p01/16.v1.json",
-     "checksum": "sha256:7cb7b6144ce75dfb8bf182b8106b1725c03c176a9566108a0a2afec200b04e2a",
-     "difficulty": 73.8,
-     "words": 33
+     "checksum": "sha256:175b7ee38e1ae34214b72618e8e234c014244ec038291121d01553282186ccde",
+     "difficulty": 44.0,
+     "words": 162
     },
     {
      "id": "en-l3-p01-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l3-p01/17.v1.json",
-     "checksum": "sha256:ab71ec792b94c8b3b15f9aa9b016058f9fbeb29467b9a622a9d76ffbe54c396d",
-     "difficulty": 38.0,
-     "words": 28
+     "checksum": "sha256:785d207e26c64d290df540d7b05b0a23e1cdea1653dafba378e5a3f1611a0258",
+     "difficulty": 55.2,
+     "words": 134
     },
     {
      "id": "en-l3-p01-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l3-p01/18.v1.json",
-     "checksum": "sha256:a3a37b8937e5c2d17294968c36de050109db03ba2e08e677e1d9f243ae2ad149",
-     "difficulty": 71.7,
-     "words": 33
+     "checksum": "sha256:a25e1100713f33fb4099a20032eb3de4ea5fee818b635789aafc43d6e79c8b78",
+     "difficulty": 55.7,
+     "words": 134
     },
     {
      "id": "en-l3-p01-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l3-p01/19.v1.json",
-     "checksum": "sha256:1e7014d8fffd702a07daaee5bdd53360f43f84518f560a69e0e4c022fbe64716",
-     "difficulty": 71.8,
-     "words": 33
+     "checksum": "sha256:9bdf61116b8d07c9708322d45d778ae597c4d09b29882c91bf314744a367f63f",
+     "difficulty": 43.3,
+     "words": 162
     },
     {
      "id": "en-l3-p01-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l3-p01/20.v1.json",
-     "checksum": "sha256:316cc6833a430ce8d5a6f97f301070694788e22a2d6b02487f72a9c723bb8d50",
-     "difficulty": 68.7,
-     "words": 34
+     "checksum": "sha256:5f6a5a42978d924aa7218cbb755f5b3c03ba48954f95357c9d03b7b575f758b6",
+     "difficulty": 42.4,
+     "words": 162
     },
     {
      "id": "en-l3-p01-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l3-p01/21.v1.json",
-     "checksum": "sha256:945d23864b6c08fe8ad5c79d7e1992100d4489f3dee161fa2c2c7fb8a4b10c6d",
-     "difficulty": 68.6,
-     "words": 34
+     "checksum": "sha256:d9fdb79f14af90cc46d3290d5a00a0193595dccc9254a1fa46e081e2dcc42e13",
+     "difficulty": 55.3,
+     "words": 134
     },
     {
      "id": "en-l3-p01-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l3-p01/22.v1.json",
-     "checksum": "sha256:01e79053c9a9b116c9845b4c40c4264d348eda941491791f2f67cc3749e62fab",
-     "difficulty": 69.9,
-     "words": 34
+     "checksum": "sha256:89e7b66f786045af58aebb8e5036d97ac2b2aded108ec30d6f0bc04bfe8824ed",
+     "difficulty": 53.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l3-p01/23.v1.json",
-     "checksum": "sha256:1ddbb0054e9a7456a6dfe7a1379e973f58fc4c7a8f19adba4c19645d011b8c0b",
-     "difficulty": 71.7,
-     "words": 33
+     "checksum": "sha256:dbc5d70ee63e703328fa1dea0b8ea971665a3d617ca9cf8a8dbb1442b0999123",
+     "difficulty": 55.2,
+     "words": 134
     },
     {
      "id": "en-l3-p01-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l3-p01/24.v1.json",
-     "checksum": "sha256:d13ca71acd07bed2b84a667f3f54cb6ecd4abc4bb6e2989f981e87911bbe05bd",
-     "difficulty": 68.9,
-     "words": 33
+     "checksum": "sha256:80adaf694398f5818e8309636dc4d438a28b6be13b554b1e13170a9dab72d782",
+     "difficulty": 56.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l3-p01/25.v1.json",
-     "checksum": "sha256:899bdbdaf37576d152216ad373b1dd480baa54113ca1986b4a8d0ec4fc3d32b6",
-     "difficulty": 67.9,
-     "words": 34
+     "checksum": "sha256:54af011654ff861010b656498b83fde7ff7a9ef6845288720def01e58bea81f8",
+     "difficulty": 54.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l3-p01/26.v1.json",
-     "checksum": "sha256:9736772619be5a5d3660a0c7e85fd3da04f50f20e14062aa3d2622e97d9b52c7",
-     "difficulty": 73.8,
-     "words": 33
+     "checksum": "sha256:4856ff90bf8fc66c2b53ea84ec624d3d86ae25b481d413854a4205174e2010b9",
+     "difficulty": 56.4,
+     "words": 134
     },
     {
      "id": "en-l3-p01-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l3-p01/27.v1.json",
-     "checksum": "sha256:fe6d6aebe78c26ae50c44fcae6b4bc607c45f2aceedff0cf7f2b2a9f763e6bd8",
-     "difficulty": 73.4,
-     "words": 33
+     "checksum": "sha256:9dfb4d6dc813ba5249fe2536c0364d7a2486d596def2d8769e5ccacff6227722",
+     "difficulty": 55.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l3-p01/28.v1.json",
-     "checksum": "sha256:eff17b80076606ebc871634d0a61148282a6dde247c3c5b16b50f23a83fcfc5e",
-     "difficulty": 66.3,
-     "words": 35
+     "checksum": "sha256:ff8153e0d574d3b0b9d48372f1095f97fa05f970fc8bdf10248942f95c46ebf4",
+     "difficulty": 55.1,
+     "words": 134
     },
     {
      "id": "en-l3-p01-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l3-p01/29.v1.json",
-     "checksum": "sha256:19124d89d1db311c23a8ebb6538489412e1cbe1e82d58ad17f4b65410a1fc8f3",
-     "difficulty": 44.0,
-     "words": 24
+     "checksum": "sha256:88dfedc91c09286573bd8596fb224b04f19bdeabea75c74c277e34058a9f437e",
+     "difficulty": 58.5,
+     "words": 134
     },
     {
      "id": "en-l3-p01-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l3-p01/30.v1.json",
-     "checksum": "sha256:c55f8dfe7efabbe45007a05c1a9ac2360c8d68ecf812ad97a4c9db285b5116ce",
-     "difficulty": 73.3,
-     "words": 33
+     "checksum": "sha256:a0dd9efd41920d1b12e07de26c9a4c1e603a2fbb8d0b7101993178101f87d826",
+     "difficulty": 44.4,
+     "words": 162
     }
    ]
   },
@@ -1294,248 +1294,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l4-p01/pack.v1.json",
-   "checksum": "sha256:4239fcf902a3ea0804d0cead0614c033a812dd9972270b4e7870ab76bcbbdc47",
+   "checksum": "sha256:3bd1d19ed9819186fa9c0afe2c72fcb390cc2c420aa35affb0cacb00304843bf",
    "free": true,
    "puzzles": [
     {
      "id": "en-l4-p01-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l4-p01/01.v1.json",
-     "checksum": "sha256:3508332810cd1cb789facc4aa3caf192834b199a979ab8b08e5a1bdf810e536e",
-     "difficulty": 79.4,
-     "words": 43
+     "checksum": "sha256:98b80337610ff785f2c11f38ed5e44c7716471b366e3a2bc9b4b22bf9843f254",
+     "difficulty": 66.9,
+     "words": 176
     },
     {
      "id": "en-l4-p01-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l4-p01/02.v1.json",
-     "checksum": "sha256:dc93348ba9802b8b1f0062639f7053a45ff5b179bb53d1c6b61207f3fe86173d",
-     "difficulty": 79.6,
-     "words": 43
+     "checksum": "sha256:61185c97640820ed5950460563abec9106d481d9c7779131e2c16f5a54482771",
+     "difficulty": 65.7,
+     "words": 176
     },
     {
      "id": "en-l4-p01-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l4-p01/03.v1.json",
-     "checksum": "sha256:f14fc046dc5364a6f45baf8bbe92713c3e9e5fb94933606e37324c66d370e3d8",
-     "difficulty": 77.7,
-     "words": 43
+     "checksum": "sha256:d1a2ccc4249de89957ea86a051d166b5875db8ef9b2e07d44bbf8dfb676f00b8",
+     "difficulty": 66.2,
+     "words": 176
     },
     {
      "id": "en-l4-p01-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l4-p01/04.v1.json",
-     "checksum": "sha256:839eeae11ac6c2ab5c543f170964647b67e4b4e938e07a871e166228818cf1c2",
-     "difficulty": 81.0,
-     "words": 43
+     "checksum": "sha256:c2fdbff609c77b662fa22f5a92b6845929dc2cd3742d383874c360877cf27eb2",
+     "difficulty": 65.5,
+     "words": 176
     },
     {
      "id": "en-l4-p01-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l4-p01/05.v1.json",
-     "checksum": "sha256:61995f78b3b6a923537bbee5a6c165d43a78fed118b9f4b9203beeb121acd7e3",
-     "difficulty": 82.7,
-     "words": 43
+     "checksum": "sha256:2620dc2ebcc43251f812721d4df94608f00aff35b4de22d453c08b3324fe6a43",
+     "difficulty": 54.1,
+     "words": 210
     },
     {
      "id": "en-l4-p01-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l4-p01/06.v1.json",
-     "checksum": "sha256:2af1e7bb95e04eb8e34ad826bee3f12eafc67551c7ccc2b43a62759842d7d02f",
-     "difficulty": 80.9,
-     "words": 43
+     "checksum": "sha256:068b767f2a68d2afa200c29241585d1c3497989dd95d554492405d6723583f5d",
+     "difficulty": 57.8,
+     "words": 210
     },
     {
      "id": "en-l4-p01-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l4-p01/07.v1.json",
-     "checksum": "sha256:4e35c7e5aec63fa88c70dbee210830c47c74a978d7de6dd0d0fb7cb8ac322f90",
-     "difficulty": 79.6,
-     "words": 43
+     "checksum": "sha256:9caca6db6e4d279c852f8bc1338106fee598c461f9f832dedc16e8971b9597ef",
+     "difficulty": 55.4,
+     "words": 210
     },
     {
      "id": "en-l4-p01-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l4-p01/08.v1.json",
-     "checksum": "sha256:f06ef3c65cd8a719a5eeb3e9b8d0471d639febd969d2665d2987ca1df1123958",
-     "difficulty": 84.2,
-     "words": 43
+     "checksum": "sha256:6c1e35e3ddb49472ab1bc24aa157a624500002a6bb3dd6310ca86000afc02a68",
+     "difficulty": 55.7,
+     "words": 210
     },
     {
      "id": "en-l4-p01-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l4-p01/09.v1.json",
-     "checksum": "sha256:6953be163b7ce30465186ea746f8b4cf4e263e57ae9d0fac5fadd02203c7070e",
-     "difficulty": 79.3,
-     "words": 43
+     "checksum": "sha256:9de029196e4d322f4b1ed2af477110289880b92665b57f21f2418ea2e59c80b5",
+     "difficulty": 59.8,
+     "words": 210
     },
     {
      "id": "en-l4-p01-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l4-p01/10.v1.json",
-     "checksum": "sha256:1d33e389080c92b2a07916184a0c561c008e17aad890c550fa31d29d5444c219",
-     "difficulty": 78.2,
-     "words": 43
+     "checksum": "sha256:e0660000c077b5ad4ebf58df5eead778ffab16dd54a8827f2f175bf32bcb7979",
+     "difficulty": 58.0,
+     "words": 210
     },
     {
      "id": "en-l4-p01-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l4-p01/11.v1.json",
-     "checksum": "sha256:e28d4e5581217f8fedc47fb69005545b6f28827b76148fde3728e25737424ce1",
-     "difficulty": 80.7,
-     "words": 43
+     "checksum": "sha256:8767608ccc9bd0814e9aa0379029a9a7736119b04a2baa0ee18f638258d41f52",
+     "difficulty": 69.0,
+     "words": 176
     },
     {
      "id": "en-l4-p01-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l4-p01/12.v1.json",
-     "checksum": "sha256:a7b6907a7d0e90ec1c9312ca6ac380574261fe809a9068db0f46bd9612093ac0",
-     "difficulty": 84.0,
-     "words": 43
+     "checksum": "sha256:de9fe3dca6974f96d6f97940d39edfe1289bc1cabf856be7f6a0e09f1c9c0624",
+     "difficulty": 66.9,
+     "words": 176
     },
     {
      "id": "en-l4-p01-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l4-p01/13.v1.json",
-     "checksum": "sha256:4e3012c9f7861ceb3b4dbcf78445edb04e321e847b175ae21cbd76eeb166add5",
-     "difficulty": 79.5,
-     "words": 43
+     "checksum": "sha256:af4a101a97bf74e91175f6bb6a45643bb9ef58c1b90259842adc716030b8c3c8",
+     "difficulty": 58.2,
+     "words": 210
     },
     {
      "id": "en-l4-p01-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l4-p01/14.v1.json",
-     "checksum": "sha256:e9e8d648f44b2e3ce772f7246088c8c97e41b1536fef757d2e89648cb512fd47",
-     "difficulty": 83.3,
-     "words": 43
+     "checksum": "sha256:4e3c9385ea9f9e76cde4e5bd1795319d54f3f777973e8fd934e6904174014ec0",
+     "difficulty": 58.4,
+     "words": 210
     },
     {
      "id": "en-l4-p01-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l4-p01/15.v1.json",
-     "checksum": "sha256:d91fd992a7fe5dcc5c19ad69a611515f0e94be1b088d089fe4a870b5ced3046d",
-     "difficulty": 82.3,
-     "words": 43
+     "checksum": "sha256:de2e1bcbfcca0e23cb4928ce8ae639f2ea58d85c24f8a2ab09a3c737a6e2be50",
+     "difficulty": 57.5,
+     "words": 210
     },
     {
      "id": "en-l4-p01-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l4-p01/16.v1.json",
-     "checksum": "sha256:b5da5599ab7be04f809f3dbe56d51aea0bcd19165aea516e575de2fdd36675b9",
-     "difficulty": 80.6,
-     "words": 43
+     "checksum": "sha256:e832b468f999038f3147615b28e8d62ba00f452741b2eb55c163e345b06a80d7",
+     "difficulty": 58.1,
+     "words": 210
     },
     {
      "id": "en-l4-p01-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l4-p01/17.v1.json",
-     "checksum": "sha256:f0dc7f99b6a567a9b5cacd50e1c4a2d1b60d3cb99a426581dd0aa631362be0f3",
-     "difficulty": 80.1,
-     "words": 43
+     "checksum": "sha256:f96572e63dbc21017c850f482b21462e9ae99ae9c3ba3a8bdf16159738074bb0",
+     "difficulty": 69.9,
+     "words": 176
     },
     {
      "id": "en-l4-p01-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l4-p01/18.v1.json",
-     "checksum": "sha256:c5c3191513b868f27fee0ea5f6ec5733bf6dbfe136ec5b5c7646b69b32a91348",
-     "difficulty": 88.7,
-     "words": 43
+     "checksum": "sha256:80733d0b7308506fab1e6822f221964e77faf6fb119461512130ef431ca46844",
+     "difficulty": 69.0,
+     "words": 176
     },
     {
      "id": "en-l4-p01-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l4-p01/19.v1.json",
-     "checksum": "sha256:fd327766f450451ff1fb5723ef56c9317cdb36db2e13f73d09ab9fc0bdbc726a",
-     "difficulty": 83.0,
-     "words": 43
+     "checksum": "sha256:923d135585359fba3c68c4f4e3184d53fc11dacdf8ea174e1f68d4e242418c61",
+     "difficulty": 67.5,
+     "words": 176
     },
     {
      "id": "en-l4-p01-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l4-p01/20.v1.json",
-     "checksum": "sha256:5c981596c34f4d066ec9815c7a699980f7ce1cdfb2e073442038974848325384",
-     "difficulty": 84.1,
-     "words": 43
+     "checksum": "sha256:b66c68008b17a46147642ecbee5ee6e285f0bcb32a64b2869ff534600b08fb0d",
+     "difficulty": 69.5,
+     "words": 176
     },
     {
      "id": "en-l4-p01-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l4-p01/21.v1.json",
-     "checksum": "sha256:6c1bcde89026a254e9aafaa782d94a2db553cd9ad2ff651a34ce9feb5fc7d01d",
-     "difficulty": 85.2,
-     "words": 43
+     "checksum": "sha256:321cb7131d370a30d80656304ad0b855edd38dc89e0f124d31506ee7f8895041",
+     "difficulty": 58.8,
+     "words": 210
     },
     {
      "id": "en-l4-p01-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l4-p01/22.v1.json",
-     "checksum": "sha256:216bcc73dede4f52a632d31f82424d2c5de9be5f09884b818d476ab97ea81990",
-     "difficulty": 88.3,
-     "words": 43
+     "checksum": "sha256:02560cacfe705f91b86da1b963b21f2f2588080b85d5347a7eb6b4adb9e6ab55",
+     "difficulty": 58.7,
+     "words": 210
     },
     {
      "id": "en-l4-p01-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l4-p01/23.v1.json",
-     "checksum": "sha256:2694657bb552bb8de87be0f048491fe44eea3c4e5f6ba720e682c6064c9c0f21",
-     "difficulty": 81.6,
-     "words": 43
+     "checksum": "sha256:cb67a6e829260bbcb6a8f892a9a6e167cc777c422913e8ba787bad1b0234aadb",
+     "difficulty": 58.7,
+     "words": 210
     },
     {
      "id": "en-l4-p01-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l4-p01/24.v1.json",
-     "checksum": "sha256:38f6291dd1657f102dcdf54711e15a398f7f298b91a6d89f9421d04268f0f825",
-     "difficulty": 83.0,
-     "words": 43
+     "checksum": "sha256:d45bb45d740e02ff6ef32a0489f5e76e93051e9b7c66ef5280fc63588405c2ed",
+     "difficulty": 58.1,
+     "words": 210
     },
     {
      "id": "en-l4-p01-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l4-p01/25.v1.json",
-     "checksum": "sha256:c1ce97b79d79db524528ea46521291f26e875408af9e609f4c2a803b315ce082",
-     "difficulty": 88.3,
-     "words": 43
+     "checksum": "sha256:50d413bb1c05941e224267098e8e3fc9d549bbe5ba3aded6880915ab2c4f832c",
+     "difficulty": 60.8,
+     "words": 210
     },
     {
      "id": "en-l4-p01-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l4-p01/26.v1.json",
-     "checksum": "sha256:396f803edb872c68cd598814c79558c3cf3ab133d0b1447eb06df1986da34770",
-     "difficulty": 84.9,
-     "words": 43
+     "checksum": "sha256:757e324a26137f855bf5d66e0c39b71a21011f098eae42d321a5d7c9966bd544",
+     "difficulty": 58.0,
+     "words": 210
     },
     {
      "id": "en-l4-p01-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l4-p01/27.v1.json",
-     "checksum": "sha256:8f37c6b82a0b4b557ec40e4caf72c1ca2147e2a52a94ffdbb31cac5a0510b11d",
-     "difficulty": 79.5,
-     "words": 43
+     "checksum": "sha256:046c1f35938f10db0e8546196eb0f6ec1e0d5d8cdf871fc4950ee8e9799cfebb",
+     "difficulty": 60.5,
+     "words": 210
     },
     {
      "id": "en-l4-p01-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l4-p01/28.v1.json",
-     "checksum": "sha256:057139c2a1d41acbf21656cf036ca4d5f113b4094867d301649fc6b282bc3cc0",
-     "difficulty": 82.1,
-     "words": 43
+     "checksum": "sha256:ed1875e8d541591ba86ab67ba1751e6b90ed960f3bb0d1d3cf64c22ddb2996ff",
+     "difficulty": 61.2,
+     "words": 210
     },
     {
      "id": "en-l4-p01-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l4-p01/29.v1.json",
-     "checksum": "sha256:e69f94519d88c5dc2417075b37e0c9f95dfa0e8b4621c14a90cda9df7d32bdab",
-     "difficulty": 87.4,
-     "words": 43
+     "checksum": "sha256:699066e9ec58f994ea2aa7ba6009f985bfa2b10e1b00113f54879f62d84feeda",
+     "difficulty": 60.2,
+     "words": 210
     },
     {
      "id": "en-l4-p01-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l4-p01/30.v1.json",
-     "checksum": "sha256:1f150bd196ce2e61e43dadabb069bdb9c3317fd034277160426f81291fff17a0",
-     "difficulty": 88.1,
-     "words": 43
+     "checksum": "sha256:aa94cdd9cca16df9ee5627ef342f4f8c71951d1fdc25b55dff7dfcff7bc6dd6f",
+     "difficulty": 60.3,
+     "words": 210
     }
    ]
   },
@@ -1550,248 +1550,248 @@
    },
    "puzzleCount": 30,
    "url": "puzzles/en/packs/en-l5-p01/pack.v1.json",
-   "checksum": "sha256:d8676031ccd041ebf31d4282cd15da7c5e0d38351966f1c5ff4fb0f02a7157a2",
+   "checksum": "sha256:00e93e1726968496befbf561c0ca1b20a96b4ba7f0a537e7aea7190f6fcfba1f",
    "free": true,
    "puzzles": [
     {
      "id": "en-l5-p01-01",
      "index": 1,
      "url": "puzzles/en/packs/en-l5-p01/01.v1.json",
-     "checksum": "sha256:58f288b92988fa12d20b588accda914204c04cbd246f69bf30d8a8a900b912dc",
-     "difficulty": 84.7,
-     "words": 54
+     "checksum": "sha256:8fabe1b3e5ec0126ada3bd0412b4790d3a3a8143f8878fde00af80e1dfc0af42",
+     "difficulty": 72.3,
+     "words": 243
     },
     {
      "id": "en-l5-p01-02",
      "index": 2,
      "url": "puzzles/en/packs/en-l5-p01/02.v1.json",
-     "checksum": "sha256:0eba4c887ca2d619134fd7625efbd1951515f886fcf085f1bc4a6fd4fe3f16eb",
-     "difficulty": 87.1,
-     "words": 54
+     "checksum": "sha256:04f99711d2b43a1c7710d614439d1bcdfd3ae5478a56d0317c6cb49449390180",
+     "difficulty": 68.2,
+     "words": 243
     },
     {
      "id": "en-l5-p01-03",
      "index": 3,
      "url": "puzzles/en/packs/en-l5-p01/03.v1.json",
-     "checksum": "sha256:9e4f026358d81daf1fda7794c8596374fa365c3e43862e38cb74e92b5cd11b14",
-     "difficulty": 85.2,
-     "words": 54
+     "checksum": "sha256:34f655d30420675a53e8d8a965e1fe36eb2d329bd4efa9aec1ab2c30015ab23d",
+     "difficulty": 70.3,
+     "words": 243
     },
     {
      "id": "en-l5-p01-04",
      "index": 4,
      "url": "puzzles/en/packs/en-l5-p01/04.v1.json",
-     "checksum": "sha256:4366b02ddcbabf3d61fd3c6b671dc728373776f0b0a8916e418c7327b18df395",
-     "difficulty": 84.3,
-     "words": 54
+     "checksum": "sha256:b03ceb1570bad13fbd97ce64c7333cbdc4bb5abb326e8ff9007aa3ab93251662",
+     "difficulty": 71.2,
+     "words": 243
     },
     {
      "id": "en-l5-p01-05",
      "index": 5,
      "url": "puzzles/en/packs/en-l5-p01/05.v1.json",
-     "checksum": "sha256:cb6a111d13494adb5e61abf3afbfb03a2b4cc3cbe393a816c0adade2d7feb2cd",
-     "difficulty": 87.7,
-     "words": 54
+     "checksum": "sha256:c1817bbf5a6ef1b544e9688954e04f092bf94d55b013a802f495d79ccebed966",
+     "difficulty": 71.9,
+     "words": 243
     },
     {
      "id": "en-l5-p01-06",
      "index": 6,
      "url": "puzzles/en/packs/en-l5-p01/06.v1.json",
-     "checksum": "sha256:7ef8bb19e31aca640da5481263409af46e47d44196ae111ccfaac393b5e6c15e",
-     "difficulty": 81.1,
-     "words": 54
+     "checksum": "sha256:4c5f629a2a55ff9f6725e2206ad84ba212311623a12b24ac70533c6b997efdb3",
+     "difficulty": 72.4,
+     "words": 243
     },
     {
      "id": "en-l5-p01-07",
      "index": 7,
      "url": "puzzles/en/packs/en-l5-p01/07.v1.json",
-     "checksum": "sha256:c5418129feab759d429666a1e22cb888343a5a4ee92192e36e5f513d5acd4dbf",
-     "difficulty": 83.4,
-     "words": 54
+     "checksum": "sha256:8427b639cbdd60f221dc93e8cb3d49b39c415fe2822831e73d9a0583f267b275",
+     "difficulty": 70.8,
+     "words": 243
     },
     {
      "id": "en-l5-p01-08",
      "index": 8,
      "url": "puzzles/en/packs/en-l5-p01/08.v1.json",
-     "checksum": "sha256:0f7ce3aac60e8e862ea02ed04d20f81b5ab2b2195ae2ad5f20c4fdab7f09059c",
-     "difficulty": 87.5,
-     "words": 54
+     "checksum": "sha256:7debd459651732404ba23852fc25d4bae16b9b5fb19dc14605a018b944741158",
+     "difficulty": 71.8,
+     "words": 243
     },
     {
      "id": "en-l5-p01-09",
      "index": 9,
      "url": "puzzles/en/packs/en-l5-p01/09.v1.json",
-     "checksum": "sha256:d98e4f54baf83bef903251528b0c476ddfbcf078a4a9819d278cda576f0e8f4c",
-     "difficulty": 83.5,
-     "words": 54
+     "checksum": "sha256:a2fa42387bf58ed049816a0b7c67c9dcefabd86239b87f77087e54a556ef45e0",
+     "difficulty": 72.3,
+     "words": 243
     },
     {
      "id": "en-l5-p01-10",
      "index": 10,
      "url": "puzzles/en/packs/en-l5-p01/10.v1.json",
-     "checksum": "sha256:af60e6cf961d51160861de31d074da3b091a96b0d3e13e2026b0443eac14c9e5",
-     "difficulty": 87.2,
-     "words": 54
+     "checksum": "sha256:6b551bb5b02926493ad82afc2b9b55e71e267b738850ac9704e5f356590972f1",
+     "difficulty": 69.9,
+     "words": 243
     },
     {
      "id": "en-l5-p01-11",
      "index": 11,
      "url": "puzzles/en/packs/en-l5-p01/11.v1.json",
-     "checksum": "sha256:48366569eccc3fac106c5ef9bed87e2f87ea8fa6701b0a9013727332354bad18",
-     "difficulty": 85.5,
-     "words": 54
+     "checksum": "sha256:b5569b30bd6c9617e353fe2eb0b70f2da9d3dfdc9b86a52ed0a6f4b52e1cc45e",
+     "difficulty": 71.2,
+     "words": 243
     },
     {
      "id": "en-l5-p01-12",
      "index": 12,
      "url": "puzzles/en/packs/en-l5-p01/12.v1.json",
-     "checksum": "sha256:e49c8711d454c00e177fe7fc39bca4cfc18d88a1df61a70ddf114c42e62f2d85",
-     "difficulty": 80.7,
-     "words": 54
+     "checksum": "sha256:f81ff79c6bd59589362029b62a7e573877a94bab80f4df6ab6acacaa9a6f69c6",
+     "difficulty": 71.7,
+     "words": 243
     },
     {
      "id": "en-l5-p01-13",
      "index": 13,
      "url": "puzzles/en/packs/en-l5-p01/13.v1.json",
-     "checksum": "sha256:5b05792bd939b932ec112e9add57ece994e8ea755a2669fa3b5fa4278195ce50",
-     "difficulty": 82.5,
-     "words": 54
+     "checksum": "sha256:595a7d7b3148e7920ee9f88915a6b603b625dc37c7213316f6484e55c662c39e",
+     "difficulty": 70.0,
+     "words": 243
     },
     {
      "id": "en-l5-p01-14",
      "index": 14,
      "url": "puzzles/en/packs/en-l5-p01/14.v1.json",
-     "checksum": "sha256:47d4edb0398a739a93d0a3f02280f29bd3238ae3d821abc0b4cc9d29598aac5d",
-     "difficulty": 80.6,
-     "words": 54
+     "checksum": "sha256:9311559c512350e3aa413b6e88ea2f05da0c07d5051ce83565dfbae7a3aa1f0e",
+     "difficulty": 71.2,
+     "words": 243
     },
     {
      "id": "en-l5-p01-15",
      "index": 15,
      "url": "puzzles/en/packs/en-l5-p01/15.v1.json",
-     "checksum": "sha256:3947288a7d742a59cf10cd229eb6ecf0e01dd8ea2c89d008b0dae0bafa3d3852",
-     "difficulty": 86.9,
-     "words": 54
+     "checksum": "sha256:190b1ea73964f1774e0ed573f78fb825b1b2f80f7d4ef776e9dcde42205c2651",
+     "difficulty": 70.9,
+     "words": 243
     },
     {
      "id": "en-l5-p01-16",
      "index": 16,
      "url": "puzzles/en/packs/en-l5-p01/16.v1.json",
-     "checksum": "sha256:9e0fee222841d868066a54b2ea45e846d7b40d670300d0c9cdd375e55c1891f2",
-     "difficulty": 84.8,
-     "words": 53
+     "checksum": "sha256:6ee178b7cdcb8d51fa85b59a717ab0fbf2b662d18adb4038b1a0f4191771cebd",
+     "difficulty": 70.6,
+     "words": 243
     },
     {
      "id": "en-l5-p01-17",
      "index": 17,
      "url": "puzzles/en/packs/en-l5-p01/17.v1.json",
-     "checksum": "sha256:1292f03f086023e833bf85331cde3eb6196a688e26483719532973a05f491672",
-     "difficulty": 84.8,
-     "words": 54
+     "checksum": "sha256:d4713d6d969505ae77b33667b70633aaf314c71933c4483c23a3700a3771a2b6",
+     "difficulty": 70.0,
+     "words": 243
     },
     {
      "id": "en-l5-p01-18",
      "index": 18,
      "url": "puzzles/en/packs/en-l5-p01/18.v1.json",
-     "checksum": "sha256:ff973fc0237cd37a1f1f6551dd838c62b92b8fc9932a1790cbebf092ee8cfd92",
-     "difficulty": 86.4,
-     "words": 54
+     "checksum": "sha256:3a48041553f2ec1197e222407afb18b744b6c3d98e51f95c471c80618df2f5ff",
+     "difficulty": 70.3,
+     "words": 243
     },
     {
      "id": "en-l5-p01-19",
      "index": 19,
      "url": "puzzles/en/packs/en-l5-p01/19.v1.json",
-     "checksum": "sha256:7801dc0e5134f4a6947cc7e1fdf1402cdbd918da01d32f7c8cee868b36dd1404",
-     "difficulty": 86.4,
-     "words": 54
+     "checksum": "sha256:8c249b97312bf7925076737a5a9ed6114ceb4477a59471a61fe22c7d4410ee20",
+     "difficulty": 70.2,
+     "words": 243
     },
     {
      "id": "en-l5-p01-20",
      "index": 20,
      "url": "puzzles/en/packs/en-l5-p01/20.v1.json",
-     "checksum": "sha256:809d174a42a73d5b3e86eaef0c224a2a6c50fb377688e8d49c36f4af9f699c79",
-     "difficulty": 84.8,
-     "words": 54
+     "checksum": "sha256:4cfb87b5f4d037d851c72368d48b1e265ddd165857ae3cfd1f5266b0a848f948",
+     "difficulty": 72.9,
+     "words": 243
     },
     {
      "id": "en-l5-p01-21",
      "index": 21,
      "url": "puzzles/en/packs/en-l5-p01/21.v1.json",
-     "checksum": "sha256:633e446b90c52d374cf0bc2663351f2dda0bf1dd5c45a86da9b2b247a7c6fa34",
-     "difficulty": 82.9,
-     "words": 54
+     "checksum": "sha256:5605fd891849d6c166655b581c5ae2fb1cd36d650dbc941da2509e40a73adbba",
+     "difficulty": 72.0,
+     "words": 243
     },
     {
      "id": "en-l5-p01-22",
      "index": 22,
      "url": "puzzles/en/packs/en-l5-p01/22.v1.json",
-     "checksum": "sha256:f32db679aeaa9d3de613e6dad43d899dd7e312b8b45eded9d65bbef280e9a695",
-     "difficulty": 84.7,
-     "words": 54
+     "checksum": "sha256:9c32650fad1681143afa713344a61c37959f6405aaee155d63187fb2130971d5",
+     "difficulty": 69.5,
+     "words": 243
     },
     {
      "id": "en-l5-p01-23",
      "index": 23,
      "url": "puzzles/en/packs/en-l5-p01/23.v1.json",
-     "checksum": "sha256:414ca443772acdd7674158d5cb39ad7e1c8d3c6e72e390d1ca6581755adbfd27",
-     "difficulty": 80.1,
-     "words": 54
+     "checksum": "sha256:907d684c79c2005ccd494b8370e07943f025ec69b895a2a62a56e8598e29443b",
+     "difficulty": 71.0,
+     "words": 243
     },
     {
      "id": "en-l5-p01-24",
      "index": 24,
      "url": "puzzles/en/packs/en-l5-p01/24.v1.json",
-     "checksum": "sha256:2b79dffb1707b86f5bc6f78d08ef964102e9eba89b4b7337ae4c1e0d6f8b382f",
-     "difficulty": 86.3,
-     "words": 54
+     "checksum": "sha256:4aae029d671ee2d0224598c8238a9151e4a9e99075bf10f825224a4628591a77",
+     "difficulty": 71.3,
+     "words": 243
     },
     {
      "id": "en-l5-p01-25",
      "index": 25,
      "url": "puzzles/en/packs/en-l5-p01/25.v1.json",
-     "checksum": "sha256:da4fb5d47d4dfe4eeb95298569de6195e71b62a418a45eef1b11b22d9edd6b62",
-     "difficulty": 80.7,
-     "words": 43
+     "checksum": "sha256:5783537d3f0e2728810d420dd1ab6953c15161ca83648344536b73a3dfd8e12f",
+     "difficulty": 70.2,
+     "words": 243
     },
     {
      "id": "en-l5-p01-26",
      "index": 26,
      "url": "puzzles/en/packs/en-l5-p01/26.v1.json",
-     "checksum": "sha256:e5513e85332f4d1200f67d3638bcad0cc0f3af013b12b9a6ed3d0b9b8519329f",
-     "difficulty": 84.1,
-     "words": 43
+     "checksum": "sha256:5ffb548388a347615dcc3cd7023e01995b4b394a82ea661c7c05a1ca0dae0642",
+     "difficulty": 69.3,
+     "words": 243
     },
     {
      "id": "en-l5-p01-27",
      "index": 27,
      "url": "puzzles/en/packs/en-l5-p01/27.v1.json",
-     "checksum": "sha256:944c7ae52621a97e60e3c039a9a2c326455246d3f108f1351218c95880022c0b",
-     "difficulty": 84.5,
-     "words": 54
+     "checksum": "sha256:f53941cc21b1fdc241720333617edd7eac8bfc0aa1fffebe0b170bc95181d42d",
+     "difficulty": 70.8,
+     "words": 243
     },
     {
      "id": "en-l5-p01-28",
      "index": 28,
      "url": "puzzles/en/packs/en-l5-p01/28.v1.json",
-     "checksum": "sha256:5e9d684071b167bc14cb630b01f1d6d16b6a3af51341b5b38a2eab8b2fd6aeb0",
-     "difficulty": 83.8,
-     "words": 43
+     "checksum": "sha256:7a1b2bb00b745407f3b0debbe7df6dfe548d13d87c9c05dcc85d2230c9421b5e",
+     "difficulty": 70.6,
+     "words": 243
     },
     {
      "id": "en-l5-p01-29",
      "index": 29,
      "url": "puzzles/en/packs/en-l5-p01/29.v1.json",
-     "checksum": "sha256:6943e75370156e1ac266a69e356dfac8b267c2f68e0ce773e67a6c991df398f4",
-     "difficulty": 87.2,
-     "words": 43
+     "checksum": "sha256:ea97a50694a7ab935d3ed92e3202149b4947d9b94c3e35085905863adbb6e730",
+     "difficulty": 70.6,
+     "words": 243
     },
     {
      "id": "en-l5-p01-30",
      "index": 30,
      "url": "puzzles/en/packs/en-l5-p01/30.v1.json",
-     "checksum": "sha256:eb9b4177ecdf3d45ae68f20a733cb082ce727a5f2818ee589f96502bc471b8a3",
-     "difficulty": 80.3,
-     "words": 43
+     "checksum": "sha256:dca831c7a205302901c81f40a87b5ba9e68872e82285d43bd0ef51cd7a166edb",
+     "difficulty": 71.6,
+     "words": 243
     }
    ]
   }

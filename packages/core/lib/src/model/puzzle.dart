@@ -320,7 +320,7 @@ class Puzzle {
     this.daily,
     this.pack,
     this.title,
-    this.schemaVersion = 1,
+    this.schemaVersion = currentSchemaVersion,
   })  : solution = List.unmodifiable(solution),
         wordById = {for (final w in words) w.id: w},
         index = WordIndex.build(shape, words) {
@@ -328,6 +328,10 @@ class Puzzle {
       throw ArgumentError('solution has ${solution.length} entries for ${shape.cellCount} cells');
     }
   }
+
+  /// File format the puzzle is (de)serialised with: 1 is the verbose
+  /// original, 2 the compact one ([PuzzleCodec]). New puzzles use 2.
+  static const int currentSchemaVersion = 2;
 
   final int schemaVersion;
   final String id;
@@ -373,7 +377,7 @@ class Puzzle {
   List<int> get letterCellIndices =>
       [for (var i = 0; i < shape.cellCount; i++) if (shape.kinds[i] == CellKind.letter) i];
 
-  Puzzle copyWith({PuzzleMeta? meta, List<ClueCell>? clueCells, List<PuzzleWord>? words, PuzzleDifficulty? difficulty}) => Puzzle(
+  Puzzle copyWith({PuzzleMeta? meta, List<ClueCell>? clueCells, List<PuzzleWord>? words, PuzzleDifficulty? difficulty, int? schemaVersion}) => Puzzle(
         id: id,
         lang: lang,
         kind: kind,
@@ -387,7 +391,7 @@ class Puzzle {
         daily: daily,
         pack: pack,
         title: title,
-        schemaVersion: schemaVersion,
+        schemaVersion: schemaVersion ?? this.schemaVersion,
       );
 }
 

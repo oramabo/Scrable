@@ -156,7 +156,7 @@ New players get 5 free hints; confirmations have a "don't ask again" option.
 - **Co-op mode**: up to 4 players solve one grid together in real time (shared cells with per-player colours and cursors, room code to join); completion rewards every member.
 - **Free season pass**: 6-week seasons from 2026-11-02, 30 tiers × 100 points; points from battle wins/losses, dailies, missions and perfect puzzles; every tier pays coins, milestone tiers add a badge. No purchase.
 - **XP and levels**: XP from puzzles (by level, bonuses for perfect/under-par/daily), battle results, co-op and missions; level curve `100·(n−1)^1.5`; rank titles טירון → מאסטר.
-- **Random puzzle mode**: the generator runs on the device from a compact lexicon export (≈30k words, 2 clues each, precomputed cell-fit flags, 1.3 MB gz per language) and the template library; the player picks a level and gets a fresh, unranked puzzle in well under a second (measured: 0.3–0.8 s on a laptop, in an isolate on device).
+- **Random puzzle mode**: the generator runs on the device from a compact lexicon export (every word with a usable clue and all its fitting clues: ≈63k Hebrew words / 207k clues / 4.2 MB gz, ≈42k English / 105k / 2.2 MB gz; precomputed cell-fit flags) and the template library; the player picks a level and gets a fresh, unranked puzzle in an isolate on the device. Measured on a PC, whole build incl. clues and validation, median / worst of 6 seeds: Hebrew L1 0.08 s, L3 0.4 / 2.0 s, L4 1.3 / 3.7 s, L5 0.9 / 1.5 s; English L4 0.2 / 0.6 s, L5 0.6 / 1.9 s. Random puzzles go up to level 5 in both languages (`LevelConfig.maxDeviceLevel`); level 6 grids take ≈ 6 s on a PC, too long behind a spinner. Random puzzles accept a score up to 2.5 points outside the band at once (`BuildRequest.bandTolerance`).
 - **Word bank**: 2–16-letter lists per language from the clue dictionary, Wiktionary/Wikipedia titles (Hebrew) and ENABLE + WordNet + Wiktionary (English); words without clues are reference material for clue writing and validation, not yet answers.
 - **Profiles and themes**, **A→Z cycler**, **32 achievements**, **daily/weekly missions**, **picture clues** (Wikimedia Commons photos with licence credits).
 
@@ -229,21 +229,25 @@ Generator parameters per level (tunable):
 **Fill (CSP)**:
 ```
 index[len][pos][symbol] = Bitset(word ids)   // alphabet from the LanguageProfile (27 Hebrew symbols, 26 English letters)
-domain(slot) = AND(index[len][p][grid[p]] for fixed p)            // cached in an LRU keyed by the pattern
-               AND levelMask[level][len] AND fitMask[slot.half?][len] AND NOT usedWords[len]
+domain(slot) = AND(index[len][p][grid[p]] for fixed p)            // cached per packed pattern
+               AND eligible[level][slot.half?][len] AND NOT excluded[len]
+               (words used elsewhere are subtracted at use time; each slot's remaining count is
+                kept up to date incrementally as words are placed, so picking a slot costs O(slots))
 loop:
-  slot = argmin |domain|  (ties: longer, more open crossings, seeded rng)      // MRV
-  if |domain| == 0 → backtrack
-  for word in beam(top K=12 by score, then the rest):
-      score = −w₁·|word.diff − target| + w₂·Σ log(1 + letterCount[cross.len][cross.pos][letter]) + jitter(rng)
-      place(word); if every unassigned crossing slot keeps a non-empty domain (unit-propagate domains of size 1;
-                      arc consistency on letter masks for L5) → recurse
-      unplace(word)
-  nodes++; if nodes > budget → RESTART
-RESTART: reseed rng from (seed, attempt); budget ×= 1.5; after K restarts mutate the layout
-         (split the hardest slot with a clue cell) or pick another template.
+  slot = argmin count  (ties: longer, more crossings)                                   // MRV
+  if count == 0 → dead end
+  for each open crossing: counts[letter] = words the crossing slot still has with that letter at the shared cell
+      (exact while cheap, else the length's letter frequencies scaled to the domain size)
+  candidates = domain words whose every crossing letter has counts > 0                 // letter-level forward checking, before placing
+  order by −w₁·|word.diff − target| + w₂·Σ log(1 + counts[cross][letter]) + jitter(rng) // difficulty steering + least constraining value
+  place(word); if no crossing slot went empty → recurse; unplace(word)
+  beam: after K=24 failed candidates of a large domain, give up on this slot
+  dead end → return its culprits (placed words crossing the slot or its open neighbours);
+             on the way back, levels whose slot is not a culprit are skipped              // conflict-directed backjumping
+  nodes++; if nodes > budget → RESTART (new rng stream, budget ×1.6)
 target = clamp(levelMean + k·(levelMean − runningMean))   // difficulty steering
 ```
+The builder gives every template one attempt first (budget 4000 nodes per 40 slots: a template that fills does so well inside it) and moves to the next on failure; only when all fail does a deep pass restart each up to 4 times. Weighting crossings more than difficulty fills faster but misses the score band, which costs more templates overall.
 Rules inside the loop: no duplicate words or lemmas; words with ≥ 2 unchecked letters must be below the level's unchecked-difficulty cap; only words with an approved fitting clue are in `fitMask`, so clue assignment never fails on geometry. **Determinism**: `seed = HMAC-SHA256(secret, lang|date|variant)` for dailies, `(lang, pack, index)` for packs; output is reproducible from `(template, seed, dictionarySnapshot, generatorVersion)`, so the dictionary is **snapshotted** (versioned, Git LFS) and old puzzles stay reproducible after the lexicon changes.
 
 **Clue assignment**: for each word, fewest-candidates first: approved clues of the lemma that fit the slot's geometry (`full` or `half`), within the level band (`min_level ≤ level ≤ max_level`, difficulty within tolerance, relaxed stepwise if empty), style allowed for the level (no wordplay/cryptic at L1–2), not used for that lemma in a daily of the same variant in the last 120 days or in the same pack, not containing another answer of the grid, and clear of the sensitive-words list; multi-word suffix appended before the fit check; weighted seeded pick favouring less-used clues; style quotas per puzzle (abbreviations ≤ 10 %, fill-ins ≤ 15 %). If nothing fits even after relaxation, the word is forbidden for that slot and the filler re-enters (rare thanks to `fitMask`).
@@ -255,7 +259,7 @@ Rules inside the loop: no duplicate words or lemmas; words with ≥ 2 unchecked 
 
 **Daily pipeline**: CLI batch-generates 90 days ahead per language and variant as drafts → scheduled job tops the horizon up daily and alerts when fewer than 30 approved days remain → editor approves in the admin (preview, warnings, swap word/clue, regenerate) → publish function strips answers, obfuscates the solution (XOR keystream from `sha256(id + salt)`), computes the checksum, uploads `puzzles/daily/{lang}/{variant}/{date}.v{n}.json` (immutable, long cache) and rewrites `manifests/daily.json` (5-minute TTL, ETag) → the app fetches the manifest, prefetches today + 2 days, verifies checksums, caches; offline it shows the last cached daily with a clear notice.
 
-**Performance target**: dictionary index build < 100 ms; fill 50–500 ms for L1–L4, p99 ≈ 3 s for L5 with restarts; a 30-puzzle pack in under a minute; 180 dailies in a few minutes. Means: byte-array words, 32-bit bitsets with popcount, no string allocation in the hot loop, pattern LRU, precomputed per-position letter counts, isolates for parallel puzzles.
+**Performance** (measured on a PC, whole build incl. clues and validation): dictionary index + decode 0.4–0.75 s per language; L1 < 0.1 s, L2–L3 0.1–0.4 s, L4 0.2–1.3 s, L5 0.6–0.9 s median with worst seeds 2–4 s, L6 ≈ 6 s; a 30-puzzle pack in about a minute. Means: byte-array words, 32-bit bitsets with popcount, no string allocation in the hot loop, pattern cache with packed integer keys, incremental domain counts, per-crossing letter counts, conflict-directed backjumping, isolates for parallel puzzles.
 
 ### 5.4 Admin tool (Flutter web, `apps/admin`)
 Lexicon/clue review queues, puzzle preview + edit (same renderer as the app, so what the reviewer approves is what players see), daily calendar with approval state and horizon alert, pack builder, template curation, flagged-clue reports, publish/hide buttons, economy dashboard (PostHog/Firestore).

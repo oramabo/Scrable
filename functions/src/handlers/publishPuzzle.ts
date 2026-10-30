@@ -7,7 +7,7 @@
 import { HttpsError } from 'firebase-functions/v2/https';
 
 import { type Db, type DocData, getField, readNumber } from '../lib/firestore';
-import { decodeLetterSymbols, letterCellCount, type PuzzleLike, solutionHash as computeSolutionHash, verifyChecksum } from '../lib/puzzleCodec';
+import { decodeLetterSymbols, letterCellCount, type PuzzleLike, solutionHash as computeSolutionHash, verifyChecksum, wordCount } from '../lib/puzzleCodec';
 import { puzzleIndexPath } from '../lib/puzzleLookup';
 import { CACHE_IMMUTABLE, type ObjectStore } from '../lib/storage';
 import { validate } from '../lib/validate';
@@ -225,7 +225,7 @@ export async function publishPuzzle(deps: PublishDeps, input: unknown, now: numb
             free,
             updatedAt: now,
             puzzles: {
-              [puzzleKey]: { index: p.pack.index, id: p.id, path, url, checksum, version: p.meta.version, difficulty: p.difficulty.score, words: p.words.length, publishedAt },
+              [puzzleKey]: { index: p.pack.index, id: p.id, path, url, checksum, version: p.meta.version, difficulty: p.difficulty.score, words: wordCount(p), publishedAt },
             },
           },
         },

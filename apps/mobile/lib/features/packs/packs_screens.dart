@@ -20,6 +20,7 @@ class LevelsTab extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     final packs = ref.watch(packsProvider);
+    final lang = ref.watch(settingsProvider.select((s) => s.puzzleLang));
     return Scaffold(
       appBar: AppBar(title: Text(l10n.levelsTitle)),
       body: packs.when(
@@ -39,7 +40,7 @@ class LevelsTab extends ConsumerWidget {
               title: '${l10n.levelTitle(level.level)} · ${l10n.levelName(level.level)}',
               subtitle: levelPacks.isEmpty
                   ? l10n.noPacksYet
-                  : '${l10n.levelGrid(level.cols, level.rows)} · ${l10n.packProgress(progress.completed, total, progress.stars)}',
+                  : '${l10n.levelGrid(level.grid(lang).cols, level.grid(lang).rows)} · ${l10n.packProgress(progress.completed, total, progress.stars)}',
               trailing: const Icon(Icons.chevron_right_rounded),
               onTap: () => context.push('/levels/${level.level}'),
             );

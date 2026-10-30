@@ -48,6 +48,8 @@ export function secretsEqual(provided: string | undefined, expected: string | un
 /** Auth user administration (deleteAccount); abstracted for tests. */
 export interface UserAdmin {
   deleteUser(uid: string): Promise<void>;
+  /** Sign-in providers linked to the account (`google.com`, `apple.com`, ...); empty for anonymous or unknown users. */
+  providerIds(uid: string): Promise<string[]>;
 }
 
 export function adminUserAdmin(auth: Auth): UserAdmin {
@@ -58,6 +60,15 @@ export function adminUserAdmin(auth: Auth): UserAdmin {
       } catch (err) {
         const code = typeof err === 'object' && err !== null ? (err as { code?: unknown }).code : undefined;
         if (code === 'auth/user-not-found') return;
+        throw err;
+      }
+    },
+    async providerIds(uid) {
+      try {
+        return (await auth.getUser(uid)).providerData.map((p) => p.providerId);
+      } catch (err) {
+        const code = typeof err === 'object' && err !== null ? (err as { code?: unknown }).code : undefined;
+        if (code === 'auth/user-not-found') return [];
         throw err;
       }
     },

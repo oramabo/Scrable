@@ -15,6 +15,7 @@ import { onCall, onRequest } from 'firebase-functions/v2/https';
 import { onSchedule } from 'firebase-functions/v2/scheduler';
 
 import { calibrateClues as calibrateCluesHandler } from './handlers/calibrateClues';
+import { claimUsername as claimUsernameHandler } from './handlers/claimUsername';
 import {
   createCoopRoom as createCoopRoomHandler,
   expireRooms as expireRoomsHandler,
@@ -103,6 +104,10 @@ export const rebuildManifests = onCall({ enforceAppCheck: false, memory: '512MiB
   requireAdmin(request);
   return rebuildManifestsHandler({ db: deps().db, storage: deps().storage }, request.data, Date.now());
 });
+
+export const claimUsername = onCall({ enforceAppCheck }, (request) =>
+  claimUsernameHandler({ db: deps().db, users: deps().users }, requireAuth(request).uid, request.data, Date.now()),
+);
 
 export const deleteAccount = onCall({ enforceAppCheck }, (request) => deleteAccountHandler({ db: deps().db, users: deps().users }, requireAuth(request).uid));
 

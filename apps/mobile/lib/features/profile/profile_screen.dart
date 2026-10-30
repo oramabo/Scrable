@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../../core/l10n/l10n.dart';
 import '../../core/providers.dart';
 import '../../core/widgets/common.dart';
+import '../account/account_controller.dart';
+import '../account/account_widgets.dart';
 import '../meta/game_events_controller.dart';
 import '../settings/settings_controller.dart';
 import 'profile_controller.dart';
@@ -118,6 +120,7 @@ class ProfileTab extends ConsumerWidget {
     final unlocked = AchievementEngine.unlocked(stats).length;
     final name = profile.displayName ?? l10n.defaultDisplayName;
     final avatar = Avatars.byId(profile.avatarId);
+    final username = ref.watch(accountProvider).username;
 
     return Scaffold(
       appBar: AppBar(
@@ -150,7 +153,12 @@ class ProfileTab extends ConsumerWidget {
                     Row(
                       children: [
                         Expanded(child: Text(name, style: theme.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w700))),
-                        IconButton(tooltip: l10n.editName, onPressed: () => _editName(context, ref, profile.displayName ?? ''), icon: const Icon(Icons.edit_outlined)),
+                        IconButton(
+                          tooltip: l10n.editName,
+                          // A claimed username is the name; renaming goes through the server.
+                          onPressed: () => username == null ? _editName(context, ref, profile.displayName ?? '') : showUsernameSheet(context, initial: username),
+                          icon: const Icon(Icons.edit_outlined),
+                        ),
                       ],
                     ),
                     Text('${l10n.rankLabel}: ${rankTitle(rank, lang)} · ${l10n.xpLevel(level)}',
@@ -164,6 +172,7 @@ class ProfileTab extends ConsumerWidget {
               ),
             ],
           ),
+          const AccountCard(),
           const SizedBox(height: 12),
           ActionCard(
             icon: Icons.military_tech_rounded,

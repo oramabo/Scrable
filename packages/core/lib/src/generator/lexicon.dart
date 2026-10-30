@@ -132,10 +132,10 @@ class Lexicon {
   int get imageCount => words.where((w) => w.image != null).length;
 
   /// Compact single-document export for on-device generation: a stratified
-  /// subset of words with at most [cluesPerWord] fitting clues each and
-  /// precomputed fit flags, so the app can build puzzles without the full
+  /// subset of words with their fitting clues (at most [cluesPerWord] each)
+  /// and precomputed fit flags, so the app can build puzzles without the full
   /// content pipeline. Returns the JSON map (encode + gzip in the caller).
-  Map<String, dynamic> exportDevice({required bool Function(String text, bool half) fits, int maxWords = 30000, int cluesPerWord = 2}) {
+  Map<String, dynamic> exportDevice({required bool Function(String text, bool half) fits, int maxWords = 75000, int cluesPerWord = 999}) {
     final usable = <LexWord>[];
     for (final w in words) {
       if (w.blocked || w.status == 'retired' || w.length > 12) continue;

@@ -39,12 +39,16 @@ class PuzzleNavigator {
   PuzzleWord word(String id) => puzzle.wordById[id]!;
 
   /// Selecting a letter cell. Tapping the current cursor cell toggles
-  /// direction when the cell has two words.
+  /// direction when the cell has two words; tapping another cell of the
+  /// selected word keeps the word and only moves the cursor.
   Selection? tapCell(int cell, Selection? current, PuzzleProgress progress) {
     if (puzzle.shape.kinds[cell] != CellKind.letter) return current;
     final across = puzzle.index.acrossOf[cell];
     final down = puzzle.index.downOf[cell];
     if (across == null && down == null) return current;
+    if (current != null && current.cell != cell && (current.wordId == across || current.wordId == down)) {
+      return Selection(wordId: current.wordId, cell: cell);
+    }
     if (across == null) return Selection(wordId: down!, cell: cell);
     if (down == null) return Selection(wordId: across, cell: cell);
 

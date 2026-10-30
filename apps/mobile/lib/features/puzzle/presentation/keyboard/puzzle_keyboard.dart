@@ -6,8 +6,8 @@ import '../../../../core/theme/app_theme.dart';
 
 /// Custom in-app keyboard built from [LanguageProfile.keyboardLayouts].
 ///
-/// Letter keys show the regular glyph (or the final form for final-form keys)
-/// but always emit the base symbol. Keys are ≥ 48 dp tall, show a press
+/// Letter keys show and emit the regular letter; the layouts' final-form keys
+/// are left out because grids never show final forms. Keys are ≥ 48 dp tall, show a press
 /// preview and carry the letter name as their semantics label. The action
 /// row has hint, geresh (Hebrew), undo, next word and backspace.
 class PuzzleKeyboard extends StatefulWidget {
@@ -57,7 +57,8 @@ class _PuzzleKeyboardState extends State<PuzzleKeyboard> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final colors = context.gridColors;
-    final rows = widget.layout.rows;
+    // Grids use regular letters only, so the final-form keys (ך ם ן ף ץ) are left out.
+    final rows = [for (final row in widget.layout.rows) row.where((k) => !k.finalForm).toList()];
     final maxLen = rows.fold<int>(0, (m, r) => r.length > m ? r.length : m);
     final fontFamily = AppTheme.fontFamilyFor(widget.lang.code);
 
@@ -85,9 +86,7 @@ class _PuzzleKeyboardState extends State<PuzzleKeyboard> {
                               child: _KeyButton(
                                 width: keyWidth,
                                 height: _keyHeight,
-                                label: k.finalForm
-                                    ? widget.lang.symbolToFinalDisplay(k.symbol)
-                                    : widget.lang.symbolToDisplay(k.symbol),
+                                label: widget.lang.symbolToDisplay(k.symbol),
                                 semanticsLabel: l10n.keySemantics(widget.lang.symbolName(k.symbol)),
                                 fontFamily: fontFamily,
                                 fill: colors.keyFill,
@@ -102,56 +101,14 @@ class _PuzzleKeyboardState extends State<PuzzleKeyboard> {
                         ],
                       ),
                     ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _ActionKey(
-                        icon: Icons.lightbulb_outline_rounded,
-                        label: l10n.keyHint,
-                        height: _keyHeight,
-                        flex: 3,
-                        fill: colors.keyActionFill,
-                        textColor: colors.keyText,
-                        onTap: widget.onHint,
-                      ),
-                      if (widget.onGeresh != null)
-                        _ActionKey(
-                          text: HebrewProfile.geresh,
-                          label: l10n.keyGeresh,
-                          height: _keyHeight,
-                          flex: 2,
-                          fill: colors.keyFill,
-                          textColor: colors.keyText,
-                          onTap: widget.enabled ? widget.onGeresh! : null,
-                        ),
-                      _ActionKey(
-                        icon: Icons.undo_rounded,
-                        label: l10n.keyUndo,
-                        height: _keyHeight,
-                        flex: 2,
-                        fill: colors.keyActionFill,
-                        textColor: colors.keyText,
-                        onTap: widget.enabled ? widget.onUndo : null,
-                      ),
-                      _ActionKey(
-                        icon: Icons.skip_next_rounded,
-                        label: l10n.keyNextWord,
-                        height: _keyHeight,
-                        flex: 3,
-                        fill: colors.keyActionFill,
-                        textColor: colors.keyText,
-                        onTap: widget.onNextWord,
-                      ),
-                      _ActionKey(
-                        icon: Icons.backspace_outlined,
-                        label: l10n.keyBackspace,
-                        height: _keyHeight,
-                        flex: 3,
-                        fill: colors.keyActionFill,
-                        textColor: colors.keyText,
-                        onTap: widget.enabled ? widget.onBackspace : null,
-                      ),
-                    ],
+                  PuzzleActionRow(
+                    height: _keyHeight,
+                    enabled: widget.enabled,
+                    onHint: widget.onHint,
+                    onGeresh: widget.onGeresh,
+                    onUndo: widget.onUndo,
+                    onNextWord: widget.onNextWord,
+                    onBackspace: widget.onBackspace,
                   ),
                 ],
               ),
@@ -296,6 +253,88 @@ class _KeyButtonState extends State<_KeyButton> {
           ),
         ),
       ),
+    );
+  }
+}
+
+/// Hint, geresh (Hebrew), undo, next word and backspace. Under the letters of
+/// [PuzzleKeyboard]; above the system keyboard, which brings its own
+/// backspace. A null [onGeresh] / [onBackspace] hides that key.
+class PuzzleActionRow extends StatelessWidget {
+  const PuzzleActionRow({
+    super.key,
+    required this.onHint,
+    required this.onUndo,
+    required this.onNextWord,
+    this.onGeresh,
+    this.onBackspace,
+    this.height = 50,
+    this.enabled = true,
+  });
+
+  final VoidCallback onHint;
+  final VoidCallback onUndo;
+  final VoidCallback onNextWord;
+  final VoidCallback? onGeresh;
+  final VoidCallback? onBackspace;
+  final double height;
+  final bool enabled;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final colors = context.gridColors;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        _ActionKey(
+          icon: Icons.lightbulb_outline_rounded,
+          label: l10n.keyHint,
+          height: height,
+          flex: 3,
+          fill: colors.keyActionFill,
+          textColor: colors.keyText,
+          onTap: onHint,
+        ),
+        if (onGeresh != null)
+          _ActionKey(
+            text: HebrewProfile.geresh,
+            label: l10n.keyGeresh,
+            height: height,
+            flex: 2,
+            fill: colors.keyFill,
+            textColor: colors.keyText,
+            onTap: enabled ? onGeresh : null,
+          ),
+        _ActionKey(
+          icon: Icons.undo_rounded,
+          label: l10n.keyUndo,
+          height: height,
+          flex: 2,
+          fill: colors.keyActionFill,
+          textColor: colors.keyText,
+          onTap: enabled ? onUndo : null,
+        ),
+        _ActionKey(
+          icon: Icons.skip_next_rounded,
+          label: l10n.keyNextWord,
+          height: height,
+          flex: 3,
+          fill: colors.keyActionFill,
+          textColor: colors.keyText,
+          onTap: onNextWord,
+        ),
+        if (onBackspace != null)
+          _ActionKey(
+            icon: Icons.backspace_outlined,
+            label: l10n.keyBackspace,
+            height: height,
+            flex: 3,
+            fill: colors.keyActionFill,
+            textColor: colors.keyText,
+            onTap: enabled ? onBackspace : null,
+          ),
+      ],
     );
   }
 }

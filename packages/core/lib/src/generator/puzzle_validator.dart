@@ -15,7 +15,13 @@ class PuzzleValidator {
 
   List<String> validate(Puzzle p, {LevelConfig? level, Set<String> blockedCanonical = const {}}) {
     final errors = <String>[];
-    final cfg = level ?? LevelConfig.forLanguage(p.lang, p.level);
+    // Dailies are built with the daily rules (25×25), not their nominal level's.
+    final cfg = level ??
+        switch (p.daily?.variant) {
+          DailyVariant.easy => LevelConfig.dailyEasy(p.lang),
+          DailyVariant.hard => LevelConfig.dailyHard(p.lang),
+          null => LevelConfig.forLanguage(p.lang, p.level),
+        };
     final layout = LayoutValidator(cfg).validate(p.shape);
     if (!layout.ok) errors.addAll(layout.errors.map((e) => 'layout: $e'));
 
@@ -43,7 +49,9 @@ class PuzzleValidator {
       final canonical = lexicon.lang.canonicalKey(answer);
       if (!seen.add(canonical)) errors.add('word ${w.id}: duplicate answer $canonical');
       if (blockedCanonical.contains(canonical)) errors.add('word ${w.id}: blocked word');
-      final lex = w.lemmaId == null ? null : lexicon.wordById[w.lemmaId!];
+      // Format-2 files do not store the lexicon id; the clue leads to it.
+      final lemmaId = w.lemmaId ?? (w.clueId == null ? null : lexicon.clueById[w.clueId]?.wordId);
+      final lex = lemmaId == null ? null : lexicon.wordById[lemmaId];
       if (lex == null) {
         errors.add('word ${w.id}: not in lexicon');
       } else if (lex.canonical != canonical) {
@@ -55,7 +63,7 @@ class PuzzleValidator {
       } else {
         if (slot.arrow != w.arrow) errors.add('word ${w.id}: slot arrow differs');
         if (w.clueId != null && !lexicon.clueById.containsKey(w.clueId)) errors.add('word ${w.id}: unknown clue ${w.clueId}');
-        if (w.clueId != null && lexicon.clueById[w.clueId]?.wordId != w.lemmaId) errors.add('word ${w.id}: clue belongs to another word');
+        if (w.clueId != null && lexicon.clueById[w.clueId]?.wordId != lemmaId) errors.add('word ${w.id}: clue belongs to another word');
         if (slot.image != null) {
           if (slot.pos != SlotPos.full) errors.add('word ${w.id}: picture clues need a full cell');
           if (slot.lines.isNotEmpty) errors.add('word ${w.id}: picture clue must not carry text lines');
